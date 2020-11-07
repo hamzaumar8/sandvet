@@ -25,7 +25,7 @@ SECRET_KEY = '2u8ht1gdfj8#$c)nsery)q2zo%d+u^b1u1h_we+0-16#9*un%b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'sandvet.com'']
+ALLOWED_HOSTS = ['127.0.0.1', 'sandvet.com']
 
 
 # Application definition
