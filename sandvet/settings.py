@@ -25,7 +25,7 @@ SECRET_KEY = '2u8ht1gdfj8#$c)nsery)q2zo%d+u^b1u1h_we+0-16#9*un%b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'sandvet.com'']
 
 
 # Application definition
@@ -37,6 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
+    'crispy_forms',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -118,3 +129,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+AUTHENTICATION_BACKENDS = (
+   'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/dashboard/'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400 
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = True
+ACCOUNT_AUTHENTICATION_METHOD =  "username_email" 
+# ACCOUNT_LOGOUT_REDIRECT_URL ='/accounts/login/'
+# 
+SOCIALACCOUNT_QUERY_EMAIL= ACCOUNT_EMAIL_REQUIRED
+SOCIALACCOUNT_EMAIL_REQUIRED = ACCOUNT_EMAIL_REQUIRED 
+SOCIALACCOUNT_STORE_TOKENS = False
+
+# Crispy forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
