@@ -1,71 +1,20 @@
 {% extends "base.html" %}
+{% block head_title %}Home{% endblock %}
+{% block navbar %} {% include "includes/indexNav.html" %} {% endblock %}
 {% block content %}
 <section class="popular-listing py-5  section-popular-listings   ">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xl-6">
-                <div class="section-heading">
-                                    <span class="">Discover</span>
-                    
-                                    <h3 class="">Popular Listing</h3>
-                                </div>
-            </div>
-        </div>
-        
         <div class="row">
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card listing__card">
-                    <a href="#" title="Green Land">
-                        <div class="card__imgBlock">
-                            <div class="overlay"></div>
-                            <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/851x67816listing-16.jpg" alt="" class="img-fluid">
-                            <div class="card__rateInfo">
-                                <h5>$1500</h5>
-                                <span class="purpose-for-sale">For Sale</span>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="card__body">
-                        <a href="#" title="Green Land">
-                            <h3>Green Land</h3>
-                            <p>
-                                <i class="fa fa-map-marker"></i>
-                                Texas, Grey Fox 6
-                            </p>
-                        </a>
-                        <div class="card__resultItems">
-                            <span class="property-card-value">
-                                <span class="field_name"> Bathrooms </span>
-                                <span class="item"> 5 </span>
-                            </span>
-                            <span class="property-card-value">
-                                <span class="field_name"> Beds </span>
-                                <span class="item"> 4 </span>
-                            </span>
-                            <span class="property-card-value">
-                                <span class="field_name"> Area </span>
-                                <span class="item">
-                                    2402 
-                                    <span class="suffix"> Ft² </span> 
-                                </span>
-                            </span> 
-                        </div>
-                    </div>
-                    <div class="card__footer">
-                        <span class="favorites-actions">
-                            <a href="#" data-id="31" class=""><i class="fa fa-heart-o"></i></a>
-                            <!-- <i class="fa fa-spinner fa-spin fa-custom-ajax-indicator"></i> -->
-                        </span>
-                        <a href="#" title="" ><i class="fa fa-calendar-check-o"></i> 4 months Ago </a>
-                    </div>
-                    <a href="#" title="Green Land" class="ext-link"></a>
-                    </div>
-                </div>
-                                                
+            {% for list in lists%}
+                {% include 'includes/list.html' %}
+            {% endfor  %}                                  
         </div>
     </div>
-    
-    </section>
-<a  href="/accounts/logout/" class="btn btn-primary">logout</a>
+</section>
+
+
+
+
+
+
 {% endblock %}
