@@ -1,0 +1,184 @@
+.widget-property-search {
+    width: 100%;
+    padding: 35px 0 0 ;
+    position: relative
+}
+
+.selio_sw_win_wrapper {
+    height: 100%;
+}
+
+.widget-property-search .banner-search {
+    margin-right: -4.5px;
+    margin-left: -4.5px;
+    width: inherit;
+    padding: 0;
+}
+ .banner-search.row {
+    display: flex !important;
+}
+.banner-search.sw_search_form {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: row;
+    -ms-flex-flow: row;
+    flex-flow: row;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+}
+.widget-property-search .banner-search {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    display: block !important;
+    position: relative;
+}
+
+    
+.banner-search {
+    background: #fff;
+    padding: 0px 7px 0px 10px;
+    height: 65px;
+}
+
+
+.form_sec .form_field.banner_search_show:not(.srch-btn), .banner-search .form_field.banner_search_show:not(.srch-btn) {
+    display: block !important;
+}
+.banner-search .form_field:nth-child(2), .banner-search .form_field, .banner-search .input-field {
+    padding: 0 4.5px;
+}
+.banner-search .form_field {
+    padding-right: 0;
+}
+.form_field.full {
+    width: 100%;
+    padding: 0;
+}
+.widget-property-search .form_field {
+    margin-bottom: 19px;
+}
+.banner-search .form_field {
+    -webkit-flex: 1 2 auto;
+    -ms-flex: 1 2 auto;
+    flex: 1 2 auto;
+}
+.sw_search_form .form_field, .sw_search_form .input-field {
+    padding: 0 4.5px;
+    margin-bottom: 8px;
+}
+.form_field {
+    width: 25%;
+    padding: 0 9px;
+}
+.widget-property-search .form_field {
+    margin-bottom: 16px;
+}
+.widget-property-search .form_field {
+    width: 100%;
+}
+
+
+.banner-search .form-group {
+    margin: 0px;
+    padding: 0;
+}
+.form-group {
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: 1rem;
+}
+
+
+.widget-property-search .banner-search .form-control {
+    padding-left: 18px;
+}
+.half-map-sec .banner-search .form-control {
+    font-size: 12px;
+}
+.widget-property-search .form-control {
+    border: 1px solid #e0e1e6;
+    margin: 0;
+}
+.widget-property-search .form-control {
+    height: 48px;
+}
+.banner-search .form-control {
+    font-weight: 500;
+    border-radius: 0;
+}
+
+.form-control{
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    outline-width: 0;
+    outline: 0;
+}
+
+.form-control:focus{
+    outline: 0 !important;
+    outline-width: 0 !important;
+    border-color: unset;
+    box-shadow: none !important;
+}
+
+.side .banner-search .form_field .drop-menu, .side .banner-search .form_field.sf_input .form-control, .half-map-sec .banner-search .form_field .drop-menu, .half-map-sec .banner-search .form_field.sf_input .form-control {
+    margin: 0px;
+    height: 48px;
+}
+.banner-search .form_field .drop-menu, .banner-search .form_field.sf_input .form-control {
+    margin: 8px 0px 6px 0px;
+    border-left: 1px solid #e0e1e6;
+    height: 51px;
+    background: transparent;
+}
+.widget-property-search .drop-menu {
+    padding: 0;
+}
+
+.widget-property-search .drop-menu {
+    padding: 0;
+}
+.widget-property-search .form-control, .widget-property-search .drop-menu {
+    border: 1px solid #e0e1e6;
+    margin: 0;
+}
+.drop-menu {
+    background: #fff;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    height: 100%;
+    text-align: left;
+    margin: 7px 0;
+    border-left: 1px solid #e0e1e6;
+    /* padding-left: 10px; */
+    padding: 5px 10px 5px 10px;
+}
+
+.widget-property-search .drop-menu .select {
+    height: 48px;
+    line-height: 48px;
+    padding: 0 18px;
+}
+.drop-menu .select {
+    cursor: pointer;
+    display: block;
+    padding: 10px;
+    color: #7e7f82;
+    font-weight: 500;
+    padding-left: 20px;
+    font-size: 12px;
+    text-transform: capitalize;
+}
