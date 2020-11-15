@@ -11,6 +11,8 @@ django-allauth = "==0.41.0"
 django-crispy-forms = "==1.9.1"
 django-widget-tweaks = "==1.4.8"
 pillow = "==7.1.2"
+django-search-views = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.8"

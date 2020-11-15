@@ -13,4 +13,9 @@ urlpatterns = [
 
     path('detail/<slug>/', propertyDetail, name='property'),
 
+
+    path('search/', SearchListView.as_view(), name='search'),
+
+
+    # path('actor/', ActorsSearchList.as_view(), name='actor'),
 ]

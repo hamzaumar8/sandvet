@@ -1,4 +1,5 @@
 {% load static %}
+{% load showpollquiz %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +24,8 @@
 
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/winter.css' %}">
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/winter.css' %}"> -->
+    <!-- <link rel="stylesheet" href="{% static 'css/custom.css' %}"> -->
     <link rel="stylesheet" href="{% static 'css/slick.css' %}">
     <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
     <link rel="stylesheet" href="{% static 'css/blueimp-gallery.min.css' %}">
@@ -59,6 +60,11 @@
         {% include "includes/navbar.html" %}
     {% endblock %}
    
+    <ul class="m-5">
+      {% for poll in poll %}
+          <li>{{ poll.title }}</li>
+      {% endfor %}
+      </ul>
     <div class="wrapper">
       <main>
      
@@ -71,7 +77,6 @@
       </main>
     </div>
    
-
 
     <script>
         $(document).ready(function() {
@@ -90,10 +95,37 @@
             $(this).removeClass('active');
             $(this).find('.dropeddown').slideUp(300);
         });
+
+        $("body").delegate(".grid.view-type", "click", function(event) {
+          $('.list.view-type').removeClass('active')
+          $(this).addClass('active');
+          $('.listing__card').removeClass('list');
+          $('.list_products .col-md-6').addClass('col-lg-4');
+        });
+
+        $("body").delegate(".list.view-type", "click", function(event) {
+            // $(this).removeAttr('tabindex', 1).focus();
+            $('.grid.view-type').removeClass('active')
+            $(this).addClass('active');
+            $('.listing__card').addClass('list');
+            $('.list_products').addClass('list');
+            $('.list_products .col-lg-4').removeClass('col-lg-4');
+        });
+
+        $('select[name=region] > option:first-child').text('All Regions');
+        $('select[name=category] > option:first-child').text('All categories');
+        $('select[name=purpose] > option:first-child').text('Purpose');
+        $('input[name=address] ').attr("placeholder", "Enter Address, City or State");
+        $('input[name=bed] ').attr("placeholder", "Beds").attr("min", '1');
+        $('input[name=bath] ').attr("placeholder", "Baths").attr("min", '1');
+        $('input[name=price__min] ').attr("placeholder", "From GH₵").attr("min", '1');
+        $('input[name=price__max] ').attr("placeholder", "To GH₵").attr("min", '1');
         
       });
 
-    
+
+
+      // document.ge
 
     </script>
     

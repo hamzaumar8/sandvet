@@ -1,0 +1,47 @@
+<div class="row">
+    <!--Pagination-->
+    {% if is_paginated %}
+    <nav class="d-flex justify-content-center wow fadeIn">
+      <ul class="pagination pg-blue">
+        {% if page_obj.has_previous %}
+        <!--Arrow left-->
+        <li class="page-item ">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        {% endif %} 
+        <!-- disabled -->
+        <li class="page-item  active">
+          <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <!-- <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li> -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+    </div>
+
+    
+
+
+    <nav class="text-center pagin-parent">
+        <ul class="pagination">
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a href="?search_order=0&amp;search_view=grid&amp;map_num_listings=50&amp;offset=12#results" data-ci-pagination-page="2">2</a></li>
+            <li class="page-item"><a href="?search_order=0&amp;search_view=grid&amp;map_num_listings=50&amp;offset=24#results" data-ci-pagination-page="3">3</a></li>
+            <li class="page-item"><a href="?search_order=0&amp;search_view=grid&amp;map_num_listings=50&amp;offset=12#results" data-ci-pagination-page="2" rel="next">&gt;</a></li>
+        </ul>
+    </nav>

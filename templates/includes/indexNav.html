@@ -52,7 +52,7 @@
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">For Rent<span class="caret"></span></a>
                                     <ul class="dropdown-menu animated">
                                         <li class="active"><a href="{% url 'property:for-rent' %}" class="dropdown-item">For  Rent</a></li>
-                                        {% for cate in category_list %}
+                                        {% for cate in category_list_nav %}
                                             <li><a href="{{ cate.get_for_rent_category_url }}" class="dropdown-item"> {{cate.title}} for rent</a></li>
                                         {% endfor %}
                                     </ul>
@@ -62,7 +62,7 @@
                                     <ul class="dropdown-menu animated">
                                         <li class="active"><a href="{% url 'property:for-sale' %}" class="dropdown-item">For Sale</a></li>
                                         <li class="active"><a href="http://127.0.0.1:8000/ctg/land/" class="dropdown-item">Land for Sale</a></li>
-                                        {% for cate in category_list %}
+                                        {% for cate in category_list_nav %}
                                             <li><a href="{{ cate.get_for_sale_category_url }}" class="dropdown-item"> {{cate.title}} for sale</a></li>
                                         {% endfor %}
                                     </ul>

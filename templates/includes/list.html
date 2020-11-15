@@ -1,6 +1,6 @@
 <div class="col-lg-4 col-md-6">
     <div class="card listing__card">
-        <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
+        <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
             <div class="card__imgBlock">
                 <div class="overlay"></div>
                 <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
@@ -10,38 +10,40 @@
                 </div>
             </div>
         </a>
-        <div class="card__body">
-            <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
-                <h3>{{ list.title }}</h3>
-                <p>
-                    <i class="fa fa-map-marker"></i>
-                    {{ list.address }} , {{ list.region.name }} Region
-                </p>
-            </a>
-            <div class="card__resultItems">
-                {% if list.category.title == 'land' %}
-                    <span class="property-card-value">
-                        <span class="field_name"> Dimensions </span>
-                        <span class="item"> {{ list.dimension }} </span>
-                    </span>
-                {% else %}
-                    <span class="property-card-value">
-                        <span class="field_name"> Bathrooms </span>
-                        <span class="item"> {{ list.bath }} </span>
-                    </span>
-                    <span class="property-card-value">
-                        <span class="field_name"> Beds  </span>
-                        <span class="item"> {{ list.bed }} </span>
-                    </span>
-                {% endif %}
+        <div class="card__full">
+            <div class="card__body">
+                <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
+                    <h3>{{ list.title }}</h3>
+                    <p>
+                        <i class="fa fa-map-marker"></i>
+                        {{ list.address }} , {{ list.region.name }} Region
+                    </p>
+                </a>
+                <div class="card__resultItems">
+                    {% if list.category.title == 'land' %}
+                        <span class="property-card-value">
+                            <span class="field_name"> Dimensions </span>
+                            <span class="item"> {{ list.dimension }} </span>
+                        </span>
+                    {% else %}
+                        <span class="property-card-value">
+                            <span class="field_name"> Bathrooms </span>
+                            <span class="item"> {{ list.bath }} </span>
+                        </span>
+                        <span class="property-card-value">
+                            <span class="field_name"> Beds  </span>
+                            <span class="item"> {{ list.bed }} </span>
+                        </span>
+                    {% endif %}
+                </div>
             </div>
-        </div>
-        <div class="card__footer">
-            <span class="favorites-actions">
-                <a href="#" data-id="31" class=""><i class="fa fa-heart-o"></i></a>
-                <!-- <i class="fa fa-spinner fa-spin fa-custom-ajax-indicator"></i> -->
-            </span>
-            <a href="#" title="" ><i class="fa fa-calendar-check-o"></i> 4 months Ago </a>
+            <div class="card__footer">
+                <span class="favorites-actions">
+                    <a href="#" data-id="31" class=""><i class="fa fa-heart-o"></i></a>
+                    <!-- <i class="fa fa-spinner fa-spin fa-custom-ajax-indicator"></i> -->
+                </span>
+                <a href="#" title="" ><i class="fa fa-calendar-check-o"></i> 4 months Ago </a>
+            </div>
         </div>
         <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="ext-link"></a>
     </div>

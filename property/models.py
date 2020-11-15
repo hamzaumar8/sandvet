@@ -47,3 +47,10 @@ class Property(models.Model):
         })
 
 
+
+
+
+# class Actor(models.Model):
+#     name = models.CharField(max_length=32)
+#     surname = models.CharField(max_length=32)
+#     age = models.IntegerField()

@@ -1,7 +1,11 @@
-from django.views.generic import View, ListView, DetailView
+from django.views.generic import View, ListView, DetailView, FormView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.db.models import Q
 from .models import Property
 from core.models import Category
+
+from .filters import PropertyFilter
+
 
 # Create your views here.
 class PropertyListView(ListView):
@@ -10,13 +14,16 @@ class PropertyListView(ListView):
     template_name = 'list.html'
     # paginate_by = 10
 
-    # def get_context_data(self, **kwargs):
-    #     # kwargs['towns'] = self.town
-    #     # kwargs['regions'] = self.region
+    def get_context_data(self, **kwargs):
+        kwargs['filter'] = self.filter
+        kwargs['category_list_nav'] = self.categoryNav
+    #     kwargs['regions'] = self.region
     #     # kwargs['wishlist'] = self.wishlist
-    #     return super().get_context_data(**kwargs)
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
+        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
         # self.town = Town.objects.all()
         # self.region = Region.objects.all()
         # if self.request.user.is_authenticated:
@@ -32,13 +39,14 @@ class ForSaleListView(ListView):
     template_name = 'list.html'
     # paginate_by = 10
 
-    # def get_context_data(self, **kwargs):
-    #     # kwargs['towns'] = self.town
-    #     # kwargs['regions'] = self.region
-    #     # kwargs['wishlist'] = self.wishlist
-    #     return super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        kwargs['filter'] = self.filter
+        kwargs['category_list_nav'] = self.categoryNav
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
+        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
         # self.town = Town.objects.all()
         # self.region = Region.objects.all()
         # if self.request.user.is_authenticated:
@@ -55,19 +63,15 @@ class ForRentListView(ListView):
     template_name = 'list.html'
     # paginate_by = 10
 
-    # def get_context_data(self, **kwargs):
-    #     # kwargs['towns'] = self.town
-    #     # kwargs['regions'] = self.region
-    #     # kwargs['wishlist'] = self.wishlist
-    #     return super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        kwargs['filter'] = self.filter
+        kwargs['category_list_nav'] = self.categoryNav
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        # self.town = Town.objects.all()
-        # self.region = Region.objects.all()
-        # if self.request.user.is_authenticated:
-        #     self.wishlist = WishList.objects.filter(user=self.request.user)
-        # else:
-        #     self.wishlist = False
+        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+
         self.forrent = self.model.objects.filter(purpose="rent")
         return self.forrent.order_by
 
@@ -90,13 +94,15 @@ class CategoryForSaleListView(ListView):
     template_name = 'list.html'
     # paginate_by = 10
 
-    # def get_context_data(self, **kwargs):
-    #     kwargs['explore_town'] = self.explore_town
-    #     kwargs['towns'] = self.town
-    #     kwargs['regions'] = self.region
-    #     return super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        kwargs['filter'] = self.filter
+        kwargs['category_list_nav'] = self.categoryNav
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
+        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+
         self.category = get_object_or_404(Category, title=self.kwargs.get('category'))
         queryset = self.model.objects.filter(category=self.category, purpose="sale")
         return queryset.order_by('-id')
@@ -108,13 +114,37 @@ class CategoryForRentListView(ListView):
     template_name = 'list.html'
     # paginate_by = 10
 
-    # def get_context_data(self, **kwargs):
-    #     kwargs['explore_town'] = self.explore_town
-    #     kwargs['towns'] = self.town
-    #     kwargs['regions'] = self.region
-    #     return super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+        kwargs['filter'] = self.filter
+        kwargs['category_list_nav'] = self.categoryNav
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
+        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+
         self.category = get_object_or_404(Category, title=self.kwargs.get('category'))
         queryset = self.model.objects.filter(category=self.category, purpose="rent")
         return queryset.order_by('-id')
+
+
+
+
+
+class SearchListView(ListView):
+    model = Property
+    context_object_name = 'lists'
+    template_name = 'list.html'
+    # paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        kwargs['filter'] = self.filter
+        kwargs['category_list_nav'] = self.categoryNav
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
+        self.query = self.filter.qs
+        
+        return self.query

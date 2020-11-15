@@ -13,13 +13,15 @@ class IndexPageView(ListView):
     # paginate_by = 10
 
     def get_context_data(self, **kwargs):
+        kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
     #     kwargs['regions'] = self.region
     #     # kwargs['wishlist'] = self.wishlist
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.category = Category.objects.filter((~Q(title="land")))
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+        self.category = Category.objects.filter()
         # self.region = Region.objects.all()
         # if self.request.user.is_authenticated:
         #     self.wishlist = WishList.objects.filter(user=self.request.user)
