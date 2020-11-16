@@ -243,7 +243,7 @@ section {
 
 .listing__card {
     margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: .5rem;
     border: 0;
     cursor: pointer;
     padding: 0 !important;
@@ -419,7 +419,7 @@ content: '';
 }
 
 .card__resultItems {
-    min-height: 78px;
+    /* min-height: 78px; */
     border-bottom: 0;
     position: relative;
 
@@ -1198,4 +1198,84 @@ option{
 }
 .listing__card.list .card__body{
     border: 0;
+}
+
+.listing__card  {
+    margin-bottom: .5rem;
+}
+ .listing__card .card__body{
+ padding: 10px 15px 0;
+}
+
+.listing__card .card__body h3{
+    font-size: 14px;
+}
+ .listing__card .card__body p{
+    margin-bottom: 0;
+}
+
+ .card__resultItems {
+    padding-bottom: 5px;
+}
+
+ .listing__card .card__footer{
+    padding: 10px 15px;
+}
+.listing__card .card__footer a{
+    font-size: 10px;
+}
+ .listing__card .card__footer::before{
+    width: calc(100% - 30px);
+}
+ .listing__card .card__footer a .fa-heart-o{
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+}
+.listing__card .card__imgBlock{
+    height: 220px;
+}
+
+.listing__card .card__imgBlock img{
+    min-height: 220px !important;
+}
+
+.listing__card .card__rateInfo span{
+    padding: 5px 10px;
+    font-size: 10px;
+    text-align: center;
+}
+.listing__card .card__rateInfo h5{
+    font-size: 18px;
+}
+.listing__card .card__rateInfo{
+    padding: 20px 10px 10px;
+}
+
+.panel__card{
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    background-color: #fff;
+}
+.panel__cardhead{
+    position: relative;
+    background-color: #fff;
+    padding: 1rem 1rem .5rem;
+    border:0;
+}
+
+.panel__cardhead:after{
+    position: absolute;
+    width: calc(100% - 2rem);
+    height: 1px;
+    background-color: #dfe0e5;
+    content: '';
+    bottom: .5rem;
+}
+.panel__cardbody{
+    padding: .5rem 1.5rem 2rem;
+    position: relative;
+    background-color: #fff;
 }

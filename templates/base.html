@@ -72,12 +72,14 @@
       {% block content %}
       {% endblock %}
       {% endblock %}
-      {% block extra_body %}
-      {% endblock %}
+      
       </main>
     </div>
    
 
+
+
+   
     <script>
         $(document).ready(function() {
         "use strict";
@@ -100,7 +102,7 @@
           $('.list.view-type').removeClass('active')
           $(this).addClass('active');
           $('.listing__card').removeClass('list');
-          $('.list_products .col-md-6').addClass('col-lg-4');
+          $('.list_products .col-md-6').addClass('col-lg-3');
         });
 
         $("body").delegate(".list.view-type", "click", function(event) {
@@ -109,7 +111,7 @@
             $(this).addClass('active');
             $('.listing__card').addClass('list');
             $('.list_products').addClass('list');
-            $('.list_products .col-lg-4').removeClass('col-lg-4');
+            $('.list_products .col-lg-3').removeClass('col-lg-3');
         });
 
         $('select[name=region] > option:first-child').text('All Regions');
@@ -120,6 +122,45 @@
         $('input[name=bath] ').attr("placeholder", "Baths").attr("min", '1');
         $('input[name=price__min] ').attr("placeholder", "From GH₵").attr("min", '1');
         $('input[name=price__max] ').attr("placeholder", "To GH₵").attr("min", '1');
+
+
+       $('.panel__responsive').slick({
+          autoplay: true,
+  autoplaySpeed: 2000,
+  dots: false,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  // arrows: true,
+  prevArrow: $('#pannelPrev'),
+  nextArrow: $('#pannelNext'),
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 754,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
         
       });
 
@@ -140,5 +181,9 @@
       <a class="play-pause"></a>
       <ol class="indicator"></ol>
       </div>
+
+
+      {% block extra_body %}
+      {% endblock %}
   </body>
 </html>

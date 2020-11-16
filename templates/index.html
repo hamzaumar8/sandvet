@@ -4,7 +4,17 @@
 {% block content %}
 <section class="popular-listing py-5  section-popular-listings   ">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center justify-content-between panel__cardhead">
+            <div>
+                <h2>Propertiies</h2>
+            </div>
+            <div class="nav nav-tabs">
+                <li class="nav-item"><button id="pannelPrev" class="nav-link btnArrows mr-1"> <i class="fa fa-angle-left"></i> </button>
+                </li>
+                <li class="nav-item"><button id="pannelNext" class="btnArrows nav-link"> <i class="fa fa-angle-right"></i></button></li>
+            </div>
+        </div>
+        <div class="row panel__responsive panel__cardbody">
             {% for list in lists%}
                 {% include 'includes/list.html' %}
             {% endfor  %}                                  
@@ -17,4 +27,12 @@
 
 
 
+{% endblock %}
+
+{% block extra_body %}
+<script>
+    $(document).ready(function() {
+        $('body').addClass('bodyIndex')
+    });
+</script>
 {% endblock %}

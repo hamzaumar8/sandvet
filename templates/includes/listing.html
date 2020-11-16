@@ -12,36 +12,35 @@
                     </div>
                 </form>
             </div>
-            <div class="listing-directs">   
-                <div class="ci sw_widget sw_wrap">
-                    <div id="results" class="properties-rows">
-                        <div class="list-head">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="sortby">
-                                    <span>Sort by:</span>
-                                    <select class="select">
-                                        <option value="">Relevant</option>
-                                        <option value="">Oldest</option>
-                                        <option value="">Most Viewed</option>
-                                        <option value="">Higher price</option>
-                                        <option value="">Lower price</option>
-                                    </select>
-                                </div><!--sortby end-->
-                                <div class="view-change">
-                                    <ul class="nav nav-tabs sw-order-view">
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link grid view-type active" data-ref="grid"><i class="fa fa-th-large"></i></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="javascript:void(0);" class="nav-link list view-type " data-ref="list"><i class="fa fa-th-list"></i></a>
-                                        </li>
-                                    </ul>
-                                </div><!--view-change end-->
-                            </div>
+
+            <div class="listing-directs py-3">   
+                <div class="col-12">
+                    <div class="">
+                        <div class="row align-items-center justify-content-between panel__cardhead">
+                            <div class="sortby">
+                                <span>Sort by:</span>
+                                <select class="select">
+                                    <option value="">Relevant</option>
+                                    <option value="">Oldest</option>
+                                    <option value="">Most Viewed</option>
+                                    <option value="">Higher price</option>
+                                    <option value="">Lower price</option>
+                                </select>
+                            </div><!--sortby end-->
+                            <div class="view-change">
+                                <ul class="nav nav-tabs sw-order-view">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link grid view-type active" data-ref="grid"><i class="fa fa-th-large"></i></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link list view-type " data-ref="list"><i class="fa fa-th-list"></i></a>
+                                    </li>
+                                </ul>
+                            </div><!--view-change end-->
                         </div>
 
                         <!--list-head end-->
-                        <div class="listings">
+                        <div class="listings panel__cardbody row">
                             <div class="list_products">
                                 <div class="row">
                                     {% for list in lists%}

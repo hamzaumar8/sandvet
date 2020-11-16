@@ -5,10 +5,14 @@
             <div class="row justify-content-between align-items-center">
                 <div class="col-xl-6 col-md-7 col-sm-12">
                     <div class="header__address">
-                    <a href="tel://%28647%29+346-0855">
+                    <a href="tel://+233507321204">
                         <i class="fa fa-phone"></i>
-                        <span>+23355756664</span>
-                    <a>                                     
+                        <span>+233507321204</span>
+                    <a>                                   
+                    <a href="tel://+233554748768">
+                        <i class="fa fa-phone"></i>
+                        <span>+233554748768</span>
+                    <a> 
                     <a href="#">
                         <i class="fa fa-map-marker"></i>
                         <span>Accra, Ghana</span>
@@ -17,9 +21,16 @@
                 </div>
                 <div class="col-xl-3 col-md-5 col-sm-12">
                     <div class="header__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>              
-                        <a href="#"><i class="fa fa-facebook"></i></a>              
-                        <a href="#"><i class="fa fa-facebook"></i></a>              
+                        {% if request.user.is_authenticated %}
+                        <a href="#">Profile</i></a>  
+                        {% else %}           
+                        <a href="{% url 'account_login' %}">Login</i></a>              
+                        <a href="#">Signup</i></a>   
+                        {% endif %}            
+                        <!-- <a href="#"><i class="fa fa-facebook"></i></a>              
+                        <a href="#"><i class="fa fa-twitter"></i></a>              
+                        <a href="#"><i class="fa fa-instagram"></i></a>              
+                        <a href="#"><i class="fa fa-linkedin"></i></a>               -->
                     </div>
                 </div>
             </div>

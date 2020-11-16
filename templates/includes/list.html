@@ -1,11 +1,12 @@
-<div class="col-lg-4 col-md-6">
+{% load humanize %}
+<div class="col-lg-3 col-md-6">
     <div class="card listing__card">
         <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
             <div class="card__imgBlock">
                 <div class="overlay"></div>
                 <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
                 <div class="card__rateInfo">
-                    <h5>&cent; {{ list.price|floatformat:2 }}</h5>
+                    <h5>&cent; {{ list.price|floatformat:2|intcomma }}</h5>
                     <span class="purpose-for-{% if list.purpose == 'sale'%}sale{%else%}rent{%endif%}">For {% if list.purpose == 'sale'%}sale{%else%}rent{%endif%}</span>
                 </div>
             </div>
@@ -39,8 +40,8 @@
             </div>
             <div class="card__footer">
                 <span class="favorites-actions">
-                    <a href="#" data-id="31" class=""><i class="fa fa-heart-o"></i></a>
-                    <!-- <i class="fa fa-spinner fa-spin fa-custom-ajax-indicator"></i> -->
+                    <a href="#" class=""><i class="fa fa-heart-o"></i></a>
+                    <!----<i class="fa fa-spinner fa-spin fa-custom-ajax-indicator"></i> -->
                 </span>
                 <a href="#" title="" ><i class="fa fa-calendar-check-o"></i> 4 months Ago </a>
             </div>
