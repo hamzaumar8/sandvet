@@ -8,6 +8,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('core.urls', namespace='core')),
     path('', include('property.urls', namespace='property')),
+    path('dashboard/', include('dashboard.urls', namespace='dashboard')),
 ]
 
 

@@ -8,7 +8,7 @@ class CustomSignupForm(SignupForm):
     fullname = forms.CharField(
         min_length=7,
         widget=forms.TextInput(attrs={
-            'placeholder': 'Full fullname',
+            'placeholder': 'Full Name',
             'required': True
         }),
     )
