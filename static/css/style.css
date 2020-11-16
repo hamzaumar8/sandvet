@@ -22,7 +22,9 @@ img {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-
+.listing__card{
+    transition: .5s ;
+}
 a, .dropdown-item, .drop-menu, .drop-menu .select i, .wrapper:before, .popup, .price, .price > h4, .agent_info > h3, .slick-prev, .slick-next, .categories-info, .catg-icon > i, .categories-info > h3, .overlay-stick, .map-city-links ul li a, .header .navbar-nav .nav-item .nav-link, .drop-menu .select .currency, .drop-menu .dropeddown li, .card .img-block:before, .card .img-block:after, .popular-cities .card:before, .popular-cities .card:after, .banner-search .btn:before, .banner-search .btn:after, .intro-content a:before, .intro-content a:after, .sbmt-btn:before, .sbmt-btn:after, .btn2:before, .btn2:after, .btn-default:before, .btn-default:after, .card .img-block .overlay, .srch-btn .overlay, .card .card-body h3, .explore-feature .card .card-body i, .popular-cities .card .overlay, .popular-cities .card .card-body i, .map-box h4 a, .infoBox-close, .map-box-icon, .marker-card, #geoLocation, #mapnav-buttons a, #scrollEnabling, #streetView, .bottom-list ul li a, .footer-social a, .alert-success, .post-nfo li, .post-nfo li a, .post_info > h3 a, .blog-img:before, .agent_img:before, .widget-catgs ul li a, .widget-catgs ul li a span, .ps-info > h3 a, .widget-tags > ul li a, .btn1, .blog-single-post:hover .view-post, .agent:hover .view-post, .socio-links li a, .social_links li a, .btn-default, .card .card-footer a .la-heart-o, .partner-logo > a img, .signin-btn b:before, .model-item .title, .h-page-card .title a, .btn, .language-selector .drop-menu .dropeddown li {
     -webkit-transition: all 0.4s linear;
     -moz-transition: all 0.4s linear;
@@ -392,7 +394,6 @@ content: '';
     border-radius: 50px;
     padding: 5px 13px;
 }
-
 
 .listing__card .card__body {
     padding: 21px 23px 0;
@@ -1104,6 +1105,7 @@ textarea, textarea:hover, textarea:focus, input:hover, input:focus, input {
     cursor: pointer;
 }
 #div_id_purpose,
+#div_id_title,
 #div_id_category,
 #div_id_region,
 #div_id_bed,
@@ -1121,6 +1123,7 @@ textarea, textarea:hover, textarea:focus, input:hover, input:focus, input {
     flex:0 0 50%;
     max-width:50%
 }
+#div_id_title,
 #div_id_purpose,
 #div_id_category,
 #div_id_region,
@@ -1130,7 +1133,58 @@ textarea, textarea:hover, textarea:focus, input:hover, input:focus, input {
     flex:0 0 25%;
     max-width:25%
 }
+.home-banner-section{
+    position: relative;
+    padding: 2rem 0 3rem;
+    background-position: center;
+    background-size: contain;
+    /* background-repeat: no-repeat !important; */
+}
 
+.home-banner-section:before{
+    position: absolute;
+    content:'';
+    width: 100%;
+    height:100%;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background-color: rgba(30, 144, 255, 0.4);
+}
+.home-widget-search {
+    border-radius: 50px !important;
+    padding: .7rem 1.5rem .7rem .7rem;
+    border: 0;
+    position: relative;
+}
+.home-widget-search #div_id_title input{
+    border-radius: 50px 0 0 50px !important;
+}
+.home-widget-search form .form-group{
+    margin-bottom: 0;
+}
+.home-widget-search #div_id_title{
+    -ms-flex:0 0 27%;
+    flex:0 0 27%;
+    max-width:27% 
+}
+.home-widget-search #div_id_price__max,
+.home-widget-search #div_id_price__min{
+    -ms-flex:0 0 18.75%;
+    flex:0 0 18.75%;
+    max-width:18.75%
+}
+.home-widget-search .btn-search{
+    border-radius: 50px;
+    display: inline;
+    -ms-flex:0 0 10.5%;
+    flex:0 0 10.5%;
+    max-width:10.5%;
+    height: 48px;
+    /* line-height: 48px; */
+    
+}
 #div_id_bed,
 #div_id_bath{
     -ms-flex:0 0 12.5%;
@@ -1178,6 +1232,8 @@ option{
 .listing__card.list{
     display: flex;
     flex-direction: row;
+    height: 220px;
+    margin-bottom: 1rem;
 }
 .listing__card.list .preview{
     -webkit-flex: 1 1 auto;
@@ -1199,6 +1255,7 @@ option{
 .listing__card.list .card__imgBlock img{
     object-fit: cover;
     height: 100%;
+    min-height: 220px;
 }
 
 .listing__card.list .card__rateInfo{
@@ -1210,9 +1267,61 @@ option{
  padding: 5px 10px;
 }
 .listing__card.list .card__body{
+    padding: 21px 23px 0;
     border: 0;
 }
 
+.listing__card.list .card__body h3 {
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+
+.listing__card.list .card__body p {
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
+.listing__card.list .card__resultItems {
+    padding-bottom: 16px;
+    min-height: 98px;
+}
+.listing__card.list .card__resultItems > span.property-card-value {
+    font-size: 12px;
+    padding: 0px 18px;
+}
+
+
+.listing__card.list .card__footer {
+    padding: 14px 23px ;
+}
+.listing__card.list .card__footer::before{
+    width: calc(100% - 46px);
+}
+
+.listing__card.list .card__footer a {
+    font-size: 12px;
+}
+.listing__card.list .card__footer a i {
+    font-size: 16px;
+}
+
+.listing__card.list .card__footer a .fa-heart-o {
+    background: #f3f4f7;
+    color: #242526;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 50px;
+    position: relative;
+    padding-left: 3px;
+    z-index: -1;
+}
+
+.listing__card.list .card__footer{
+    border:0;
+}
 .listing__card  {
     margin-bottom: .5rem;
 }

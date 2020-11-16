@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q
 from .models import Category
 from property.models import Property
+from property.filters import HomePropertFilter
 
 # Create your views here.
 class IndexPageView(ListView):
@@ -15,6 +16,7 @@ class IndexPageView(ListView):
     def get_context_data(self, **kwargs):
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+        kwargs['filter'] = self.filter
     #     kwargs['regions'] = self.region
     #     # kwargs['wishlist'] = self.wishlist
         return super().get_context_data(**kwargs)
@@ -22,6 +24,8 @@ class IndexPageView(ListView):
     def get_queryset(self):
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.filter()
+
+        self.filter = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
         # self.region = Region.objects.all()
         # if self.request.user.is_authenticated:
         #     self.wishlist = WishList.objects.filter(user=self.request.user)

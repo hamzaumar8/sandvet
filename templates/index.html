@@ -1,7 +1,23 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %} 
+{% load static %}
 {% block head_title %}Home{% endblock %}
 {% block navbar %} {% include "includes/indexNav.html" %} {% endblock %}
 {% block content %}
+<section class="home-banner-section" style="background-image: url({% static 'img/homebanner.png' %});">
+    <div class="container">
+        <div class="row">
+            <div class="widget-property-search card mt-3 home-widget-search col-12">
+                <form action="{% url 'property:search' %}" class="">
+                    <div class="row">
+                        {{ filter.form|crispy }}
+                        <button type="submit" class="btn btn-primary  btn-search"><i class="fa fa-search"></i> Search</button>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </div>
+</section>
 <section class="popular-listing py-5  section-popular-listings   ">
     <div class="container">
         <div class="row align-items-center justify-content-between panel__cardhead">
