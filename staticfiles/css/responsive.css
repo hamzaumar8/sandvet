@@ -1,0 +1,103 @@
+@media (max-width: 1600px) {
+    
+}
+
+@media (max-width: 1366px) {
+    
+}
+
+@media (max-width: 1200px) {
+    header .container {
+        max-width: 1170px;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        overflow: auto;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 360px;
+        height: 100%;
+        background-color: #fff;
+        z-index: 99999;
+        padding: 70px 30px;
+        -webkit-transition: all 0.4s ease-in-out;
+        -o-transition: all 0.4s ease-in-out;
+        -ms-transition: all 0.4s ease-in-out;
+        -moz-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .navbar-collapse.show {
+        opacity: 1;
+        visibility: visible;
+    }
+    .navbar-expand-lg .navbar-nav {
+        -webkit-flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    
+    #navbarSupportedContent .navbar-nav {
+        margin-bottom: 35px;
+    }
+    .close-menu,
+    .menu-button {
+        display: block;
+    }
+    .main__header .navbar-nav .nav-item,
+    header .navbar-nav .nav-item {
+        margin: 0;
+    }
+    header .navbar-nav .nav-item .nav-link {
+        border-bottom: 1px solid #dfe0e5;
+        padding: 15px 0 14px 0;
+    }
+    .main__header .navbar-nav .nav-item .dropdown-menu ,
+    header .navbar-nav .nav-item .dropdown-menu {
+        overflow: initial;
+        box-shadow: none;
+        right: 0;
+        margin-right: 0;
+        padding-right: 0;
+        position: static;
+        border: 0;
+    }
+    .main__header .dropdown-toggle::after ,
+    header .dropdown-toggle::after {
+        position: absolute;
+        left: auto;
+        right: 10px;
+        top: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .top__header{
+        display: none !important;
+    }
+    main .form__wrapper,
+    .popular-listing{
+        padding: 2rem 1rem;
+    }
+    .form__content{
+        padding: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    
+}
+
+
+@media (min-width: 1200px){
+.container {
+    max-width: 1170px;
+    padding: 0;
+}
