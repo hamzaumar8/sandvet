@@ -1396,6 +1396,9 @@ option{
     content: '';
     bottom: .5rem;
 }
+.pannel__headtitle h2{
+    text-transform: capitalize;
+}
 .panel__cardbody{
     padding: .5rem 1.5rem 2rem;
     position: relative;

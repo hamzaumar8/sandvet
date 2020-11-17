@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{table1}}
+    {{table2}}
+    {% for table1Instace in table1 %}
+        <h1>
+
+            {{table1Instace.title}}
+            {{table1Instace.timestamp}}
+        </h1>
+        
+    {% for table2Instance in table1Instace.table2_set.all %}
+        {{table2Instace.title}}
+    <!--Print table elements here-->
+
+    {% endfor %}
+
+{% endfor %}
+
+
+
+{% for item in s %}
+    <h1>
+
+        {{ item.name }}
+
+    </h1>
+    {% for x in item.items_set.all %}
+        -- {{ x.name }}
+    {% endfor %}
+{% endfor %}
+
+
+{% for item in s %}
+    <h1>
+
+        {{ item.title }}
+
+    </h1>
+    {% for x in item.property_set.all %}
+        -- 
+    {% endfor %}
+{% endfor %}
+</body>
+</html>

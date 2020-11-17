@@ -1,9 +1,7 @@
 from django.views.generic import View, ListView, DetailView, FormView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q
-from .models import Property
-from core.models import Category
-
+from .models import Property, Category
 from .filters import PropertyFilter
 
 
@@ -54,7 +52,7 @@ class ForSaleListView(ListView):
         # else:
         #     self.wishlist = False
         self.forsale = self.model.objects.filter(purpose='sale')
-        return self.forsale.order_by
+        return self.forsale.order_by('-id')
 
 
 class ForRentListView(ListView):
@@ -148,3 +146,17 @@ class SearchListView(ListView):
         self.query = self.filter.qs
         
         return self.query
+
+
+
+# def checkPage(request):
+#     table1 = Category.objects.all() 
+#     table2 = Property.objects.all() 
+#     return render(request, 'template_name.html',{'table1':table1, 'table2':table2})
+
+def checkPage(request):
+    s = Category.objects.all()
+    return_dict = {
+        's' :   s        
+    }
+    return render(request, 'template_name.html', return_dict)

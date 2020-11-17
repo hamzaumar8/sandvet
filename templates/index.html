@@ -4,6 +4,9 @@
 {% block head_title %}Home{% endblock %}
 {% block navbar %} {% include "includes/indexNav.html" %} {% endblock %}
 {% block content %}
+
+
+
 <section class="home-banner-section" style="background-image: url({% static 'img/homebanner.png' %});">
     <div class="container">
         <div class="row">
@@ -18,30 +21,8 @@
         </div> 
     </div>
 </section>
-<section class="popular-listing py-5  section-popular-listings   ">
-    <div class="container">
-        <div class="row align-items-center justify-content-between panel__cardhead">
-            <div>
-                <h2>Propertiies</h2>
-            </div>
-            <div class="nav nav-tabs">
-                <li class="nav-item"><button id="pannelPrev" class="nav-link btnArrows mr-1"> <i class="fa fa-angle-left"></i> </button>
-                </li>
-                <li class="nav-item"><button id="pannelNext" class="btnArrows nav-link"> <i class="fa fa-angle-right"></i></button></li>
-            </div>
-        </div>
-        <div class="row panel__responsive panel__cardbody">
-            {% for list in lists%}
-                {% include 'includes/list.html' %}
-            {% endfor  %}                                  
-        </div>
-    </div>
-</section>
 
-
-
-
-
+{% include "includes/index/category.html" %}
 
 {% endblock %}
 

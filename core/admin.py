@@ -22,5 +22,3 @@ admin.site.index_title = 'Welcome to the sandvet admin area'
 admin.site.register(Region)
 # admin.site.register(Town)
 # admin.site.register(PaidTour)
-admin.site.register(Category)
-# admin.site.register(Category)

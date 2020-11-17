@@ -17,5 +17,8 @@ urlpatterns = [
     path('search/', SearchListView.as_view(), name='search'),
 
 
+    path('check/', checkPage, name='check'),
+
+
     # path('actor/', ActorsSearchList.as_view(), name='actor'),
 ]

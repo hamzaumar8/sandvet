@@ -8,7 +8,14 @@ class PropertyFilter(django_filters.FilterSet):
     price__max = django_filters.NumberFilter(field_name='price', lookup_expr='lt')
     class Meta:
         model = Property
-        fields = ['address', 'purpose', 'category', 'region' ,'bed', 'bath']
+        fields = [
+            'address', 
+            'purpose', 
+            'category', 
+            'region' ,
+            'bed', 
+            'bath'
+        ]
 
 
 class HomePropertFilter(django_filters.FilterSet):
@@ -17,5 +24,8 @@ class HomePropertFilter(django_filters.FilterSet):
     price__max = django_filters.NumberFilter(field_name='price', lookup_expr='lt')
     class Meta:
         model = Property
-        fields = ['title', 'category']
+        fields = [
+            'title', 
+            'category'
+        ]
 

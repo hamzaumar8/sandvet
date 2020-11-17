@@ -2,8 +2,7 @@ from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q
-from .models import Category
-from property.models import Property
+from property.models import Property, Category
 from property.filters import HomePropertFilter
 
 # Create your views here.
@@ -17,21 +16,17 @@ class IndexPageView(ListView):
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
         kwargs['filter'] = self.filter
+        # kwargs['property'] = self.property
     #     kwargs['regions'] = self.region
     #     # kwargs['wishlist'] = self.wishlist
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
         self.categoryNav = Category.objects.filter((~Q(title="land")))
-        self.category = Category.objects.filter()
-
+        self.category = Category.objects.all()
+        self.property = Property.objects.all()
         self.filter = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
-        # self.region = Region.objects.all()
-        # if self.request.user.is_authenticated:
-        #     self.wishlist = WishList.objects.filter(user=self.request.user)
-        # else:
-        #     self.wishlist = False
-        return self.model.objects.order_by('-id')[:6]
+        return self.model.objects.order_by('-id')
 
 
 
