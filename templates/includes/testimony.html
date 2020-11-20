@@ -1,0 +1,33 @@
+{% load static %}
+{% if testimonys%}
+<section class="testimonial-sec section-clients-say  ">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="section-heading">
+				<span class="">Clients Say</span>
+				<h3 class="">Testimonials</h3>
+			</div>
+		</div>
+		<div class="row testimonail-sect">
+			<div class="testimony__carousel col-12">
+				{% for testimony in testimonys %}
+				<div class="testimony__comment mx-3">
+					<div class="card testimony__commentCard">
+						<p>{{ testimony.message }}</p>
+						<div class="d-flex align-items-center testimony__profCard">
+							<div class="testimony__image">
+								<img src="{{ testimony.imageURL }}" alt="image" class="img-fluid">
+							</div>
+							<div>
+								<h3>{{ testimony.name }}</h3>
+								<p>Property owner</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				{%endfor%}
+			</div>
+		</div>
+	</div>
+</section>
+{%endif%}

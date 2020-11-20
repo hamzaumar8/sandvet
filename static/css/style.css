@@ -1,8 +1,8 @@
 :root {
     --blue: #1e90ff;
     --white: #ffffff;
-    -colorPrimary: ;
-    -colorSecondary
+    --colorSecondary: #293556;
+    --colorSndSecondary: #2e4583;
 }
 
 * {
@@ -1859,3 +1859,67 @@ section.main-banner-sec {
     font-weight: 700;
     text-transform: uppercase;
 }
+
+.testimonial-sec{
+    position: relative;
+    background-color: var(--white);
+    margin-top: 2rem;
+    padding: 3rem 2rem 5rem;
+}
+
+.testimony__comment{
+    position: relative;
+    /* padding: 2rem; */
+}
+.testimony__commentCard{
+    box-shadow: unset;
+    padding: 2rem 2rem 2rem 4rem;
+}
+
+.testimony__commentCard::before {
+    content: '\201c';
+    position: absolute;
+    top: 5px;
+    left: 2rem;
+    color: var(--colorSndSecondary);
+    font-family: "Poppins","Raleway";
+    font-size: 5rem;
+}
+
+.bottom__section{
+    padding: 3rem 0;
+    background-color: var(--colorSndSecondary);
+}
+
+footer.footer{
+    position: relative;
+    padding:1rem;
+    background-color: var(--colorSecondary);
+}
+
+footer.footer .copyright a{
+    color: var(--white);
+    font-size: 20px;
+    font-weight: 500 !important;
+    position: relative;
+    font: inherit;
+}
+.testimony__profCard{
+    position: relative;
+    padding: 1rem 0  0;
+}
+.testimony__image{
+    position: relative;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.testimony__image img{
+    position: relative;
+    width: 100%;
+    min-height: 80px;
+}
+

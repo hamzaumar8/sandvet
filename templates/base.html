@@ -38,7 +38,7 @@
   <!-- <script src="{% static 'slick/slick.js' %}"></script> -->
   <script src="{% static 'js/slick.js' %}"></script>
   <script src="{% static 'js/blueimp-gallery.js' %}"></script>
-  <!-- <script src="{% static 'js/custom.js' %}"></script> -->
+  
   </head>
 <body>
   {% block body %}
@@ -50,8 +50,8 @@
         {% include "includes/messages.html" %}
         {% block content %} {% endblock %}
       </main>
-
-      <!-- {% include "includes/footer.html" %} -->
+      {% include "includes/testimony.html" %}
+      {% include "includes/footer.html" %}
     </div>
   {% endblock %}
 
@@ -100,43 +100,6 @@
         $('input[name=price__max] ').attr("placeholder", "To GH₵").attr("min", '1');
 
 
-       $('.panel__responsive').slick({
-          autoplay: true,
-  autoplaySpeed: 2000,
-  dots: false,
-  infinite: true,
-  speed: 300,
-  slidesToShow: 4,
-  slidesToScroll: 4,
-  // arrows: true,
-  prevArrow: $('#pannelPrev'),
-  nextArrow: $('#pannelNext'),
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 754,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-  ]
-});
 
 
 
@@ -144,14 +107,26 @@ $("body").delegate(".close-menu", "click", function(event) {
           $('.navbar-collapse.collapse').removeClass('show')
         });
         
+
+
+
+
+
+           $('.testimony__carousel').slick({
+              dots: true,
+              infinite: true,
+              slidesToShow: 3,
+              slidesToScroll: 3,
+});
       });
 
 
 
-      // document.ge
-
+      
     </script>
     
+    <script src="{% static 'js/custom_sliders.js' %}"></script>
+
 
     <div id="blueimp-gallery" class="blueimp-gallery">
       <div class="slides"></div>

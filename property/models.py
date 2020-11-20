@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.shortcuts import reverse
 from core.models import Region
@@ -52,11 +53,12 @@ class Property(models.Model):
     # #######
     image = models.ImageField(null=True, blank=True)
     views = models.PositiveIntegerField(default=0)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     
 
     def __str__(self):
         return self.title
+
 
     @property
     def imageURL(self):
@@ -70,6 +72,42 @@ class Property(models.Model):
         return reverse("property:property", kwargs={
             'slug': self.slug
         })
+
+    def get_date(self):
+        time = datetime.now()
+        if self.created_at.day == time.day:
+            return str(time.hour - self.created_at.hour) + " hours ago"
+        else:
+            if self.created_at.month == time.month:
+                return str(time.day - self.created_at.day) + " days ago"
+            else:
+                if self.created_at.year == time.year:
+                    return str(time.month - self.created_at.month) + " months ago"
+        return self.created_at
+
+
+
+
+class Testimony(models.Model):  
+    name = models.CharField(max_length=200, null=True)
+    message = models.TextField()
+    image = models.ImageField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+
+    def __str__(self):
+        return self.name
+
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url 
+        except:
+            url = ''
+        return url
+
+   
 
 
 
