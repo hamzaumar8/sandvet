@@ -1678,7 +1678,7 @@ section.main-banner-sec {
 .banner-carousel {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 600px;
 }
 .banner-slide:after{
     position: absolute;
@@ -1754,6 +1754,7 @@ section.main-banner-sec {
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
     z-index: 99;
+    padding: 4rem 7rem;
 }
 
 .banner_text {
