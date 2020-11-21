@@ -14,6 +14,8 @@
         </div>
     </div>
 </section>
+
+
 <section class="bottom__section">
     <div class="container placeholder-container">
         <div class="row">
@@ -24,6 +26,15 @@
                         <li><span class="value"><a href="{% url 'property:for-sale' %}">Property for sale</a></span></li>
                         {% for cate in category_list_nav %}
                         <li><span class="value"><a href="#">{{cate.title}} for rent</a></span></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+                <div class="widget-footer-contacts mt-3">
+                    <h3>For Sale</h3>
+                    <ul class="footer-list">
+                        <li><span class="value"><a href="{% url 'property:for-sale' %}">Property for sale</a></span></li>
+                        {% for cate in category_list %}
+                        <li><span class="value"><a href="#">{{cate.title}} for sale</a></span></li>
                         {%endfor%}
                     </ul>
                 </div>
@@ -39,20 +50,31 @@
                     </ul>
                 </div>
             </div>
+            <div id="widget-follow-us-1" class="widget footer-regular widget-follow-us block-selio col-xl-3 col-sm-12 col-md-5">
+                <div class="widget-footer-contacts">
+                    <h3>Locality</h3>
+                    <ul class="footer-list">                
+                        {% for local in locality %}
+                            <li><span class="value"><a href="{{local.get_locality_url}}">propety at {{local.name}}</a></span></li>
+                        {%endfor%}
+                    </ul>
+
+                </div>
+            </div> 
             <div id="widget-footer-contacts-1" class="widget footer-regular widget-footer-contacts block-selio col-xl-3 col-sm-6 col-md-3">
                 <div class="widget-footer-contacts">
                     <h3>Contact Us</h3>
                     <ul class="footer-list">                
-                        <li><i class="fa fa-map-marker"></i> <span class="value">Accra, Ghana</span></li>
-                        <li><i class="fa fa-phone"></i> <span class="value"><a href="tel:(844)%20380-8603">(844) 380-8603</a></span></li>
+                        <li><i class="fa fa-map-marker"></i> <span class="value">University of Ghana, East Legon - Accra, Ghana</span></li>
+                        <li><i class="fa fa-phone"></i> <span class="value"><a href="tel://+233507321204">+233 50 732 1204</a></span></li>
+                        <li><i class="fa fa-phone"></i> <span class="value"><a href="tel://+233554748768">+233 55 474 8768</a></span></li>
                         <li><i class="fa fa-envelope"></i> <span class="value"><a href="mailto:support@sandvet.com">support@sandvet.com</a></span></li>
 
-                        <li><i class="fa fa-chevron-circle-right"></i><span class="value"><a href="#">Contact Us</a></span></li>
+                        <li><i class="fa fa-chevron-circle-right"></i><span class="value"><a href="{% url 'core:contact' %}">Contact Us</a></span></li>
                     </ul>
+
                 </div>
-            </div>
-            <div id="widget-follow-us-1" class="widget footer-regular widget-follow-us block-selio col-xl-3 col-sm-12 col-md-5">
-                <div class="bottom-list widget-follow-us">
+                <div class="widget-footer-contacts mt-3">
                     <h3>Follow Us</h3>
                     <div class="footer-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -61,7 +83,7 @@
                         <a href="#"><i class="fa fa-instagram"></i></a>
                     </div>
                 </div>
-            </div>        
+            </div>       
         </div>
     </div>
 </section>

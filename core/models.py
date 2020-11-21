@@ -21,4 +21,8 @@ class Locality(models.Model):
     def __str__(self):
         return self.name
 
+    def get_locality_url(self):
+        return reverse("core:locality", kwargs={
+            'locality': self.name
+        })
 

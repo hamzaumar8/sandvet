@@ -40,7 +40,8 @@ class Property(models.Model):
     price = models.FloatField()
     slug = models.SlugField(unique=True)
     description = models.TextField()
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='properties')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='property')
+    locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
     # #######

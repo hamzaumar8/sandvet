@@ -21,9 +21,11 @@ class IndexPageView(ListView):
         kwargs['testimonys'] = self.testimony
         kwargs['filter'] = self.filter
         kwargs['subscription_form'] = self.subscriptionform
+        kwargs['locality'] = self.locality
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
+        self.locality = Locality.objects.all() 
         self.subscriptionform = SubscriptionForm()
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.all()
@@ -89,4 +91,30 @@ def subscriptionForm(request):
         # response_data = 'ok'
         return JsonResponse('ok', status=200, safe=False)
     return JsonResponse({}, status=200)
+
+
+
+
+def contactPage(request):
+    return render(request, 'contact.html')
+
+
+
+class LocalityListView(ListView):
+    model = Property
+    context_object_name = 'lists'
+    template_name = 'list.html'
+    # paginate_by = 10
+
+    # def get_context_data(self, **kwargs):
+    #     kwargs['explore_town'] = self.explore_town
+    #     kwargs['towns'] = self.town
+    #     kwargs['regions'] = self.region
+    #     return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        self.locality = get_object_or_404(Locality, name=self.kwargs.get('locality'))
+        queryset = self.model.objects.filter(locality=self.locality)
+        return queryset.order_by('-id')
+
 
