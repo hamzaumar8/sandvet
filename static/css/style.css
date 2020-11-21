@@ -366,7 +366,11 @@ header {
     color: #fff;
     transition: all 0.4s linear;
 }
-
+.header__social  li a.dropdown-item{
+    color: #242526 !important;
+    display: block;
+    padding: 0.5rem 1.5rem .7rem;
+}
 .header__address a i {
     font-size: 18px;
     margin-right: 5px;
@@ -603,7 +607,7 @@ section {
     /* margin-right: -17px;
     margin-left: -17px; */
 }
-
+.banner_text .card .resul-items > span.property-card-value,
 .card__resultItems>span.property-card-value {
     display: inline-block;
     font-size: 12px;
@@ -615,14 +619,17 @@ section {
     font-weight: 700;
 }
 
+.banner_text .card .resul-items>span.property-card-value:first-child ,
 .card__resultItems>span.property-card-value:first-child {
     padding-left: 0;
 }
 
+.banner_text .card .resul-items>span.property-card-value:last-child ,
 .card__resultItems>span.property-card-value:last-child {
     border-right: none;
 }
 
+.banner_text .card .resul-items>span.property-card-value .field_name ,
 .card__resultItems>span.property-card-value .field_name {
     color: #161616;
     font-weight: 400;
@@ -2003,9 +2010,16 @@ footer.footer .copyright a{
     font-size: 18px;
     font-weight: 600;
 }
+.widget-footer-contacts li{
+    margin-bottom: 15px;
+}
 .widget-footer-contacts li,
 .widget-footer-contacts a{
     color: #eee;
     font-size: 14px;
     text-transform: capitalize !important;
+}
+.footer-list i {
+    font-size: 14px;
+    margin-right: 12px;
 }
