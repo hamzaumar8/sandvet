@@ -58,10 +58,8 @@ class CategoryListView(ListView):
 
 @csrf_exempt
 def subscriptionForm(request):
-    response_data = {}
-
     if request.method == "POST" and request.is_ajax:
-        
+
         email = request.POST['email']
         locality = request.POST['locality']
         category = request.POST['category']
@@ -69,30 +67,26 @@ def subscriptionForm(request):
         bed = request.POST['bed']
         from_price = request.POST['from_price']
         to_price = request.POST['to_price']
+        try:
+            subscription = Subscription()
+            subscription.email=email
+            subscription.purpose=purpose
+            subscription.bed=bed
+            subscription.from_price=from_price
+            subscription.to_price=to_price
 
-        locality = Locality.objects.get(id=locality)
-        category = Category.objects.get(id=category)
+            if locality != '' and locality is not None:
+                subscription.locality = Locality.objects.get(pk=locality)
 
-        new_subscription = Subscription.objects.create(
-            email=email,
-            locality=locality,
-            category=category,
-            purpose=purpose,
-            bed=bed,
-            from_price=from_price,
-            to_price=to_price,
-        )
+            if category  != '' and category  is not None:
+                subscription.category = Category.objects.get(id=category)
 
-        new_subscription.save()
-        response_data['email'] = email
-        response_data['locality'] = locality
-        response_data['category'] = category
-        response_data['purpose'] = purpose
-        response_data['bed'] = bed
-        response_data['from_price'] = from_price
-        response_data['to_price'] = to_price
+            subscription.save()
+            
+        except Exception as e:
+            return JsonResponse({"error":str(e)}, status=403)
 
-
-        return HttpResponse(JsonResponse(response_data))
-    return HttpResponse(JsonResponse(response_data))
+        # response_data = 'ok'
+        return JsonResponse('ok', status=200, safe=False)
+    return JsonResponse({}, status=200)
 

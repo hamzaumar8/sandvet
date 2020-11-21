@@ -84,26 +84,49 @@
 </footer>
 
   <!-- Modal -->
-  <div class="modal fade subscriptModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade subscriptModal" id="subscriptionModal" tabindex="-1" aria-labelledby="subscriptionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Propert Alerts</h5>
+          <h5 class="modal-title" id="subscriptionModalLabel">Propert Alerts</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body form_subscription row">
-          <form action="" method="POST" class="col-12" id="subForm">
+            <div class="col-12 mb-2">
+                <p>
+                    Be the first to know about the best property deals in Ghana!
+                </p>
+            </div>
+            <form action="" method="POST" class="col-12" id="subForm">
             <div id="signup_error"></div>
+            <div class="row">
                 {% csrf_token %} 
-              {{subscription_form|crispy}}
-              <button type="submit" id="">jjj</button>
-          </form>
+                {{subscription_form|crispy}}
+            </div>
+            <button type="submit"class="btn btn-primary col-12">Alert Me</button>
+            </form>
+            </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade completeSubscriptModal" id="completeSubscriptionModal" tabindex="-1" aria-labelledby="completeSubscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="completeSubscriptionModalLabel">Thank your for subscribing</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p>You will receive an update when this type of property becomes available.
+                </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="col-12 btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

@@ -91,6 +91,7 @@
         });
 
         $('select[name=region] > option:first-child').text('All Regions');
+        $('select[name=locality] > option:first-child').text('All Locality');
         $('select[name=category] > option:first-child').text('All categories');
         $('select[name=purpose] > option:first-child').text('Purpose');
         $('input[name=address] ').attr("placeholder", "Enter Address, City or State");
@@ -99,6 +100,8 @@
         $('input[name=bath] ').attr("placeholder", "Baths").attr("min", '1');
         $('input[name=price__min] ').attr("placeholder", "From GH₵").attr("min", '1');
         $('input[name=price__max] ').attr("placeholder", "To GH₵").attr("min", '1');
+        $('input[name=to_price] ').attr("placeholder", "To GH₵").attr("min", '1');
+        $('input[name=from_price] ').attr("placeholder", "From GH₵").attr("min", '1');
 
 
 
@@ -125,7 +128,7 @@ $("body").delegate("#subscript-btn", "click", function(event) {
   const subcriptEmail = $('#subscript-email').val();
   if(subcriptEmail){
     event.preventDefault();
-      $('#exampleModal').modal('toggle');
+      $('#subscriptionModal').modal('toggle');
       const emailModal = $('.form_subscription #id_email').val(subcriptEmail)
     }
   })
@@ -136,7 +139,7 @@ $("body").delegate("#subscript-btn", "click", function(event) {
   //Process signup with out loading a page
 $("#subForm").submit(function(event) {
   event.preventDefault();
-  var form = $('#subForm')
+  var form = $(this)
   if (form.valid()) {
     // $('#loading').addClass('loading');
     $.ajax({
@@ -149,9 +152,22 @@ $("#subForm").submit(function(event) {
               // complete: function() {
             //     $(".loading").hide();
             // },
+            
             success: function(data) {
-              $("#signup_error").html(data);
-              $('#exampleModal').modal('close');
+              console.log(data)
+              if(data == 'ok'){
+                $('#subscriptionModal').modal('hide');
+                $('#completeSubscriptionModal').modal('toggle');
+              }else{
+              $("#signup_error").html(
+                `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ${data}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`
+              );
+            }
             }
           })
       }else{
