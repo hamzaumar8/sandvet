@@ -8,4 +8,6 @@ urlpatterns = [
     path('', IndexPageView.as_view(), name='index'),
 
     path('ctg/<str:category>/', CategoryListView.as_view(), name='category'),
+
+    path('ajax_subscriptionform/', subscriptionForm),
 ]

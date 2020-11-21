@@ -1,8 +1,14 @@
 from datetime import datetime
 from django.db import models
 from django.shortcuts import reverse
-from core.models import Region
+from core.models import Region, Locality
 # Create your models here.
+
+
+PROPERTY_PURPOSE_TYPE = [
+    ('sale', 'sale'),
+    ('rent', 'rent'),
+]
 
 class Category(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
@@ -30,20 +36,13 @@ class Category(models.Model):
 
 
 class Property(models.Model):
-    SALE = 'sale'
-    RENT = 'rent'
-    PROPERTY_PURPOSE_TYPE = [
-        (SALE, 'sale'),
-        (RENT, 'rent'),
-    ]
-    
     title = models.CharField(max_length=200, null=True)
     price = models.FloatField()
     slug = models.SlugField(unique=True)
     description = models.TextField()
     region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='properties')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default=SALE)
+    purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
     # #######
     address = models.CharField(max_length=200, null=True, blank=True)
     dimension = models.CharField(max_length=200, null=True, blank=True)
@@ -111,3 +110,22 @@ class Testimony(models.Model):
 
 
 
+
+
+class Subscription(models.Model):
+    PROPERTY_PURPOSE_TYPE = [
+        ('', ''),
+        ('sale', 'for sale'),
+        ('rent', 'for rent'),
+    ]
+    email = models.CharField(max_length=200, null=True)
+    locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
+    bed = models.PositiveIntegerField(default=1)
+    from_price = models.FloatField(null=True)
+    to_price = models.FloatField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

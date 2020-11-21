@@ -13,3 +13,12 @@ class Region(models.Model):
         return self.name
     
    
+class Locality(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+

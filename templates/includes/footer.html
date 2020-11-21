@@ -1,26 +1,41 @@
+{% load crispy_forms_tags %} 
+<section class="subscription">
+    <div class="container">
+        <div class="row t">
+            <div class="col-12">
+                <h1 class="mb-3 text-center  text-white">Get Property Alerts from Us</h1>
+                <form class="col-lg-6 mx-auto">
+                    <div class="text-fields">
+                        <input type="email" name="subscript-email" id="subscript-email" required class="form-control">
+                        <button class="btn" id="subscript-btn"> subscribe</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 <section class="bottom__section">
     <div class="container placeholder-container">
         <div class="row">
-            <div id="widget-logo-social-1" class="widget footer-regular widget-logo-social block-selio col-xl-3 col-sm-6 col-md-4"><div class="bottom-logo">
-                <a href="{% url 'core:index' %}">
-                    <img src="#" alt="Sandvet Logo" class="img-fluid">
-                </a>                
-                <div class="content">       
-                    <p class="description">
-                        Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat co nsequat auctor eu in elit.</p>  
-                    </div> 
+            <div id="widget-logo-social-1" class="widget footer-regular widget-logo-social block-selio col-xl-3 col-sm-6 col-md-4">
+                <div class="widget-footer-contacts">
+                    <h3>For rent</h3>
+                    <ul class="footer-list">
+                        <li><span class="value"><a href="{% url 'property:for-sale' %}">Property for sale</a></span></li>
+                        {% for cate in category_list_nav %}
+                        <li><span class="value"><a href="#">{{cate.title}} for rent</a></span></li>
+                        {%endfor%}
+                    </ul>
                 </div>
             </div>
-            <div id="widget-footer-contacts-1" class="widget footer-regular widget-footer-contacts block-selio col-xl-3 col-sm-6 col-md-3">
+            <div id="widget-logo-social-1" class="widget footer-regular widget-logo-social block-selio col-xl-3 col-sm-6 col-md-4">
                 <div class="widget-footer-contacts">
-                    <h3>Contact Us</h3>
-                    <ul class="footer-list">                
-                        <li><i class="fa fa-map-marker"></i> <span class="value">Accra, Ghana</span></li>
-                        <li><i class="fa fa-phone"></i> <span class="value"><a href="tel://+233507321204">+233507321204</a></span></li>
-                        <li><i class="fa fa-phone"></i> <span class="value"><a href="tel://+233554748768">+2335547487683</a></span></li>
-                        <li><i class="fa fa-envelope"></i> <span class="value"><a href="mailto:support@sandvet.com">support@sandvet.com</a></span></li>
-
-                        <li><i class="fa fa-chevron-circle-right"></i><span class="value"><a href="#">Contact Us</a></span></li>
+                    <h3>For Sale</h3>
+                    <ul class="footer-list">
+                        <li><span class="value"><a href="{% url 'property:for-sale' %}">Property for sale</a></span></li>
+                        {% for cate in category_list %}
+                        <li><span class="value"><a href="#">{{cate.title}} for sale</a></span></li>
+                        {%endfor%}
                     </ul>
                 </div>
             </div>
@@ -67,3 +82,31 @@
         </div>
     </div>
 </footer>
+
+  <!-- Modal -->
+  <div class="modal fade subscriptModal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Propert Alerts</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body form_subscription row">
+          <form action="" method="POST" class="col-12" id="subForm">
+            <div id="signup_error"></div>
+                {% csrf_token %} 
+              {{subscription_form|crispy}}
+              <button type="submit" id="">jjj</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

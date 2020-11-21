@@ -3,6 +3,7 @@
     --white: #ffffff;
     --colorSecondary: #293556;
     --colorSndSecondary: #2e4583;
+    --colorPrimary:#3e60c1;
 }
 
 * {
@@ -1327,11 +1328,11 @@ input {
     cursor: pointer;
 }
 
-#div_id_purpose,
+.widget-property-search #div_id_purpose,
 #div_id_title,
-#div_id_category,
+.widget-property-search #div_id_category,
 #div_id_region,
-#div_id_bed,
+.widget-property-search #div_id_bed,
 #div_id_bath,
 #div_id_price__min,
 #div_id_price__max,
@@ -1348,12 +1349,12 @@ input {
     max-width: 50%
 }
 
-#div_id_title,
-#div_id_purpose,
-#div_id_category,
-#div_id_region,
-#div_id_price__min,
-#div_id_price__max {
+.widget-property-search #div_id_title,
+.widget-property-search #div_id_purpose,
+.widget-property-search #div_id_category,
+.widget-property-search #div_id_region,
+.widget-property-search #div_id_price__min,
+.widget-property-search #div_id_price__max {
     -ms-flex: 0 0 25%;
     flex: 0 0 25%;
     max-width: 25%
@@ -1417,8 +1418,8 @@ input {
     /* line-height: 48px; */
 }
 
-#div_id_bed,
-#div_id_bath {
+.widget-property-search #div_id_bed,
+.widget-property-search #div_id_bath {
     -ms-flex: 0 0 12.5%;
     flex: 0 0 12.5%;
     max-width: 12.5%
@@ -1924,3 +1925,53 @@ footer.footer .copyright a{
     min-height: 80px;
 }
 
+
+.subscription{
+    background-color: var(--colorPrimary);
+    padding: 4rem 0;
+}
+.subscription h1{
+    font-size: 30px;
+}
+.subscription form{
+    position: relative;
+}
+
+.subscription .text-fields{
+    display: flex;
+    flex-direction: row;
+}
+
+.subscription .text-fields input{
+    width: 100%;
+    height: 60px;
+    border: 2px solid var(--colorSecondary);
+    border-radius: 30px 0 0 30px !important;
+    padding: 0 1.2rem 0 1.5rem;
+    font-size: 14px;
+}
+.subscription .text-fields button{
+  width: 150px;
+  border-radius: 0;
+  background-color: var(--colorSecondary);
+  border: 2px solid var(--colorSecondary);
+  color: var(--white);
+  border-radius: 0 30px  30px 0 !important;
+  text-transform: uppercase;
+}
+
+.widget-footer-contacts h3{
+    font-size: 18px;
+    color: var(--white);
+}
+
+.subscriptModal .modal-header{
+    background-color: var(--colorSecondary);
+    border-radius: 0;
+}
+
+.subscriptModal .modal-header .close,
+.subscriptModal .modal-title{
+    color: var(--white) !important;
+    font-size: 20px;
+}
