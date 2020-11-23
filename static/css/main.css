@@ -772,8 +772,9 @@
   
   .main__header .navbar-nav .nav-item .nav-link {
     color: #161616;
-    font-size: 14px;
+    font-size: 15px;
     position: relative;
+    text-transform: capitalize;
   }
   
   .main__header .dropdown-toggle::after {
@@ -794,8 +795,8 @@
   .main__header .navbar-nav .nav-item .dropdown-menu {
     border-radius: 0px;
     border: 0px;
-    padding: 0 20px;
-    border-top: 1px solid #d5d4d9;
+    padding: 0 20px 5px;
+    /* border-top: 1px solid #d5d4d9; */
     overflow: hidden;
     position: absolute;
     top: 50px;
@@ -1609,7 +1610,8 @@
   }
   
   .listing__card .card__body h3 {
-    font-size: 14px;
+    font-size: 15px;
+    text-transform: capitalize;
   }
   
   .listing__card .card__body p {

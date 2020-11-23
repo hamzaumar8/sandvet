@@ -50,6 +50,17 @@ $(document).ready(function() {
         $('.navbar-collapse.collapse').removeClass('show')
     });
         
+    $('.banner-carousel').slick({
+        autoplay: true,
+        autoplaySpeed: 2000,
+        infinite: true,
+        speed: 300,
+        dots: false,
+        infinite: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+    });
+
     $('.testimony__carousel').slick({
         dots: true,
         infinite: true,
