@@ -55,6 +55,7 @@ $(document).ready(function() {
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 3,
+        // adaptiveHeight: true,
         responsive: [
             {
                 breakpoint: 1024,
@@ -70,6 +71,13 @@ $(document).ready(function() {
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 554,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
                 }
             },
             {
