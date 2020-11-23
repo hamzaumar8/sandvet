@@ -11,9 +11,15 @@ class Region(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_region_url(self):
+        return reverse("core:region", kwargs={
+            'region': self.name
+        })
     
    
 class Locality(models.Model):
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='locality')
     name = models.CharField(max_length=200, null=True, blank=True)
     class Meta:
         ordering = ['name']

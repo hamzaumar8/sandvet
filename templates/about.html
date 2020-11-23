@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<section class="pager-sec bfr " style="background-image: url(https://listing-themes.com/selio-wp/wp-content/themes/selio/assets/images/resources/pager-bg.jpg);">
+	<div class="container">
+		<div class="pager-sec-details">
+			<h3 class="">About</h3>
+            <ul>
+                <li class="item">
+                    <a href="{% url 'core:index' %}">Home</a>
+                </li>
+                <li>
+                    <span>About Us</span>
+                </li>
+            </ul>
+    	</div>
+	</div>
+</section>
+<section class="sect-carousel-purposes section-padding">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12">
+				<div class="section-heading">
+					<h3 class="title text-center mb-3">our services</h3>
+                </div>
+			</div>
+		</div>
+        <div class="ui-card-slider-box">
+            <div id="slider" class="ui-card-slider">
+                <div class="slide hidden-slide"  data-index="0">
+                    <div class="scontent">
+                        <i class="fa fa-home slide-icon"></i>
+                        <h2 class="title">Real Estates </h2>
+                    </div>
+                    <a href="#">
+                        <img src="{% static 'img/about/carousel-2.jpg' %}" alt="Real Estates"></a>
+                    <a href="#" class="link-ext"></a>
+                </div>
+                <div class="slide left-hidden-slide" data-index="1">
+                    <div class="scontent">
+                        <i class="fa fa-hotel slide-icon"></i>
+                        <h2 class="title">Property</h2>
+                    </div>
+                    <a href="#">
+                        <img src="{% static 'img/about/carousel-3.jpg' %}" alt="Property"></a>
+                    <a href="{% url 'property:property' %}" class="link-ext"></a>
+                </div>
+                <div class="slide left-hidden-slide" data-index="2">
+                    <div class="scontent">
+                        <i class="fa fa-car slide-icon"></i>
+                        <h2 class="title">Cars</h2>
+                    </div>
+                    <a href="#">
+                        <img src="{% static 'img/about/carousel-4.jpg' %}" alt="Hotels and Restaurants"></a>
+                    <a href="##" class="link-ext"></a>
+                </div>
+                <div class="slide left-hidden-slide" data-index="3">
+                    <div class="scontent">
+                        <i class="fa fa-hotel slide-icon"></i>
+                        <h2 class="title">Hotels and Restaurants</h2>
+                    </div>
+                    <a href="#">
+                        <img src="{% static 'img/about/carousel-3.jpg' %}" alt="Hotels and Restaurants"></a>
+                    <a href="##" class="link-ext"></a>
+                </div>
+                <div class="slide left-slide" data-index="4">
+                    <div class="scontent">
+                        <i class="fa fa-certificate slide-icon"></i>
+                        <h2 class="title">Lands</h2>
+                    </div>
+                    <a href="#">
+                        <img src="{% static 'img/about/carousel-1.jpg' %}" alt="Commercial Solutions">
+                    </a>
+                    <a href="##" class="link-ext"></a>
+                </div>
+            </div>
+            <div class="ui-card-slider-nav">
+                <a href="#" class="arrow left"><i class="fa fa-arrow-left"></i></a>
+                <a href="#" class="arrow right"><i class="fa fa-arrow-right"></i></a>
+            </div>
+        </div>
+	</div>
+</section>
+<section class="pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="card">
+                    <div class="row panel__cardhead">
+                        <div class="pannel__headtitle">
+                            <h2>About Us</h2>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos reiciendis praesentium nulla. Aperiam nulla suscipit delectus officiis provident dignissimos. Quasi, temporibus. Optio reiciendis maxime modi, quaerat magnam eos tempora iusto!
+                        </p>
+                    </div>
+                    <div class="mb-3">
+                        <h2>Our vision</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ex sapiente maiores. Cumque culpa odit consectetur labore, minima ipsa eius aliquam accusantium qui error est eveniet ipsum esse consequuntur perspiciatis!</p>
+                    </div>
+                    <div>
+                        <h2>Our mission</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ex sapiente maiores. Cumque culpa odit consectetur labore, minima ipsa eius aliquam accusantium qui error est eveniet ipsum esse consequuntur perspiciatis!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                {% include 'includes/featured.html' %}
+            </div>
+
+        </div>
+    </div>
+</section>
+{%endblock%}

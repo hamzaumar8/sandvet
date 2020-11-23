@@ -1,0 +1,88 @@
+{% load humanize %}
+{% if featured_list %}
+<div id="sw_win_latestlisting_widget-1" class="descp-text widget widget_sw_win_latestlisting_widget side">
+    <h3 class="widget-title mb-1 p-0">featured Properties</h3>
+    <hr>
+    <div class="selio_sw_win_wrapper">
+        <div class="ci sw_widget sw_wrap">
+            <div class="widget-posts">
+                <ul>
+                    {% for featured in featured_list %}
+                    <li>
+                        <div class="wd-posts">
+                            <div class="ps-img">
+                                <a href="{{ featured.get_absolute_url }}" title="{{ featured.title }}">
+                                    <img src="{{ featured.imageURL }}" alt="{{ featured.title }}">
+                                </a>
+                            </div><!--ps-img end-->
+                            <div class="ps-info">
+                                <h3><a href="{{ featured.get_absolute_url }}" title="{{ featured.title }}">{{ featured.title }}</a></h3>
+                                <strong>&cent; {{ featured.price|floatformat:2|intcomma }}</strong>
+                                <span><i class="fa fa-map-marker"></i>{{ featured.address }} , {{ featured.region.name }} Region</span>
+                            </div><!--ps-info end-->
+                        </div><!--wd-posts end-->
+                    </li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+                        <!-- {% for featured in featured_list %} -->
+                        <!-- featured list -->
+                        <!-- <div class="col-12">
+                            <div class="card listing__card">
+                                <a href="{{ featured.get_absolute_url }}" title="{{ featured.title }}" class="preview">
+                                    <div class="card__imgBlock">
+                                        <div class="overlay"></div>
+                                        <img src="{{ featured.imageURL }}" alt="{{ featured.title }}" class="img-fluid">
+                                        <div class="card__rateInfo">
+                                            <h5>&cent; {{ featured.price|floatformat:2|intcomma }}</h5>
+                                            <span class="purpose-for-{% if featured.purpose == 'sale'%}sale{%else%}rent{%endif%}">For {% if featured.purpose == 'sale'%}sale{%else%}rent{%endif%}</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="card__full">
+                                    <div class="card__body">
+                                        <a href="{{ featured.get_absolute_url }}" title="{{ featured.title }}">
+                                            <h3>{{ featured.title }}</h3>
+                                            <p>
+                                                <i class="fa fa-map-marker"></i>
+                                                {{ featured.address }} , {{ featured.region.name }} Region
+                                            </p>
+                                        </a>
+                                        <div class="card__resultItems">
+                                            {% if featured.category.title == 'land' %}
+                                                <span class="property-card-value">
+                                                    <span class="field_name"> Dimensions </span>
+                                                    <span class="item"> {{ featured.dimension }} </span>
+                                                </span>
+                                            {% else %}
+                                                <span class="property-card-value">
+                                                    <span class="field_name"> Bathrooms </span>
+                                                    <span class="item"> {{ featured.bath }} </span>
+                                                </span>
+                                                <span class="property-card-value">
+                                                    <span class="field_name"> Beds  </span>
+                                                    <span class="item"> {{ featured.bed }} </span>
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="card__footer">
+                                        <span class="favorites-actions">
+                                            <a href="#" class=""><i class="fa fa-heart-o"></i></a>
+                                            ---<i class="fa fa-spinner fa-spin fa-custom-ajax-indicator"></i> --
+                                        </span>
+                                        <a href="#" title="" ><i class="fa fa-calendar-check-o"></i> {{ featured.get_date }} </a>
+                                    </div>
+                                </div>
+                                <a href="{{ featured.get_absolute_url }}" title="{{ featured.title }}" class="ext-link"></a>
+                            </div>
+                        </div>    -->
+
+
+                        <!-- {% endfor %}  -->
+                    <!-- </div> -->
+                <!-- </div> -->
+                {% endif %}

@@ -7,7 +7,7 @@ from django.db.models import Q
 from property.models import Property, Category, Testimony, Subscription
 from property.filters import HomePropertFilter
 from .forms import SubscriptionForm
-from .models import Locality
+from .models import Locality, Region
 # Create your views here.
 class IndexPageView(ListView):
     model = Property
@@ -16,22 +16,26 @@ class IndexPageView(ListView):
     # paginate_by = 10
 
     def get_context_data(self, **kwargs):
+
+        kwargs['locality'] = self.locality
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+
         kwargs['testimonys'] = self.testimony
         kwargs['filter'] = self.filter
         kwargs['subscription_form'] = self.subscriptionform
-        kwargs['locality'] = self.locality
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
         self.locality = Locality.objects.all() 
-        self.subscriptionform = SubscriptionForm()
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.all()
-        self.property = Property.objects.all()
+
         self.testimony = Testimony.objects.all()
+        self.subscriptionform = SubscriptionForm()
         self.filter = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
+
+
         return self.model.objects.order_by('-id')
 
 
@@ -44,15 +48,21 @@ class CategoryListView(ListView):
     template_name = 'list.html'
     # paginate_by = 10
 
-    # def get_context_data(self, **kwargs):
-    #     kwargs['explore_town'] = self.explore_town
-    #     kwargs['towns'] = self.town
-    #     kwargs['regions'] = self.region
-    #     return super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+
+        kwargs['locality'] = self.locality
+        kwargs['category_list_nav'] = self.categoryNav
+        kwargs['category_list'] = self.category
+
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.category = get_object_or_404(Category, title=self.kwargs.get('category'))
-        queryset = self.model.objects.filter(category=self.category)
+        self.locality = Locality.objects.all() 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+        self.category = Category.objects.all()
+
+        self.categoryparam = get_object_or_404(Category, title=self.kwargs.get('category'))
+        queryset = self.model.objects.filter(category=self.categoryparam)
         return queryset.order_by('-id')
 
 
@@ -98,23 +108,76 @@ def subscriptionForm(request):
 def contactPage(request):
     return render(request, 'contact.html')
 
+def aboutPage(request):
+    locality = Locality.objects.all() 
+    categoryNav = Category.objects.filter((~Q(title="land")))
+    category = Category.objects.all()
+    featured = Property.objects.filter(featured=1)[:4]
+    region = Region.objects.all()
 
+    context = {
+        'locality': locality,
+        'category_list': category,
+        'category_list_nav': categoryNav,
+        'featured_list': featured,
+        'region_list' : region,
+    }
+    return render(request, 'about.html', context)
 
 class LocalityListView(ListView):
     model = Property
     context_object_name = 'lists'
     template_name = 'list.html'
-    # paginate_by = 10
+    # paginate_by = 1
 
-    # def get_context_data(self, **kwargs):
-    #     kwargs['explore_town'] = self.explore_town
-    #     kwargs['towns'] = self.town
-    #     kwargs['regions'] = self.region
-    #     return super().get_context_data(**kwargs)
+    def get_context_data(self, **kwargs):
+
+        kwargs['locality'] = self.locality
+        kwargs['category_list_nav'] = self.categoryNav
+        kwargs['category_list'] = self.category
+
+        return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.locality = get_object_or_404(Locality, name=self.kwargs.get('locality'))
-        queryset = self.model.objects.filter(locality=self.locality)
+
+        self.locality = Locality.objects.all() 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+        self.category = Category.objects.all()
+
+
+
+        self.local = get_object_or_404(Locality, name=self.kwargs.get('locality'))
+        queryset = self.model.objects.filter(locality=self.local)
+        return queryset.order_by('-id')
+
+
+
+
+
+class RegionListView(ListView):
+    model = Property
+    context_object_name = 'lists'
+    template_name = 'list.html'
+    # paginate_by = 1
+
+    def get_context_data(self, **kwargs):
+
+        kwargs['locality'] = self.locality
+        kwargs['category_list_nav'] = self.categoryNav
+        kwargs['category_list'] = self.category
+
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+
+        self.locality = Locality.objects.all() 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+        self.category = Category.objects.all()
+
+
+
+        self.reg = get_object_or_404(Region, name=self.kwargs.get('region'))
+        queryset = self.model.objects.filter(region=self.reg)
         return queryset.order_by('-id')
 
 

@@ -53,6 +53,9 @@ class Property(models.Model):
     # #######
     image = models.ImageField(null=True, blank=True)
     views = models.PositiveIntegerField(default=0)
+    # #######
+    featured = models.PositiveIntegerField(default=0, null=True, blank=True)
+    # #######
     created_at = models.DateTimeField(auto_now_add=True)
     
 

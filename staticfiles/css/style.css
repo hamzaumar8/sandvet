@@ -412,6 +412,7 @@ header {
     height: 90px;
 }
 
+
 section {
     float: none;
     width: auto;
@@ -749,7 +750,7 @@ section {
     position: relative;
     /* z-index: 1; */
     overflow: hidden;
-    background-color: #5983fc;
+    background-color: var(--colorSndSecondary);
 }
 
 .navbar-expand-lg .navbar-nav {

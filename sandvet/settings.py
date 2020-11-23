@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4r8c17n##k^koo6&i1rx^tj4cef@mn+j$55(0fhd!9nhp@5*o&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['sandvet.com', 'www.sandvet.com', '127.0.0.1']
 

@@ -3,8 +3,6 @@
 {% load crispy_forms_tags %} 
 {% block head_title %} {{ object.title }} {%endblock %} 
 {% block content%}
-
-
 <section class="property-single-pg">
     <div class="container">
         <div class="property-hd-sec">
@@ -27,272 +25,183 @@
             </div><!--card end-->
         </div>
         <!---property-hd-sec end-->
-
-
-<div class="property-single-page-content">
-    <div class="row">
-        <div class="col-lg-8 px-0 ">
-            <div class="selio_sw_win_wrapper">
-                <div class="ci sw_widget sw_wrap">
-                    <div class="bootstrap-wrapper" id="listing-preview">
-                        <div class="property-pg-left">
-                            <div class="property-imgs">
-                                <div class="property-main-img">
-                                    <!-- Slide 0 -->
-                                    <div class="property-img">
-                                        <img data-fullsrc="{{ object.imageURL }}" src="{{ object.imageURL }}" alt="{{ object.title }}">
-                                    </div><!--property-img end-->
-                                    <!-- Slide 1 -->
-                                    <div class="property-img">
-                                        <img data-fullsrc="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/1300x80016listing-17.jpg" src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/770x48316listing-17.jpg" alt="{{ object.title }}">
-                                    </div><!--property-img end-->
-                                </div><!--property-main-img end-->
-                                <div class="property-thumb-imgs">
-                                    <div class="row thumb-carous">
-                                        <!-- Slide 0 -->
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
-                                            <div class="property-img">
-                                                <img src="{{ object.imageURL }}" alt="{{ object.title }}">
-                                            </div><!--property-img end-->
-                                        </div>
-                                        <!-- Slide 1 -->
-                                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
-                                            <div class="property-img">
-                                                <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/770x48316listing-17.jpg" alt="{{ object.title }}">
-                                            </div><!--property-img end-->
-                                        </div>
-                                    </div>
-                                </div><!--property-thumb-imgs end-->
-                            </div><!--property-imgs end-->
-
-
-                            <div class="descp-text">
-                                <h3>Content</h3>
-                                <p>{{ object.description }}</p>
-                                <p class="clearfix">
-                                    <b>Location:</b> United States, Minnesota 
-                                </p>
-                            </div><!--descp-text end-->
-                            <div class="details-info  widget-overview visible-sm visible-xs field_1">
-                                <h3 class=" CATEGORY">Overview</h3>
-                                <ul>
-                                    <li><h4>Purpose:</h4> <span>For Sale</span></li>
-                                    <li><h4>Sale price:</h4> <span>$1500</span></li>
-                                    <li><h4>Land area:</h4> <span>1300ft2</span></li>
-                                    <li><h4>Area:</h4> <span>240Ft²</span></li>
-                                    <li><h4>Beds:</h4> <span>{{ object.bed }}</span></li>
-                                    <li><h4>Bathrooms:</h4> <span>{{ object.bath }}</span></li>
-                                    <li><h4>Garage:</h4> <span>{{ object.garage }}</span></li>
-                                    <li><h4>Country:</h4> <span>Croatia</span></li>
-                                </ul>
-                                <br style="clear: both;">
-                            </div> <!--details-info end-->
-                            <div class="details-info  details-info-transparent   field_21">
-                                <h3 class=" CATEGORY">Indoor amenities</h3>
-                                <ul>
-                                    <li class="input-field option">
-                                        <input type="checkbox" name="c22" checked="checked" disabled="disabled" id="c22">
-                                        <label for="c22">
-                                            <span></span>
-                                            <small>Air conditioning</small>
-                                        </label>
-                                    </li>
-                                    <li class="input-field option">
-                                        <input type="checkbox" name="c23" checked="checked" disabled="disabled" id="c23">
-                                        <label for="c23">
-                                            <span></span>
-                                            <small>Cable TV</small>
-                                        </label>
-                                    </li>
-                                    <li class="input-field option">
-                                        <input type="checkbox" name="c29" checked="checked" disabled="disabled" id="c29">
-                                        <label for="c29">
-                                            <span></span>
-                                            <small>Internet</small>
-                                        </label>
-                                    </li>
-                                    <li class="input-field option">
-                                        <input type="checkbox" name="c31" checked="checked" disabled="disabled" id="c31">
-                                        <label for="c31">
-                                            <span></span>
-                                            <small>Microwave</small>
-                                        </label>
-                                    </li>
-                                </ul>
-                                <br style="clear: both;">
-                            </div> <!--details-info end-->
-
-                            <div class="details-info  details-info-transparent   field_52">
-                                <h3 class=" CATEGORY">Outdoor amenities</h3>
-                                <ul>
-                                    <li class="input-field option">
-                                        <input type="checkbox" name="c32" checked="checked" disabled="disabled" id="c32">
-                                        <label for="c32">
-                                            <span></span>
-                                            <small>Parking</small>
-                                        </label>
-                                    </li>
-                                    <li class="input-field option">
-                                        <input type="checkbox" name="c11" checked="checked" disabled="disabled" id="c11">
-                                        <label for="c11">
-                                            <span></span>
-                                            <small>Balcony</small>
-                                        </label>
-                                    </li>
-                                    <li class="input-field option">
-                                        <input type="checkbox" name="c27" checked="checked" disabled="disabled" id="c27">
-                                        <label for="c27">
-                                            <span></span>
-                                            <small>Grill</small>
-                                        </label>
-                                    </li>
-                                    <li class="input-field option">
-                                        <input type="checkbox" name="c33" checked="checked" disabled="disabled" id="c33">
-                                        <label for="c33">
-                                            <span></span>
-                                            <small>Pool</small>
-                                        </label>
-                                    </li>
-                                </ul>
-                                <br style="clear: both;">
-                            </div> <!--details-info end-->
-                            <div class="similar-listings-posts clearfix">
-                                <h3>Similar Listings</h3>
-                                <div class="list-products">
-                                    
-                                </div><!-- list-products end-->
-                            </div>
-                        </div>
-                    </div><!--property-pg-left end-->
-                </div>
-            </div>  
-        </div>
-
-        <div class="col-lg-4 pr-0">
-            <div class="sidebar layout2">
-                <div id="sw_win_contactform_widget-1" class="descp-text widget widget_sw_win_contactform_widget side"><h3 class="widget-title">Contact form</h3>
+        <div class="property-single-page-content">
+            <div class="row">
+                <div class="col-lg-8 px-0 ">
                     <div class="selio_sw_win_wrapper">
                         <div class="ci sw_widget sw_wrap">
-                            <div class="contact-agent widget-form" id="form">
-                                <form id="sw_contactform_sw_win_contactform_widget-1" method="post" action="#sw_contactform_sw_win_contactform_widget-1" class="box">
-                                    <div class="box-container widget-body">
-                                        <div class="form-field">
-                                            <input class="" id="fullname_sw_win_contactform_widget-1" name="fullname" type="text" value="" placeholder="Full name">
-                                        </div>
-                                        <div class="form-field">
-                                            <input class="" id="email_sw_win_contactform_widget-1" name="email" type="text" value="" placeholder="Your email">
-                                        </div>
-                                        <div class="form-field">
-                                            <input class="" id="phone_sw_win_contactform_widget-1" name="phone" type="text" value="" placeholder="Phone number">
-                                        </div>
-                                        <div class="form-field">
-                                            <input class="" id="subject_sw_win_contactform_widget-1" name="subject" type="text" value="" placeholder="Subject">
-                                        </div>
-                                        <div class="form-field">
-                                            <textarea id="message_sw_win_contactform_widget-1" name="message" rows="4" class="" placeholder="Message"></textarea>
-                                        </div>
-                                        <div class="form-field">
-                                            <button type="submit" class="btn2">Send</button>
-                                        </div>
+                            <div class="bootstrap-wrapper" id="listing-preview">
+                                <div class="property-pg-left">
+                                    <div class="property-imgs">
+                                        <div class="property-main-img">
+                                            <!-- Slide 0 -->
+                                            <div class="property-img">
+                                                <img data-fullsrc="{{ object.imageURL }}" src="{{ object.imageURL }}" alt="{{ object.title }}">
+                                            </div><!--property-img end-->
+                                            <!-- Slide 1 -->
+                                            <div class="property-img">
+                                                <img data-fullsrc="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/1300x80016listing-17.jpg" src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/770x48316listing-17.jpg" alt="{{ object.title }}">
+                                            </div><!--property-img end-->
+                                        </div><!--property-main-img end-->
+                                        <div class="property-thumb-imgs">
+                                            <div class="row thumb-carous">
+                                                <!-- Slide 0 -->
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
+                                                    <div class="property-img">
+                                                        <img src="{{ object.imageURL }}" alt="{{ object.title }}">
+                                                    </div><!--property-img end-->
+                                                </div>
+                                                <!-- Slide 1 -->
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
+                                                    <div class="property-img">
+                                                        <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/770x48316listing-17.jpg" alt="{{ object.title }}">
+                                                    </div><!--property-img end-->
+                                                </div>
+                                            </div>
+                                        </div><!--property-thumb-imgs end-->
+                                    </div><!--property-imgs end-->
+
+
+                                    <div class="descp-text">
+                                        <h3>Content</h3>
+                                        <p>{{ object.description }}</p>
+                                        <p class="clearfix">
+                                            <b>Location:</b> United States, Minnesota 
+                                        </p>
+                                    </div><!--descp-text end-->
+                                    <div class="details-info  widget-overview visible-sm visible-xs field_1">
+                                        <h3 class=" CATEGORY">Overview</h3>
+                                        <ul>
+                                            <li><h4>Purpose:</h4> <span>For Sale</span></li>
+                                            <li><h4>Sale price:</h4> <span>$1500</span></li>
+                                            <li><h4>Land area:</h4> <span>1300ft2</span></li>
+                                            <li><h4>Area:</h4> <span>240Ft²</span></li>
+                                            <li><h4>Beds:</h4> <span>{{ object.bed }}</span></li>
+                                            <li><h4>Bathrooms:</h4> <span>{{ object.bath }}</span></li>
+                                            <li><h4>Garage:</h4> <span>{{ object.garage }}</span></li>
+                                            <li><h4>Country:</h4> <span>Croatia</span></li>
+                                        </ul>
+                                        <br style="clear: both;">
+                                    </div> <!--details-info end-->
+                                    <div class="details-info  details-info-transparent   field_21">
+                                        <h3 class=" CATEGORY">Indoor amenities</h3>
+                                        <ul>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c22" checked="checked" disabled="disabled" id="c22">
+                                                <label for="c22">
+                                                    <span></span>
+                                                    <small>Air conditioning</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" checked="checked" disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Cable TV</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c29" checked="checked" disabled="disabled" id="c29">
+                                                <label for="c29">
+                                                    <span></span>
+                                                    <small>Internet</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c31" checked="checked" disabled="disabled" id="c31">
+                                                <label for="c31">
+                                                    <span></span>
+                                                    <small>Microwave</small>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                        <br style="clear: both;">
+                                    </div> <!--details-info end-->
+
+                                    <div class="details-info  details-info-transparent   field_52">
+                                        <h3 class=" CATEGORY">Outdoor amenities</h3>
+                                        <ul>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c32" checked="checked" disabled="disabled" id="c32">
+                                                <label for="c32">
+                                                    <span></span>
+                                                    <small>Parking</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c11" checked="checked" disabled="disabled" id="c11">
+                                                <label for="c11">
+                                                    <span></span>
+                                                    <small>Balcony</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c27" checked="checked" disabled="disabled" id="c27">
+                                                <label for="c27">
+                                                    <span></span>
+                                                    <small>Grill</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c33" checked="checked" disabled="disabled" id="c33">
+                                                <label for="c33">
+                                                    <span></span>
+                                                    <small>Pool</small>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                        <br style="clear: both;">
+                                    </div> <!--details-info end-->
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3>Similar Listings</h3>
+                                        <div class="list-products">
+                                            
+                                        </div><!-- list-products end-->
                                     </div>
-                                </form>
+                                </div>
+                            </div><!--property-pg-left end-->
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="col-lg-4 pr-0">
+                    <div class="sidebar layout2">
+                        <div id="sw_win_contactform_widget-1" class="descp-text widget widget_sw_win_contactform_widget side"><h3 class="widget-title">Contact form</h3>
+                            <div class="selio_sw_win_wrapper">
+                                <div class="ci sw_widget sw_wrap">
+                                    <div class="contact-agent widget-form" id="form">
+                                        <form id="sw_contactform_sw_win_contactform_widget-1" method="post" action="#sw_contactform_sw_win_contactform_widget-1" class="box">
+                                            <div class="box-container widget-body">
+                                                <div class="form-field">
+                                                    <input class="" id="fullname_sw_win_contactform_widget-1" name="fullname" type="text" value="" placeholder="Full name">
+                                                </div>
+                                                <div class="form-field">
+                                                    <input class="" id="email_sw_win_contactform_widget-1" name="email" type="text" value="" placeholder="Your email">
+                                                </div>
+                                                <div class="form-field">
+                                                    <input class="" id="phone_sw_win_contactform_widget-1" name="phone" type="text" value="" placeholder="Phone number">
+                                                </div>
+                                                <div class="form-field">
+                                                    <input class="" id="subject_sw_win_contactform_widget-1" name="subject" type="text" value="" placeholder="Subject">
+                                                </div>
+                                                <div class="form-field">
+                                                    <textarea id="message_sw_win_contactform_widget-1" name="message" rows="4" class="" placeholder="Message"></textarea>
+                                                </div>
+                                                <div class="form-field">
+                                                    <button type="submit" class="btn2">Send</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        {% include 'includes/latest-listing.html' %}
                     </div>
                 </div>
-
-<div id="sw_win_latestlisting_widget-1" class="widget widget_sw_win_latestlisting_widget side">
-    <h3 class="widget-title">Latest listings</h3><div class="selio_sw_win_wrapper">
-<div class="ci sw_widget sw_wrap">
-<div class="widget-posts">
-
-<ul>
-<li>
-<div class="wd-posts">
-    <div class="ps-img">
-        <a href="https://listing-themes.com/selio-wp/listing-preview/green-land11" title="Green Land">
-            <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/224x17816listing-16.jpg" alt="Green Land">
-        </a>
-    </div><!--ps-img end-->
-    <div class="ps-info">
-        <h3><a href="https://listing-themes.com/selio-wp/listing-preview/green-land11" title="Green Land">Green Land</a></h3>
-        <strong>
-                                                    $1500                                                        </strong>
-        <span><i class="fa fa-map-marker"></i>Texas, Grey Fox 6</span>
-    </div><!--ps-info end-->
-</div><!--wd-posts end-->
-</li>
-<li>
-<div class="wd-posts">
-    <div class="ps-img">
-        <a href="https://listing-themes.com/selio-wp/listing-preview/green-land1" title="Green Land">
-            <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/224x17816listing-16.jpg" alt="Green Land">
-        </a>
-    </div><!--ps-img end-->
-    <div class="ps-info">
-        <h3><a href="https://listing-themes.com/selio-wp/listing-preview/green-land1" title="Green Land">Green Land</a></h3>
-        <strong>
-                                                    $1500                                                        </strong>
-        <span><i class="fa fa-map-marker"></i>Texas, Grey Fox 6</span>
-    </div><!--ps-info end-->
-</div><!--wd-posts end-->
-</li>
-<li>
-<div class="wd-posts">
-    <div class="ps-img">
-        <a href="https://listing-themes.com/selio-wp/listing-preview/palace-square" title="Palace Square">
-            <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/224x17829listing-29.jpg" alt="Palace Square">
-        </a>
-    </div><!--ps-img end-->
-    <div class="ps-info">
-        <h3><a href="https://listing-themes.com/selio-wp/listing-preview/palace-square" title="Palace Square">Palace Square</a></h3>
-        <strong>
-                                                    $5500                                                        </strong>
-        <span><i class="fa fa-map-marker"></i>New York, Pen Road 1</span>
-    </div><!--ps-info end-->
-</div><!--wd-posts end-->
-</li>
-<li>
-<div class="wd-posts">
-    <div class="ps-img">
-        <a href="https://listing-themes.com/selio-wp/listing-preview/princes-place-court" title="Princes Place Court">
-            <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/224x17828listing-28.jpg" alt="Princes Place Court">
-        </a>
-    </div><!--ps-img end-->
-    <div class="ps-info">
-        <h3><a href="https://listing-themes.com/selio-wp/listing-preview/princes-place-court" title="Princes Place Court">Princes Place Court</a></h3>
-        <strong>
-                                                    $6700                                                        </strong>
-        <span><i class="fa fa-map-marker"></i>Wisconsin, Comfort Court 10</span>
-    </div><!--ps-info end-->
-</div><!--wd-posts end-->
-</li>
-<li>
-<div class="wd-posts">
-    <div class="ps-img">
-        <a href="https://listing-themes.com/selio-wp/listing-preview/atrium-house" title="Atrium House">
-            <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/224x17827listing-27.jpg" alt="Atrium House">
-        </a>
-    </div><!--ps-img end-->
-    <div class="ps-info">
-        <h3><a href="https://listing-themes.com/selio-wp/listing-preview/atrium-house" title="Atrium House">Atrium House</a></h3>
-        <strong>
-                                                    $8100                                                        </strong>
-        <span><i class="fa fa-map-marker"></i>California, Renzelli Boulevard 7</span>
-    </div><!--ps-info end-->
-</div><!--wd-posts end-->
-</li>
-</ul>
-
-
-</div>
-
-</div>
-</div></div>
-                         </div><!--sidebar end-->
-                </div>
-                                    </div>
-        </div><!--property-single-page-content end-->
+            </div>
+        </div>
     </div>
 </section>
+
 {%endblock %}

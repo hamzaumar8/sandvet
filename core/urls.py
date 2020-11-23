@@ -7,9 +7,11 @@ app_name = 'core'
 urlpatterns = [
     path('', IndexPageView.as_view(), name='index'),
 
-    path('ctg/<str:category>/', CategoryListView.as_view(), name='category'),
-    path('<str:locality>/locality/', LocalityListView.as_view(), name='locality'),
+    path('category/<str:category>/', CategoryListView.as_view(), name='category'),
+    path('locality/<str:locality>/', LocalityListView.as_view(), name='locality'),
+    path('region/<str:region>/', RegionListView.as_view(), name='region'),
 
     path('ajax_subscriptionform/', subscriptionForm),
     path('contact-us/', contactPage, name='contact'),
+    path('about-us/', aboutPage, name='about'),
 ]
