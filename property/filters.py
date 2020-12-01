@@ -10,11 +10,11 @@ class PropertyFilter(django_filters.FilterSet):
         model = Property
         fields = [
             'address', 
-            'purpose', 
+            # 'purpose', 
             'category', 
-            'region' ,
-            'bed', 
-            'bath'
+            # 'region' ,
+            # 'bed', 
+            # 'bath'
         ]
 
 

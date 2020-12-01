@@ -2,18 +2,15 @@
 {% load crispy_forms_tags %} 
 {% load static %}
 {% block head_title %}Home{% endblock %}
+
 {% block navbar %} {% include "includes/indexNav.html" %} {% endblock %}
+
 {% block content %}
+    {% include "includes/index/bannerSlider.html" %}
 
-{% include "includes/index/bannerSlider.html" %}
-
-{% include "includes/index/category.html" %}
-{% include "includes/testimony.html" %}
-{% include "includes/subscription.html" %}
-
-
-
-
+    {% include "includes/index/category.html" %}
+    {% include "includes/testimony.html" %}
+    {% include "includes/subscription.html" %}
 {% endblock %}
 
 {% block extra_body %}

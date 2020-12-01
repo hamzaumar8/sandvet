@@ -1,0 +1,350 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Simulor - Responsive Bootstrap 4 Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static 'dashboard/images/favicon.ico' %}">
+
+         <!-- plugin css -->
+         <link href="{% static 'dashboard/libs/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+         <link href="{% static 'dashboard/libs/datatables/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+         <link href="{% static 'dashboard/libs/datatables/buttons.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
+         <link href="{% static 'dashboard/libs/datatables/select.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />   
+        {% block extra_head %} {% endblock %}
+        <!-- App css -->
+        <link href="{% static 'dashboard/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dashboard/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dashboard/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="menubar-light topbar-dark">
+        {% block body %}
+        <!-- Navigation Bar-->
+        <header id="topnav">
+
+            <!-- Topbar Start -->
+            <div class="navbar-custom">
+                <div class="container-fluid">
+                    <ul class="list-unstyled topnav-menu float-right mb-0">
+
+                        <li class="dropdown notification-list">
+                            <!-- Mobile menu toggle-->
+                            <a class="navbar-toggle nav-link">
+                                <div class="lines">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </a>
+                            <!-- End mobile menu toggle-->
+                        </li>
+    
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="layouts-menubar-light.html#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="{% static 'dashboard/images/users/avatar-4.jpg' %}" alt="user-image" class="rounded-circle">
+                                <span class="pro-user-name ml-1">
+                                    Morgan K <i class="mdi mdi-chevron-down"></i> 
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                                <!-- item-->
+                                <div class="dropdown-item noti-title">
+                                    <h6 class="m-0">
+                                        Welcome !
+                                    </h6>
+                                </div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="dripicons-user"></i>
+                                    <span>My Account</span>
+                                </a>
+
+                                <div class="dropdown-divider"></div>
+
+                                <!-- item-->
+                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <i class="dripicons-power"></i>
+                                    <span>Logout</span>
+                                </a>
+
+                            </div>
+                        </li>
+    
+                    </ul>
+    
+                    <ul class="list-unstyled topnav-menu-left m-0">
+            
+                        <li class="logo-box float-left">
+                            <a href="index.html" class="logo">
+                                <span class="logo-lg">
+                                    <img src="{% static 'img/core/logo.png' %}" alt="" height="30">
+                                </span>
+                                <span class="logo-sm">
+                                    <img src="{% static 'dashboard/images/logo-sm.png' %}" alt="" height="28">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div> <!-- end container-fluid-->
+            </div>
+            <!-- end Topbar -->
+
+            
+            <div class="topbar-menu">
+                <div class="container-fluid">
+                    <div id="navigation">
+                        <!-- Navigation Menu-->
+                        <ul class="navigation-menu">
+
+                            <li class="has-submenu">
+                                <a href="{% url 'dashboard:dashboard' %}"><i class="fe-airplay"></i>Dashboards</a>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="{% url 'dashboard:property' %}"><i class="fe-airplay"></i>Properties</a>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="layouts-menubar-light.html#">
+                                <i class="fe-hard-drive"></i>Components <div class="arrow-down"></div></a>  
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="components-elements.html">UI Elements</a>
+                                    </li>
+                                    <li>
+                                        <a href="components-rangeslider.html">Range Slider</a>
+                                    </li>
+                                    <li>
+                                        <a href="components-alerts.html">Alerts</a>
+                                    </li>
+                                    <li>
+                                        <a href="components-ribbons.html">Ribbons</a>
+                                    </li>
+                                    <li>
+                                        <a href="components-sweet-alerts.html">Sweet Alerts</a>
+                                    </li>
+                                    <li>
+                                        <a href="components-typography.html">Typography</a>
+                                    </li>
+                                    <li>
+                                        <a href="components-charts.html">Charts</a>
+                                    </li>
+                                    <li>
+                                        <a href="components-maps.html">Maps</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="layouts-menubar-light.html#"> <i class="fe-edit"></i> Forms <div class="arrow-down"></div></a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="form-elements.html">General Elements</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-advanced.html">Advanced Form</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-editors.html">Editors</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-uploads.html">File Uploads</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="layouts-menubar-light.html#"> <i class="fe-grid"></i> Tables <div class="arrow-down"></div></a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="tables-basic.html">Basic Tables</a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-advanced.html">Advanced Tables</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="layouts-menubar-light.html#"> <i class="fe-anchor"></i> Icons <div class="arrow-down"></div></a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="icons-feather.html">Feather Icons</a>
+                                    </li>
+                                    <li>
+                                        <a href="icons-mdi.html">Material Design Icons</a>
+                                    </li>
+                                    <li>
+                                        <a href="icons-dripicons.html">Dripicons</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                
+
+                            <li class="has-submenu">
+                                <a href="layouts-menubar-light.html#"> <i class="fe-book-open"></i>Pages <div class="arrow-down"></div></a>
+                                <ul class="submenu megamenu">
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <a href="pages-starter.html">Starter</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages-calendar.html">Calendar</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages-timeline.html">Timeline</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages-invoice.html">Invoice</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages-contacts.html">Contacts</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                <a href="pages-login.html">Login</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages-register.html">Register</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages-recoverpw.html">Recover Password</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages-lock-screen.html">Lock Screen</a>
+                                            </li>
+                                            <li>
+                                                <a href="pages-404.html">Error 404</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                        
+                                </ul>
+                            </li>
+
+                            <li class="has-submenu">
+                                <a href="layouts-menubar-light.html#"> <i class="fe-layout"></i>Layouts <div class="arrow-down"></div></a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="layouts-topbar-light.html">Topbar light</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-menubar-light.html">Menubar Light</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-center-menu.html">Center Menu</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-normal-header.html">Unsticky Header</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <!-- End navigation menu -->
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end #navigation -->
+                </div>
+                <!-- end container -->
+            </div>
+            <!-- end navbar-custom -->
+
+        </header>
+        <!-- End Navigation Bar-->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="wrapper">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item active">{{ dash_title }}</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">{{ dash_title }}</h4>
+                        </div>
+                    </div>
+                </div>     
+                <!-- end page title --> 
+                {% block content %}{% endblock %}
+    <!-- end row --> 
+</div> <!-- end container-fluid -->
+</div>
+<!-- end wrapper -->
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+
+
+<!-- Footer Start -->
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                         &copy; Sandvet 
+                    </div>
+                </div>
+            </footer>
+        <!-- end Footer -->
+        
+        
+        
+        {% endblock %}
+        
+        <!-- Vendor js -->
+        <script src="{% static 'dashboard/js/vendor.min.js' %}"></script>
+        
+        
+        
+        <!-- Chart JS -->
+        <script src="{% static 'dashboard/libs/chart-js/Chart.bundle.min.js' %}"></script>
+        <!-- Sparkline charts -->
+        <script src="{% static 'dashboard/libs/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+        <!-- Dashboard js -->
+        <script src="{% static 'dashboard/js/pages/dashboard.init.js' %}"></script> 
+        
+        <!-- datatable js -->
+         <script src="{% static 'dashboard/libs/datatables/jquery.dataTables.min.js' %}"></script>
+         <script src="{% static 'dashboard/libs/datatables/dataTables.bootstrap4.min.js' %}"></script>
+         <script src="{% static 'dashboard/libs/datatables/dataTables.responsive.min.js' %}"></script>
+         <script src="{% static 'dashboard/libs/datatables/responsive.bootstrap4.min.js' %}"></script>
+         
+         <script src="{% static 'dashboard/libs/datatables/dataTables.buttons.min.js' %}"></script>
+         <script src="{% static 'dashboard/libs/datatables/buttons.bootstrap4.min.js' %}"></script>
+         <script src="{% static 'dashboard/libs/datatables/buttons.html5.min.js' %}"></script>
+         <script src="{% static 'dashboard/libs/datatables/buttons.flash.min.js' %}"></script>
+         <script src="{% static 'dashboard/libs/datatables/buttons.print.min.js' %}"></script>
+ 
+         <script src="{% static 'dashboard/libs/datatables/dataTables.keyTable.min.js' %}"></script>
+         <script src="{% static 'dashboard/libs/datatables/dataTables.select.min.js' %}"></script>
+         
+         <!-- Datatables init -->
+         <script src="{% static 'dashboard/js/pages/datatables.init.js' %}"></script>        
+         
+         <!-- App js -->
+         <script src="{% static 'dashboard/js/app.min.js' %}"></script>
+
+        {% block extra_body %}{% endblock %}
+    </body>
+    </html>

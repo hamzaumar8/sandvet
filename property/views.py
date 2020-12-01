@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q
 from .models import Property, Category
 from .filters import PropertyFilter
-from core.models import Locality
+from core.models import Locality, Region
 
 # Create your views here.
 class PropertyListView(ListView):
@@ -17,6 +17,7 @@ class PropertyListView(ListView):
         kwargs['locality'] = self.locality
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+        kwargs['region_list'] = self.region
 
         return super().get_context_data(**kwargs)
 
@@ -25,6 +26,7 @@ class PropertyListView(ListView):
         self.locality = Locality.objects.all() 
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.all()
+        self.region = Region.objects.all()
 
         return self.model.objects.order_by('-id')
 
@@ -41,6 +43,7 @@ class ForSaleListView(ListView):
         kwargs['locality'] = self.locality
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+        kwargs['region_list'] = self.region
 
         return super().get_context_data(**kwargs)
 
@@ -66,6 +69,8 @@ class ForRentListView(ListView):
         kwargs['locality'] = self.locality
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+        kwargs['region_list'] = self.region
+        
 
         return super().get_context_data(**kwargs)
 
@@ -74,6 +79,7 @@ class ForRentListView(ListView):
         self.locality = Locality.objects.all() 
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.all()
+        self.region = Region.objects.all()
 
         self.forrent = self.model.objects.filter(purpose="rent")
         return self.forrent.order_by
@@ -84,9 +90,12 @@ class ForRentListView(ListView):
 def propertyDetail(request, slug):
     lists = get_object_or_404(Property, slug=slug)
     latest_list = Property.objects.filter(~Q(id=lists.id)).order_by('-id')[:10]
+
+    region = Region.objects.all()
     context = {
         'object': lists, 
         'latest_lists': latest_list,
+        'region_list': region,
     }    
     return render(request, 'list-detail.html', context)
 
@@ -105,6 +114,7 @@ class CategoryForSaleListView(ListView):
         kwargs['locality'] = self.locality
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+        kwargs['region_list'] = self.region
 
         return super().get_context_data(**kwargs)
 
@@ -113,6 +123,7 @@ class CategoryForSaleListView(ListView):
         self.locality = Locality.objects.all() 
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.all()
+        self.region = Region.objects.all()
 
         self.cate = get_object_or_404(Category, title=self.kwargs.get('category'))
         queryset = self.model.objects.filter(category=self.cate, purpose="sale")
@@ -131,6 +142,7 @@ class CategoryForRentListView(ListView):
         kwargs['locality'] = self.locality
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+        kwargs['region_list'] = self.region
 
         return super().get_context_data(**kwargs)
 
@@ -139,6 +151,7 @@ class CategoryForRentListView(ListView):
         self.locality = Locality.objects.all() 
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.all()
+        self.region = Region.objects.all()
 
         self.cate = get_object_or_404(Category, title=self.kwargs.get('category'))
         queryset = self.model.objects.filter(category=self.cate, purpose="rent")
@@ -159,6 +172,7 @@ class SearchListView(ListView):
         kwargs['locality'] = self.locality
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+        kwargs['region_list'] = self.region
         
         return super().get_context_data(**kwargs)
 
@@ -167,6 +181,7 @@ class SearchListView(ListView):
         self.locality = Locality.objects.all() 
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.all()
+        self.region = Region.objects.all()
         
         self.query = self.filter.qs
         return self.query

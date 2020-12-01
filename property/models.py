@@ -35,33 +35,68 @@ class Category(models.Model):
         })
 
 
-class Property(models.Model):
-    title = models.CharField(max_length=200, null=True)
-    price = models.FloatField()
-    slug = models.SlugField(unique=True)
-    description = models.TextField()
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='property')
+
+
+
+
+
+
+
+
+
+class CarProperty(models.Model):
+    asset = models.ForeignKey("Property",  on_delete=models.CASCADE, related_name='carproperty')
+
+    # #######
+    color = models.CharField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+
+
+
+class LandProperty(models.Model):
+    asset = models.ForeignKey("Property",  on_delete=models.CASCADE, related_name='landproperty')
+    # 
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='landproperty')
     locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
     # #######
     address = models.CharField(max_length=200, null=True, blank=True)
     dimension = models.CharField(max_length=200, null=True, blank=True)
     bed = models.PositiveIntegerField(default=1, null=True, blank=True)
     bath = models.PositiveIntegerField(default=1, null=True, blank=True)
     garage = models.PositiveIntegerField(default=0, null=True, blank=True)
-    # #######
-    image = models.ImageField(null=True, blank=True)
-    views = models.PositiveIntegerField(default=0)
-    # #######
-    featured = models.PositiveIntegerField(default=0, null=True, blank=True)
-    # #######
     created_at = models.DateTimeField(auto_now_add=True)
     
 
     def __str__(self):
         return self.title
 
+
+
+
+
+
+
+
+
+
+
+class Property(models.Model):
+    title = models.CharField(max_length=200, null=True)
+    price = models.FloatField()
+    slug = models.SlugField(unique=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
+    image = models.ImageField(null=True, blank=True)
+    description = models.TextField(null=True, blank=False)
+    views = models.PositiveIntegerField(default=0)
+    featured = models.PositiveIntegerField(default=0, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
 
     @property
     def imageURL(self):
@@ -113,12 +148,8 @@ class Testimony(models.Model):
    
 
 
-
-
-
 class Subscription(models.Model):
     PROPERTY_PURPOSE_TYPE = [
-        ('', ''),
         ('sale', 'for sale'),
         ('rent', 'for rent'),
     ]

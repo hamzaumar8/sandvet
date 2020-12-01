@@ -1,0 +1,43 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title">Key Data Table</h4>
+                <table id="key-datatable" class="table dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Age</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for prop in property_list %}
+                        <tr>
+                            <td>{{ prop.title }}</td>
+                                            <td>System Architect</td>
+                                            <td>Edinburgh</td>
+                                            <td>61</td>
+                                            <td>2011/04/25</td>
+                                            <td>$320,800</td>
+                                        </tr>
+                                       {% endfor %}
+                                    </tbody>
+                                </table>
+
+                            </div> <!-- end card body-->
+                        </div> <!-- end card -->
+                    </div><!-- end col-->
+                </div>
+                <!-- end row-->
+
+                {% endblock %}
+        
+
+                

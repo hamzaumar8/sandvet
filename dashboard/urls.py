@@ -5,6 +5,7 @@ from .views import *
 app_name = 'dashboard'
 
 urlpatterns = [
-    # path('', IndexPageView.as_view(), name='index'),
-
+    path('', dashboardPage, name='dashboard'),
+    path('properties/', propertyPage, name='property'),
+    path('property/add/', PropertAddPage, name='add-property'),
 ]

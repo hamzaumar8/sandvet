@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import  JsonResponse, HttpResponse
 from django.db.models import Q
 from property.models import Property, Category, Testimony, Subscription
-from property.filters import HomePropertFilter
+from property.filters import HomePropertFilter, PropertyFilter
 from .forms import SubscriptionForm
 from .models import Locality, Region
 # Create your views here.
@@ -20,6 +20,7 @@ class IndexPageView(ListView):
         kwargs['locality'] = self.locality
         kwargs['category_list_nav'] = self.categoryNav
         kwargs['category_list'] = self.category
+        kwargs['region_list'] = self.region
 
         kwargs['testimonys'] = self.testimony
         kwargs['filter'] = self.filter
@@ -30,6 +31,7 @@ class IndexPageView(ListView):
         self.locality = Locality.objects.all() 
         self.categoryNav = Category.objects.filter((~Q(title="land")))
         self.category = Category.objects.all()
+        self.region = Region.objects.all()
 
         self.testimony = Testimony.objects.all()
         self.subscriptionform = SubscriptionForm()
@@ -180,4 +182,31 @@ class RegionListView(ListView):
         queryset = self.model.objects.filter(region=self.reg)
         return queryset.order_by('-id')
 
+
+
+
+
+class LandListView(ListView):
+    model = Property
+    context_object_name = 'lists'
+    template_name = 'list.html'
+    # paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        kwargs['filter'] = self.filter
+        kwargs['locality'] = self.locality
+        kwargs['category_list_nav'] = self.categoryNav
+        kwargs['category_list'] = self.category
+
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
+        self.locality = Locality.objects.all() 
+        self.categoryNav = Category.objects.filter((~Q(title="land")))
+        self.category = Category.objects.all()
+
+        self.landCategory = Category.objects.get(title='land')
+        queryset = self.model.objects.filter(category=self.landCategory)
+        return queryset.order_by('-id')
 
