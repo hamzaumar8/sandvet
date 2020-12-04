@@ -1,16 +1,20 @@
 from django import forms
-from property.models import Property, PROPERTY_PURPOSE_TYPE
+from property import models as propsModel
 
 
 
 class PropertyForm(forms.ModelForm): 
 
-    purpose = forms.ChoiceField(
-        choices=PROPERTY_PURPOSE_TYPE, 
-        widget=forms.RadioSelect(attrs={
-            'class': 'custom-control-input'
-        })
+    title =  forms.CharField(
+        required = True,
+        label='Title',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'eg: 4plots of land at east legon'
+            }
+        )
     )
+
     
     def __init__(self, *args, **kwargs):
         super(PropertyForm, self).__init__(*args, **kwargs)
@@ -22,137 +26,48 @@ class PropertyForm(forms.ModelForm):
 
             
     class Meta:
-        model = Property
+        model = propsModel.Property
         fields = [
             'title', 
             'category', 
             'purpose',
             'price', 
+            'image',
+            'description',
         ]
         
-# class AssetLandForm(forms.ModelForm): 
-#     location =  forms.CharField(
-#         required = True,
-#         label='Location/Plot No./Description',
-#         widget=forms.TextInput(
-#             attrs={
-#                 'placeholder': 'Location/Plot No./Description'
-#             }
-#         )
-#     )
-    
-#     nature_of_acquisition =  forms.CharField(
-#         required = True,
-#         label='Nature Of Acquisition',
-#         widget=forms.TextInput(
-#             attrs={
-#                 'placeholder': 'Nature Of Acquisition'
-#             }
-#         )
-#     )
-    
-#     date_of_acquisition = forms.DateField(
-#         input_formats=['%Y-%m-%d'],
-#         required = True,
-#         label='Date Of Acquisition',
-#         widget=forms.DateTimeInput(attrs={
-#             'id': 'example-date',
-#             'placeholder': 'Date Of Acquisition',
-#             'type': 'date'
-#         })
-#     )
-    
-#     town_or_district =  forms.CharField(
-#         required = True,
-#         label='Town / District',
-#         widget=forms.TextInput(
-#             attrs={
-#                 'placeholder': 'Town / District'
-#             }
-#         )
-#     )
-    
+class PropertyLandForm(forms.ModelForm): 
+    dimension =  forms.CharField(
+        label='Dimension',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'eg: 2500 ft2'
+            }
+        )
+    )
+    location =  forms.CharField(
+        label='Location',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'eg: Tema Comm. 25'
+            }
+        )
+    )
+    def __init__(self, *args, **kwargs):
+        super(PropertyLandForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
 
-#     purpose_of_acquisition = forms.CharField(
-#         required = True,
-#         label='Purpose Of Acquisition',
-#         widget=forms.Textarea(
-#             attrs={
-#             'id': 'example-textarea',
-#             'placeholder': '',
-#             'rows': 5
-#             }
-#         )
-#     )
-    
-#     current_use = forms.CharField(
-#         required = True,
-#         label='Current Use/State Of Development',
-#         widget=forms.TextInput(
-#             attrs={
-#             'id': 'simpleinput',
-#             'placeholder': 'Some text value...',
-#             }
-#         )
-#     )
-    
-#     user_agency = forms.CharField(
-#         required = True,
-#         label='User Agency/Allottee',
-#         widget=forms.TextInput(
-#             attrs={
-#             'id': 'simpleinput',
-#             'placeholder': 'Some text value...',
-#             }
-#         )
-#     )
-
-#     # encroachment = forms.CharField(
-#     #     required = True,
-#     #     label='User Agency/Allottee',
-#     #     widget=forms.TextInput(
-#     #         attrs={
-#     #         'id': 'simpleinput',
-#     #         'placeholder': 'Some text value...',
-#     #         }
-#     #     )
-#     # )
-    
-#     comment = forms.CharField(
-#         required = True,
-#         label='Comments/Notes',
-#         widget=forms.Textarea(
-#             attrs={
-#             'id': 'example-textarea',
-#             'placeholder': '',
-#             'rows': 5
-#             }
-#         )
-#     )
-    
-    
-
-#     def __init__(self, *args, **kwargs):
-#         super(AssetLandForm, self).__init__(*args, **kwargs)
-#         ## add a "form-control" class to each form input
-#         ## for enabling bootstrap
-#         for name in self.fields.keys():
-#             self.fields[name].widget.attrs.update({
-#                 'class': 'form-control',
-#             })
-#     class Meta:
-#         model = AssetLand
-#         fields = [
-#             'location', 
-#             'nature_of_acquisition',
-#             'date_of_acquisition', 
-#             'town_or_district',
-#             'purpose_of_acquisition',
-#             'current_use',
-#             'user_agency',
-#             'encroachment',
-#             'comment'
-#         ]
+    class Meta:
+        model = propsModel.LandProperty
+        fields = [
+            'region', 
+            'locality',
+            'location', 
+            'dimension',
+        ]
 
 
 

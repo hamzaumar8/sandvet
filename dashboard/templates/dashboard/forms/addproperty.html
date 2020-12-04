@@ -1,5 +1,32 @@
 <div class="tab-pane show active" id="lands">
-    <form class="form-horizontal" id="form_assetLand">
+    <form class="form-horizontal" id="form_propertyLand" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="form-group row">
+            {% for field in property_form %}
+                <div class="col-6 mb-2">
+                    <p class="m-0">{{ field.label }}*</p>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            {% for field in propertyland_form %}
+                <div class="col-6 mb-2">
+                    <p class="m-0">{{ field.label }}*</p>
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            <div class="col-lg-12">
+                <br>
+                <button type="submit" class="btn btn-primary btn-lg waves-effect waves-light"><i class="fa fa-spinner fa-spin fa-custom-ajax-indicator d-none"></i>submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="tab-pane show" id="house">
+    <form class="form-horizontal" id="">
         {% csrf_token %}
         <input type="hidden" name="asset_type" value="LD">
         <div class="form-group row">
@@ -9,107 +36,18 @@
                     {{ field }}
                 </div>
             {% endfor %}
+            <div id="red" class="colors" style="display:none"> .... </div>
+<div id="sale" class="colors" style="display:none"> sale </div>
+<div id="rent" class="colors" style="display:none">
+    <label for="">rent period</label>
+<input type="text" name="period" >
+</div>
+
+{{ propertyland_form }}
             <div class="col-lg-12">
                 <br>
                 <button type="submit" class="btn btn-primary btn-lg waves-effect waves-light"><i class="fa fa-spinner fa-spin fa-custom-ajax-indicator d-none"></i>submit</button>
             </div>
         </div>
-    </form>
-</div>
-<div class="tab-pane" id="vehicles">
-    <form class="form-horizontal" id="form_assetVehicle">
-        {% csrf_token %}
-        <input type="hidden" name="asset_type" value="OV">
-        <div class="form-group row">
-            <div class="col-lg-6">
-                <p>Asset ID*</p>
-                <input type="text" class="form-control" id="simpleinput" value="OV-{{assetsVehicle_id}}" required disabled>
-            </div>
-            <div class="col-lg-6">
-                <p>Name of Asset*</p>
-                <input type="text" class="form-control" id="simpleinput" name="name" placeholder="Some text value..." required>
-            </div> 
-            {% for field in assetvehicle_form %}
-                <div class="col-6 mb-2">
-                    <p class="m-0">{{ field.label }}*</p>
-                    {{ field }}
-                </div>
-            {% endfor %}
-            <!-- <div class="col-lg-6"><p>Type of Vehicle*</p>
-                <select class="form-control">
-                    <option>Select Option</option>
-                    <option>SUV</option>
-                    <option>4X4</option>
-                    <option>Truck</option>
-                    <option>Ambulance </option>
-                    <option>Bus </option>
-                    <option>Van</option>
-                    <option>Forklift</option>
-                    <option>Tractor</option>
-                    <option> Station Wagon  </option>
-                    <option>Saloon</option>
-                    <option>Add more</option>
-                </select>
-            </div> -->
-            <div class="col-lg-12">
-                <br>
-                <button type="submit" class="btn btn-primary btn-lg waves-effect waves-light">Create Asset</button>
-            </div>
-        </div>
-        
-    </form>
-</div>
-<div class="tab-pane" id="oequipment">
-    <form class="form-horizontal" id="form_assetEquipment">
-        {% csrf_token %}
-        <input type="hidden" name="asset_type" value="OE">
-        <div class="form-group row">
-            <div class="col-lg-6">
-                <p>Asset ID*</p>
-                <input type="text" class="form-control" id="simpleinput" value="OE-{{assetsEquipment_id}}" required disabled>
-            </div>
-            <div class="col-lg-6">
-                <p>Name of Asset*</p>
-                <input type="text" class="form-control" id="simpleinput" name="name" placeholder="Some text value..." required>
-            </div> 
-            {% for field in assetequipment_form %}
-                <div class="col-6 mb-2">
-                    <p class="m-0">{{ field.label }}*</p>
-                    {{ field }}
-                </div>
-            {% endfor %}
-            <div class="col-lg-12">
-                <br>
-                <button type="submit" class="btn btn-primary btn-lg waves-effect waves-light">Create Asset</button>
-            </div>
-        </div>
-        
-    </form>
-</div>
-<div class="tab-pane" id="rassets">
-    <form class="form-horizontal" id="form_assetResidential">
-        {% csrf_token %}
-        <input type="hidden" name="asset_type" value="RA">
-        <div class="form-group row">
-            <div class="col-lg-6">
-                <p>Asset ID*</p>
-                <input type="text" class="form-control" id="simpleinput" value="RA-{{assetsResidential_id}}" required disabled>
-            </div>
-            <div class="col-lg-6">
-                <p>Name of Asset*</p>
-                <input type="text" class="form-control" id="simpleinput" name="name" placeholder="Some text value..." required>
-            </div> 
-            {% for field in assetresidential_form %}
-                <div class="col-6 mb-2">
-                    <p class="m-0">{{ field.label }}*</p>
-                    {{ field }}
-                </div>
-            {% endfor %}
-            <div class="col-lg-12">
-                <br>
-                <button type="submit" class="btn btn-primary btn-lg waves-effect waves-light">Create Asset</button>
-            </div>
-        </div>
-        
     </form>
 </div>

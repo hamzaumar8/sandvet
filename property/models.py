@@ -1,9 +1,13 @@
 from datetime import datetime
 from django.db import models
 from django.shortcuts import reverse
+from autoslug import AutoSlugField
+from autoslug.settings import slugify as default_slugify
 from core.models import Region, Locality
 # Create your models here.
 
+def custom_slugify(value):
+    return default_slugify(value).replace(' ', '-')
 
 PROPERTY_PURPOSE_TYPE = [
     ('sale', 'sale'),
@@ -39,31 +43,49 @@ class Category(models.Model):
 
 
 
-
-
-
-
-
 class CarProperty(models.Model):
-    asset = models.ForeignKey("Property",  on_delete=models.CASCADE, related_name='carproperty')
+    property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='carproperty')
 
     # #######
-    color = models.CharField(max_length=200, null=True, blank=True)
+    int_color = models.CharField(max_length=200, null=True, blank=True)
+    ext_color = models.CharField(max_length=200, null=True, blank=True)
+    millage = models.CharField(max_length=200, null=True, blank=True)
+    body_type = models.CharField(max_length=200, null=True, blank=True)
+    fuel_type = models.CharField(max_length=200, null=True, blank=True)
+    drive_type = models.CharField(max_length=200, null=True, blank=True)
+    car_state = models.CharField(max_length=200, null=True, blank=True)
+    engine = models.CharField(max_length=200, null=True, blank=True)
+    air_con = models.CharField(max_length=200, null=True, blank=True)
+    year = models.CharField(max_length=5, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.property.title
 
 
 
 
 class LandProperty(models.Model):
-    asset = models.ForeignKey("Property",  on_delete=models.CASCADE, related_name='landproperty')
+    property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='landproperty')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='landproperty')
+    locality = models.ForeignKey(Locality, on_delete=models.CASCADE)
+    location = models.CharField(max_length=200)
+    dimension = models.CharField(max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+
+    def __str__(self):
+        return self.property.title
+
+
+
+
+class HouseProperty(models.Model):
+    property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='houseproperty')
     # 
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='landproperty')
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='houseproperty')
     locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
     # #######
     address = models.CharField(max_length=200, null=True, blank=True)
-    dimension = models.CharField(max_length=200, null=True, blank=True)
     bed = models.PositiveIntegerField(default=1, null=True, blank=True)
     bath = models.PositiveIntegerField(default=1, null=True, blank=True)
     garage = models.PositiveIntegerField(default=0, null=True, blank=True)
@@ -71,11 +93,7 @@ class LandProperty(models.Model):
     
 
     def __str__(self):
-        return self.title
-
-
-
-
+        return self.property.title
 
 
 
@@ -84,16 +102,20 @@ class LandProperty(models.Model):
 
 
 class Property(models.Model):
-    title = models.CharField(max_length=200, null=True)
+    title = models.CharField(max_length=200,null=True)
     price = models.FloatField()
-    slug = models.SlugField(unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(upload_to='property/')
     description = models.TextField(null=True, blank=False)
     views = models.PositiveIntegerField(default=0)
-    featured = models.PositiveIntegerField(default=0, null=True, blank=True)
+    featured = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    slug = AutoSlugField(
+                populate_from='title', 
+                unique_with='created_at__month',
+                slugify=custom_slugify
+            )
 
     def __str__(self):
         return self.title
@@ -123,6 +145,9 @@ class Property(models.Model):
                     return str(time.month - self.created_at.month) + " months ago"
         return self.created_at
 
+
+    def get_land_details(self):
+        return LandProperty.objects.get(property=self)
 
 
 
@@ -161,6 +186,9 @@ class Subscription(models.Model):
     from_price = models.FloatField(null=True)
     to_price = models.FloatField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+  
 
     def __str__(self):
         return self.email
+
+   

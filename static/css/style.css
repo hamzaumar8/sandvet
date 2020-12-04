@@ -274,7 +274,7 @@ p {
 }
 
 main .form__wrapper {
-  background-color: #5983fc;
+  background-color: #fff !!important;
   min-height: 100vh;
   display: -webkit-flex;
   display: -ms-flexbox;

@@ -25,7 +25,7 @@ SECRET_KEY = '4r8c17n##k^koo6&i1rx^tj4cef@mn+j$55(0fhd!9nhp@5*o&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sandvet.com', 'www.sandvet.com', '127.0.0.1']
+ALLOWED_HOSTS = ['sandvet.com', 'www.sandvet.com']
 
 
 # Application definition
@@ -192,5 +192,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL =  "ctmafri@gmail.com"
 EMAIL_HOST_PASSWORD = "yvbdactfcsfourif"
 
-# if DEBUG:
-#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    ALLOWED_HOSTS = ['127.0.0.1']

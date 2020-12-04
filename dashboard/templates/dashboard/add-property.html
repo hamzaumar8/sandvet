@@ -9,22 +9,22 @@
                 <ul class="nav nav-pills navtab-bg nav-justified mb-3">
                     <li class="nav-item">
                         <a href="#lands" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                            Buildings/ Lands / Appartment
+                            Lands 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#appartment" data-toggle="tab" aria-expanded="false" class="nav-link">
+                            Buildings/Appartment/House
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#vehicles" data-toggle="tab" aria-expanded="true" class="nav-link">
-                            Official Vehicles
+                            Hotel / Restaurants
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#oequipment" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            Office Equipment
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#rassets" data-toggle="tab" aria-expanded="false" class="nav-link">
-                            Residential Assets
+                            Cars
                         </a>
                     </li>
                 </ul>
@@ -36,3 +36,77 @@
     </div>
 </div>
 {%endblock%}
+
+{% block extra_body %}
+<script>
+    $('document').ready(function(){
+        "use strict";
+
+
+        // $("#id_purpose").prepend("<option value='' selected='selected'>----</option>");
+        $('#id_purpose').change(function(){
+            $('.colors').hide();
+            $('#' + $(this).val()).show();
+            if(($(this).val()) === 'rent'){
+                $('#id_price').attr('placeholder', 'Amount to pay per month')
+            }else{
+                $('#id_price').attr('placeholder', 'price')
+            }
+        }); 
+  
+    
+
+        function FormAddProperty(FormId, endpoint) {
+            $(FormId).submit(function(event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: endpoint,
+                    method: "POST",
+                    data: formData,
+                    beforeSend: function() {
+                        $(".fa-custom-ajax-indicator").show();
+                    },
+                    complete: function() {
+                        $(".fa-custom-ajax-indicator").hide();
+                    },
+                    success: function (response) {
+                        $('.error').remove();
+                        console.log(response)
+                        if(response.error){
+                            $.each(response.errors, function(name, error){
+                                error = '<small class="text-muted error">' + error + '</small>'
+                                $(this).find('[name=' + name + ']').after(error);
+                            })
+                        }
+                        else{
+                            
+                                window.location.href = "{% url 'dashboard:property' %}";
+                            
+                        }
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    error : function(response){
+                        $('.error').remove();
+                        console.log(response)
+                        
+                        
+                        if(response.responseJSON.error){
+                            console.log("error", response.responseJSON.errors)
+                            $.each(response.responseJSON.errors, function(name, error){
+                                error = '<small class="text-muted error">' + error + '</small>'
+                                $(this).find('[name=' + name + ']').after(error);
+                            })
+                        }
+                    }
+                })
+            });
+        }
+        // add Property Land
+        FormAddProperty("#form_propertyLand", "{% url 'dashboard:add-land-property' %}")
+    
+    });
+</script>
+    {% endblock %}

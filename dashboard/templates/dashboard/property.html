@@ -5,39 +5,47 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Key Data Table</h4>
+                <a href="{% url 'dashboard:add-property' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-plus mr-1"></i> New Property</a>
                 <table id="key-datatable" class="table dt-responsive nowrap">
                     <thead>
                         <tr>
+                            <td>ID</td>
                             <th>Title</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Purpose</th>
+                            <th>Entry date</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for prop in property_list %}
                         <tr>
+                            <td>{{ prop.id }}</td>
                             <td>{{ prop.title }}</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                       {% endfor %}
-                                    </tbody>
-                                </table>
-
-                            </div> <!-- end card body-->
-                        </div> <!-- end card -->
-                    </div><!-- end col-->
-                </div>
-                <!-- end row-->
-
-                {% endblock %}
+                            <td>{{ prop.category.title }}</td>
+                            <td>&cent; {{ prop.price }}</td>
+                            <td>{{ prop.purpose }}</td>
+                            <td>{{ prop.created_at|date:"d- m-Y" }}</td>
+                            <td>
+                                <div class="btn-group dropdown">
+                                    <a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="index.html#"><i class="mdi mdi-eye mr-1 text-muted"></i>View</a>
+                                        <a class="dropdown-item" href="#"><i class="mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
+                                        <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-1 text-muted"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div> 
+        </div> 
+    </div>
+</div>
+{% endblock %}
         
 
                 
