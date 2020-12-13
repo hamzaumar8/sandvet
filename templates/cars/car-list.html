@@ -1,0 +1,37 @@
+{% load humanize %}
+<div class="col-lg-4 col-md-6 cars">
+    <div class="card listing__card">
+        <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
+            <div class="card__imgBlock">
+                <div class="overlay"></div>
+                <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
+                <div class="card__rateInfo">
+                    <h5>&cent; {{ list.price|floatformat:2|intcomma }}</h5>
+                    <span class="purpose-for-rent">{{ list.car_state }}</span>
+                </div>
+            </div>
+        </a>
+        <div class="card__full">
+            <div class="card__body">
+                <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
+                    <h3>{{ list.title }}</h3>
+                    <p>
+                        <i class="fa fa-map-marker"></i>
+                        {{ list.address }} , {{ list.region }} Region
+                    </p>
+                </a>
+                <div class="card__resultItems mb-2">
+                    <span class="property-card-value">
+                        <span class="field_name"> Engine </span><span class="item"> {{ list.engine }} </span>
+                    </span>
+                    <span class="property-card-value">
+                        <span class="field_name"><i class="fa fa-dashboard"></i>  </span>
+                        <span class="item"> {{ list.mileage }} KM </span>
+                    </span>
+                </div>
+            </div>
+            <!-- <div class="card__footer"></div> -->
+        </div>
+        <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="ext-link"></a>
+    </div>
+</div>

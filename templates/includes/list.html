@@ -1,5 +1,5 @@
 {% load humanize %}
-<div class="col-lg-3 col-md-6">
+
     <div class="card listing__card">
         <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
             <div class="card__imgBlock">
@@ -17,7 +17,7 @@
                     <h3>{{ list.title }}</h3>
                     <p>
                         <i class="fa fa-map-marker"></i>
-                        {{ list.address }} , {{ list.region.name }} Region
+                        {{ list.address }} , {{ list.region }} Region
                     </p>
                 </a>
                 <div class="card__resultItems">
@@ -48,4 +48,3 @@
         </div>
         <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="ext-link"></a>
     </div>
-</div>

@@ -5,7 +5,11 @@
             <div class="widget-property-search card mt-3">
                 <form action="{% url 'property:search' %}" class="">
                     <div class="row">
-                        {{ filter.form|crispy }}
+                        {% for field in  filter.form %}
+                        <div class="col-md-3">
+                            {{ field|as_crispy_field }}
+                        </div>
+                        {% endfor %}
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary ">search</button>
                         </div>
@@ -44,7 +48,9 @@
                             <div class="list_products col-12 m-0 p-0">
                                 <div class="row">
                                     {% for list in lists%}
-                                        {% include 'includes/list.html' %}
+                                        <div class="col-lg-3 col-md-6">
+                                            {% include 'includes/list.html' %}
+                                            </div>
                                     {% endfor %}
                                 </div>
                             </div>

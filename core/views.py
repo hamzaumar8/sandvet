@@ -8,7 +8,22 @@ from property.models import Property, Category, Testimony, Subscription
 from property.filters import HomePropertFilter, PropertyFilter
 from .forms import SubscriptionForm
 from .models import Locality, Region
+from cars.filters import CarFilter
 # Create your views here.
+
+def BaseView(request):
+    template_name = 'base.html'
+
+    context ={
+        "locality" : Locality.objects.all(),
+        "category_list_nav" : Category.objects.filter((~Q(title="land"))),
+        "category_list" : Category.objects.all(),
+        "region_list" : Region.objects.all(),
+        "testimonys" : Testimony.objects.all(),
+        "subscription_form" : SubscriptionForm(),
+    }
+
+    return render(request, template_name, context)
 class IndexPageView(ListView):
     model = Property
     context_object_name = 'lists'
@@ -23,6 +38,7 @@ class IndexPageView(ListView):
         kwargs['region_list'] = self.region
 
         kwargs['testimonys'] = self.testimony
+        kwargs['carfilter'] = self.carfilter
         kwargs['filter'] = self.filter
         kwargs['subscription_form'] = self.subscriptionform
         return super().get_context_data(**kwargs)
@@ -35,6 +51,7 @@ class IndexPageView(ListView):
 
         self.testimony = Testimony.objects.all()
         self.subscriptionform = SubscriptionForm()
+        self.carfilter = CarFilter(self.request.GET, queryset= self.model.objects.all()) 
         self.filter = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
 
 

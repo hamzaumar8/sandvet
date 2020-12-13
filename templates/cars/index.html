@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %} 
+{% load static %}
+{% block head_title %}{% endblock %}
+{% block content %}
+
+    
+    
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="py-3 filter-sec">
+                <div class="d-flex align-items-center justify-content-between panel__cardhead">
+                    <div><h3>Fliter</h3></div>
+                    <div class="view-change"></div>
+                </div>
+                <!--list-head end-->
+                <div class="listings panel__cardbody d-flex">
+                    <div class="list_products col-12 m-0 p-0">
+                        <form action="{% url 'cars:cars' %}" class="">
+                            <div class="row">
+                                {% for field in sidefilter.form %}
+                                <div class="col-12">
+                                    {{ field|as_crispy_field }}
+                                </div>
+                                {% endfor %}
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary col-12">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>     
+        </div>  
+        <div class=" col-md-9">
+            <div class="listing-directs py-3 row"> 
+                <div class="col-md-12">
+                    <div class="cars_grid">
+                        <div class="row align-items-center justify-content-between panel__cardhead">
+                            <div><h2>{{ car_count }} Car(s)</h2></div>
+                            <div class="view-change">
+                                <ul class="nav nav-tabs sw-order-view">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link grid view-type active" data-ref="grid"><i class="fa fa-th-large"></i></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link list view-type " data-ref="list"><i class="fa fa-th-list"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="listings panel__cardbody row">
+                            <div class="list_products col-12 m-0 p-0">
+                                <div class="row">
+                                    {% for list in lists%}
+                                        {% include 'cars/car-list.html' %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                {% include 'includes/pagination.html' %}
+                            </div>
+                        </div><!--tab-content end-->
+                    </div>
+                </div>
+            </div>  
+            <div class="similar-listings-posts clearfix mt-3">
+                <div class="col-12"><div class="row"><h3>Latest Property listings</h3></div></div>
+                <div class="list-products">
+                    <div class="row">
+                        {%for list in property_list %}
+                        <div class="col-lg-4 col-md-6">
+                            {% include 'includes/list.html' %}
+                            </div>
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+{% endblock %}

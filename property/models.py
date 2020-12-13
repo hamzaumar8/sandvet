@@ -9,6 +9,27 @@ from core.models import Region, Locality
 def custom_slugify(value):
     return default_slugify(value).replace(' ', '-')
 
+
+# Create your models here.
+REGIONS_LIST = (
+    ('ashanti', 'Ashanti'),
+    ('ahafo', 'Ahafo'),
+    ('brong-ahafo', 'Brong Ahafo'),
+    ('bono-east', 'Bono East '),
+    ('central', 'Central'),
+    ('eastern', 'Eastern'),
+    ('greater-accra', 'Greater Accra'),
+    ('northern', 'Northern'),
+    ('savannah', 'Savannah'), 
+    ('north-east', 'North East'), 
+    ('upper-east', 'Upper East'),
+    ('upper-west', 'Upper West'),
+    ('volta', 'Volta'),
+    ('oti', 'Oti Region'),
+    ('werstern', 'Western'),
+    ('werstern-north', 'Western North'),
+)
+
 PROPERTY_PURPOSE_TYPE = [
     ('sale', 'sale'),
     ('rent', 'rent'),
@@ -38,28 +59,6 @@ class Category(models.Model):
             'category': self.title
         })
 
-
-
-
-
-
-class CarProperty(models.Model):
-    property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='carproperty')
-
-    # #######
-    int_color = models.CharField(max_length=200, null=True, blank=True)
-    ext_color = models.CharField(max_length=200, null=True, blank=True)
-    millage = models.CharField(max_length=200, null=True, blank=True)
-    body_type = models.CharField(max_length=200, null=True, blank=True)
-    fuel_type = models.CharField(max_length=200, null=True, blank=True)
-    drive_type = models.CharField(max_length=200, null=True, blank=True)
-    car_state = models.CharField(max_length=200, null=True, blank=True)
-    engine = models.CharField(max_length=200, null=True, blank=True)
-    air_con = models.CharField(max_length=200, null=True, blank=True)
-    year = models.CharField(max_length=5, null=True, blank=True)
-
-    def __str__(self):
-        return self.property.title
 
 
 
@@ -106,6 +105,7 @@ class Property(models.Model):
     price = models.FloatField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
+    region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
     image = models.ImageField(upload_to='property/')
     description = models.TextField(null=True, blank=False)
     views = models.PositiveIntegerField(default=0)

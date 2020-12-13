@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
-from property.models import Property, LandProperty, CarProperty
+from property.models import Property, LandProperty
 from .forms import PropertyForm, PropertyLandForm
 # Create your views here.
 def gen_asset_id(moduleName):

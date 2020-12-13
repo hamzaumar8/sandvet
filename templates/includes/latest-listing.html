@@ -1,6 +1,6 @@
 {% load humanize %}
 <div id="sw_win_latestlisting_widget-1" class="descp-text widget widget_sw_win_latestlisting_widget side">
-    <h3 class="widget-title mb-1 p-0">Latest listings</h3>
+    <h3 class="widget-title mb-1 p-0">Latest Cars listings</h3>
     <hr>
     <div class="selio_sw_win_wrapper">
         <div class="ci sw_widget sw_wrap">
@@ -17,7 +17,36 @@
                             <div class="ps-info">
                                 <h3><a href="{{ latest.get_absolute_url }}" title="{{ latest.title }}">{{ latest.title }}</a></h3>
                                 <strong>&cent; {{ latest.price|floatformat:2|intcomma }}</strong>
-                                <span><i class="fa fa-map-marker"></i>{{ latest.address }} , {{ latest.region.name }} Region</span>
+                                <span><i class="fa fa-map-marker"></i>{{ latest.address }} , {{ latest.region }} Region</span>
+                            </div><!--ps-info end-->
+                        </div><!--wd-posts end-->
+                    </li>
+                    {%endfor%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sw_win_latestlisting_widget-1" class="descp-text widget widget_sw_win_latestlisting_widget side">
+    <h3 class="widget-title mb-1 p-0">Latest Property Listings</h3>
+    <hr>
+    <div class="selio_sw_win_wrapper">
+        <div class="ci sw_widget sw_wrap">
+            <div class="widget-posts">
+                <ul>
+                    {% for latest in latest_property %}
+                    <li>
+                        <div class="wd-posts">
+                            <div class="ps-img">
+                                <a href="{{ latest.get_absolute_url }}" title="{{ latest.title }}">
+                                    <img src="{{ latest.imageURL }}" alt="{{ latest.title }}">
+                                </a>
+                            </div><!--ps-img end-->
+                            <div class="ps-info">
+                                <h3><a href="{{ latest.get_absolute_url }}" title="{{ latest.title }}">{{ latest.title }}</a></h3>
+                                <strong>&cent; {{ latest.price|floatformat:2|intcomma }}</strong>
+                                <span><i class="fa fa-map-marker"></i> {{ latest.region }} Region</span>
                             </div><!--ps-info end-->
                         </div><!--wd-posts end-->
                     </li>

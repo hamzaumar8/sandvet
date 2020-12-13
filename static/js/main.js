@@ -14,14 +14,16 @@ $(document).ready(function() {
         $(this).find('.dropeddown').slideUp(300);
     });
 
-    $("body").delegate(".grid.view-type", "click", function(event) {
+    $("body").delegate(".grid.view-type", "click", function(e) {
+        e.preventDefault()
         $('.list.view-type').removeClass('active')
         $(this).addClass('active');
         $('.listing__card').removeClass('list');
         $('.list_products .col-md-6').addClass('col-lg-3');
     });
 
-    $("body").delegate(".list.view-type", "click", function(event) {
+    $("body").delegate(".list.view-type", "click", function(e) {
+        e.preventDefault()
         $('.grid.view-type').removeClass('active')
         $(this).addClass('active');
         $('.listing__card').addClass('list');
@@ -29,20 +31,52 @@ $(document).ready(function() {
         $('.list_products .col-lg-3').removeClass('col-lg-3');
     });
 
+    $("body").delegate(".cars_grid .grid.view-type", "click", function(e) {
+        e.preventDefault()
+        $('.list.view-type').removeClass('active')
+        $(this).addClass('active');
+        $('.listing__card').removeClass('list');
+        $('.list_products .col-md-6').addClass('col-lg-4');
+    });
+
+    $("body").delegate(".cars_grid .list.view-type", "click", function(e) {
+        e.preventDefault()
+        $('.grid.view-type').removeClass('active')
+        $(this).addClass('active');
+        $('.listing__card').addClass('list');
+        $('.list_products').addClass('list');
+        $('.list_products .col-lg-4').removeClass('col-lg-4');
+    });
 
 
+
+    $('.banner-carousel select[name=category] > option:first-child').text('All Categories');
+    $('.banner-carousel select[name=brand] > option:first-child').text('All Brands');
+    $('.banner-carousel select[name=car_state] > option:first-child').text('Condition');
+    $('.banner-carousel select[name=purpose] > option:first-child').text('Purpose');
+    $('.banner-carousel input[name=address] ').attr("placeholder", "Enter Address, City or State");
+    $('.banner-carousel input[name=title] ').attr("placeholder", "Property name or title");
+    $('.banner-carousel .banner-cars input[name=title] ').attr("placeholder", "Car name ot title");
+    
+    // FILTER
+    $('.filter-sec select[name=brand] > option:first-child').text('All');
+    $('.filter-sec select[name=car_state] > option:first-child').text('All');
+    $('.filter-sec select[name=region] > option:first-child').text('All');
+
+    $(function() {
+        $(".filter-sec .form-control").change(function() {
+          $(".filter-sec form").submit();
+        });
+    });
     $('select[name=region] > option:first-child').text('All Regions');
     $('select[name=locality] > option:first-child').text('All Locality');
-    $('select[name=category] > option:first-child').text('All categories');
-    $('select[name=purpose] > option:first-child').text('Purpose');
-    $('input[name=address] ').attr("placeholder", "Enter Address, City or State");
-    $('input[name=title] ').attr("placeholder", "Enter Propert name or title");
     $('input[name=bed] ').attr("placeholder", "Beds").attr("min", '1');
     $('input[name=bath] ').attr("placeholder", "Baths").attr("min", '1');
     $('input[name=price__min] ').attr("placeholder", "From GH₵").attr("min", '1');
     $('input[name=price__max] ').attr("placeholder", "To GH₵").attr("min", '1');
     $('input[name=to_price] ').attr("placeholder", "To GH₵").attr("min", '1');
     $('input[name=from_price] ').attr("placeholder", "From GH₵").attr("min", '1');
+
 
 
 
