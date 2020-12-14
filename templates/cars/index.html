@@ -39,7 +39,7 @@
                 <div class="col-md-12">
                     <div class="cars_grid">
                         <div class="row align-items-center justify-content-between panel__cardhead">
-                            <div><h2>{{ car_count }} Car(s)</h2></div>
+                            <div><h2>{{ car_count }} {{obj_brands.name}} Car(s)</h2></div>
                             <div class="view-change">
                                 <ul class="nav nav-tabs sw-order-view">
                                     <li class="nav-item">
@@ -81,4 +81,6 @@
         </div>
     </div>
 </div>  
+
+{% include "includes/index/car-brands.html" %}
 {% endblock %}

@@ -65,7 +65,6 @@ class Category(models.Model):
 
 class LandProperty(models.Model):
     property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='landproperty')
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='landproperty')
     locality = models.ForeignKey(Locality, on_delete=models.CASCADE)
     location = models.CharField(max_length=200)
     dimension = models.CharField(max_length=200, null=True, blank=True)
@@ -81,7 +80,6 @@ class LandProperty(models.Model):
 class HouseProperty(models.Model):
     property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='houseproperty')
     # 
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='houseproperty')
     locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
     # #######
     address = models.CharField(max_length=200, null=True, blank=True)

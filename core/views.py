@@ -9,6 +9,7 @@ from property.filters import HomePropertFilter, PropertyFilter
 from .forms import SubscriptionForm
 from .models import Locality, Region
 from cars.filters import CarFilter
+from cars.models import Car, Brand
 # Create your views here.
 
 def BaseView(request):
@@ -31,30 +32,20 @@ class IndexPageView(ListView):
     # paginate_by = 10
 
     def get_context_data(self, **kwargs):
+        kwargs['locality'] = Locality.objects.all()
+        kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+        kwargs['category_list'] = Category.objects.all()
+        kwargs['region_list'] = Region.objects.all()
 
-        kwargs['locality'] = self.locality
-        kwargs['category_list_nav'] = self.categoryNav
-        kwargs['category_list'] = self.category
-        kwargs['region_list'] = self.region
-
-        kwargs['testimonys'] = self.testimony
-        kwargs['carfilter'] = self.carfilter
-        kwargs['filter'] = self.filter
-        kwargs['subscription_form'] = self.subscriptionform
+        kwargs['testimonys'] = Testimony.objects.all()
+        kwargs['brands'] = Brand.objects.order_by('-id')[:12]
+        kwargs['cars'] = Car.objects.order_by('-id')[:12]
+        kwargs['carfilter'] = CarFilter(self.request.GET, queryset= self.model.objects.all()) 
+        kwargs['filter'] = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
+        kwargs['subscription_form'] = SubscriptionForm()
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.locality = Locality.objects.all() 
-        self.categoryNav = Category.objects.filter((~Q(title="land")))
-        self.category = Category.objects.all()
-        self.region = Region.objects.all()
-
-        self.testimony = Testimony.objects.all()
-        self.subscriptionform = SubscriptionForm()
-        self.carfilter = CarFilter(self.request.GET, queryset= self.model.objects.all()) 
-        self.filter = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
-
-
         return self.model.objects.order_by('-id')
 
 

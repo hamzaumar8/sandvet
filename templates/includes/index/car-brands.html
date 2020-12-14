@@ -1,0 +1,36 @@
+{% load humanize %}
+{% if  brands %}
+    <section class="popular-listing py-4  section-popular-listings">
+        <div class="container">
+            <div class="row align-items-center justify-content-between panel__cardhead">
+                <div class="pannel__headtitle">
+                    <h2>Top Car Brands</h2>
+                </div>
+                <div class="nav nav-tabs">
+                    <li class="nav-item"><button id="pannelPrevBrands" class="nav-link btnArrows mr-1"> <i class="fa fa-angle-left"></i> </button></li>
+                    <li class="nav-item"><button id="pannelNextBrands" class="btnArrows nav-link"> <i class="fa fa-angle-right"></i></button></li>
+                </div>
+            </div>
+                
+            <div id="panel__responsiveBrands" class="row panel__responsive panel__cardbody align-items-center">
+                {% for list in brands %}
+                <div class="mx-3">
+                    <div class="card text-center listing__card brand-card">
+                        <div class="brand-img">
+                            <img src="{{ list.imageURL }}" alt="{{ list.name }}" class="img-fluid">
+                        </div>
+                        <div class="brand-title">
+                            <a href="{{list.get_absolute_url}}">{{ list.name }}</a>
+                        </div>
+                        <a href="{{list.get_absolute_url}}" title="{{ list.name }}" class="ext-link" tabindex="0"></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row align-items-center justify-content-center panel__cardfooter">
+                <a href="{% url 'cars:brands' %}" class="btn btn-see-more">view all brands</a>
+            </div> 
+        </div>
+    </section>
+    <script>$(document).ready(function() {"use strict";$('#panel__responsiveBrands').slick({autoplay: true,autoplaySpeed: 2000,dots: false,infinite: true,speed: 300,slidesToShow: 7,slidesToScroll: 7,prevArrow: $('#pannelPrevBrands'),nextArrow: $('#pannelNextBrands'),responsive: [{breakpoint: 1024,settings: {slidesToShow: 3,slidesToScroll: 3,infinite: true,dots: true}},{breakpoint: 754,settings: {slidesToShow: 2,slidesToScroll: 2}},{breakpoint: 480,settings: {slidesToShow: 1,slidesToScroll: 1}}]});})</script>
+{% endif %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %} 
+{% load static %}
+{% block head_title %}{% endblock %}
+{% block content %}
+
+   
+<section class="banner-partial" style="background-image: url({% static 'img/about/carousel-4.jpg' %});">
+    <div class="container">
+        <di class="row">
+            <div class="col-md-11 mx-auto">
+                <div class="title-sec">
+                    <h2>Find your dream car with us.</h2>
+                    <p>Best automobile market hub in Ghana.</p>
+                </div>
+            </div>
+        </di>
+    </div>
+</section> 
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-12 mb-3">
+            <h3 class="h2">All Car Brands </h3>
+        </div>
+    </div>
+    <div class="row">
+        {% for list in lists%}
+        <div class="col-3 col-sm-2 ">
+            <div class="brand-card text-center card">
+                <div class="brand-img">
+                    <img src="{{list.imageURL}}" alt="" class="img-fluid">
+                </div>
+                <div class=" brand-title">
+                    <a href="{{list.get_absolute_url}}">{{ list.name }}</a>
+                </div>
+                <a href="{{list.get_absolute_url}}" title="{{ list.name }}" class="ext-link" tabindex="0"></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>  
+
+{% include "includes/index/car-brands.html" %}
+{% endblock %}

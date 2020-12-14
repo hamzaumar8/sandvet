@@ -1,7 +1,9 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from property.models import Property, LandProperty
-from .forms import PropertyForm, PropertyLandForm
+from .forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm
+from cars.models import CarImage, Car
 # Create your views here.
 def gen_asset_id(moduleName):
     moduleInstance = moduleName.objects.last()
@@ -30,8 +32,7 @@ def propertyPage(request):
 
 
 
-def PropertAddPage(request):
-
+def PropertyAddPage(request):
     propertyForm = PropertyForm()
     propertyLandForm = PropertyLandForm()
        
@@ -54,7 +55,6 @@ def ajaxPropertyLandAdd(request):
         propland_form = PropertyLandForm(request.POST, request.FILES)
         if form.is_valid() and propland_form.is_valid():
             
-            region = propland_form.cleaned_data['region']
             locality = propland_form.cleaned_data['locality']
             location = propland_form.cleaned_data['location']
 
@@ -63,7 +63,6 @@ def ajaxPropertyLandAdd(request):
 
             propland_obj = LandProperty.objects.create(
                 property=prop,
-                region=region, 
                 locality=locality, 
                 location=location, 
             )
@@ -80,3 +79,36 @@ def ajaxPropertyLandAdd(request):
     return JsonResponse({}, status=400)
 
 
+
+
+def CarPage(request):
+    car_lists = Car.objects.order_by('-id')
+    context = {
+        'dash_title': 'Cars',
+        'car_lists': car_lists
+    }
+    return render(request, 'dashboard/car.html', context)
+
+
+def CarAddPage(request):
+    form = CarForm()
+    image_form = CarImagesForm()
+    if request.method == "POST":
+        form = CarForm(request.POST, request.FILES)
+        img_form = CarImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = CarImage(car=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Car  been Added succesfully')
+            return redirect('dashboard:car')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Add Car',
+        "form": form,
+        "image_form": image_form
+    }
+    return render(request, "dashboard/add-car.html", context)

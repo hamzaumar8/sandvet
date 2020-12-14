@@ -16,6 +16,8 @@
          <link href="{% static 'dashboard/libs/datatables/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
          <link href="{% static 'dashboard/libs/datatables/buttons.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
          <link href="{% static 'dashboard/libs/datatables/select.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />   
+         <!-- Plugins css -->
+        <link href="{% static 'dashboard/libs/dropzone/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
         {% block extra_head %} {% endblock %}
         <!-- App css -->
         <link href="{% static 'dashboard/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
@@ -109,6 +111,9 @@
                             </li>
                             <li class="has-submenu">
                                 <a href="{% url 'dashboard:property' %}"><i class="fe-airplay"></i>Properties</a>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="{% url 'dashboard:car' %}"><i class="fe-airplay"></i>Cars</a>
                             </li>
                             <li class="has-submenu">
                                 <a href="layouts-menubar-light.html#">
@@ -283,7 +288,8 @@
                             <h4 class="page-title">{{ dash_title }}</h4>
                         </div>
                     </div>
-                </div>     
+                </div>   
+                {% include "includes/messages.html" %}  
                 <!-- end page title --> 
                 {% block content %}{% endblock %}
     <!-- end row --> 
@@ -343,8 +349,19 @@
          <script src="{% static 'dashboard/js/pages/datatables.init.js' %}"></script>        
          
          <script src="{% static 'dashboard/js/jquery.validate.min.js' %}"></script>
+          <!-- Plugins js -->
+        <script src="{% static 'dashboard/libs/dropzone/dropzone.min.js' %}"></script>
          <!-- App js -->
          <script src="{% static 'dashboard/js/app.min.js' %}"></script>
+        
+         <script src="{% static 'dashboard/js/jscolor.js' %}"></script>
+
+<script>
+jscolor.presets.default = {
+	format:'any', previewSize:0
+};
+</script>
+
 
         {% block extra_body %}{% endblock %}
     </body>

@@ -393,16 +393,18 @@
   
   .header__social a,
   .header__address a {
+    position: relative;
     display: inline-block;
     color: #fff;
-    border-right: 1px solid #fff;
     transition: all 0.4s linear;
   }
-  .header__social a:last-child,
-  .header__address a:last-child {
-    border-right: none !important;
-    color: red;
+  .header__address a {
+    border-right: 1px solid #eee;
   }
+  .header__contact{
+    border-right: none !important;
+  }
+  
   .header__social li a.dropdown-item {
     color: #242526 !important;
     display: block;
@@ -1718,6 +1720,34 @@
     position: relative;
     background-color: #fff;
   }
+
+  .panel__cardfooter {
+    position: relative;
+    background-color: #fff;
+    padding: .5rem 1rem 1rem;
+    border: 0;
+  }
+  .btn-see-more{
+    background-color: #fff;
+    border: 1px solid var(--colorPrimary);
+    color: var(--colorPrimary);
+    font-weight: 600;
+    border-radius: 35px;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .btn-see-more:hover{
+    background-color: var(--colorPrimary);
+    color: #fff;
+  }
+  .panel__cardfooter:after {
+    position: absolute;
+    width: calc(100% - 2rem);
+    height: 1px;
+    background-color: #dfe0e5;
+    content: "";
+    top: 0;
+  }
   
   .banner-carousel .slick-slide .banner-slide,
   .banner-carousel .slick-slide > div:not(.banner_text),
@@ -2580,4 +2610,29 @@ object-position: center; */
 }
 .similar-listings-posts .listing__card{
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.05);
+}
+
+.card__full i{
+  color: var(--colorPrimary);
+}
+.brand-card{
+  position: relative;
+  padding: .5rem !important;
+  margin-bottom: 1rem;
+}
+
+.brand-img{
+  min-height: 140px;
+  height: 140px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+
+.brand-title a{
+  color: var(--colorSndSecondary);
+  text-transform: capitalize;
+  font-weight: 500;
+  font-size: 16px;
 }

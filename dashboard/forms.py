@@ -1,5 +1,6 @@
 from django import forms
 from property import models as propsModel
+from cars import models as carModel
 
 
 
@@ -31,6 +32,7 @@ class PropertyForm(forms.ModelForm):
             'title', 
             'category', 
             'purpose',
+            'region',
             'price', 
             'image',
             'description',
@@ -63,7 +65,6 @@ class PropertyLandForm(forms.ModelForm):
     class Meta:
         model = propsModel.LandProperty
         fields = [
-            'region', 
             'locality',
             'location', 
             'dimension',
@@ -73,6 +74,69 @@ class PropertyLandForm(forms.ModelForm):
 
 
 
+
+class CarForm(forms.ModelForm): 
+
+    year = forms.TypedChoiceField(coerce=int, choices=carModel.year_choices, initial=carModel.current_year)
+
+    title =  forms.CharField(
+        required = True,
+        label='Title',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'eg: 2019 toyota corola'
+            }
+        )
+    )
+
+    
+    def __init__(self, *args, **kwargs):
+        super(CarForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            }) 
+
+            
+    class Meta:
+        model = carModel.Car
+        fields = [
+            'title', 
+            'price', 
+            'region',
+            'brand', 
+            'int_color',
+            'ext_color',
+            'mileage',
+            # 'body_type',
+            'fuel_type',
+            'gearbox',
+            'year',
+            'image',
+            'description',
+        ]
+
+
+
+class CarImagesForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CarImagesForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+
+    images =  forms.CharField(
+        required = True,
+        label='Car Images',
+        widget=forms.ClearableFileInput(
+            attrs={'multiple': True}
+        )
+    ) 
+    class Meta:
+        model = carModel.CarImage
+        fields = ['images']
+        
 # class AssetVehicleForm(forms.ModelForm): 
     
 #     vehicle_type = forms.ModelChoiceField(

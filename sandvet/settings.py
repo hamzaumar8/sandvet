@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     "widget_tweaks",
     'django_filters',
+    'colorfield',
 
     'core',
     'accounts',
