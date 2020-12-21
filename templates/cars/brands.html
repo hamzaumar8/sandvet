@@ -23,7 +23,7 @@
             <h3 class="h2">All Car Brands </h3>
         </div>
     </div>
-    <div class="row">
+    <div class="row mb-5">
         {% for list in lists%}
         <div class="col-3 col-sm-2 ">
             <div class="brand-card text-center card">
@@ -38,7 +38,40 @@
         </div>
         {% endfor %}
     </div>
+    {%if car_list %}
+    <div class="row">
+        <div class="similar-listings-posts clearfix my-2 px-3">
+            <h3 class="col-12 mb-2">Latest Car Listing </h3>
+            <div class="list-products">
+                <div class="row">
+                    {%for list in car_list %}
+                        <div class="col-lg-3 col-md-4 cars">                    
+                            {% include 'cars/car-list.html' %}
+                        </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if property_list %}
+    <div class="row">
+        <div class="similar-listings-posts clearfix my-2 px-3">
+            <div class="col-12 mb-2"><h3>Latest Property Listings</h3></div>
+            <div class="list-products">
+                <div class="row">
+                    {%for list in property_list %}
+                    <div class="col-lg-3 col-md-4">
+                        {% include 'includes/list.html' %}
+                    </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
 </div>  
 
-{% include "includes/index/car-brands.html" %}
+
 {% endblock %}

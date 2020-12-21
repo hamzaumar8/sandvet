@@ -1,0 +1,27 @@
+{% load static %}
+{% load humanize %}
+<div class="card listing__card">
+    <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
+        <div class="card__imgBlock">
+            <div class="overlay"></div>
+            <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
+            <div class="card__rateInfo">
+                <h5>&cent; {{ list.price|floatformat:2|intcomma }}</h5>
+                <span class="purpose-for-rent">{{ list.condition }}</span>
+            </div>
+        </div>
+    </a>
+    <div class="card__full">
+        <div class="card__body">
+            <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
+                <h3>{{ list.title }}</h3>
+                <p>
+                    <i class="fa fa-map-marker"></i>
+                    {{ list.address }} , {{ list.region }} Region
+                </p>
+            </a>
+        </div>
+        <!-- <div class="card__footer"></div> -->
+    </div>
+    <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="ext-link"></a>
+</div>

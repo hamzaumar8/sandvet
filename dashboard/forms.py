@@ -105,16 +105,23 @@ class CarForm(forms.ModelForm):
             'price', 
             'region',
             'brand', 
-            'int_color',
-            'ext_color',
-            'mileage',
-            # 'body_type',
+            'car_type',
             'fuel_type',
             'gearbox',
+            'mileage',
+            'int_color',
+            'ext_color',
             'year',
+            'engine',
+            'drive_type',
+            'car_state',
+            'air_con',
+            'purpose',
             'image',
             'description',
         ]
+
+
 
 
 
@@ -127,7 +134,7 @@ class CarImagesForm(forms.ModelForm):
             })
 
     images =  forms.CharField(
-        required = True,
+        required = False,
         label='Car Images',
         widget=forms.ClearableFileInput(
             attrs={'multiple': True}
@@ -136,6 +143,29 @@ class CarImagesForm(forms.ModelForm):
     class Meta:
         model = carModel.CarImage
         fields = ['images']
+        
+class BrandForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(BrandForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = carModel.Brand
+        fields = ['name', 'image']
+
+
+class TypeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(TypeForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = carModel.Type
+        fields = ['name',]
         
 # class AssetVehicleForm(forms.ModelForm): 
     

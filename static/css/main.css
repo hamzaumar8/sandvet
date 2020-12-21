@@ -274,7 +274,6 @@
   }
   
   main .form__wrapper {
-    background-color: #fff;
     min-height: 100vh;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -327,7 +326,7 @@
     opacity: 1;
     z-index: 5;
     position: relative;
-    box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
+    box-shadow: 0 7px 10px rgba(0,0,0,.08);
   }
   
   .form__head {
@@ -335,11 +334,7 @@
     color: #fff;
     font-size: 18px;
     font-weight: 500;
-    background-color: var(--colorSndSecondary);
     padding: 18px 0 18px 0;
-  }
-  .form__head h3{
-    color: #fff;
   }
   .form__content {
     width: 100%;
@@ -1137,7 +1132,9 @@
     float: left;
     width: 100%;
   }
-  
+  .thumb-img .property-img  {
+    max-height: 100px;
+  }
   .property-img > img {
     width: 100%;
     float: left;
@@ -1183,7 +1180,7 @@
     font-size: 18px;
     text-transform: uppercase;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 5px;
     letter-spacing: 1px;
   }
   
@@ -2485,6 +2482,13 @@ object-position: center; */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+}
+.banner-brands{
+  padding: 4rem 7rem !important;
+}
+.banner-brands .title-sec p{
+  opacity: 1;
+  font-size: 30px;
 }
 
 .banner-partial::before{

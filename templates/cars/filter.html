@@ -1,0 +1,26 @@
+{% load crispy_forms_tags %} 
+<div class="col-md-3">
+    <div class="py-3 filter-sec">
+        <div class="d-flex align-items-center justify-content-between panel__cardhead">
+            <div><h3>Fliter</h3></div>
+            <div class="view-change"></div>
+        </div>
+        <!--list-head end-->
+        <div class="listings panel__cardbody d-flex">
+            <div class="list_products col-12 m-0 p-0">
+                <form action="{% url 'cars:cars' %}" class="">
+                    <div class="row">
+                        {% for field in sidefilter.form %}
+                        <div class="col-12">
+                            {{ field|as_crispy_field }}
+                        </div>
+                        {% endfor %}
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary col-12">Filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>     
+</div>  

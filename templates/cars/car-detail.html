@@ -32,6 +32,7 @@
                                                 <div class="rate-info">
                                                     <h5>&cent; {{ object.price|floatformat:2 }}</h5>
                                                     <span class="purpose-for-sale">For Sale</span>
+                                                    <p><i class="fa fa-eye"></i> {{ object.views }} views on this post</p>
                                                 </div><!--rate-info end-->
                                             </div>
                                         </div>
@@ -184,27 +185,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {% if brand_lists %}
                                     <div class="similar-listings-posts clearfix">
                                         <h3 class="col-12">Buy Similar {{object.brand}} cars </h3>
                                         <div class="list-products">
                                             <div class="row">
-
                                                 {%for list in brand_lists %}
-                                                {% include 'cars/car-list.html' %}
+                                                    <div class="col-lg-4 col-md-6">
+                                                        {% include 'cars/car-list.html' %}
+                                                    </div>
                                                 {%endfor%}
                                             </div>
                                         </div>
                                     </div>
+                                    {% endif %}
+                                    {% if region_list %}
                                     <div class="similar-listings-posts clearfix">
                                         <h3 class="col-12">Buy cars in {{object.region}} region </h3>
                                         <div class="list-products">
                                             <div class="row">
                                                 {%for list in region_list %}
-                                                {% include 'cars/car-list.html' %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'cars/car-list.html' %}
+                                                    </div>
                                                 {%endfor%}
                                             </div>
                                         </div>
                                     </div>
+                                    {% endif %}
                                     <div class="similar-listings-posts clearfix">
                                         <h3 class="col-12">Buy Property in {{object.region}} region</h3>
                                         <div class="list-products">

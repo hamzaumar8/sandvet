@@ -1,0 +1,45 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'dashboard:add-type' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-plus mr-1"></i> New  Car Types</a>
+                <table id="key-datatable" class="table dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <th>name</th>
+                            <th>Entry Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for type in types %}
+                        <tr>
+                            <td>{{ type.id }}</td>
+                            <td>{{ type.name }}</td>
+                            <td>{{ type.created_at|date:"d- m-Y" }}</td>
+                            <td>
+                                <div class="btn-group dropdown">
+                                    <a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'dashboard:edit-type' id=type.id%}"><i class="mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
+                                        <a class="dropdown-item" href="{% url 'dashboard:delete-type' id=type.id%}"><i class="mdi mdi-delete mr-1 text-muted"></i>Delete</a>
+                                     </div>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div> 
+        </div> 
+    </div>
+</div>
+{% endblock %}
+        
+
+                

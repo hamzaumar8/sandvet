@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %} 
+{% load static %}
+{% block head_title %}{% endblock %}
+{% block content %}
+
+<section class="banner-partial banner-brands" style="background-image: url({% static 'img/about/carousel-4.jpg' %});">
+    <div class="container">
+        <di class="row">
+            <div class="col-md-11 mx-auto">
+                <div class="title-sec">
+                    <p>Best automobile market hub in Ghana.</p>
+                    <div class="col-2 mx-auto">
+                        <img src="{{ obj_brands.imageURL }}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </di>
+    </div>
+</section> 
+    
+
+<div class="container mb-4">
+    <div class="row">
+        <div class="navigaiton card col-12">
+            <a class="navLinks" href="{% url 'core:index' %}">Home</a>
+            <a class="navLinks" href="{% url 'cars:cars' %}" >Cars</a>
+            <a class="navLinks" href="{% url 'cars:brands' %}" >Brands</a>
+            <a class="navLinks">{{ obj_brands.name }}</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="similar-listings-posts clearfix">
+            <div class="col-12">
+                <div class="row">
+                    <h2 class="h2">{{ car_count }} {{obj_brands.name}} Car(s)</h2>
+                </div>
+            </div>
+            <div class="list-products">
+                <div class="row">
+                    {% for list in lists%}
+                        <div class="col-lg-3 col-md-4 cars"> 
+                            {% include 'cars/car-list.html' %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12">
+                {% include 'includes/pagination.html' %}
+            </div>
+        </div>
+        <div class="similar-listings-posts clearfix mt-3">
+            <div class="col-12"><div class="row"><h3>Latest Property listings</h3></div></div>
+            <div class="list-products">
+                <div class="row">
+                    {%for list in property_list %}
+                        <div class="col-lg-3 col-md-4">
+                            {% include 'includes/list.html' %}
+                        </div>
+                    {%endfor%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+{% endblock %}

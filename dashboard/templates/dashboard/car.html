@@ -14,6 +14,8 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Purpose</th>
+                            <th>Type</th>
+                            <th>featured</th>
                             <th>Entry date</th>
                             <th></th>
                         </tr>
@@ -25,15 +27,23 @@
                             <td>{{ car.title }}</td>
                             <td>{{ car.brand.name }}</td>
                             <td>&cent; {{ car.price }}</td>
-                            <td>{{ car.body_type }}</td>
+                            <td>{{ car.purpose }}</td>
+                            <td>{{ car.car_type.name }}</td>
+                            <th>
+                                {% if car.featured == 1 %}
+                                <a href="{% url 'dashboard:featured-car' id=car.id%}" class="btn btn-sm btn-danger">remove</a>
+                                {% else %}
+                                <a href="{% url 'dashboard:featured-car' id=car.id%}" class="btn btn-sm btn-primary">add</a>
+                                {% endif %}
+                            </th>
                             <td>{{ car.created_at|date:"d- m-Y" }}</td>
                             <td>
                                 <div class="btn-group dropdown">
                                     <a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="index.html#"><i class="mdi mdi-eye mr-1 text-muted"></i>View</a>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
-                                        <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-1 text-muted"></i>Delete</a>
+                                        <a class="dropdown-item" href="{% url 'dashboard:view-car' id=car.id%}"><i class="mdi mdi-eye mr-1 text-muted"></i>View</a>
+                                        <a class="dropdown-item" href="{% url 'dashboard:edit-car' id=car.id%}"><i class="mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
+                                        <a class="dropdown-item" href="{% url 'dashboard:delete-car' id=car.id%}"><i class="mdi mdi-delete mr-1 text-muted"></i>Delete</a>
                                     </div>
                                 </div>
                             </td>

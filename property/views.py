@@ -126,8 +126,7 @@ class CategoryForSaleListView(ListView):
         self.region = Region.objects.all()
 
         self.cate = get_object_or_404(Category, title=self.kwargs.get('category'))
-        queryset = self.model.objects.filter(category=self.cate, purpose="sale")
-        return queryset.order_by('-id')
+        return self.model.objects.filter(category=self.cate, purpose="sale").order_by('-id')
 
 
 class CategoryForRentListView(ListView):

@@ -3,7 +3,7 @@ from django.db import models
 from django.shortcuts import reverse
 from autoslug import AutoSlugField
 from autoslug.settings import slugify as default_slugify
-from core.models import Region, Locality
+from core.models import  Locality, REGIONS_LIST
 # Create your models here.
 
 def custom_slugify(value):
@@ -11,24 +11,7 @@ def custom_slugify(value):
 
 
 # Create your models here.
-REGIONS_LIST = (
-    ('ashanti', 'Ashanti'),
-    ('ahafo', 'Ahafo'),
-    ('brong-ahafo', 'Brong Ahafo'),
-    ('bono-east', 'Bono East '),
-    ('central', 'Central'),
-    ('eastern', 'Eastern'),
-    ('greater-accra', 'Greater Accra'),
-    ('northern', 'Northern'),
-    ('savannah', 'Savannah'), 
-    ('north-east', 'North East'), 
-    ('upper-east', 'Upper East'),
-    ('upper-west', 'Upper West'),
-    ('volta', 'Volta'),
-    ('oti', 'Oti Region'),
-    ('werstern', 'Western'),
-    ('werstern-north', 'Western North'),
-)
+
 
 PROPERTY_PURPOSE_TYPE = [
     ('sale', 'sale'),

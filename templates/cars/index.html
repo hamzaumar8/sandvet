@@ -4,36 +4,36 @@
 {% block head_title %}{% endblock %}
 {% block content %}
 
-    
-    
-
-<div class="container mb-4">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="py-3 filter-sec">
-                <div class="d-flex align-items-center justify-content-between panel__cardhead">
-                    <div><h3>Fliter</h3></div>
-                    <div class="view-change"></div>
-                </div>
-                <!--list-head end-->
-                <div class="listings panel__cardbody d-flex">
-                    <div class="list_products col-12 m-0 p-0">
+<!-- <section class="banner-partial banner-brands" style="background-image: url({% static 'img/about/carousel-4.jpg' %});">
+    <div class="container">
+        <di class="row">
+            <div class="col-md-11 mx-auto">
+                <div class="title-sec">
+                    <p>Best automobile market hub in Ghana.</p>
+                    <div class="widget-property-search card mt-3">
                         <form action="{% url 'cars:cars' %}" class="">
                             <div class="row">
-                                {% for field in sidefilter.form %}
-                                <div class="col-12">
+                                {% for field in  sidefilter.form %}
+                                <div class="col-md-3">
                                     {{ field|as_crispy_field }}
                                 </div>
                                 {% endfor %}
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary col-12">Filter</button>
+                                    <button type="submit" class="btn btn-primary ">search</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div>     
-        </div>  
+            </div>
+        </di>
+    </div>
+</section>  -->
+    
+
+<div class="container mb-4">
+    <div class="row">
+        {% include 'cars/filter.html' %}
         <div class=" col-md-9">
             <div class="listing-directs py-3 row"> 
                 <div class="col-md-12">
@@ -55,7 +55,9 @@
                             <div class="list_products col-12 m-0 p-0">
                                 <div class="row">
                                     {% for list in lists%}
+                                    <div class="col-lg-4 col-md-6 cars"> 
                                         {% include 'cars/car-list.html' %}
+                                        </div>
                                     {% endfor %}
                                 </div>
                             </div>

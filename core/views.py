@@ -38,8 +38,8 @@ class IndexPageView(ListView):
         kwargs['region_list'] = Region.objects.all()
 
         kwargs['testimonys'] = Testimony.objects.all()
-        kwargs['brands'] = Brand.objects.order_by('-id')[:12]
-        kwargs['cars'] = Car.objects.order_by('-id')[:12]
+        kwargs['brands'] = Brand.objects.filter(featured=1).order_by('-id')[:12]
+        kwargs['cars'] = Car.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['carfilter'] = CarFilter(self.request.GET, queryset= self.model.objects.all()) 
         kwargs['filter'] = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
         kwargs['subscription_form'] = SubscriptionForm()

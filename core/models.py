@@ -2,6 +2,25 @@ from django.db import models
 from django.shortcuts import reverse
 # Create your models here.
 
+REGIONS_LIST = (
+    ('ashanti', 'Ashanti'),
+    ('ahafo', 'Ahafo'),
+    ('brong-ahafo', 'Brong Ahafo'),
+    ('bono-east', 'Bono East '),
+    ('central', 'Central'),
+    ('eastern', 'Eastern'),
+    ('greater-accra', 'Greater Accra'),
+    ('northern', 'Northern'),
+    ('savannah', 'Savannah'), 
+    ('north-east', 'North East'), 
+    ('upper-east', 'Upper East'),
+    ('upper-west', 'Upper West'),
+    ('volta', 'Volta'),
+    ('oti', 'Oti Region'),
+    ('werstern', 'Western'),
+    ('werstern-north', 'Western North'),
+)
+
 class Region(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     capital = models.CharField(max_length=200, null=True, blank=True)
@@ -19,8 +38,8 @@ class Region(models.Model):
     
    
 class Locality(models.Model):
-    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True, related_name='locality')
-    name = models.CharField(max_length=200, null=True, blank=True)
+    region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True, unique=True)
     class Meta:
         ordering = ['name']
 
