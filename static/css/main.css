@@ -742,6 +742,10 @@
     -o-transition: all 0.4s linear;
     transition: all 0.4s linear;
     will-change: all;
+    color: #fff;
+  }
+  .btn2:hover{
+    color: #fff !important;
   }
   
   .btn2:hover:after,
@@ -755,6 +759,7 @@
     -o-transition: all 0.4s linear;
     transition: all 0.4s linear;
     will-change: all;
+    color: #fff;
   }
   
   .listing__card:hover .card__imgBlock .overlay {
@@ -771,19 +776,21 @@
   
   .btn2 {
     float: left;
-    width: 100%;
     color: #ffffff;
     font-size: 14px;
-    height: 51px;
-    line-height: 51px;
+    height: 45px;
+    line-height: 45px;
     border-radius: 30px;
+    padding: 0 2rem;
     text-align: center;
     border: 0;
     cursor: pointer;
     position: relative;
-    /* z-index: 1; */
+    display: inline-block;
+    outline: none !important;
     overflow: hidden;
-    background-color: #5983fc;
+    text-transform: uppercase;
+    background-color: var(--colorPrimary);
   }
   
   .navbar-expand-lg .navbar-nav {
@@ -1003,7 +1010,9 @@
     border: 0;
     padding: 0;
   }
-  
+  .property-hd-sec h1.h3 {
+    text-transform: capitalize;
+  }
   .property-hd-sec .card .card-body h1 {
     font-size: 24px;
     margin-bottom: 2px;
@@ -1253,8 +1262,22 @@
   }
   
   .details-info.details-info-transparent {
-    background: white;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 2rem;
   }
+  .details-info.details-info-transparent .d-flex{
+    position: relative;
+    z-index: 99;
+  }
+  .details-info.details-info-transparent  h3{
+    color: #fff;
+    font-size: 20px;
+
+  }
+  
   
   .input-field > input[type="radio"],
   .input-field > input[type="checkbox"] {
@@ -1385,6 +1408,15 @@
     color: #67686c;
     border: 1px solid #dfe0e5;
     background-color: #fff;
+  }
+  .filter-sec .form-control{
+    font-size: 12px;
+    color: #67686c;
+    border:0;
+    background-color: #f0f3f8;
+    height: 40px;
+    padding: 0 12px;
+    width: 100%;
   }
   
   .form_subscription input,
@@ -1624,7 +1656,17 @@
   .listing__card.list .card__footer {
     border: 0;
   }
-  
+  .cars .listing__card .card__body {
+    padding: 10px 15px;
+    display: inline-block;
+    width: 100%;
+  }
+  .btn-enroll{
+    border-radius: 30px;
+    font-size: 12px;
+    padding: 5px 15px;
+    text-transform: capitalize;
+  }
   .listing__card .card__body {
     padding: 10px 15px 0;
   }
@@ -2491,6 +2533,7 @@ object-position: center; */
   font-size: 30px;
 }
 
+.details-info.details-info-transparent::before,
 .banner-partial::before{
   position: absolute;
   content: '';
@@ -2503,6 +2546,9 @@ object-position: center; */
   height: 100%;
   z-index: 1;
   opacity: .6;
+}
+.details-info.details-info-transparent::before{
+  opacity: .4;
 }
 .title-sec{
   position: relative;

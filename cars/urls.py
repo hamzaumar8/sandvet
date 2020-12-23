@@ -13,4 +13,6 @@ urlpatterns = [
     path('for-hire/', views.CarListHireView.as_view(), name='car-for-hire'),
     path('spare-parts/', views.SparePartListView.as_view(), name='spare-parts'),
     path('spare-part/<slug>/', views.SparePartDetail, name='spare-part-detail'),
+    path('driving-schools/', views.SchoolListView.as_view(), name='schools'),
+    path('driving-school/<slug>/', views.SchoolDetail, name='school-detail'),
 ]

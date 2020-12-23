@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from property.models import Property, LandProperty
-from .forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm
-from cars.models import CarImage, Car, Brand, Type
+from .forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm
+from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
 from .decorators import check_admin
 # Create your views here.
 def gen_asset_id(moduleName):
@@ -158,7 +158,7 @@ def CarEditPage(request, *args, **kwargs):
         else:
             print(form.errors)
     context = {
-        "dash_title": 'Add Car',
+        "dash_title": 'Edit Car',
         "form": form,
         "image_form": image_form,
         "images": images
@@ -350,3 +350,229 @@ def DeleteType(request, *args, **kwargs):
     get_object_or_404(Type, pk=kwargs["id"]).delete()
     messages.success(request, "Car Type deleted successfully")
     return redirect(reverse("dashboard:types"))
+
+
+
+
+
+
+@login_required
+@check_admin
+def SparePartPage(request):
+    spareparts = SparePart.objects.order_by('-id')
+    context = {
+        'dash_title': 'Spare Part',
+        'spareparts': spareparts
+    }
+    return render(request, 'dashboard/spare-parts.html', context)
+
+
+
+
+@login_required
+@check_admin
+def SparePartAddPage(request):
+    form = SparePartForm()
+    image_form = SparePartImagesForm()
+    if request.method == "POST":
+        form = SparePartForm(request.POST, request.FILES)
+        img_form = SparePartImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = SparePartImage(sparepart=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Spare Part  been Added succesfully')
+            return redirect('dashboard:spare-parts')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Add Spare Part',
+        "form": form,
+        "image_form": image_form
+    }
+    return render(request, "dashboard/add-spare-part.html", context)
+
+
+
+
+
+@login_required
+@check_admin
+def SparePartEditPage(request, *args, **kwargs):
+    sparepart = get_object_or_404(SparePart, pk=kwargs["id"])
+    images = sparepart.sparepartimages.order_by('-id')
+    form = SparePartForm(instance=sparepart)
+    image_form = SparePartImagesForm()
+    if request.method == "POST":
+        form = SparePartForm(request.POST, request.FILES, instance=sparepart)
+        img_form = SparePartImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = SparePartImage(sparepart=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Spare Part  been updated succesfully')
+            return redirect('dashboard:spare-parts')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Edit Spare Part',
+        "form": form,
+        "image_form": image_form,
+        "images": images
+    }
+    return render(request, "dashboard/edit-car.html", context)
+
+
+
+@login_required
+@check_admin
+def FeaturedSparePart(request, *args, **kwargs):
+    sparepart = get_object_or_404(SparePart, pk=kwargs["id"])
+    sparepart_qs = SparePart.objects.filter(id=sparepart.id)
+    if sparepart.featured == 1:
+        sparepart_qs.update(featured=0)
+    else:
+        sparepart_qs.update(featured=1)
+    messages.success(request, "updated successfully")
+    return redirect('dashboard:spare-parts')
+
+
+@login_required
+@check_admin
+def ViewSparePart(request, *args, **kwargs):
+    sparepart = get_object_or_404(SparePart, pk=kwargs["id"])
+    images = sparepart.sparepartimages.order_by('-id')
+    context = {
+        "sparepart": sparepart,
+        "images": images
+    }
+    return render(request, "dashboard/view-spare-part.html", context)
+
+
+@login_required
+@check_admin
+def DeleteSparePart(request, *args, **kwargs):
+    get_object_or_404(SparePart, pk=kwargs["id"]).delete()
+    messages.success(request, "Spare Part deleted successfully")
+    return redirect(reverse("dashboard:spare-parts"))
+
+
+
+
+@login_required
+@check_admin
+def SchoolPage(request):
+    schools = School.objects.order_by('-id')
+    context = {
+        'dash_title': 'Driving Schools',
+        'schools': schools
+    }
+    return render(request, 'dashboard/schools.html', context)
+
+
+
+
+@login_required
+@check_admin
+def SchoolAddPage(request):
+    form = SchoolForm()
+    image_form = SchoolImagesForm()
+    if request.method == "POST":
+        form = SchoolForm(request.POST, request.FILES)
+        img_form = SchoolImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = SchoolImage(school=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Driving School  been Added succesfully')
+            return redirect('dashboard:schools')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Add Driving School',
+        "form": form,
+        "image_form": image_form
+    }
+    return render(request, "dashboard/add-school.html", context)
+
+
+
+
+
+@login_required
+@check_admin
+def SchoolEditPage(request, *args, **kwargs):
+    school = get_object_or_404(School, pk=kwargs["id"])
+    images = school.schoolimage.order_by('-id')
+    form = SchoolForm(instance=school)
+    image_form = SchoolImagesForm()
+    if request.method == "POST":
+        form = SchoolForm(request.POST, request.FILES, instance=school)
+        img_form = SchoolImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = SchoolImage(school=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Driving School  been updated succesfully')
+            return redirect('dashboard:schools')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Edit Driving School',
+        "form": form,
+        "image_form": image_form,
+        "images": images
+    }
+    return render(request, "dashboard/edit-school.html", context)
+
+
+
+@login_required
+@check_admin
+def FeaturedSchool(request, *args, **kwargs):
+    school = get_object_or_404(School, pk=kwargs["id"])
+    school_qs = school.objects.filter(id=school.id)
+    if school.featured == 1:
+        school_qs.update(featured=0)
+    else:
+        school_qs.update(featured=1)
+    messages.success(request, "Updated successfully")
+    return redirect('dashboard:schools')
+
+
+@login_required
+@check_admin
+def ViewSchool(request, *args, **kwargs):
+    school = get_object_or_404(School, pk=kwargs["id"])
+    images = school.schoolimages.order_by('-id')
+    context = {
+        "school": school,
+        "images": images
+    }
+    return render(request, "dashboard/view-spare-part.html", context)
+
+
+@login_required
+@check_admin
+def DeleteSchool(request, *args, **kwargs):
+    get_object_or_404(School, pk=kwargs["id"]).delete()
+    messages.success(request, "Driving School deleted successfully")
+    return redirect(reverse("dashboard:schools"))
+
+
+
+
+@login_required
+@check_admin
+def DeleteSchoolImage(request, *args, **kwargs):
+    get_object_or_404(SchoolImage, pk=kwargs["id"]).delete()
+    messages.success(request, "Image deleted successfully")
+    return HttpResponseRedirect(request.path_info)

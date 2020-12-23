@@ -166,7 +166,73 @@ class TypeForm(forms.ModelForm):
     class Meta:
         model = carModel.Type
         fields = ['name',]
-        
+
+
+class SparePartForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SparePartForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = carModel.SparePart
+        fields = ['title', 'price', 'region', 'locality', 'condition', 'description','image']
+
+
+
+class SparePartImagesForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SparePartImagesForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+
+    images =  forms.CharField(
+        required = False,
+        label='Car Images',
+        widget=forms.ClearableFileInput(
+            attrs={'multiple': True}
+        )
+    ) 
+    class Meta:
+        model = carModel.SparePartImage
+        fields = ['images']
+
+
+class SchoolForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SchoolForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = carModel.School
+        fields = ['title', 'region', 'locality', 'description','image']
+
+
+
+class SchoolImagesForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SchoolImagesForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+
+    images =  forms.CharField(
+        required = False,
+        label='Car Images',
+        widget=forms.ClearableFileInput(
+            attrs={'multiple': True}
+        )
+    ) 
+    class Meta:
+        model = carModel.SchoolImage
+        fields = ['images']
+            
 # class AssetVehicleForm(forms.ModelForm): 
     
 #     vehicle_type = forms.ModelChoiceField(

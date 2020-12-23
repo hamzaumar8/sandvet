@@ -1,0 +1,74 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'dashboard:add-spare-part' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-plus mr-1"></i> New Spare Part</a>
+                <table id="key-datatable" class="table dt-responsive nowrap">
+                    <tbody>
+                        <tr>
+                            <td>ID</td>
+                            <td>{{ sparepart.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tite</td>
+                            <td>{{ sparepart.title }}</td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td>GH&cent; {{ car.price|floatformat:2|intcomma }}</td>
+                        </tr>
+                        <tr>
+                            <td>Locality</td>
+                            <td>{{ sparepart.locality.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Region</td>
+                            <td>{{ sparepart.region }} Region</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Condition</td>
+                            <td>{{ sparepart.condition }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-12 card">
+                        <p class="mb-0">Description</p>
+                        <p>{{ sparepart.description }} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        Spare Part Images
+                    </div>
+                    <div class="col-lg-3 col-md-6 ">
+                        <div class="card d-block">
+                            <img class="card-img-top img-fluid" src="{{sparepart.imageURL}}" alt="{{img.sparepart}}" class="img-fluid" style="max-height: 250px;">
+                        </div>
+                    </div>
+                    {% for img in images %}
+                    <div class="col-lg-3 col-md-6 ">
+                        <div class="card d-block">
+                            <img class="card-img-top img-fluid" src="{{img.imageURL}}" alt="{{img.sparepart}}" class="img-fluid" style="max-height: 250px;">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="{% url 'dashboard:edit-spare-part' id=sparepart.id%}"><i class="text-white mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
+                    <a class="btn btn-danger" href="{% url 'dashboard:delete-spare-part' id=sparepart.id%}"><i class="text-white mdi mdi-delete mr-1 text-muted"></i>Delete</a>
+                </div>
+            </div> 
+        </div> 
+    </div>
+</div>
+{% endblock %}
+        
+
+                

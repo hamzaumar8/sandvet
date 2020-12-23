@@ -197,9 +197,58 @@ class SparePart(models.Model):
 
 
 
-class SpareImage(models.Model):
-    sparepart = models.ForeignKey(Car, on_delete=models.CASCADE, null=True, blank=True)
+class SparePartImage(models.Model):
+    sparepart = models.ForeignKey(SparePart, on_delete=models.CASCADE, null=True, blank=True, related_name="sparepartimages")
     images = models.ImageField(null=True, blank=True, upload_to="cars/spareparts")
+
+    def __str__(self):
+        return self.sparepart.title
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.images.url 
+        except:
+            url = ''
+        return url
+
+
+
+
+
+
+class School(models.Model):
+    title = models.CharField(max_length=200,null=True)
+    region = models.CharField(max_length=20, choices=REGIONS_LIST, null=True, blank=True)
+    locality = models.ForeignKey(Locality, on_delete=models.SET_NULL, null=True, blank=True, related_name='schoollocality')
+    image = models.ImageField(upload_to='school/')
+    description = models.TextField(null=True, blank=False)
+    views = models.PositiveIntegerField(default=0)
+    featured = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = AutoSlugField(populate_from='title',unique_with='created_at__month',slugify=custom_slugify )
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url 
+        except:
+            url = ''
+        return url
+    
+    def get_absolute_url(self):
+        return reverse("cars:school-detail", kwargs={
+            'slug': self.slug
+        })
+
+
+    
+class SchoolImage(models.Model):
+    school = models.ForeignKey(School, on_delete=models.CASCADE, null=True, blank=True, related_name="schoolimage")
+    images = models.ImageField(null=True, blank=True, upload_to="cars/school")
 
     def __str__(self):
         return self.sparepart.title

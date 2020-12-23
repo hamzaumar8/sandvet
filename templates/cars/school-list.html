@@ -1,0 +1,27 @@
+{% load static %}
+{% load humanize %}
+<div class="card listing__card">
+    <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
+        <div class="card__imgBlock">
+            <div class="overlay"></div>
+            <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
+        </div>
+    </a>
+    <div class="card__full">
+        <div class="card__body">
+            <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
+                <h3>{{ list.title }}</h3>
+            </a>
+                <p>
+                    <i class="fa fa-map-marker"></i>
+                    {{ list.locality }} , {{ list.region }} Region
+                </p>
+                
+                <div class="mb-2 pull-right">
+                    <a href="{{ list.get_absolute_url }}" class="btn btn-enroll btn-primary btn-sm">enroll now</a>
+                </div>
+        </div>
+        <!-- <div class="card__footer"></div> -->
+    </div>
+    <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="ext-link"></a>
+</div>

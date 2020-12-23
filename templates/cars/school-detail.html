@@ -1,0 +1,208 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %} 
+{% block head_title %} {{ object.title }} {%endblock %} 
+{% block content%}
+<section class="property-single-pg mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="navigaiton card">
+					<a class="navLinks" href="{% url 'core:index' %}">Home</a>
+					<a class="navLinks" href="{% url 'cars:cars' %}" >Cars</a>
+					<a class="navLinks" href="{% url 'cars:schools' %}" >Driving Schools</a>
+					<a class="navLinks">{{ object.title }}</a>
+				</div>
+            </div>
+        </div>
+        <!---property-hd-sec end-->
+        <div class="property-single-page-content">
+            <div class="row">
+                <div class="col-lg-8 px-0 ">
+                    <div class="selio_sw_win_wrapper">
+                        <div class="ci sw_widget sw_wrap">
+                            <div class="bootstrap-wrapper" id="listing-preview">
+                                <div class="property-pg-left">
+                                    <div class="property-hd-sec descp-text col-12">
+                                        <div class="row justify-content-between">
+                                            <div class="col-d-10">
+                                                <h1 class="h3">{{ object.title }}</h1>
+                                                <p><i class="fa fa-map-marker"></i> {{object.locality}}, {{ object.region }} Region</p>
+                                            </div>
+                                            <div class="col-md2">
+                                                <div class="rate-info">
+                                                    <p class="mt-1"><i class="fa fa-eye"></i> {{ object.views }} views on this post </p>
+                                                    
+                                                </div><!--rate-info end-->
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row justify-content-between contact-agent p-0">
+                                            <div class="">
+                                                <span>
+                                                    <i class="fa fa-phone"></i>
+                                                    <a href="tell://+233554748768">
+                                                        +233 55 474 8768                
+                                                    </a>
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span><i class="fa fa-whatsapp"></i>
+                                                    <a href="https://wa.me/233507321204?text=Hello Sandvet, I am interested with your car listing {{ object.get_absolute_url }}.">
+                                                        +233 50 732 1204             
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="property-imgs">
+                                        <div class="property-main-img">
+                                            <!-- Slide 0 -->
+                                            <div class="property-img">
+                                                <img data-fullsrc="{{ object.imageURL }}" src="{{ object.imageURL }}" alt="{{ object.title }}">
+                                            </div><!--property-img end-->
+                                            <!-- Slide 1 -->
+                                            {% for carimg in carimages %}
+                                                <div class="property-img">
+                                                    <img data-fullsrc="{{ object.imageURL }}" src="{{ object.imageURL }}" alt="{{ object.title }}">
+                                                </div>
+                                            {%endfor%}
+                                        </div><!--property-main-img end-->
+                                        <div class="property-thumb-imgs">
+                                            <div class="row thumb-carous">
+                                                <!-- Slide 0 -->
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
+                                                    <div class="property-img">
+                                                        <img src="{{ object.imageURL }}" alt="{{ object.title }}">
+                                                    </div><!--property-img end-->
+                                                </div>
+                                                <!-- Slide 1 -->
+                                                {% for carimg in carimages %}
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
+                                                    <div class="property-img">
+                                                        <img src="{{ carimg.imageURL}}" alt="{{ object.title }}">
+                                                    </div><!--property-img end-->
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div><!--property-thumb-imgs end-->
+                                    </div><!--property-imgs end-->
+
+                                    
+
+                                    <div class="descp-text">
+                                        <h3>Description</h3>
+                                        <p>{{ object.description }}</p>
+                                    </div>
+                                    <div class="details-info  details-info-transparent" style="background-image: url({% static 'img/core/banner-car-parts1.jpg' %});">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h3 class="m-0">Make cool cash selling with us</h3>
+                                            <a href="#" class="btn2">Sell your car</a>
+                                        </div>
+                                    </div>
+                                    {% if spare_lists %}
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3 class="col-12">Buy Latest Spare Parts Instock </h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in spare_lists %}
+                                                    <div class="col-lg-4 col-md-6 cars">
+                                                        {% include 'cars/spare-list.html' %}
+                                                    </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if region_list %}
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3 class="col-12">Buy Spare Parts in {{object.region}} region </h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in region_list %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'cars/spare-list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if car_lists %}
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3 class="col-12">Buy Cars in {{object.region}} region</h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in car_lists %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'cars/car-list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if property_lists %}
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3 class="col-12">Buy Property in {{object.region}} region</h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in property_lists %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'includes/list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+
+                <div class="col-lg-4 pr-0">
+                    <div class="sidebar layout2">
+                        {% include 'details/agent-info.html'%}
+                        <div class="descp-text widget widget_sw_win_contactform_widget side"><h3 class="widget-title">Contact form</h3>
+                            <hr>
+                            <div class="selio_sw_win_wrapper">
+                                <div class="ci sw_widget sw_wrap">
+                                    <div class="contact-agent widget-form" id="form">
+                                        <form id="sw_contactform_sw_win_contactform_widget-1" method="post" action="#sw_contactform_sw_win_contactform_widget-1" class="box">
+                                            <div class="box-container widget-body">
+                                                <div class="form-field">
+                                                    <input class="" id="fullname_sw_win_contactform_widget-1" name="fullname" type="text" value="" placeholder="Full name">
+                                                </div>
+                                                <div class="form-field">
+                                                    <input class="" id="email_sw_win_contactform_widget-1" name="email" type="text" value="" placeholder="Your email">
+                                                </div>
+                                                <div class="form-field">
+                                                    <input class="" id="phone_sw_win_contactform_widget-1" name="phone" type="text" value="" placeholder="Phone number">
+                                                </div>
+                                                <div class="form-field">
+                                                    <input class="" id="subject_sw_win_contactform_widget-1" name="subject" type="text" value="" placeholder="Subject">
+                                                </div>
+                                                <div class="form-field">
+                                                    <textarea id="message_sw_win_contactform_widget-1" name="message" rows="4" class="" placeholder="Message"></textarea>
+                                                </div>
+                                                <div class="form-field">
+                                                    <button type="submit" class="btn2">Send</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% include 'includes/latest-listing.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{%endblock %}
