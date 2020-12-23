@@ -12,6 +12,7 @@
                             <td>ID</td>
                             <th>Title</th>
                             <th>Region</th>
+                            <th>Locality</th>
                             <th>Featured</th>
                             <th>Entry Date</th>
                             <th></th>
@@ -23,6 +24,7 @@
                             <td>{{ sparepart.id }}</td>
                             <td>{{ sparepart.title }}</td>
                             <td>{{ sparepart.region }}</td>
+                            <td>{{ sparepart.locality.name }}</td>
                             <td>
                                 {% if sparepart.featured == 1 %}
                                 <a href="{% url 'dashboard:featured-spare-part' id=sparepart.id%}" class="btn btn-sm btn-danger">remove</a>

@@ -13,6 +13,7 @@
                             <th>Title</th>
                             <th>Region</th>
                             <th>Locality</th>
+                            <th>Location</th>
                             <th>Featured</th>
                             <th>Entry Date</th>
                             <th></th>
@@ -25,6 +26,7 @@
                             <td>{{ school.title }}</td>
                             <td>{{ school.region }}</td>
                             <td>{{ school.locality }}</td>
+                            <td>{{ school.location }}</td>
                             <td>
                                 {% if school.featured == 1 %}
                                 <a href="{% url 'dashboard:featured-school' id=school.id%}" class="btn btn-sm btn-danger">remove</a>

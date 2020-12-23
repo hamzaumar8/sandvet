@@ -223,6 +223,7 @@ class School(models.Model):
     locality = models.ForeignKey(Locality, on_delete=models.SET_NULL, null=True, blank=True, related_name='schoollocality')
     image = models.ImageField(upload_to='school/')
     description = models.TextField(null=True, blank=False)
+    location = models.CharField(max_length=20, null=True, blank=True)
     views = models.PositiveIntegerField(default=0)
     featured = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

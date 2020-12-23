@@ -210,7 +210,7 @@ class SchoolForm(forms.ModelForm):
             })
     class Meta:
         model = carModel.School
-        fields = ['title', 'region', 'locality', 'description','image']
+        fields = ['title', 'region', 'locality', 'location', 'description','image']
 
 
 

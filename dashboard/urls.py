@@ -36,6 +36,7 @@ urlpatterns = [
     path('car/spare-part/<int:id>/view/', ViewSparePart, name='view-spare-part'),
     path('car/spare-part/<int:id>/featured/', FeaturedSparePart, name='featured-spare-part'),
     path('car/spare-part/<int:id>/delete/', DeleteSparePart, name='delete-spare-part'),
+    path('car/spare-part/image/<int:id>/delete/', DeleteSparePartImage, name='delete-sparepart-image'),
     
     # DRIVING SCHOOL
     path('car/driving-schools/', SchoolPage, name='schools'),

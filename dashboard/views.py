@@ -168,9 +168,11 @@ def CarEditPage(request, *args, **kwargs):
 @login_required
 @check_admin
 def DeleteCarImage(request, *args, **kwargs):
-    get_object_or_404(CarImage, pk=kwargs["id"]).delete()
+    carimg = get_object_or_404(CarImage, pk=kwargs["id"])
+    car = carimg.car
+    carimg.delete()
     messages.success(request, "Image deleted successfully")
-    return HttpResponseRedirect(request.path_info)
+    return redirect("dashboard:edit-car", id=car.pk)
 
 
 @login_required
@@ -424,7 +426,7 @@ def SparePartEditPage(request, *args, **kwargs):
         "image_form": image_form,
         "images": images
     }
-    return render(request, "dashboard/edit-car.html", context)
+    return render(request, "dashboard/edit-spare-part.html", context)
 
 
 
@@ -461,6 +463,14 @@ def DeleteSparePart(request, *args, **kwargs):
     return redirect(reverse("dashboard:spare-parts"))
 
 
+@login_required
+@check_admin
+def DeleteSparePartImage(request, *args, **kwargs):
+    spareimg = get_object_or_404(SparePartImage, pk=kwargs["id"])
+    sparepart = spareimg.sparepart
+    spareimg.delete()
+    messages.success(request, "Image deleted successfully")
+    return redirect("dashboard:edit-spare-part", id=sparepart.pk)
 
 
 @login_required
@@ -552,12 +562,12 @@ def FeaturedSchool(request, *args, **kwargs):
 @check_admin
 def ViewSchool(request, *args, **kwargs):
     school = get_object_or_404(School, pk=kwargs["id"])
-    images = school.schoolimages.order_by('-id')
+    images = school.schoolimage.order_by('-id')
     context = {
         "school": school,
         "images": images
     }
-    return render(request, "dashboard/view-spare-part.html", context)
+    return render(request, "dashboard/view-school.html", context)
 
 
 @login_required
@@ -573,6 +583,8 @@ def DeleteSchool(request, *args, **kwargs):
 @login_required
 @check_admin
 def DeleteSchoolImage(request, *args, **kwargs):
-    get_object_or_404(SchoolImage, pk=kwargs["id"]).delete()
+    schoolimg = get_object_or_404(SchoolImage, pk=kwargs["id"])
+    school = schoolimg.school
+    schoolimg.delete()
     messages.success(request, "Image deleted successfully")
-    return HttpResponseRedirect(request.path_info)
+    return redirect("dashboard:edit-school", id=school.pk)

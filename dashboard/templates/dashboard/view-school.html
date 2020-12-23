@@ -1,0 +1,74 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'dashboard:add-school' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-plus mr-1"></i> New School</a>
+                <table id="key-datatable" class="table dt-responsive nowrap">
+                    <tbody>
+                        <tr>
+                            <td>ID</td>
+                            <td>{{ school.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Title</td>
+                            <td>{{ school.title }}</td>
+                        </tr>
+                        <tr>
+                            <td>Region</td>
+                            <td>{{ school.region }}</td>
+                        </tr>
+                        <tr>
+                            <td>Locality</td>
+                            <td>{{ school.locality.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Location</td>
+                            <td>{{ school.location }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Timestamp</td>
+                            <td>{{ school.created_at }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-12 card">
+                        <p class="mb-0">Description</p>
+                        <p>{{ school.description }} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        Car Images
+                    </div>
+                    <div class="col-lg-3 col-md-6 ">
+                        <div class="card d-block">
+                            <img class="card-img-top img-fluid" src="{{school.imageURL}}" alt="{{img.car}}" class="img-fluid" style="max-height: 250px;">
+                        </div>
+                    </div>
+                    {% for img in images %}
+                    <div class="col-lg-3 col-md-6 ">
+                        <div class="card d-block">
+                            <img class="card-img-top img-fluid" src="{{img.imageURL}}" alt="{{img.car}}" class="img-fluid" style="max-height: 250px;">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="{% url 'dashboard:edit-school' id=school.id%}"><i class="text-white mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
+                    <a class="btn btn-danger" href="{% url 'dashboard:delete-school' id=school.id%}"><i class="text-white mdi mdi-delete mr-1 text-muted"></i>Delete</a>
+                </div>
+            </div> 
+        </div> 
+    </div>
+</div>
+{% endblock %}
+        
+
+                
