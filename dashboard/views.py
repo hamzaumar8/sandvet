@@ -549,7 +549,7 @@ def SchoolEditPage(request, *args, **kwargs):
 @check_admin
 def FeaturedSchool(request, *args, **kwargs):
     school = get_object_or_404(School, pk=kwargs["id"])
-    school_qs = school.objects.filter(id=school.id)
+    school_qs = School.objects.filter(id=school.id)
     if school.featured == 1:
         school_qs.update(featured=0)
     else:

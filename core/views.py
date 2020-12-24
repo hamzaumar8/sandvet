@@ -9,7 +9,7 @@ from property.filters import HomePropertFilter, PropertyFilter
 from .forms import SubscriptionForm
 from .models import Locality, Region
 from cars.filters import CarFilter
-from cars.models import Car, Brand
+from cars.models import Car, Brand, SparePart, School
 # Create your views here.
 
 def BaseView(request):
@@ -40,6 +40,8 @@ class IndexPageView(ListView):
         kwargs['testimonys'] = Testimony.objects.all()
         kwargs['brands'] = Brand.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['cars'] = Car.objects.filter(featured=1).order_by('-id')[:12]
+        kwargs['spareparts'] = SparePart.objects.filter(featured=1).order_by('-id')[:12]
+        kwargs['schools'] = School.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['carfilter'] = CarFilter(self.request.GET, queryset= self.model.objects.all()) 
         kwargs['filter'] = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
         kwargs['subscription_form'] = SubscriptionForm()

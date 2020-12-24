@@ -1,0 +1,54 @@
+{% load humanize %}
+{% if  schools %}
+    <section class="popular-listing py-4  section-popular-listings">
+        <div class="container">
+            <div class="row align-items-center justify-content-between panel__cardhead">
+                <div class="pannel__headtitle">
+                    <h2>available Driving schools</h2>
+                </div>
+                <div class="nav nav-tabs">
+                    <li class="nav-item"><button id="pannelPrevFeaturedSchools" class="nav-link btnArrows mr-1"> <i class="fa fa-angle-left"></i> </button></li>
+                    <li class="nav-item"><button id="pannelNextFeaturedSchools" class="btnArrows nav-link"> <i class="fa fa-angle-right"></i></button></li>
+                </div>
+            </div>
+                
+            <div id="panel__responsiveFeaturedSchools" class="row panel__responsive panel__cardbody">
+                {% for list in schools %}
+                <div class="mx-3">
+                    <div class="card listing__card">
+                        <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
+                            <div class="card__imgBlock">
+                                <div class="overlay"></div>
+                                <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
+                                <div class="card__rateInfo"></div>
+                            </div>
+                        </a>
+                        <div class="card__full">
+                            <div class="card__body">
+                                <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
+                                    <h3>{{ list.title }}</h3>
+                                    <p>
+                                        <i class="fa fa-map-marker"></i> {{ list.locality }}, {{ list.region }} Region
+                                    </p>
+                                </a>
+                                <div class="card__resultItems">
+                                    <span class="property-card-value">
+                                        <span class="field_name"></span><span class="item"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card__footer">
+                                <span class="favorites-actions">
+                                </span>
+                                <a href="#" title="" ><i class="fa fa-calendar-check-o"></i> {{ list.get_date }} </a>
+                            </div>
+                        </div>
+                        <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="ext-link"></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <script>$(document).ready(function() {"use strict";$('#panel__responsiveFeaturedSchools').slick({autoplay: true,autoplaySpeed: 2000,dots: false,infinite: true,speed: 300,slidesToShow: 4,slidesToScroll: 4,prevArrow: $('#pannelPrevFeaturedSchools'),nextArrow: $('#pannelNextFeaturedSchools'),responsive: [{breakpoint: 1024,settings: {slidesToShow: 3,slidesToScroll: 3,infinite: true,dots: true}},{breakpoint: 754,settings: {slidesToShow: 2,slidesToScroll: 2}},{breakpoint: 480,settings: {slidesToShow: 1,slidesToScroll: 1}}]});})</script>
+{% endif %}

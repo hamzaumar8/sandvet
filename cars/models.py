@@ -194,6 +194,17 @@ class SparePart(models.Model):
             'slug': self.slug
         })
 
+    def get_date(self):
+        time = datetime.now()
+        if self.created_at.day == time.day:
+            return str(time.hour - self.created_at.hour) + " hours ago"
+        else:
+            if self.created_at.month == time.month:
+                return str(time.day - self.created_at.day) + " days ago"
+            else:
+                if self.created_at.year == time.year:
+                    return str(time.month - self.created_at.month) + " months ago"
+        return self.created_at
 
 
 
@@ -244,7 +255,18 @@ class School(models.Model):
         return reverse("cars:school-detail", kwargs={
             'slug': self.slug
         })
-
+    
+    def get_date(self):
+        time = datetime.now()
+        if self.created_at.day == time.day:
+            return str(time.hour - self.created_at.hour) + " hours ago"
+        else:
+            if self.created_at.month == time.month:
+                return str(time.day - self.created_at.day) + " days ago"
+            else:
+                if self.created_at.year == time.year:
+                    return str(time.month - self.created_at.month) + " months ago"
+        return self.created_at
 
     
 class SchoolImage(models.Model):
