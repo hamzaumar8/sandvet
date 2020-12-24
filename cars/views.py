@@ -80,6 +80,11 @@ class BrandListView(ListView):
 
 
 
+# def detail_list(model,  fieldname, field, nid):
+#     if nid:
+#         lists = model.objects.filter((~Q(id=nid)), brand=field).order_by('-id')[:3]
+#     else:
+#         lists = model.objects.filter(brand=field).order_by('-id')[:3]
 
 
 def CarDetail(request, slug):
@@ -92,21 +97,25 @@ def CarDetail(request, slug):
         lists.save()
         request.session[session_key] = True
 
-    latest_list = Car.objects.filter(~Q(id=lists.id)).order_by('-id')[:10]
     brand_list = Car.objects.filter((~Q(id=lists.id)), brand=lists.brand).order_by('-id')[:3]
     region_list = Car.objects.filter((~Q(id=lists.id)), region=lists.region).order_by('-id')[:3]
     property_list = Property.objects.filter(region=lists.region).order_by('-id')[:3]
-    latest_property = Property.objects.order_by('-id')[:10]
+    spare_region_list = SparePart.objects.filter(region=lists.region).order_by('-id')[:3]
+    latest_list = Car.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
+    latest_property = Property.objects.order_by('-id')[:6]
+    latest_spareparts = SparePart.objects.order_by('-id')[:6]
 
     # region = Region.objects.all()
     context = {
         'object': lists, 
-        'latest_lists': latest_list,
-        'latest_property': latest_property,
+        'objectimages': carimages,
         'brand_lists': brand_list,
         'property_lists': property_list,
-        'carimages': carimages,
         'region_list': region_list,
+        'spare_region_list': spare_region_list,
+        'latest_lists': latest_list,
+        'latest_property': latest_property,
+        'latest_spareparts': latest_spareparts,
     }    
     return render(request, 'cars/car-detail.html', context)
 
@@ -197,7 +206,7 @@ def SparePartDetail(request, slug):
         lists.save()
         request.session[session_key] = True
 
-    spare_list = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:3]
+    latest_spareparts = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
     region_list = SparePart.objects.filter((~Q(id=lists.id)), region=lists.region).order_by('-id')[:3]
     property_list = Property.objects.filter(region=lists.region).order_by('-id')[:3]
     car_list = Car.objects.filter(region=lists.region).order_by('-id')[:3]
@@ -209,11 +218,11 @@ def SparePartDetail(request, slug):
         'object': lists, 
         'latest_lists': latest_list,
         'latest_property': latest_property,
-        'spare_lists': spare_list,
         'property_lists': property_list,
         'car_lists': car_list,
-        # 'spareimages': spareimages,
+        'objectimages': spareimages,
         'region_list': region_list,
+        'latest_spareparts': latest_spareparts,
     }    
     return render(request, 'cars/spare-detail.html', context)
 

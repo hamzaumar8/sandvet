@@ -994,7 +994,9 @@
     width: 100%;
     margin-bottom: 2rem;
   }
-  
+  .property-hd-sec p{
+    text-transform: capitalize;
+  }
   .property-hd-sec .card {
     position: relative;
     width: 100%;
@@ -1140,8 +1142,17 @@
   .property-img {
     float: left;
     width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+  }
+  .property-main-img .property-img  img{
+    min-height: 500px;
   }
   .thumb-img .property-img  {
+    height: 100px;
+  }
+  .thumb-img .property-img  img{
     max-height: 100px;
   }
   .property-img > img {
@@ -1162,7 +1173,7 @@
     margin: 0 -15px;
   }
   
-  .property-thumb-imgs .col-lg-4 {
+  .property-thumb-imgs .col-lg-2 {
     padding: 0 8px;
   }
   

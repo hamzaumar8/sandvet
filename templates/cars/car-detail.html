@@ -37,59 +37,9 @@
                                             </div>
                                         </div>
                                         <hr>
-                                        <div class="row justify-content-between contact-agent p-0">
-                                            <div class="">
-                                                <span>
-                                                    <i class="fa fa-phone"></i>
-                                                    <a href="tell://+233554748768">
-                                                        +233 55 474 8768                
-                                                    </a>
-                                                </span>
-                                            </div>
-                                            <div>
-                                                <span><i class="fa fa-whatsapp"></i>
-                                                    <a href="https://wa.me/233507321204?text=Hello Sandvet, I am interested with your car listing {{ object.get_absolute_url }}.">
-                                                        +233 50 732 1204             
-                                                    </a>
-                                                </span>
-                                            </div>
-                                        </div>
+                                        {% include 'details/info-contact.html' %}
                                     </div>
-
-                                    <div class="property-imgs">
-                                        <div class="property-main-img">
-                                            <!-- Slide 0 -->
-                                            <div class="property-img">
-                                                <img data-fullsrc="{{ object.imageURL }}" src="{{ object.imageURL }}" alt="{{ object.title }}">
-                                            </div><!--property-img end-->
-                                            <!-- Slide 1 -->
-                                            {% for carimg in carimages %}
-                                                <div class="property-img">
-                                                    <img data-fullsrc="{{ object.imageURL }}" src="{{ object.imageURL }}" alt="{{ object.title }}">
-                                                </div>
-                                            {%endfor%}
-                                        </div><!--property-main-img end-->
-                                        <div class="property-thumb-imgs">
-                                            <div class="row thumb-carous">
-                                                <!-- Slide 0 -->
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
-                                                    <div class="property-img">
-                                                        <img src="{{ object.imageURL }}" alt="{{ object.title }}">
-                                                    </div><!--property-img end-->
-                                                </div>
-                                                <!-- Slide 1 -->
-                                                {% for carimg in carimages %}
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
-                                                    <div class="property-img">
-                                                        <img src="{{ carimg.imageURL}}" alt="{{ object.title }}">
-                                                    </div><!--property-img end-->
-                                                </div>
-                                                {%endfor%}
-                                            </div>
-                                        </div><!--property-thumb-imgs end-->
-                                    </div><!--property-imgs end-->
-
-                                    
+                                   {% include 'details/info-images.html' %}
 
                                     <div class="descp-text">
                                         <h3>Description</h3>
@@ -137,7 +87,7 @@
                                                 <div></div>
                                                 <div class="">
                                                 <h4>Body Type</h4> 
-                                                <span>{{object.body_type}}</span>
+                                                <span>{{object.car_type}}</span>
                                                 </div>
                                             </li>
                                             <li>
@@ -212,6 +162,21 @@
                                         </div>
                                     </div>
                                     {% endif %}
+                                    {% if spare_region_list %}
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3 class="col-12">Buy Spare Parts in {{object.region}} region </h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in spare_region_list %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'cars/spare-list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if property_lists %}
                                     <div class="similar-listings-posts clearfix">
                                         <h3 class="col-12">Buy Property in {{object.region}} region</h3>
                                         <div class="list-products">
@@ -224,6 +189,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {%endif%}
                                 </div>
                             </div>
                         </div>

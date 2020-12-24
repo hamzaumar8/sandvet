@@ -1,0 +1,32 @@
+<div class="property-imgs">
+    <div class="property-main-img">
+        <!-- Slide 0 -->
+        <div class="property-img">
+            <img data-fullsrc="{{ object.imageURL }}" src="{{ object.imageURL }}" alt="{{ object.title }}">
+        </div><!--property-img end-->
+        <!-- Slide 1 -->
+        {% for img in objectimages %}
+            <div class="property-img">
+                <img data-fullsrc="{{ img.imageURL }}" src="{{ img.imageURL }}" alt="{{ img.title }}">
+            </div>
+        {%endfor%}
+    </div><!--property-main-img end-->
+    <div class="property-thumb-imgs">
+        <div class="row thumb-carous">
+            <!-- Slide 0 -->
+            <div class="col-lg-2 col-md-2 col-sm-3 col-3 thumb-img">
+                <div class="property-img">
+                    <img src="{{ object.imageURL }}" alt="{{ object.title }}">
+                </div><!--property-img end-->
+            </div>
+            <!-- Slide 1 -->
+            {% for img in objectimages %}
+            <div class="col-lg-2 col-md-2 col-sm-3 col-3 thumb-img">
+                <div class="property-img">
+                    <img src="{{ img.imageURL}}" alt="{{ object.title }}">
+                </div><!--property-img end-->
+            </div>
+            {%endfor%}
+        </div>
+    </div><!--property-thumb-imgs end-->
+</div><!--property-imgs end-->
