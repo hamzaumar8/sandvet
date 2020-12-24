@@ -52,14 +52,14 @@
                                             <a href="#" class="btn2">Sell your car</a>
                                         </div>
                                     </div>
-                                    {% if spare_lists %}
+                                    {% if school_list %}
                                     <div class="similar-listings-posts clearfix">
-                                        <h3 class="col-12">Buy Latest Spare Parts Instock </h3>
+                                        <h3 class="col-12">Enroll in Relative Driving schools available. </h3>
                                         <div class="list-products">
                                             <div class="row">
-                                                {%for list in spare_lists %}
+                                                {%for list in school_list %}
                                                     <div class="col-lg-4 col-md-6 cars">
-                                                        {% include 'cars/spare-list.html' %}
+                                                        {% include 'cars/school-list.html' %}
                                                     </div>
                                                 {%endfor%}
                                             </div>
@@ -68,12 +68,12 @@
                                     {% endif %}
                                     {% if region_list %}
                                     <div class="similar-listings-posts clearfix">
-                                        <h3 class="col-12">Buy Spare Parts in {{object.region}} region </h3>
+                                        <h3 class="col-12">Drving Schools in {{object.region}} region </h3>
                                         <div class="list-products">
                                             <div class="row">
                                                 {%for list in region_list %}
                                                 <div class="col-lg-4 col-md-6">
-                                                    {% include 'cars/spare-list.html' %}
+                                                    {% include 'cars/school-list.html' %}
                                                 </div>
                                                 {%endfor%}
                                             </div>

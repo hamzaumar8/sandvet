@@ -210,8 +210,8 @@ def SparePartDetail(request, slug):
     region_list = SparePart.objects.filter((~Q(id=lists.id)), region=lists.region).order_by('-id')[:3]
     property_list = Property.objects.filter(region=lists.region).order_by('-id')[:3]
     car_list = Car.objects.filter(region=lists.region).order_by('-id')[:3]
-    latest_property = Property.objects.order_by('-id')[:10]
-    latest_list = Car.objects.order_by('-id')[:10]
+    latest_property = Property.objects.order_by('-id')[:6]
+    latest_list = Car.objects.order_by('-id')[:6]
 
     # region = Region.objects.all()
     context = {
@@ -255,7 +255,7 @@ class SchoolListView(ListView):
 
 def SchoolDetail(request, slug):
     lists = get_object_or_404(School, slug=slug)
-    spareimages = lists.schoolimage.order_by('-id')
+    schoolimages = lists.schoolimage.order_by('-id')
 
     session_key = 'viewed_school_{}'.format(lists.pk) 
     if not request.session.get(session_key, False):
@@ -263,22 +263,24 @@ def SchoolDetail(request, slug):
         lists.save()
         request.session[session_key] = True
 
-    spare_list = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:3]
-    region_list = SparePart.objects.filter((~Q(id=lists.id)), region=lists.region).order_by('-id')[:3]
+    school_list = School.objects.filter(~Q(id=lists.id)).order_by('-id')[:3]
+    region_list = School.objects.filter((~Q(id=lists.id)), region=lists.region).order_by('-id')[:3]
     property_list = Property.objects.filter(region=lists.region).order_by('-id')[:3]
     car_list = Car.objects.filter(region=lists.region).order_by('-id')[:3]
-    latest_property = Property.objects.order_by('-id')[:10]
-    latest_list = Car.objects.order_by('-id')[:10]
+    latest_property = Property.objects.order_by('-id')[:6]
+    latest_list = Car.objects.order_by('-id')[:6]
+    latest_spareparts = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
 
     # region = Region.objects.all()
     context = {
         'object': lists, 
         'latest_lists': latest_list,
         'latest_property': latest_property,
-        'spare_lists': spare_list,
         'property_lists': property_list,
         'car_lists': car_list,
-        # 'spareimages': spareimages,
+        'objectimages': schoolimages,
         'region_list': region_list,
+        'school_list': school_list,
+        'latest_spareparts': latest_spareparts
     }    
     return render(request, 'cars/school-detail.html', context)
