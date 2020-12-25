@@ -1,20 +1,20 @@
 from django import forms
 from property import models as propsModel
 from cars import models as carModel
-
+from core import models as coreModel
 
 
 class PropertyForm(forms.ModelForm): 
 
-    title =  forms.CharField(
-        required = True,
-        label='Title',
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': 'eg: 4plots of land at east legon'
-            }
-        )
-    )
+    # title =  forms.CharField(
+    #     required = True,
+    #     label='Title',
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'placeholder': 'eg: 4plots of land at east legon'
+    #         }
+    #     )
+    # )
 
     
     def __init__(self, *args, **kwargs):
@@ -33,6 +33,7 @@ class PropertyForm(forms.ModelForm):
             'category', 
             'purpose',
             'region',
+            'locality', 
             'price', 
             'image',
             'description',
@@ -65,8 +66,7 @@ class PropertyLandForm(forms.ModelForm):
     class Meta:
         model = propsModel.LandProperty
         fields = [
-            'locality',
-            'location', 
+            'location',
             'dimension',
         ]
 
@@ -124,6 +124,16 @@ class CarForm(forms.ModelForm):
 
 
 
+class LocalityForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(LocalityForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = propsModel.Locality
+        fields = ['region', 'name']
 
 class CarImagesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

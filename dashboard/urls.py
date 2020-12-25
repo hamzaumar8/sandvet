@@ -1,52 +1,60 @@
 from django.urls import path
-from .views import *
-
+from .views import core, prop, cars
 
 app_name = 'dashboard'
 
 urlpatterns = [
-    path('', dashboardPage, name='dashboard'),
-    path('properties/', propertyPage, name='property'),
-    path('property/add/', PropertyAddPage, name='add-property'),
+    path('', core.dashboardPage, name='dashboard'),
+    path('locality/', core.LocalityPage, name='locality'),
+    path('locality/add/', core.LocalityAddPage, name='locality-add'),
+    path('locality/<int:id>/edit/', core.LocalityEditPage, name='edit-locality'),
+    path('locality/<int:id>/delete/', core.DeleteLocality, name='delete-locality'),
 
-    path('cars/', CarPage, name='car'),
-    path('car/add/', CarAddPage, name='add-car'),
-    path('car/<int:id>/delete/', DeleteCar, name='delete-car'),
-    path('car/<int:id>/edit/', CarEditPage, name='edit-car'),
-    path('car/<int:id>/view/', ViewCar, name='view-car'),
-    path('car/image/<int:id>/delete/', DeleteCarImage, name='delete-car-image'),
-    path('car/<int:id>/featured/', FeaturedCar, name='featured-car'),
 
-    path('brands/', BrandPage, name='brands'),
-    path('brand/add/', BrandAddPage, name='add-brand'),
-    path('brand/<int:id>/featured/', FeaturedBrand, name='featured-brand'),
-    path('brand/<int:id>/view/', ViewBrand, name='view-brand'),
-    path('brand/<int:id>/delete/', DeleteBrand, name='delete-brand'),
-    path('brand/<int:id>/edit/', BrandEditPage, name='edit-brand'),
+    # Propery
+    path('properties/', prop.propertyPage, name='property'),
+    path('property/add/', prop.PropertyAddPage, name='add-property'),
+
+
+    # Cars
+    path('cars/', cars.CarPage, name='car'),
+    path('car/add/', cars.CarAddPage, name='add-car'),
+    path('car/<int:id>/delete/', cars.DeleteCar, name='delete-car'),
+    path('car/<int:id>/edit/', cars.CarEditPage, name='edit-car'),
+    path('car/<int:id>/view/', cars.ViewCar, name='view-car'),
+    path('car/image/<int:id>/delete/', cars.DeleteCarImage, name='delete-car-image'),
+    path('car/<int:id>/featured/', cars.FeaturedCar, name='featured-car'),
+
+    path('brands/', cars.BrandPage, name='brands'),
+    path('brand/add/', cars.BrandAddPage, name='add-brand'),
+    path('brand/<int:id>/featured/', cars.FeaturedBrand, name='featured-brand'),
+    path('brand/<int:id>/view/', cars.ViewBrand, name='view-brand'),
+    path('brand/<int:id>/delete/', cars.DeleteBrand, name='delete-brand'),
+    path('brand/<int:id>/edit/', cars.BrandEditPage, name='edit-brand'),
     
-    path('car/types/', TypePage, name='types'),
-    path('car/type/add/', TypeAddPage, name='add-type'),
-    path('car/type/<int:id>/edit/', TypeEditPage, name='edit-type'),
-    path('car/type/<int:id>/delete/', DeleteType, name='delete-type'),
+    path('car/types/', cars.TypePage, name='types'),
+    path('car/type/add/', cars.TypeAddPage, name='add-type'),
+    path('car/type/<int:id>/edit/', cars.TypeEditPage, name='edit-type'),
+    path('car/type/<int:id>/delete/', cars.DeleteType, name='delete-type'),
 
     # SPARE PARTS
-    path('car/spare-parts/', SparePartPage, name='spare-parts'),
-    path('car/spare-part/add/', SparePartAddPage, name='add-spare-part'),
-    path('car/spare-part/<int:id>/Edit/', SparePartEditPage, name='edit-spare-part'),
-    path('car/spare-part/<int:id>/view/', ViewSparePart, name='view-spare-part'),
-    path('car/spare-part/<int:id>/featured/', FeaturedSparePart, name='featured-spare-part'),
-    path('car/spare-part/<int:id>/delete/', DeleteSparePart, name='delete-spare-part'),
-    path('car/spare-part/image/<int:id>/delete/', DeleteSparePartImage, name='delete-sparepart-image'),
+    path('car/spare-parts/', cars.SparePartPage, name='spare-parts'),
+    path('car/spare-part/add/', cars.SparePartAddPage, name='add-spare-part'),
+    path('car/spare-part/<int:id>/Edit/', cars.SparePartEditPage, name='edit-spare-part'),
+    path('car/spare-part/<int:id>/view/', cars.ViewSparePart, name='view-spare-part'),
+    path('car/spare-part/<int:id>/featured/', cars.FeaturedSparePart, name='featured-spare-part'),
+    path('car/spare-part/<int:id>/delete/', cars.DeleteSparePart, name='delete-spare-part'),
+    path('car/spare-part/image/<int:id>/delete/', cars.DeleteSparePartImage, name='delete-sparepart-image'),
     
     # DRIVING SCHOOL
-    path('car/driving-schools/', SchoolPage, name='schools'),
-    path('car/driving-school/add/', SchoolAddPage, name='add-school'),
-    path('car/driving-school/<int:id>/Edit/', SchoolEditPage, name='edit-school'),
-    path('car/driving-school/<int:id>/view/', ViewSchool, name='view-school'),
-    path('car/driving-school/<int:id>/featured/', FeaturedSchool, name='featured-school'),
-    path('car/driving-school/<int:id>/delete/', DeleteSchool, name='delete-school'),
-    path('car/driving-school/image/<int:id>/delete/', DeleteSchoolImage, name='delete-school-image'),
+    path('car/driving-schools/', cars.SchoolPage, name='schools'),
+    path('car/driving-school/add/', cars.SchoolAddPage, name='add-school'),
+    path('car/driving-school/<int:id>/Edit/', cars.SchoolEditPage, name='edit-school'),
+    path('car/driving-school/<int:id>/view/', cars.ViewSchool, name='view-school'),
+    path('car/driving-school/<int:id>/featured/', cars.FeaturedSchool, name='featured-school'),
+    path('car/driving-school/<int:id>/delete/', cars.DeleteSchool, name='delete-school'),
+    path('car/driving-school/image/<int:id>/delete/', cars.DeleteSchoolImage, name='delete-school-image'),
 
     # Ajax URLS
-    path("dashboard/property/add/land/", ajaxPropertyLandAdd, name="add-land-property"),
+    path("dashboard/property/add/land/", prop.ajaxPropertyLandAdd, name="add-land-property"),
 ]

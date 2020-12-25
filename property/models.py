@@ -20,6 +20,8 @@ PROPERTY_PURPOSE_TYPE = [
 
 class Category(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = AutoSlugField(populate_from='title',unique_with='created_at__month',slugify=custom_slugify )
 
     def __str__(self):
         return self.title
@@ -48,7 +50,6 @@ class Category(models.Model):
 
 class LandProperty(models.Model):
     property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='landproperty')
-    locality = models.ForeignKey(Locality, on_delete=models.CASCADE)
     location = models.CharField(max_length=200)
     dimension = models.CharField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,9 +63,7 @@ class LandProperty(models.Model):
 
 class HouseProperty(models.Model):
     property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='houseproperty')
-    # 
-    locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
-    # #######
+    #
     address = models.CharField(max_length=200, null=True, blank=True)
     bed = models.PositiveIntegerField(default=1, null=True, blank=True)
     bath = models.PositiveIntegerField(default=1, null=True, blank=True)
@@ -87,6 +86,7 @@ class Property(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
     region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
+    locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to='property/')
     description = models.TextField(null=True, blank=False)
     views = models.PositiveIntegerField(default=0)

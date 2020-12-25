@@ -110,12 +110,26 @@
                                 <a href="{% url 'dashboard:dashboard' %}"><i class="fe-airplay"></i>Dashboards</a>
                             </li>
                             <li class="has-submenu">
+                                <a href="{% url 'dashboard:locality' %}"><i class="fe-airplay"></i>Locality</a>
+                            </li>
+                            <li class="has-submenu">
                                 <a href="{% url 'dashboard:property' %}"><i class="fe-airplay"></i>Properties</a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="{% url 'dashboard:types' %}">Categories</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'dashboard:property' %}">Properties</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="has-submenu">
                                 <a href="{% url 'dashboard:car' %}">
                                 <i class="fe-align-center"></i>Cars <div class="arrow-down"></div></a>  
                                 <ul class="submenu">
+                                    <li>
+                                        <a href="{% url 'dashboard:car' %}">Cars</a>
+                                    </li>
                                     <li>
                                         <a href="{% url 'dashboard:brands' %}">Brands</a>
                                     </li>
