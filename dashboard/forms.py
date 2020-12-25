@@ -135,6 +135,18 @@ class LocalityForm(forms.ModelForm):
         model = propsModel.Locality
         fields = ['region', 'name']
 
+
+class CategoryForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CategoryForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = propsModel.Category
+        fields = ['title',]
+
 class CarImagesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CarImagesForm, self).__init__(*args, **kwargs)

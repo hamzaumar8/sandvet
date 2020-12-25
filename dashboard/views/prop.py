@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
-from property.models import Property, LandProperty
-from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm
+from property.models import Property, LandProperty, Category
+from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm
 from core.models import Locality
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
 from dashboard.decorators import check_admin
@@ -81,3 +81,60 @@ def ajaxPropertyLandAdd(request):
     return JsonResponse({}, status=400)
 
 
+@login_required
+@check_admin
+def CategoryPage(request):
+    category = Category.objects.all()
+    context = {
+        'dash_title': 'Category',
+        'category_list': category
+    }
+    return render(request, 'dashboard/category.html', context)
+
+@login_required
+@check_admin
+def CategoryAddPage(request):
+    form = CategoryForm()
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Category  been Added succesfully')
+            return redirect('dashboard:categories')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Add Category',
+        "form": form,
+    }
+    return render(request, "dashboard/add-locality.html", context)
+
+
+@login_required
+@check_admin
+def DeleteCategory(request, *args, **kwargs):
+    get_object_or_404(Category, pk=kwargs["id"]).delete()
+    messages.success(request, "Category deleted successfully")
+    return redirect(reverse("dashboard:categories"))
+
+
+
+
+@login_required
+@check_admin
+def CategoryEditPage(request, *args, **kwargs):
+    category = get_object_or_404(Category, pk=kwargs["id"])
+    form = CategoryForm(instance=category)
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Category  been updated succesfully')
+            return redirect('dashboard:categories')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Edit Category',
+        "form": form,
+    }
+    return render(request, "dashboard/edit-locality.html", context)

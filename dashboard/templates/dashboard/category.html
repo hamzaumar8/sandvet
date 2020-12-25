@@ -2,33 +2,31 @@
 {% load static %}
 {% block content %}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="card">
             <div class="card-body">
-                <a href="{% url 'dashboard:locality-add' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-plus mr-1"></i> New Locality</a>
+                <a href="{% url 'dashboard:add-category' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-plus mr-1"></i> New Locality</a>
                 <table id="key-datatable" class="table dt-responsive nowrap">
                     <thead>
                         <tr>
                             <td>ID</td>
-                            <th>Name</th>
-                            <th>Rgion</th>
+                            <th>Title</th>
                             <th>Entry date</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    {% for locality in locality_list %}
+                    {% for category in category_list %}
                         <tr>
-                            <td>{{ locality.id }}</td>
-                            <td>{{ locality.name }}</td>
-                            <td>{{ locality.region.title }}</td>
-                            <td>{{ locality.created_at|date:"d- m-Y" }}</td>
+                            <td>{{ category.id }}</td>
+                            <td>{{ category.title }}</td>
+                            <td>{{ category.created_at|date:"d- m-Y" }}</td>
                             <td>
                                 <div class="btn-group dropdown">
                                     <a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="{% url 'dashboard:edit-locality' id=locality.id %}"><i class="mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
-                                        <a class="dropdown-item" href="{% url 'dashboard:delete-locality' id=locality.id %}"><i class="mdi mdi-delete mr-1 text-muted"></i>Delete</a>
+                                        <a class="dropdown-item" href="{% url 'dashboard:edit-category' id=category.id %}"><i class="mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
+                                        <a class="dropdown-item" href="{% url 'dashboard:delete-category' id=category.id %}"><i class="mdi mdi-delete mr-1 text-muted"></i>Delete</a>
                                     </div>
                                 </div>
                             </td>

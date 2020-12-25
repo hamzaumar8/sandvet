@@ -15,6 +15,10 @@ urlpatterns = [
     path('properties/', prop.propertyPage, name='property'),
     path('property/add/', prop.PropertyAddPage, name='add-property'),
 
+    path('property/categories/', prop.CategoryPage, name='categories'),
+    path('property/category/add/', prop.CategoryAddPage, name='add-category'),
+    path('property/category/<int:id>/edit/', prop.CategoryEditPage, name='edit-category'),
+    path('property/category/<int:id>/delete/', prop.DeleteCategory, name='delete-category'),
 
     # Cars
     path('cars/', cars.CarPage, name='car'),
