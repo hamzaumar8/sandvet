@@ -70,9 +70,9 @@ def DeleteLocality(request, *args, **kwargs):
 @check_admin
 def LocalityEditPage(request, *args, **kwargs):
     locality = get_object_or_404(Locality, pk=kwargs["id"])
-    form = CarForm(instance=locality)
+    form = LocalityForm(instance=locality)
     if request.method == "POST":
-        form = CarForm(request.POST, instance=locality)
+        form = LocalityForm(request.POST, instance=locality)
         if form.is_valid():
             form.save()
             messages.success(request, 'Locality  been updated succesfully')

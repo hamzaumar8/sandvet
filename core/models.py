@@ -1,6 +1,11 @@
 from django.db import models
 from django.shortcuts import reverse
+from autoslug import AutoSlugField
+from autoslug.settings import slugify as default_slugify
 # Create your models here.
+
+def custom_slugify(value):
+    return default_slugify(value).replace(' ', '-')
 
 REGIONS_LIST = (
     ('ashanti', 'Ashanti'),
@@ -40,6 +45,9 @@ class Region(models.Model):
 class Locality(models.Model):
     region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = AutoSlugField(populate_from='title',unique_with='created_at__month',slugify=custom_slugify)
+
     class Meta:
         ordering = ['name']
 
@@ -48,6 +56,6 @@ class Locality(models.Model):
 
     def get_locality_url(self):
         return reverse("core:locality", kwargs={
-            'locality': self.name
+            'locality': self.slug
         })
 
