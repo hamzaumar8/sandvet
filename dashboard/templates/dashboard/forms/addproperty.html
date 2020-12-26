@@ -1,17 +1,16 @@
+{% load crispy_forms_tags %} 
 <div class="tab-pane show active" id="lands">
     <form class="form-horizontal" id="form_propertyLand" enctype="multipart/form-data" >
         {% csrf_token %}
         <div class="form-group row">
             {% for field in property_form %}
-                <div class="col-6 mb-2">
-                    <p class="m-0">{{ field.label }}*</p>
-                    {{ field }}
+                <div class="col-md-6 mb-2">
+                    {{ field|as_crispy_field }}
                 </div>
             {% endfor %}
             {% for field in propertyland_form %}
-                <div class="col-6 mb-2">
-                    <p class="m-0">{{ field.label }}*</p>
-                    {{ field }}
+                <div class="col-md-6 mb-2">
+                    {{ field|as_crispy_field }}
                 </div>
             {% endfor %}
 

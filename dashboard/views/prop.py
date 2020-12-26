@@ -57,11 +57,14 @@ def ajaxPropertyLandAdd(request):
         form = PropertyForm(request.POST, request.FILES)
         propland_form = PropertyLandForm(request.POST, request.FILES)
         if form.is_valid() and propland_form.is_valid():
-
+            land = Category.objects.get(title='land')
             instance = form.save(request)
+            instance.category = land
+            instance.purpose = 'sale'
             land = propland_form.save()
             land.property = instance
             land.save()
+            instance.save()
             
             return JsonResponse({'error': False, 'message': 'Uploaded Successfully'}, status=200)
         else:

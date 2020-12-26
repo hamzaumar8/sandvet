@@ -11,6 +11,10 @@ def custom_slugify(value):
 
 
 # Create your models here.
+PRICE_NEGORIABLE = (
+    ('yes', 'Yes'),
+    ('no', 'No'),
+)
 
 
 PROPERTY_PURPOSE_TYPE = [
@@ -50,11 +54,10 @@ class Category(models.Model):
 
 class LandProperty(models.Model):
     property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='landproperty', null=True)
-    location = models.CharField(max_length=200)
     dimension = models.CharField(max_length=200, null=True, blank=True)
+    area = models.CharField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
-
     def __str__(self):
         return self.property.title
 
@@ -83,10 +86,12 @@ class HouseProperty(models.Model):
 class Property(models.Model):
     title = models.CharField(max_length=200,null=True)
     price = models.FloatField()
+    price_negotiable = models.CharField(max_length=3, choices=PRICE_NEGORIABLE, default='no')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     purpose = models.CharField(max_length=4, choices=PROPERTY_PURPOSE_TYPE, default='sale')
-    region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
-    locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
+    region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True)
+    locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
+    location_address = models.CharField(max_length=200, null=True)
     image = models.ImageField(upload_to='property/')
     description = models.TextField(null=True, blank=False)
     views = models.PositiveIntegerField(default=0)

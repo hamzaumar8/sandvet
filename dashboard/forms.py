@@ -32,9 +32,11 @@ class PropertyForm(forms.ModelForm):
             'title', 
             'category', 
             'purpose',
-            'region',
-            'locality', 
             'price', 
+            'price_negotiable',
+            'region',
+            'locality',
+            'location_address', 
             'owned_by',
             'image',
             'description',
@@ -45,18 +47,19 @@ class PropertyLandForm(forms.ModelForm):
         label='Dimension',
         widget=forms.TextInput(
             attrs={
-                'placeholder': 'eg: 2500 ft2'
+                'placeholder': 'eg: 700 ft × 100 ft'
             }
         )
     )
-    location =  forms.CharField(
-        label='Location',
+    area =  forms.CharField(
+        label='Area (already in meter square)',
         widget=forms.TextInput(
             attrs={
-                'placeholder': 'eg: Tema Comm. 25'
+                'placeholder': 'eg: 6,503'
             }
         )
     )
+
     def __init__(self, *args, **kwargs):
         super(PropertyLandForm, self).__init__(*args, **kwargs)
         for name in self.fields.keys():
@@ -67,8 +70,8 @@ class PropertyLandForm(forms.ModelForm):
     class Meta:
         model = propsModel.LandProperty
         fields = [
-            'location',
             'dimension',
+            'area',
         ]
 
 
