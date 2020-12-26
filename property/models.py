@@ -19,7 +19,7 @@ PROPERTY_PURPOSE_TYPE = [
 ]
 
 class Category(models.Model):
-    title = models.CharField(max_length=200, null=True, blank=True)
+    title = models.CharField(max_length=200, null=True, blank=True, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     slug = AutoSlugField(populate_from='title',unique_with='created_at__month',slugify=custom_slugify )
 
@@ -141,6 +141,7 @@ class RealEstate(models.Model):
     region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
     locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
     url = models.URLField(max_length=200, null=True, blank=True)
+    logo = models.ImageField(upload_to='realeastate/logo', null=True)
     image = models.ImageField(upload_to='realeastate/')
     description = models.TextField(null=True, blank=False)
     views = models.PositiveIntegerField(default=0)

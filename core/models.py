@@ -43,7 +43,7 @@ class Region(models.Model):
     
    
 class Locality(models.Model):
-    region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
+    region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True, unique=True)
     name = models.CharField(max_length=200, null=True, blank=True, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     slug = AutoSlugField(populate_from='title',unique_with='created_at__month',slugify=custom_slugify)

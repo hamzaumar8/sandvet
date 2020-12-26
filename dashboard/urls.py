@@ -23,7 +23,11 @@ urlpatterns = [
     # Real Estate
     path('real-estates/', prop.RealEstatePage, name='realestates'),
     path('real-estate/add/', prop.RealEstateAddPage, name='add-realestate'),
+    path('real-estate/<int:id>/view/', prop.ViewRealEstate, name='view-realestate'),
+    path('real-estate/<int:id>/edit/', prop.RealEstateEditPage, name='edit-realestate'),
+    path('real-estate/<int:id>/delete/', prop.DeleteRealEstate, name='delete-realestate'),
     path('real-estate/<int:id>/featured/', prop.FeaturedRealEstate, name='featured-realestate'),
+    path('real-estate/image/<int:id>/delete/', prop.DeleteRealEstateImage, name='delete-realestate-image'),
 
     # Cars
     path('cars/', cars.CarPage, name='car'),

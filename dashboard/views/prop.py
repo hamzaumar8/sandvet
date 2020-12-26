@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count, Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
-from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage
+from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage, SocialHandle
 from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm
 from core.models import Locality
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
@@ -210,3 +210,62 @@ def RealEstateAddPage(request):
         "image_form": image_form,
     }
     return render(request, "dashboard/add-realestate.html", context)
+
+
+
+
+@login_required
+@check_admin
+def RealEstateEditPage(request, *args, **kwargs):
+    realestate = get_object_or_404(RealEstate, pk=kwargs["id"])
+    form = RealEstateForm(instance=realestate)
+    handle_inst = SocialHandle.objects.get(realestate=realestate)
+    handle_form = SocialHandleForm(instance=handle_inst)
+    images = RealEstateImage.objects.filter(realestate=realestate)
+    image_form = RealEstateImagesForm()
+    if request.method == "POST":
+        form = RealEstateForm(request.POST, request.FILES, instance=realestate)
+        handle_form = SocialHandleForm(request.POST, instance=handle_inst)
+        img_form = RealEstateImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid() and handle_form.is_valid():
+            inst = form.save()
+            handle_form.save()
+            for imagefile in files:
+                file_instance = RealEstateImage(realestate=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Real Estate  been updated succesfully')
+            return redirect('dashboard:realestates')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Edit Car',
+        "form": form,
+        "image_form": image_form,
+        "images": images,
+        "handle_form": handle_form
+    }
+    return render(request, "dashboard/add-realestate.html", context)
+
+
+
+@login_required
+@check_admin
+def DeleteRealEstateImage(request, *args, **kwargs):
+    realestateimg = get_object_or_404(RealEstateImage, pk=kwargs["id"])
+    realestate = realestateimg.realestate
+    realestateimg.delete()
+    messages.success(request, "Image deleted successfully")
+    return redirect("dashboard:edit-realestate", id=realestate.pk)
+
+
+@login_required
+@check_admin
+def ViewRealEstate(request, *args, **kwargs):
+    realestate = get_object_or_404(RealEstate, pk=kwargs["id"])
+    images = RealEstateImage.objects.filter(realestate=realestate)
+    context = {
+        "realestate": realestate,
+        "images": images
+    }
+    return render(request, "dashboard/view-realestate.html", context)
