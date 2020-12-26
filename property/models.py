@@ -49,7 +49,7 @@ class Category(models.Model):
 
 
 class LandProperty(models.Model):
-    property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='landproperty')
+    property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='landproperty', null=True)
     location = models.CharField(max_length=200)
     dimension = models.CharField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,7 +62,7 @@ class LandProperty(models.Model):
 
 
 class HouseProperty(models.Model):
-    property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='houseproperty')
+    property = models.OneToOneField("Property",  on_delete=models.CASCADE, related_name='houseproperty', null=True)
     #
     address = models.CharField(max_length=200, null=True, blank=True)
     bed = models.PositiveIntegerField(default=1, null=True, blank=True)

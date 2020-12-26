@@ -57,20 +57,12 @@ def ajaxPropertyLandAdd(request):
         form = PropertyForm(request.POST, request.FILES)
         propland_form = PropertyLandForm(request.POST, request.FILES)
         if form.is_valid() and propland_form.is_valid():
-            
-            # locality = propland_form.cleaned_data['locality']
-            location = propland_form.cleaned_data['location']
 
             instance = form.save(request)
-            prop = Property.objects.get(pk=instance.id)
-
-            propland_obj = LandProperty.objects.create(
-                property=prop,
-                # locality=locality, 
-                location=location, 
-            )
-
-            propland_obj.save()
+            land = propland_form.save()
+            land.property = instance
+            land.save()
+            
             return JsonResponse({'error': False, 'message': 'Uploaded Successfully'}, status=200)
         else:
             # some form errors occured.
@@ -174,7 +166,7 @@ def FeaturedRealEstate(request, *args, **kwargs):
 def DeleteRealEstate(request, *args, **kwargs):
     get_object_or_404(RealEstate, pk=kwargs["id"]).delete()
     messages.success(request, "Real Estate deleted successfully")
-    return redirect(reverse("dashboard:realestate"))
+    return redirect(reverse("dashboard:realestates"))
 
 
 
