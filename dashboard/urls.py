@@ -20,6 +20,11 @@ urlpatterns = [
     path('property/category/<int:id>/edit/', prop.CategoryEditPage, name='edit-category'),
     path('property/category/<int:id>/delete/', prop.DeleteCategory, name='delete-category'),
 
+    # Real Estate
+    path('real-estates/', prop.RealEstatePage, name='realestates'),
+    path('real-estate/add/', prop.RealEstateAddPage, name='add-realestate'),
+    path('real-estate/<int:id>/featured/', prop.FeaturedRealEstate, name='featured-realestate'),
+
     # Cars
     path('cars/', cars.CarPage, name='car'),
     path('car/add/', cars.CarAddPage, name='add-car'),

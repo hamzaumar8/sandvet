@@ -97,6 +97,7 @@ class Property(models.Model):
                 unique_with='created_at__month',
                 slugify=custom_slugify
             )
+    owned_by = models.ForeignKey("RealEstate", on_delete=models.CASCADE, null=True, blank=True, related_name="realestates")
 
     def __str__(self):
         return self.title
@@ -129,6 +130,89 @@ class Property(models.Model):
 
     def get_land_details(self):
         return LandProperty.objects.get(property=self)
+
+
+
+
+
+
+class RealEstate(models.Model):
+    title = models.CharField(max_length=200,null=True, unique=True)
+    region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
+    locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
+    url = models.URLField(max_length=200, null=True, blank=True)
+    image = models.ImageField(upload_to='realeastate/')
+    description = models.TextField(null=True, blank=False)
+    views = models.PositiveIntegerField(default=0)
+    featured = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = AutoSlugField(
+                populate_from='title', 
+                unique_with='created_at__month',
+                slugify=custom_slugify
+            )
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url 
+        except:
+            url = ''
+        return url
+
+    def get_absolute_url(self):
+        return reverse("property:property", kwargs={
+            'slug': self.slug
+        })
+
+    def get_date(self):
+        time = datetime.now()
+        if self.created_at.day == time.day:
+            return str(time.hour - self.created_at.hour) + " hours ago"
+        else:
+            if self.created_at.month == time.month:
+                return str(time.day - self.created_at.day) + " days ago"
+            else:
+                if self.created_at.year == time.year:
+                    return str(time.month - self.created_at.month) + " months ago"
+        return self.created_at
+
+
+    def get_land_details(self):
+        return LandProperty.objects.get(property=self)
+
+
+
+
+class RealEstateImage(models.Model):
+    realestate = models.ForeignKey(RealEstate, on_delete=models.CASCADE, null=True, blank=True, related_name='realestateimages')
+    images = models.ImageField(null=True, blank=True, upload_to="realestate/imgs/")
+
+    def __str__(self):
+        return self.realestate.title
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.images.url 
+        except:
+            url = ''
+        return url
+
+
+
+class SocialHandle(models.Model):
+    realestate = models.ForeignKey(RealEstate, on_delete=models.CASCADE, null=True, blank=True)
+    facebook = models.URLField(max_length=200, null=True, blank=True)
+    linkedIn = models.URLField(max_length=200, null=True, blank=True)
+    instagram = models.URLField(max_length=200, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.realestate.title
 
 
 

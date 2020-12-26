@@ -35,6 +35,7 @@ class PropertyForm(forms.ModelForm):
             'region',
             'locality', 
             'price', 
+            'owned_by',
             'image',
             'description',
         ]
@@ -71,6 +72,75 @@ class PropertyLandForm(forms.ModelForm):
         ]
 
 
+
+
+class LocalityForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(LocalityForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = propsModel.Locality
+        fields = ['region', 'name']
+
+
+class CategoryForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(CategoryForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = propsModel.Category
+        fields = ['title',]
+
+
+
+class RealEstateForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(RealEstateForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = propsModel.RealEstate
+        fields = ['title','region','locality', 'url', 'image', 'description']
+
+class SocialHandleForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(SocialHandleForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = propsModel.SocialHandle
+        fields = ['facebook','linkedIn','instagram',]
+
+        
+
+class RealEstateImagesForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(RealEstateImagesForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+
+    images =  forms.CharField(
+        required = False,
+        label='Real Estate Images',
+        widget=forms.ClearableFileInput(
+            attrs={'multiple': True}
+        )
+    ) 
+    class Meta:
+        model = propsModel.RealEstateImage
+        fields = ['images']
 
 
 
@@ -120,32 +190,6 @@ class CarForm(forms.ModelForm):
             'image',
             'description',
         ]
-
-
-
-
-class LocalityForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(LocalityForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-            })
-    class Meta:
-        model = propsModel.Locality
-        fields = ['region', 'name']
-
-
-class CategoryForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(CategoryForm, self).__init__(*args, **kwargs)
-        for name in self.fields.keys():
-            self.fields[name].widget.attrs.update({
-                'class': 'form-control',
-            })
-    class Meta:
-        model = propsModel.Category
-        fields = ['title',]
 
 class CarImagesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

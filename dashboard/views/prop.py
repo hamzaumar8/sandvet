@@ -2,9 +2,10 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.db.models import Count, Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
-from property.models import Property, LandProperty, Category
-from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm
+from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage
+from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm
 from core.models import Locality
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
 from dashboard.decorators import check_admin
@@ -57,7 +58,7 @@ def ajaxPropertyLandAdd(request):
         propland_form = PropertyLandForm(request.POST, request.FILES)
         if form.is_valid() and propland_form.is_valid():
             
-            locality = propland_form.cleaned_data['locality']
+            # locality = propland_form.cleaned_data['locality']
             location = propland_form.cleaned_data['location']
 
             instance = form.save(request)
@@ -65,7 +66,7 @@ def ajaxPropertyLandAdd(request):
 
             propland_obj = LandProperty.objects.create(
                 property=prop,
-                locality=locality, 
+                # locality=locality, 
                 location=location, 
             )
 
@@ -138,3 +139,74 @@ def CategoryEditPage(request, *args, **kwargs):
         "form": form,
     }
     return render(request, "dashboard/edit-locality.html", context)
+
+
+
+
+
+@login_required
+@check_admin
+def RealEstatePage(request):
+    realestate = RealEstate.objects.all().annotate(num_props=Count('realestates', distinct=True))
+    context = {
+        'dash_title': 'Real Estate',
+        'realestate_list': realestate
+    }
+    return render(request, 'dashboard/real-estate.html', context)
+
+
+@login_required
+@check_admin
+def FeaturedRealEstate(request, *args, **kwargs):
+    realestate = get_object_or_404(RealEstate, pk=kwargs["id"])
+    realestate_qs = RealEstate.objects.filter(id=realestate.id)
+    if realestate.featured == 1:
+        realestate_qs.update(featured=0)
+    else:
+        realestate_qs.update(featured=1)
+    messages.success(request, "Updated successfully")
+    return redirect('dashboard:realestates')
+
+
+
+@login_required
+@check_admin
+def DeleteRealEstate(request, *args, **kwargs):
+    get_object_or_404(RealEstate, pk=kwargs["id"]).delete()
+    messages.success(request, "Real Estate deleted successfully")
+    return redirect(reverse("dashboard:realestate"))
+
+
+
+
+@login_required
+@check_admin
+def RealEstateAddPage(request):
+    form = RealEstateForm()
+    handle_form = SocialHandleForm()
+    image_form = RealEstateImagesForm()
+    if request.method == "POST":
+        form = RealEstateForm(request.POST, request.FILES)
+        img_form = RealEstateImagesForm(request.POST, request.FILES)
+        handle_form = SocialHandleForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid() and handle_form.is_valid():
+            inst = form.save()
+            handle = handle_form.save()
+            handle.realestate = inst
+            handle.save()
+            print(handle.realestate)
+            for imagefile in files:
+                file_instance = RealEstateImage(realestate=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Real Estate  been Added succesfully')
+            return redirect('dashboard:realestates')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Add Real Estate',
+        "form": form,
+        "handle_form": handle_form,
+        "image_form": image_form,
+    }
+    return render(request, "dashboard/add-realestate.html", context)
