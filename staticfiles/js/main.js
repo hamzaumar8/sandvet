@@ -14,12 +14,13 @@ $(document).ready(function() {
         $(this).find('.dropeddown').slideUp(300);
     });
 
+    $('.propetyList .listing__card').addClass('list');
     $("body").delegate(".grid.view-type", "click", function(e) {
         e.preventDefault()
         $('.list.view-type').removeClass('active')
         $(this).addClass('active');
         $('.listing__card').removeClass('list');
-        $('.list_products .col-md-6').addClass('col-lg-3');
+        $('.list_products .col-md-12').addClass('col-lg-4').removeClass('col-md-12');
     });
 
     $("body").delegate(".list.view-type", "click", function(e) {
@@ -28,7 +29,8 @@ $(document).ready(function() {
         $(this).addClass('active');
         $('.listing__card').addClass('list');
         $('.list_products').addClass('list');
-        $('.list_products .col-lg-3').removeClass('col-lg-3');
+        $('.list_products .col-lg-4').removeClass('col-lg-4').addClass('col-md-12');
+        console.log('howdy')
     });
 
     $("body").delegate(".cars_grid .grid.view-type", "click", function(e) {
