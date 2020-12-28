@@ -10,7 +10,6 @@ urlpatterns = [
     path('category/<str:category>/', CategoryListView.as_view(), name='category'),
     path('locality/<str:locality>/', LocalityListView.as_view(), name='locality'),
     path('region/<str:region>/', RegionListView.as_view(), name='region'),
-    path('land/', LandListView.as_view(), name='land'),
     
 
     path('ajax_subscriptionform/', subscriptionForm),

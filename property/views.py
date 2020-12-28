@@ -1,60 +1,52 @@
 from django.views.generic import View, ListView, DetailView, FormView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q
-from .models import Property, Category
-from .filters import PropertyFilter
+from .models import Property, Category, LandProperty
+from .filters import PropertyFilter, PropertyLandFilter
 from core.models import Locality, Region
 
 # Create your views here.
 class PropertyListView(ListView):
     model = Property
     context_object_name = 'lists'
-    template_name = 'list.html'
-    # paginate_by = 10
+    template_name = 'property/list.html'
+    paginate_by = 24
 
     def get_context_data(self, **kwargs):
+        kwargs['page_title'] = 'All Properties'
         kwargs['filter'] = self.filter
-        kwargs['locality'] = self.locality
-        kwargs['category_list_nav'] = self.categoryNav
-        kwargs['category_list'] = self.category
-        kwargs['region_list'] = self.region
+        kwargs['locality'] = Locality.objects.all() 
+        kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+        kwargs['category_list'] = Category.objects.all()
+        kwargs['region_list'] = Region.objects.all()
 
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
-        self.locality = Locality.objects.all() 
-        self.categoryNav = Category.objects.filter((~Q(title="land")))
-        self.category = Category.objects.all()
-        self.region = Region.objects.all()
-
-        return self.model.objects.order_by('-id')
+        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.order_by('-id')) 
+        return self.filter.qs
 
 
 class ForSaleListView(ListView):
     model = Property
     context_object_name = 'lists'
-    template_name = 'list.html'
-    # paginate_by = 10
+    template_name = 'property/list.html'
+    paginate_by = 24
 
     def get_context_data(self, **kwargs):
-
+        kwargs['page_title'] = 'All Properties'
         kwargs['filter'] = self.filter
-        kwargs['locality'] = self.locality
-        kwargs['category_list_nav'] = self.categoryNav
-        kwargs['category_list'] = self.category
-        kwargs['region_list'] = self.region
+        kwargs['locality'] = Locality.objects.all() 
+        kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+        kwargs['category_list'] = Category.objects.all()
+        kwargs['region_list'] = Region.objects.all()
 
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
-        self.locality = Locality.objects.all() 
-        self.categoryNav = Category.objects.filter((~Q(title="land")))
-        self.category = Category.objects.all()
-
         self.forsale = self.model.objects.filter(purpose='sale')
-        return self.forsale.order_by('-id')
+        self.filter = PropertyFilter(self.request.GET, queryset=self.forsale.order_by('-id')) 
+        return self.filter.qs
 
 
 class ForRentListView(ListView):
@@ -198,3 +190,38 @@ def checkPage(request):
         's' :   s        
     }
     return render(request, 'template_name.html', return_dict)
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+class LandListView(ListView):
+    model = Property
+    context_object_name = 'lists'
+    template_name = 'property/list.html'
+    paginate_by = 36
+
+    def get_context_data(self, **kwargs):
+        kwargs['filter'] = self.filter
+        kwargs['locality'] =  Locality.objects.all() 
+        kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+        kwargs['category_list'] = Category.objects.all()
+        kwargs['page_title'] = "Land"
+
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+
+        # self.sidefilter = CarSideFilter(self.request.GET, queryset= self.model.objects.order_by('-id'))
+        self.landCategory = Category.objects.get(title='land') 
+        self.filter = PropertyLandFilter(self.request.GET, queryset=self.model.objects.filter(category=self.landCategory)) 
+        # queryset = self.model.objects.filter(category=self.landCategory)
+        return self.filter.qs

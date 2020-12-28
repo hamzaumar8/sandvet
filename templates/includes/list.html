@@ -1,6 +1,6 @@
 {% load humanize %}
 
-    <div class="card listing__card">
+    <div class="card listing__card ">
         <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
             <div class="card__imgBlock">
                 <div class="overlay"></div>
@@ -17,10 +17,10 @@
                     <h3>{{ list.title }}</h3>
                     <p>
                         <i class="fa fa-map-marker"></i>
-                        {{ list.address }} , {{ list.region }} Region
+                        {{ list.locality.name }} , {{ list.region }} Region
                     </p>
                 </a>
-                <div class="card__resultItems">
+                <div class="card__resultItems"> 
                     {% if list.category.title == 'land' %}
                         <span class="property-card-value">
                             <span class="field_name"> Dimensions </span>
@@ -40,7 +40,7 @@
             </div>
             <div class="card__footer">
                 <span class="favorites-actions">
-                    <a href="#" class=""><i class="fa fa-heart-o"></i></a>
+                    <!-- <a href="#" class=""><i class="fa fa-heart-o"></i></a> -->
                     <!----<i class="fa fa-spinner fa-spin fa-custom-ajax-indicator"></i> -->
                 </span>
                 <a href="#" title="" ><i class="fa fa-calendar-check-o"></i> {{ list.get_date }} </a>

@@ -196,27 +196,5 @@ class RegionListView(ListView):
 
 
 
-class LandListView(ListView):
-    model = Property
-    context_object_name = 'lists'
-    template_name = 'list.html'
-    # paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        kwargs['filter'] = self.filter
-        kwargs['locality'] = self.locality
-        kwargs['category_list_nav'] = self.categoryNav
-        kwargs['category_list'] = self.category
-
-        return super().get_context_data(**kwargs)
-
-    def get_queryset(self):
-        self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
-        self.locality = Locality.objects.all() 
-        self.categoryNav = Category.objects.filter((~Q(title="land")))
-        self.category = Category.objects.all()
-
-        self.landCategory = Category.objects.get(title='land')
-        queryset = self.model.objects.filter(category=self.landCategory)
-        return queryset.order_by('-id')
 

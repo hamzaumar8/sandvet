@@ -6,8 +6,8 @@ app_name = 'property'
 
 urlpatterns = [
     path('property/', PropertyListView.as_view(), name='property'),
-    path('for-sale/', ForSaleListView.as_view(), name='for-sale'),
-    path('<str:category>/for-sale/', CategoryForSaleListView.as_view(), name='for-sale-cate'),
+    path('property/for-sale/', ForSaleListView.as_view(), name='for-sale'),
+    path('property/<str:category>/for-sale/', CategoryForSaleListView.as_view(), name='for-sale-cate'),
     path('for-rent/', ForRentListView.as_view(), name='for-rent'),
     path('<str:category>/for-rent/', CategoryForRentListView.as_view(), name='for-rent-cate'),
 
@@ -19,6 +19,7 @@ urlpatterns = [
 
     path('check/', checkPage, name='check'),
 
+    path('property/land/', LandListView.as_view(), name='land'),
 
     # path('actor/', ActorsSearchList.as_view(), name='actor'),
 ]

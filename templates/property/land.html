@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block head_title %}{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %} 
+<div class="container mt-3">
+    <div class="row">
+        <div class="navigaiton card col-12">
+            <a class="navLinks" href="{% url 'core:index' %}">Home</a>
+            <a class="navLinks" href="{% url 'property:property' %}">Property</a>
+            <a class="navLinks">Land</a>
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="col-md-3">
+            <div class="py-3 filter-sec">
+                <div class="d-flex align-items-center justify-content-between panel__cardhead">
+                    <div><h3>Fliter</h3></div>
+                    <div class="view-change"></div>
+                </div>
+                 <!--list-head end-->
+                <div class="listings panel__cardbody d-flex">
+                    <div class="list_products col-12 m-0 p-0">
+                    <form  class="">
+                        <div class="row">
+                            {% for field in filter.form %}
+                                <div class="col-12">
+                                    {{ field|as_crispy_field }}
+                                </div>
+                            {% endfor %}
+                                <div class="col-12">
+                                    <button type="submit" class="btn2">Filter</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>     
+        </div> 
+        <div class="col-md-9">
+            <div class="listing-directs py-3">   
+                    <div class="">
+                        <div class="row align-items-center justify-content-between panel__cardhead">
+                            <div class="sortby">
+                                <span>Sort by:</span>
+                                <select class="select">
+                                    <option value="">Relevant</option>
+                                    <option value="">Oldest</option>
+                                    <option value="">Most Viewed</option>
+                                    <option value="">Higher price</option>
+                                    <option value="">Lower price</option>
+                                </select>
+                            </div><!--sortby end-->
+                            <div class="view-change">
+                                <ul class="nav nav-tabs sw-order-view">
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link grid view-type " data-ref="grid"><i class="fa fa-th-large"></i></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="javascript:void(0);" class="nav-link list view-type active" data-ref="list"><i class="fa fa-th-list"></i></a>
+                                    </li>
+                                </ul>
+                            </div><!--view-change end-->
+                        </div>
+
+                        <!--list-head end-->
+                        <div class="listings panel__cardbody row">
+                            <div class="list_products col-12 m-0 p-0 list">
+                                <div class="row">
+                                    {% for list in lists.property_set.all %}
+                                        <div class="col-md-12 mb-3">
+                                            {% include 'includes/list.html' %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                {% include 'includes/pagination.html' %}
+                            </div>
+                        </div><!--tab-content end-->
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+
+{% endblock %}
