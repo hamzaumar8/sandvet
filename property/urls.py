@@ -5,11 +5,11 @@ from .views import *
 app_name = 'property'
 
 urlpatterns = [
-    path('property/', PropertyListView.as_view(), name='property'),
-    path('property/for-sale/', ForSaleListView.as_view(), name='for-sale'),
-    path('property/<str:category>/for-sale/', CategoryForSaleListView.as_view(), name='for-sale-cate'),
+    path('', PropertyListView.as_view(), name='property'),
+    path('for-sale/', ForSaleListView.as_view(), name='for-sale'),
+    path('<slug>/for-sale/', CategoryForSaleListView.as_view(), name='for-sale-cate'),
     path('for-rent/', ForRentListView.as_view(), name='for-rent'),
-    path('<str:category>/for-rent/', CategoryForRentListView.as_view(), name='for-rent-cate'),
+    path('<slug>/for-rent/', CategoryForRentListView.as_view(), name='for-rent-cate'),
 
     path('detail/<slug>/', propertyDetail, name='property'),
 
@@ -19,7 +19,7 @@ urlpatterns = [
 
     path('check/', checkPage, name='check'),
 
-    path('property/land/', LandListView.as_view(), name='land'),
+    path('land/', LandListView.as_view(), name='land'),
 
     # path('actor/', ActorsSearchList.as_view(), name='actor'),
 ]

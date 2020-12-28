@@ -35,17 +35,17 @@ class Category(models.Model):
 
     def get_category_url(self):
         return reverse("core:category", kwargs={
-            'category': self.slug
+            'slug': self.slug
         })
 
     def get_for_sale_category_url(self):
         return reverse("property:for-sale-cate", kwargs={
-            'category': self.slug
+            'slug': self.slug
         })
 
     def get_for_rent_category_url(self):
         return reverse("property:for-rent-cate", kwargs={
-            'category': self.slug
+            'slug': self.slug
         })
 
 

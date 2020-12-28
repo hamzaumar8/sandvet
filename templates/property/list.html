@@ -3,10 +3,12 @@
 {% load crispy_forms_tags %} 
 <div class="container mt-3">
     <div class="row">
-        <div class="navigaiton card col-12">
-            <a class="navLinks" href="{% url 'core:index' %}">Home</a>
-            <a class="navLinks" href="{% url 'property:property' %}">Property</a>
-            <a class="navLinks">{{ page_title }}</a>
+        <div class="col-12">
+            <div class="navigaiton card">
+                <a class="navLinks" href="{% url 'core:index' %}">Home</a>
+                <a class="navLinks" href="{% url 'property:property' %}">Property</a>
+                <a class="navLinks">{{ page_title }}</a>
+            </div>
         </div>
     </div>
 
@@ -37,8 +39,8 @@
             </div>     
         </div> 
         <div class="col-md-9">
-            <div class="listing-directs py-3">   
-                    <div class="">
+            <div class="listing-directs py-3 ">   
+                    <div class="col-12">
                         <div class="row align-items-center justify-content-between panel__cardhead">
                             <div class="sortby">
                                 {{lists|length}}
