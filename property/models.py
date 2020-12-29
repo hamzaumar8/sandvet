@@ -102,7 +102,7 @@ class Property(models.Model):
                 unique_with='created_at__month',
                 slugify=custom_slugify
             )
-    owned_by = models.ForeignKey("RealEstate", on_delete=models.CASCADE, null=True, blank=True, related_name="realestates")
+    owned_by = models.ForeignKey("RealEstate", on_delete=models.CASCADE, null=True, blank=True, related_name="realestate")
 
     def __str__(self):
         return self.title
@@ -116,7 +116,7 @@ class Property(models.Model):
         return url
 
     def get_absolute_url(self):
-        return reverse("property:property", kwargs={
+        return reverse("property:property-detail", kwargs={
             'slug': self.slug
         })
 
@@ -169,9 +169,17 @@ class RealEstate(models.Model):
         except:
             url = ''
         return url
+    
+    @property
+    def logoURL(self):
+        try:
+            url = self.logo.url 
+        except:
+            url = ''
+        return url
 
     def get_absolute_url(self):
-        return reverse("property:property", kwargs={
+        return reverse("property:realestate-detail", kwargs={
             'slug': self.slug
         })
 

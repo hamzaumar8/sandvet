@@ -1641,14 +1641,14 @@
     min-height: 98px;
   }
   
-  .listing__card.list .card__resultItems > span.property-card-value {
+  .listing__card .card__resultItems > span.property-card-value {
     padding: 0;
     padding-right:  18px;
     font-size: 14px;
     font-size: 600;
     line-height: 1.5;
   }
-  .listing__card.list .card__resultItems > span.property-card-value i{
+  .listing__card .card__resultItems > span.property-card-value i{
     font-size: 16px;
   }
    .card__resultItems > span.property-card-value .item{

@@ -3,28 +3,34 @@
 {% load crispy_forms_tags %} 
 {% block head_title %} {{ object.title }} {%endblock %} 
 {% block content%}
-<section class="property-single-pg">
+{% if object.logoURL %}
+<section class="banner-partial banner-brands" style="background-image: url({{ object.imageURL }});">
     <div class="container">
-        <div class="property-hd-sec">
-            <div class="card">
-                <div class="card-body">
-                    <a href="#">
-                        <h1>{{ object.title }}</h1>
-                        <p><i class="fa fa-map-marker"></i>Texas, Grey Fox 6 {{ object.region.name }}</p>
-                    </a>
-                    <ul>
-                        <li>5 Bathrooms</li>
-                        <li>4 Beds</li>
-                        <li>Area 240Ft²</li>
-                    </ul>
-                </div><!--card-body end-->
-                <div class="rate-info">
-                    <h5>&cent; {{ object.price|floatformat:2 }}</h5>
-                    <span class="purpose-for-sale">For Sale</span>
-                </div><!--rate-info end-->
-            </div><!--card end-->
+        <di class="row">
+            <div class="col-md-11 mx-auto">
+                <div class="title-sec">
+                    <p>{{ object.title }}</p>
+                    <div class="col-2 mx-auto">
+                        <img src="{{ object.logoURL }}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </di>
+    </div>
+</section> 
+{% endif %}
+<section class="property-single-pg mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="navigaiton card">
+					<a class="navLinks" href="{% url 'core:index' %}">Home</a>
+					<a class="navLinks" href="{% url 'cars:cars' %}" >Properties</a>
+					<a class="navLinks" href="{% url 'cars:cars' %}" >Real Estate</a>
+					<a class="navLinks">{{ object.title }}</a>
+				</div>
+            </div>
         </div>
-        <!---property-hd-sec end-->
         <div class="property-single-page-content">
             <div class="row">
                 <div class="col-lg-8 px-0 ">
@@ -32,43 +38,55 @@
                         <div class="ci sw_widget sw_wrap">
                             <div class="bootstrap-wrapper" id="listing-preview">
                                 <div class="property-pg-left">
-                                    <div class="property-imgs">
-                                        <div class="property-main-img">
-                                            <!-- Slide 0 -->
-                                            <div class="property-img">
-                                                <img data-fullsrc="{{ object.imageURL }}" src="{{ object.imageURL }}" alt="{{ object.title }}">
-                                            </div><!--property-img end-->
-                                            <!-- Slide 1 -->
-                                            <div class="property-img">
-                                                <img data-fullsrc="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/1300x80016listing-17.jpg" src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/770x48316listing-17.jpg" alt="{{ object.title }}">
-                                            </div><!--property-img end-->
-                                        </div><!--property-main-img end-->
-                                        <div class="property-thumb-imgs">
-                                            <div class="row thumb-carous">
-                                                <!-- Slide 0 -->
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
-                                                    <div class="property-img">
-                                                        <img src="{{ object.imageURL }}" alt="{{ object.title }}">
-                                                    </div><!--property-img end-->
-                                                </div>
-                                                <!-- Slide 1 -->
-                                                <div class="col-lg-4 col-md-4 col-sm-4 col-4 thumb-img">
-                                                    <div class="property-img">
-                                                        <img src="//listing-themes.com/selio-wp/wp-content/uploads/sw_win/files/strict_cache/770x48316listing-17.jpg" alt="{{ object.title }}">
-                                                    </div><!--property-img end-->
+                                    <!---property-hd-sec end-->
+                                    <div class="property-hd-sec descp-text col-12">
+                                        <div class="row justify-content-between">
+                                            <div class="col-d-10">
+                                                <h1>{{ object.title }}</h1>
+                                                <p><i class="fa fa-map-marker"></i> {{ object.location_address}}, {{ object.locality.name }} - {{ object.region }} Region</p>
+                                            </div><!--card-body end-->
+                                            <div class="col-md2">
+                                                <div class="rate-info">
+                                                    {% if not object.logo %}
+                                                        <h5>&cent; {{ object.price|floatformat:2 }}</h5>
+                                                        <span class="purpose-for-sale">For Sale</span>
+                                                    {% endif %}
+                                                </div><!--rate-info end-->
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        {% include 'details/info-contact.html' %}
+                                    </div>
+                                    {% if not object.logo %}
+                                        {% include 'details/info-images.html' %}
+                                    {% endif %}
+                                    {% if  object.logo %}
+                                        <div class="descp-text">
+                                            <div class="row align-items-center justify-content-between panel__cardhead">
+                                                <div class="sortby">
+                                                    {{object.realestate.all|length}} Prpoerty Units
+                                                </div><!--sortby end-->
+                                            </div>
+                                            <!--list-head end-->
+                                            <div class="listings panel__cardbody row">
+                                                <div class="list_products col-12 m-0 p-0">
+                                                    <div class="row">
+                                                        {% for list in object.realestate.all %}
+                                                            <div class="col-md-6 mb-3">
+                                                                {% include 'includes/list.html' %}
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div><!--property-thumb-imgs end-->
-                                    </div><!--property-imgs end-->
-
+                                        </div><!--descp-text end-->
+                                    {% endif %}
 
                                     <div class="descp-text">
                                         <h3>Content</h3>
                                         <p>{{ object.description }}</p>
-                                        <p class="clearfix">
-                                            <b>Location:</b> United States, Minnesota 
-                                        </p>
-                                    </div><!--descp-text end-->
+                                    </div>
+                                    {% if not object.logo %}
                                     <div class="details-info  widget-overview visible-sm visible-xs field_1">
                                         <h3 class=" CATEGORY">Overview</h3>
                                         <ul>
@@ -82,7 +100,9 @@
                                             <li><h4>Country:</h4> <span>Croatia</span></li>
                                         </ul>
                                         <br style="clear: both;">
-                                    </div> <!--details-info end-->
+                                    </div>
+
+                                     <!--details-info end-->
                                     <div class="details-info  details-info-transparent   field_21">
                                         <h3 class=" CATEGORY">Indoor amenities</h3>
                                         <ul>
@@ -151,7 +171,8 @@
                                             </li>
                                         </ul>
                                         <br style="clear: both;">
-                                    </div> <!--details-info end-->
+                                    </div>
+                                    {% endif %} <!--details-info end-->
                                     <div class="similar-listings-posts clearfix">
                                         <h3>Similar Listings</h3>
                                         <div class="list-products">
@@ -166,6 +187,7 @@
 
                 <div class="col-lg-4 pr-0">
                     <div class="sidebar layout2">
+                        {% include 'details/agent-info.html'%}
                         <div id="sw_win_contactform_widget-1" class="descp-text widget widget_sw_win_contactform_widget side"><h3 class="widget-title">Contact form</h3>
                             <div class="selio_sw_win_wrapper">
                                 <div class="ci sw_widget sw_wrap">

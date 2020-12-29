@@ -14,42 +14,51 @@
             </div>
         </a>
         <div class="card__full">
-            <div class="card__body">
-                <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
-                    <h3>{{ list.title }}</h3>
-                    <p>
-                        <i class="fa fa-map-marker"></i> {{ list.location_address}} -
-                        {{ list.locality.name }} , {{ list.region }} Region
-                    </p>
-                </a>
-                <div class="card__resultItems"> 
-                    {% if list.url %}
-                    <span class="property-card-value">
-                        <span class="field_name"><i class="fa fa-globe"></i></span>
-                        <span class="item">{{ list.url }}</span>
-                    </span><br>
-                    <span class="property-card-value">
-                        <span class="field_name"><i class="fa fa-home"></i></span>
-                        <span class="item">{{ list.num_props }} Property Units</span>
-                    </span>
-                    {% else %}
-                        {% if list.category.title == 'land' %}
-                            <span class="property-card-value">
-                                <span class="field_name"> Dimensions </span>
-                                <span class="item"> {{ list.dimension }} </span>
-                            </span>
+            <div class="card__body d-flex justify-content-between">
+                <div>
+                    <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
+                        <h3>{{ list.title }}</h3>
+                        <p>
+                            <i class="fa fa-map-marker"></i> {{ list.location_address}} -
+                            {{ list.locality.name }} , {{ list.region }} Region
+                        </p>
+                    </a>
+                    <div class="card__resultItems"> 
+                        {% if list.url %}
+                        <span class="property-card-value">
+                            <span class="field_name"><i class="fa fa-globe"></i></span>
+                            <span class="item">{{ list.url }}</span>
+                        </span><br>
+                        <span class="property-card-value">
+                            <span class="field_name"><i class="fa fa-home"></i></span>
+                            <span class="item">{{ list.num_props }} Property Units</span>
+                        </span>
                         {% else %}
-                            <span class="property-card-value">
-                                <span class="field_name"> Bathrooms </span>
-                                <span class="item"> {{ list.bath }} </span>
-                            </span>
-                            <span class="property-card-value">
-                                <span class="field_name"> Beds  </span>
-                                <span class="item"> {{ list.bed }} </span>
-                            </span>
+                            {% if list.category.title == 'land' %}
+                                <span class="property-card-value">
+                                    <span class="field_name"> Dimensions </span>
+                                    <span class="item"> {{ list.dimension }} </span>
+                                </span>
+                            {% else %}
+                                <span class="property-card-value">
+                                    <span class="field_name"> Bathrooms </span>
+                                    <span class="item"> {{ list.bath }} </span>
+                                </span>
+                                <span class="property-card-value">
+                                    <span class="field_name"> Beds  </span>
+                                    <span class="item"> {{ list.bed }} </span>
+                                </span>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
+                    </div>
                 </div>
+                {% if list.logoURL %}
+                <div>
+                    <div>
+                        <img src="{{ list.logoURL }}" alt="" width="150" height="150" title="{{list.title}} Logo">
+                    </div>
+                </div>
+                {% endif %}
             </div>
             <div class="card__footer">
                 <span class="favorites-actions">

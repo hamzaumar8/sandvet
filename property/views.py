@@ -229,4 +229,18 @@ class RealEstateListView(ListView):
 
     def get_queryset(self):
         self.filter = RealEstateFilter(self.request.GET, queryset=self.model.objects.order_by('-id')) 
-        return self.filter.qs.annotate(num_props=Count('realestates', distinct=True))
+        return self.filter.qs.annotate(num_props=Count('realestate', distinct=True))
+
+
+
+def RealestateDetail(request, slug):
+    lists = get_object_or_404(RealEstate, slug=slug)
+    latest_list = RealEstate.objects.filter(~Q(id=lists.id)).order_by('-id')[:10]
+
+    region = Region.objects.all()
+    context = {
+        'object': lists, 
+        'latest_lists': latest_list,
+        'region_list': region,
+    }    
+    return render(request, 'list-detail.html', context)

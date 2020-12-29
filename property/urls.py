@@ -11,7 +11,7 @@ urlpatterns = [
     path('for-rent/', ForRentListView.as_view(), name='for-rent'),
     path('<slug>/for-rent/', CategoryForRentListView.as_view(), name='for-rent-cate'),
 
-    path('detail/<slug>/', propertyDetail, name='property'),
+    path('detail/<slug>/', propertyDetail, name='property-detail'),
 
 
     path('search/', SearchListView.as_view(), name='search'),
@@ -22,4 +22,5 @@ urlpatterns = [
     path('land/', LandListView.as_view(), name='land'),
 
     path('real-estates/', RealEstateListView.as_view(), name='real-estates'),
+    path('real-estate/detail/<slug>/', RealestateDetail, name='realestate-detail'),
 ]

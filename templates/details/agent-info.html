@@ -4,6 +4,11 @@
     <div class="selio_sw_win_wrapper">
         <div class="">
             <div class="contact-agent widget-form">
+                {% if object.logo %}
+                    <div class="">
+                        <img src="{{object.logoURL}}" alt="" class="col-12 img-fluid">
+                    </div>
+                {%endif%}
                 <div class="d-flex justify-content-between py-2">
                     <div>Call</div>
                     <div>
