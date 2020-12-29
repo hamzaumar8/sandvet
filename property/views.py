@@ -1,8 +1,8 @@
 from django.views.generic import View, ListView, DetailView, FormView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
-from django.db.models import Q
-from .models import Property, Category, LandProperty
-from .filters import PropertyFilter, PropertyCategoryFilter
+from django.db.models import Q, Count
+from .models import Property, Category, LandProperty, RealEstate
+from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter
 from core.models import Locality, Region
 
 # Create your views here.
@@ -206,3 +206,27 @@ class LandListView(ListView):
         self.landCategory = Category.objects.get(title='land') 
         self.filter = PropertyCategoryFilter(self.request.GET, queryset=self.model.objects.filter(category=self.landCategory)) 
         return self.filter.qs
+
+
+
+
+
+
+class RealEstateListView(ListView):
+    model = RealEstate
+    context_object_name = 'lists'
+    template_name = 'property/list.html'
+    paginate_by = 24
+
+    def get_context_data(self, **kwargs):
+        kwargs['page_title'] = "RealEstate"
+        kwargs['filter'] = self.filter
+        kwargs['locality'] =  Locality.objects.all() 
+        kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+        kwargs['category_list'] = Category.objects.all()
+
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        self.filter = RealEstateFilter(self.request.GET, queryset=self.model.objects.order_by('-id')) 
+        return self.filter.qs.annotate(num_props=Count('realestates', distinct=True))

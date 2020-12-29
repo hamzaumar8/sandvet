@@ -17,6 +17,19 @@ class PropertyFilter(django_filters.FilterSet):
             'region',
         ]
 
+
+class RealEstateFilter(django_filters.FilterSet):
+    title = django_filters.CharFilter(field_name='title', lookup_expr='icontains')
+    location_address = django_filters.CharFilter(field_name='location_address', lookup_expr='icontains')
+    class Meta:
+        model = RealEstate
+        fields = [
+            'title',
+            'location_address', 
+            'locality',
+            'region',
+        ]
+
 class PropertyCategoryFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(field_name='title', lookup_expr='icontains')
     location_address = django_filters.CharFilter(field_name='location_address', lookup_expr='icontains')

@@ -145,6 +145,7 @@ class RealEstate(models.Model):
     title = models.CharField(max_length=200,null=True, unique=True)
     region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True, blank=True)
     locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True, blank=True)
+    location_address = models.CharField(max_length=200, null=True)
     url = models.URLField(max_length=200, null=True, blank=True)
     logo = models.ImageField(upload_to='realeastate/logo', null=True)
     image = models.ImageField(upload_to='realeastate/')
@@ -211,14 +212,14 @@ class RealEstateImage(models.Model):
 
 
 class SocialHandle(models.Model):
-    realestate = models.ForeignKey(RealEstate, on_delete=models.CASCADE, null=True, blank=True)
+    realestate = models.OneToOneField(RealEstate, on_delete=models.CASCADE, null=True, blank=True, related_name='socialhandle')
     facebook = models.URLField(max_length=200, null=True, blank=True)
     linkedIn = models.URLField(max_length=200, null=True, blank=True)
     instagram = models.URLField(max_length=200, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.realestate.title
+    # def __str__(self):
+    #     return self.realestate.title
 
 
 

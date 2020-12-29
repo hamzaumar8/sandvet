@@ -111,7 +111,7 @@ class RealEstateForm(forms.ModelForm):
             })
     class Meta:
         model = propsModel.RealEstate
-        fields = ['title','region','locality', 'url', 'logo', 'image', 'description']
+        fields = ['title','region','locality', 'location_address' ,'url', 'logo', 'image', 'description']
 
 class SocialHandleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

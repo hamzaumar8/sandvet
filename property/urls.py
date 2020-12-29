@@ -21,5 +21,5 @@ urlpatterns = [
 
     path('land/', LandListView.as_view(), name='land'),
 
-    # path('actor/', ActorsSearchList.as_view(), name='actor'),
+    path('real-estates/', RealEstateListView.as_view(), name='real-estates'),
 ]

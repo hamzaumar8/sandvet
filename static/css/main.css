@@ -668,7 +668,19 @@
     color: #161616;
     font-weight: 400;
   }
-  
+  .favorites-actions .field_name{
+    width: 25px;
+    height: 25px;
+    background: var(--colorPrimary);
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+  }
+  .favorites-actions .field_name i{
+    color: #fff !important;
+  }
   .card__footer {
     position: relative;
     display: flex;
@@ -1630,10 +1642,19 @@
   }
   
   .listing__card.list .card__resultItems > span.property-card-value {
-    font-size: 12px;
-    padding: 0px 18px;
+    padding: 0;
+    padding-right:  18px;
+    font-size: 14px;
+    font-size: 600;
+    line-height: 1.5;
   }
-  
+  .listing__card.list .card__resultItems > span.property-card-value i{
+    font-size: 16px;
+  }
+   .card__resultItems > span.property-card-value .item{
+    color:#444;
+    font-weight: 600;
+  }
   .listing__card.list .card__footer {
     padding: 14px 23px;
   }
