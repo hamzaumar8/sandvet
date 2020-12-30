@@ -142,7 +142,7 @@ def CategoryEditPage(request, *args, **kwargs):
 @login_required
 @check_admin
 def RealEstatePage(request):
-    realestate = RealEstate.objects.all().annotate(num_props=Count('realestates', distinct=True))
+    realestate = RealEstate.objects.all().annotate(num_props=Count('realestate', distinct=True))
     context = {
         'dash_title': 'Real Estate',
         'realestate_list': realestate

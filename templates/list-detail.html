@@ -24,9 +24,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="navigaiton card">
-					<a class="navLinks" href="{% url 'core:index' %}">Home</a>
-					<a class="navLinks" href="{% url 'cars:cars' %}" >Properties</a>
-					<a class="navLinks" href="{% url 'cars:cars' %}" >Real Estate</a>
+                    <a class="navLinks" href="{% url 'core:index' %}">Home</a>
+                    <a class="navLinks" href="{% url 'property:property' %}" >Properties</a>
+                    {% if not object.logo %}
+                        <a class="navLinks" href="{% url 'property:realestates' %}" >Real Estate</a>
+                    {% endif %}
 					<a class="navLinks">{{ object.title }}</a>
 				</div>
             </div>
@@ -80,12 +82,13 @@
                                                 </div>
                                             </div>
                                         </div><!--descp-text end-->
+                                        <div class="descp-text">
+                                            <h3>Description</h3>
+                                            <p>{{ object.description }}</p>
+                                        </div>
                                     {% endif %}
 
-                                    <div class="descp-text">
-                                        <h3>Content</h3>
-                                        <p>{{ object.description }}</p>
-                                    </div>
+                                    
                                     {% if not object.logo %}
                                     <div class="details-info  widget-overview visible-sm visible-xs field_1">
                                         <h3 class=" CATEGORY">Overview</h3>
@@ -172,13 +175,64 @@
                                         </ul>
                                         <br style="clear: both;">
                                     </div>
-                                    {% endif %} <!--details-info end-->
+                                    {% endif %} 
+                                    {% if region_list %}
                                     <div class="similar-listings-posts clearfix">
-                                        <h3>Similar Listings</h3>
+                                        <h3 class="col-12">Explore Real Estates in {{object.region}} region </h3>
                                         <div class="list-products">
-                                            
-                                        </div><!-- list-products end-->
+                                            <div class="row">
+                                                {%for list in region_list %}
+                                                <div class="col-md-6">
+                                                    {% include 'includes/list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
                                     </div>
+                                    {% endif %}
+                                    {% if property_list %}
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3 class="col-12">Latest Properties in {{object.region}} region </h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in property_list %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'includes/list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if cars_list %}
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3 class="col-12">Buy Cars in {{object.region}} region </h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in cars_list %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'cars/car-list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% if school_list %}
+                                    <div class="similar-listings-posts clearfix">
+                                        <h3 class="col-12">Enroll in available Driving schools</h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in school_list %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'cars/school-list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
                                 </div>
                             </div><!--property-pg-left end-->
                         </div>
