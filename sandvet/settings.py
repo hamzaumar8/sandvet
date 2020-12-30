@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'property',
     'dashboard',
     'cars',
+
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [

@@ -50,10 +50,29 @@
                                             <div class="col-md2">
                                                 <div class="rate-info">
                                                     {% if not object.logo %}
-                                                        <h5>&cent; {{ object.price|floatformat:2 }}</h5>
-                                                        <span class="purpose-for-sale">For Sale</span>
+                                                    <h5>&cent; {{ object.price|floatformat:2 }}</h5>
+                                                    <span class="purpose-for-sale">For Sale</span>
                                                     {% endif %}
                                                 </div><!--rate-info end-->
+                                                    <span class="favorites-actions">
+                                                    {% if object.logo %}
+                                                        {% if object.socialhandle.facebook %}
+                                                        <span class="property-card-value">
+                                                            <span class="field_name"><a href="{{object.socialhandle.facebook}}"><i class="fa fa-facebook"></i></a></span>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if object.socialhandle.facebook %}
+                                                        <span class="property-card-value">
+                                                            <span class="field_name"><a href="{{object.socialhandle.instagram}}"><i class="fa fa-instagram"></i></a></span>
+                                                        </span>
+                                                        {% endif %}
+                                                        {% if object.socialhandle.facebook %}
+                                                        <span class="property-card-value">
+                                                            <span class="field_name"><a href="{{object.socialhandle.linkedIn}}"><i class="fa fa-linkedin"></i></a></span>
+                                                        </span>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </span>
                                             </div>
                                         </div>
                                         <hr>
