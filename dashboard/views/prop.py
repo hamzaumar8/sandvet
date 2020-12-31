@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.db.models import Count, Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage, SocialHandle
-from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm
+from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm, PropertyHouseForm
 from core.models import Locality
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
 from dashboard.decorators import check_admin
@@ -37,11 +37,13 @@ def propertyPage(request):
 def PropertyAddPage(request):
     propertyForm = PropertyForm()
     propertyLandForm = PropertyLandForm()
+    propertyHouseForm = PropertyHouseForm()
        
     context = {
         "dash_title": 'Add Property',
         "property_form": propertyForm,
         "propertyland_form": propertyLandForm,
+        "propertyhouse_form": propertyHouseForm,
     }
     return render(request, "dashboard/add-property.html", context)
 

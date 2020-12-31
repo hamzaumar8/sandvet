@@ -16,6 +16,9 @@
          <link href="{% static 'dashboard/libs/datatables/responsive.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
          <link href="{% static 'dashboard/libs/datatables/buttons.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />
          <link href="{% static 'dashboard/libs/datatables/select.bootstrap4.min.css' %}" rel="stylesheet" type="text/css" />   
+         
+        <link href="{% static 'dashboard/libs/jquery-nice-select/nice-select.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'dashboard/libs/select2/select2.min.css' %}" rel="stylesheet" type="text/css" />
          <!-- Plugins css -->
         <link href="{% static 'dashboard/libs/dropzone/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
         {% block extra_head %} {% endblock %}
@@ -238,12 +241,21 @@
          <script src="{% static 'dashboard/libs/datatables/dataTables.keyTable.min.js' %}"></script>
          <script src="{% static 'dashboard/libs/datatables/dataTables.select.min.js' %}"></script>
          
+         <script src="{% static 'dashboard/libs/jquery-nice-select/jquery.nice-select.min.js' %}"></script>
+        <script src="{% static 'dashboard/libs/select2/select2.min.js' %}"></script>
+         
          <!-- Datatables init -->
          <script src="{% static 'dashboard/js/pages/datatables.init.js' %}"></script>        
          
          <script src="{% static 'dashboard/js/jquery.validate.min.js' %}"></script>
           <!-- Plugins js -->
         <script src="{% static 'dashboard/libs/dropzone/dropzone.min.js' %}"></script>
+
+         <!-- Mask input -->
+         <script src="{% static 'dashboard/libs/jquery-mask-plugin/jquery.mask.min.js' %}"></script>
+
+         <!-- Init js-->
+         <script src="{% static 'dashboard/js/pages/form-advanced.init.js' %}"></script>
          <!-- App js -->
          <script src="{% static 'dashboard/js/app.min.js' %}"></script>
         

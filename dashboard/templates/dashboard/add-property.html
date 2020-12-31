@@ -1,6 +1,7 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
 {% block content %}
+
 <div class="row">
     <div class="col-lg-12"> 
         <div class="card">
@@ -32,11 +33,10 @@
     $('document').ready(function(){
         "use strict";
 
-
         // $("#id_purpose").prepend("<option value='' selected='selected'>----</option>");
-        $('#lands #id_purpose').attr('disabled', 'true')
-        $('#lands #id_category').attr('disabled', 'true')
-        $('#lands .col-md-6:eq(1)').hide()
+        // $('#lands #id_purpose').attr('disabled', 'true')
+        // $('#lands #id_category').attr('disabled', 'true')
+        // $('#lands .col-md-6:eq(1)').hide()
         $('#appartment #id_purpose').change(function(){
             $('.colors').hide();
             $('#' + $(this).val()).show();

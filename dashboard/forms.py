@@ -6,16 +6,29 @@ from core import models as coreModel
 
 class PropertyForm(forms.ModelForm): 
 
-    # title =  forms.CharField(
-    #     required = True,
-    #     label='Title',
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             'placeholder': 'eg: 4plots of land at east legon'
-    #         }
-    #     )
-    # )
+    description = forms.CharField(
+        required = True,
+        label='Description',
+        widget=forms.Textarea(
+            attrs={
+                'id': 'example-textarea',
+                'rows': 5
+            }
+        )
+    )
 
+    owned_by = forms.ModelChoiceField(
+        queryset= propsModel.RealEstate.objects.all(), 
+        empty_label='Sandvet',
+        label= 'Owned By',
+        required=False,
+        widget=forms.Select(
+            attrs={
+                'class': 'select2',
+                'data-toggle': "select2"
+            }
+        )
+    )
     
     def __init__(self, *args, **kwargs):
         super(PropertyForm, self).__init__(*args, **kwargs)
@@ -72,6 +85,44 @@ class PropertyLandForm(forms.ModelForm):
         fields = [
             'dimension',
             'area',
+        ]
+
+
+
+class PropertyHouseForm(forms.ModelForm): 
+    
+    amenities = forms.CharField(
+        required = True,
+        label='Amenities',
+        widget=forms.Textarea(
+            attrs={
+                'id': 'example-textarea',
+                'placeholder': 'eg: Fans, Refrigerator, Microwave',
+                'rows': 5
+            }
+        )
+    )
+    area =  forms.CharField(
+        label='Area (already in meter square)',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'eg: 6,503'
+            }
+        )
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(PropertyHouseForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+
+    class Meta:
+        model = propsModel.HouseProperty
+        fields = [
+            'area',
+            'amenities',
         ]
 
 
