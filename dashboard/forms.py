@@ -121,6 +121,9 @@ class PropertyHouseForm(forms.ModelForm):
     class Meta:
         model = propsModel.HouseProperty
         fields = [
+            'bed',
+            'bath',
+            'garage',
             'area',
             'amenities',
         ]

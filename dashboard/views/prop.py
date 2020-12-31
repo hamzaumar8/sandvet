@@ -81,6 +81,31 @@ def ajaxPropertyLandAdd(request):
 
 @login_required
 @check_admin
+def ajaxPropertyHouseAdd(request):
+    # request should be ajax and method should be POST.
+    if request.is_ajax and request.method == "POST":
+        # get the form data
+        form = PropertyForm(request.POST, request.FILES)
+        prophouse_form = PropertyHouseForm(request.POST, request.FILES)
+        if form.is_valid() and prophouse_form.is_valid():
+            instance = form.save(request)
+            house = prophouse_form.save()
+            house.property = instance
+            house.save()
+            instance.save()
+            
+            return JsonResponse({'error': False, 'message': 'Uploaded Successfully'}, status=200)
+        else:
+            # some form errors occured.
+            print(propland_form.errors)
+            print(form.errors)
+            return JsonResponse({'error': True, 'errors': form.errors}, status=400)
+
+    # some error occured
+    return JsonResponse({}, status=400)
+
+@login_required
+@check_admin
 def CategoryPage(request):
     category = Category.objects.all()
     context = {
