@@ -70,6 +70,7 @@ class HouseProperty(models.Model):
     bed = models.PositiveIntegerField(default=1, null=True, blank=True)
     bath = models.PositiveIntegerField(default=1, null=True, blank=True)
     garage = models.PositiveIntegerField(default=0, null=True, blank=True)
+    area = models.CharField(max_length=200, null=True, blank=True)
     amenities = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     

@@ -57,7 +57,8 @@
                                 <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">For Rent<span class="caret"></span></a>
                                     <ul class="dropdown-menu animated">
-                                        <li class="active"><a href="{% url 'property:for-rent' %}" class="dropdown-item">For  Rent</a></li>
+                                        <li class="active"><a href="{% url 'property:for-rent' %}" class="dropdown-item">Properties For  Rent</a></li>
+                                        <li class=""><a href="{% url 'cars:car-for-hire' %}" class="dropdown-item">Car For Hire</a></li>
                                         {% for cate in category_list_nav %}
                                             <li><a href="{{ cate.get_for_rent_category_url }}" class="dropdown-item"> {{cate.title}} for rent</a></li>
                                         {% endfor %}

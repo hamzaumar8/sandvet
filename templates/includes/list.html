@@ -37,16 +37,28 @@
                             {% if list.category.title == 'land' %}
                                 <span class="property-card-value">
                                     <span class="field_name"> Dimensions </span>
-                                    <span class="item"> {{ list.dimension }} </span>
+                                    <span class="item"> {{ list.landproperty.dimension }} </span>
+                                </span>
+                                <span class="property-card-value">
+                                    <span class="field_name"> Area </span>
+                                    <span class="item"> {{ list.landproperty.area }} </span>
                                 </span>
                             {% else %}
                                 <span class="property-card-value">
-                                    <span class="field_name"> Bathrooms </span>
-                                    <span class="item"> {{ list.bath }} </span>
+                                    <span class="field_name"> Bathrooms: </span>
+                                    <span class="item"> {{ list.houseproperty.bath }} </span>
                                 </span>
                                 <span class="property-card-value">
-                                    <span class="field_name"> Beds  </span>
-                                    <span class="item"> {{ list.bed }} </span>
+                                    <span class="field_name"> Beds:  </span>
+                                    <span class="item"> {{ list.houseproperty.bed }} </span>
+                                </span>
+                                <span class="property-card-value">
+                                    <span class="field_name"> Garages:  </span>
+                                    <span class="item"> {{ list.houseproperty.garage }} </span>
+                                </span>
+                                <span class="property-card-value">
+                                    <span class="field_name"> Area:  </span>
+                                    <span class="item"> {{ list.houseproperty.area }} </span>
                                 </span>
                             {% endif %}
                         {% endif %}

@@ -665,7 +665,7 @@
   
   .banner_text .card .resul-items > span.property-card-value .field_name,
   .card__resultItems > span.property-card-value .field_name {
-    color: #161616;
+    color: var(--colorPrimary);
     font-weight: 400;
   }
   .favorites-actions .field_name{
@@ -1642,11 +1642,13 @@
   }
   
   .listing__card .card__resultItems > span.property-card-value {
-    padding: 0;
-    padding-right:  18px;
+    padding: 0 10px;
     font-size: 14px;
     font-size: 600;
     line-height: 1.5;
+  }
+  .listing__card .card__resultItems > span.property-card-value:first-child{
+    padding-left: 0;
   }
   .listing__card .card__resultItems > span.property-card-value i{
     font-size: 16px;
