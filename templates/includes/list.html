@@ -6,10 +6,12 @@
                 <div class="overlay"></div>
                 <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
                 {% if not list.url %}
-                    <div class="card__rateInfo">
-                        <h5>&cent; {{ list.price|floatformat:2|intcomma }}</h5>
-                        <span class="purpose-for-{% if list.purpose == 'sale'%}sale{%else%}rent{%endif%}">For {% if list.purpose == 'sale'%}sale{%else%}rent{%endif%}</span>
-                    </div>
+                    {% if not list.rate %}
+                        <div class="card__rateInfo">
+                            <h5>&cent; {{ list.price|floatformat:2|intcomma }}</h5>
+                            <span class="purpose-for-{% if list.purpose == 'sale'%}sale{%else%}rent{%endif%}">For {% if list.purpose == 'sale'%}sale{%else%}rent{%endif%}</span>
+                        </div>
+                    {% endif %}
                 {% endif %}
             </div>
         </a>
@@ -33,6 +35,74 @@
                             <span class="field_name"><i class="fa fa-home"></i></span>
                             <span class="item">{{ list.num_props }} Property Units</span>
                         </span>
+                        {% elif  list.rate %}
+                            <span class="property-card-value">
+                                <span class="item">
+                                    {% if  list.rate == '1' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    {% elif  list.rate  == '2' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    {% elif  list.rate  == '3' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    {% elif  list.rate  == '4' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    {% elif  list.rate  == '5' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    {% endif %}
+                                    Rated 
+                                </span>
+                            </span>
+                            
+                            {% if  list.conference_facilities %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-chair"></i></span>
+                                <span class="item"> Conference facilities</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.pool %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-swimming-pool"></i></span>
+                                <span class="item">Pool</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.free_wiFi %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-wifi"></i></span>
+                                <span class="item">Free High Speed Internet (WiFi)</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.free_parking %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-parking"></i></span>
+                                <span class="item">Free parking</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.fitness_center %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-dumbbell"></i></span>
+                                <span class="item">Fitness Center</span>
+                            </span>
+                            {% endif %}
                         {% else %}
                             {% if list.category.title == 'land' %}
                                 <span class="property-card-value">
@@ -64,12 +134,12 @@
                         {% endif %}
                     </div>
                 </div>
-                {% if list.logoURL %}
-                <div>
+                {% if list.logo %}
                     <div>
-                        <img src="{{ list.logoURL }}" alt="" width="100" height="150" title="{{list.title}} Logo">
+                        <div>
+                            <img src="{{ list.logoURL }}" alt="" width="100" height="150" title="{{list.title}} Logo">
+                        </div>
                     </div>
-                </div>
                 {% endif %}
             </div>
             <div class="card__footer">
@@ -92,7 +162,11 @@
                         {% endif %}
                     {% endif %}
                 </span>
+                {% if list.rate %}
+                    <a href="{{ list.get_absolute_url }}" class="btn btn-enroll btn-primary btn-sm text-white">view Hotel</a>
+                {% else %}
                 <a href="#" title="" ><i class="fa fa-calendar-check-o"></i> {{ list.get_date }} </a>
+                {% endif %}
             </div>
         </div>
         {% if not list.url %}

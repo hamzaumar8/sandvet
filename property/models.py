@@ -11,6 +11,14 @@ def custom_slugify(value):
 
 
 # Create your models here.
+STAR_RATING = (
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+    ('5', '5'),
+)
+
 PRICE_NEGORIABLE = (
     ('yes', 'Yes'),
     ('no', 'No'),
@@ -273,3 +281,76 @@ class Subscription(models.Model):
         return self.email
 
    
+
+
+
+
+class Hotel(models.Model):
+    title = models.CharField(max_length=200,null=True)
+    location_address = models.CharField(max_length=200, null=True)
+    locality = models.ForeignKey(Locality, on_delete=models.CASCADE, null=True)
+    region = models.CharField(choices=REGIONS_LIST, max_length=20, null=True)
+    logo = models.ImageField(upload_to='hotels/logo', null=True)
+    image = models.ImageField(upload_to='hotels/')
+    description = models.TextField(null=True, blank=False)
+    rate = models.CharField(choices=STAR_RATING, max_length=1, null=True, blank=True)
+    free_parking = models.BooleanField(default=False)
+    free_wiFi = models.BooleanField(default=False)
+    pool = models.BooleanField(default=False)
+    fitness_center = models.BooleanField(default=False)
+    free_breakfast = models.BooleanField(default=False)
+    free_airport_transportation = models.BooleanField(default=False)
+    conference_facilities = models.BooleanField(default=False)
+    bar_or_lounge = models.BooleanField(default=False)
+    views = models.PositiveIntegerField(default=0)
+    featured = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = AutoSlugField(
+                populate_from='title', 
+                unique_with='created_at__month',
+                slugify=custom_slugify
+            )
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url 
+        except:
+            url = ''
+        return url
+
+    @property
+    def logoURL(self):
+        try:
+            url = self.logo.url 
+        except:
+            url = ''
+        return url
+
+    def get_absolute_url(self):
+        return reverse("property:property-detail", kwargs={
+            'slug': self.slug
+        })
+
+    def get_date(self):
+        time = datetime.now()
+        if self.created_at.day == time.day:
+            return str(time.hour - self.created_at.hour) + " hours ago"
+        else:
+            if self.created_at.month == time.month:
+                return str(time.day - self.created_at.day) + " days ago"
+            else:
+                if self.created_at.year == time.year:
+                    return str(time.month - self.created_at.month) + " months ago"
+        return self.created_at
+
+
+    
+
+
+
+
+
