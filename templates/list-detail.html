@@ -74,7 +74,7 @@
                                                     {% endif %}
                                                 </div><!--rate-info end-->
                                                 {% endif %}
-                                                    <span class="favorites-actions">
+                                                <span class="favorites-actions">
                                                     {% if object.logo %}
                                                         {% if object.socialhandle.facebook %}
                                                         <span class="property-card-value">
@@ -91,9 +91,11 @@
                                                             <a href="{{object.socialhandle.linkedIn}}"><span class="field_name"><i class="fa fa-linkedin"></i></span></a>
                                                         </span>
                                                         {% endif %}
-                                                    {% endif %}
-                                                </span>
-                                            </div>
+                                                        {% endif %}
+                                                    </span>
+                                                
+                                                    <p class="mt-1"><i class="fa fa-eye"></i> {{ object.views }} views on this post </p>
+                                                </div>
                                         </div>
                                         <hr>
                                         {% include 'details/info-contact.html' %}
@@ -379,7 +381,7 @@
 
                                     {% if region_list %}
                                     <div class="similar-listings-posts clearfix">
-                                        <h3 class="col-12">Explore Real Estates in {{object.region}} region </h3>
+                                        <h3 class="col-12">Explore {{page_title}} in {{object.region}} region </h3>
                                         <div class="list-products">
                                             <div class="row">
                                                 {%for list in region_list %}

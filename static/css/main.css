@@ -12,7 +12,10 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
-  
+  i.fa-star-o,
+  i.fa-star{
+    color: #ffc107 !important;
+  }
   html,
   body,
   div,

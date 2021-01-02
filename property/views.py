@@ -76,13 +76,27 @@ class ForRentListView(ListView):
 
 def propertyDetail(request, slug):
     lists = get_object_or_404(Property, slug=slug)
-    latest_list = Property.objects.filter(~Q(id=lists.id)).order_by('-id')[:10]
+    session_key = 'viewed_property_{}'.format(lists.pk) 
+    if not request.session.get(session_key, False):
+        lists.views += 1
+        lists.save()
+        request.session[session_key] = True
+
+    school_list = School.objects.order_by('-id')[:3]
+    cars_list = Car.objects.filter(region=lists.region).order_by('-id')[:3]
+    region_list = RealEstate.objects.filter((~Q(id=lists.id)), region=lists.region).order_by('-id')[:3]
+    latest_list = Car.objects.order_by('-id')[:6]
+    latest_property = Property.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
+    latest_spareparts = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
+
 
     region = Region.objects.all()
     context = {
+        'page_title': 'Properties',
         'object': lists, 
         'latest_lists': latest_list,
         'region_list': region,
+        'latest_property': latest_property,
     }    
     return render(request, 'list-detail.html', context)
 
@@ -236,6 +250,13 @@ class RealEstateListView(ListView):
 
 def RealestateDetail(request, slug):
     lists = get_object_or_404(RealEstate, slug=slug)
+
+    session_key = 'viewed_estate_{}'.format(lists.pk) 
+    if not request.session.get(session_key, False):
+        lists.views += 1
+        lists.save()
+        request.session[session_key] = True
+
     school_list = School.objects.order_by('-id')[:3]
     cars_list = Car.objects.filter(region=lists.region).order_by('-id')[:3]
     property_list = Property.objects.filter(region=lists.region).order_by('-id')[:3]
@@ -286,7 +307,11 @@ class HotelListView(ListView):
 def HotelDetail(request, slug):
     lists = get_object_or_404(Hotel, slug=slug)
     hotelimages = lists.hotelimages.order_by('-id')
-
+    session_key = 'viewed_hotel_{}'.format(lists.pk) 
+    if not request.session.get(session_key, False):
+        lists.views += 1
+        lists.save()
+        request.session[session_key] = True
     context = {
         'object': lists, 
         'objectimages': hotelimages,
@@ -296,7 +321,13 @@ def HotelDetail(request, slug):
 def HotelRoomDetail(request, slug):
     lists = get_object_or_404(HotelRoom, slug=slug)
     roomimages = lists.hotelroomimages.order_by('-id')
-   
+
+    session_key = 'viewed_room_{}'.format(lists.pk) 
+    if not request.session.get(session_key, False):
+        lists.views += 1
+        lists.save()
+        request.session[session_key] = True
+
     context = {
         'object': lists, 
         'objectimages': roomimages,
