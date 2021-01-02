@@ -46,34 +46,34 @@
                             <span class="item">{{ list.num_props }} Property Units</span>
                         </span>
                         {% elif  list.rate %}
-                            <span class="property-card-value">
-                                <span class="item">
+                        <span class="property-card-value">
+                            <span class="item">
                                     {% if  list.rate == '1' %}
-                                        <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
-                                    {% elif  list.rate  == '2' %}
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    {% elif  list.rate  == '3' %}
-                                        <i class="fa fa-star"></i>
+                                        {% elif  list.rate  == '2' %}
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
-                                    {% elif  list.rate  == '4' %}
+                                        <i class="fa fa-star-o"></i>
+                                        {% elif  list.rate  == '3' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        {% elif  list.rate  == '4' %}
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star-o"></i>
                                     {% elif  list.rate  == '5' %}
-                                        <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -112,6 +112,82 @@
                                 <span class="field_name"><i class="fa fa-dumbbell"></i></span>
                                 <span class="item">Fitness Center</span>
                             </span>
+                            {% endif %}
+                        {% elif not list.rate %}
+                            {% if list.hotel.rate %}
+                            <span class="property-card-value">
+                                <span class="item">
+                                    {% if  list.hotel.rate == '1' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    {% elif  list.hotel.rate  == '2' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    {% elif  list.hotel.rate  == '3' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    {% elif  list.hotel.rate  == '4' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    {% elif  list.hotel.rate  == '5' %}
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    {% endif %}
+                                    Rated 
+                                </span>
+                            </span>
+                            
+                            {% if  list.housekeeping %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-tshirt"></i></span>
+                                <span class="item">Housekeeping</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.refrigerator %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa"></i></span>
+                                <span class="item">Refrigerator</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.flatscreen_tv %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-television"></i></span>
+                                <span class="item">Flatscreen TV</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.room_service %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-parking"></i></span>
+                                <span class="item">Room Service</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.kitchenette %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-dumbbell"></i></span>
+                                <span class="item">Kitchenette</span>
+                            </span>
+                            {% endif %}
+                            {% if  list.air_conditioning %}
+                            <span class="property-card-value">
+                                <span class="field_name"><i class="fa fa-air-freshener"></i></span>
+                                <span class="item">Air Conditioning</span>
+                            </span>
+                            {% endif %}
                             {% endif %}
                         {% else %}
                             {% if list.category.title == 'land' %}
