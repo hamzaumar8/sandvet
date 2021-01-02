@@ -88,8 +88,12 @@
                                 <li class="nav-item">
                                     <a href="{% url 'property:real-estates' %}" class="nav-link">Real Estates</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'property:hotels' %}" class="nav-link">Hotels</a>
+                                <li class="nav-item dropdown active">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hotels<span class="caret"></span></a>
+                                    <ul class="dropdown-menu animated">
+                                        <li class="active"><a href="{% url 'property:hotels' %}" class="dropdown-item">Hotels</a></li>
+                                        <li class=""><a href="{% url 'property:hotel-rooms' %}" class="dropdown-item">Hotel Rooms</a></li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'property:property' %}" class="nav-link">Property</a>
@@ -97,7 +101,6 @@
                                 <li class="nav-item">
                                     <a href="{% url 'property:land' %}" class="nav-link ">Land</a>
                                 </li>
-
                                 {% if request.user.is_authenticated %}
                                 <li class="nav-item dropdown hidNav d-none">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.first_name}}<span class="caret"></span></a>
@@ -107,12 +110,12 @@
                                     </ul>
                                 </li>
                                 {%else%}
-                                <li class="nav-item">
-                                    <a href="{% url 'account_login' %}" class="nav-link ">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{% url 'account_signup' %}" class="nav-link ">New Customer?</a>
-                                </li>
+                                    <li class="nav-item hidNav d-none">
+                                        <a href="{% url 'account_login' %}" class="nav-link ">Login</a>
+                                    </li>
+                                    <li class="nav-item hidNav d-none">
+                                        <a href="{% url 'account_signup' %}" class="nav-link ">New Customer?</a>
+                                    </li>
                                 {%endif%}
                             </ul>
                         </div>

@@ -25,5 +25,6 @@ urlpatterns = [
     path('real-estate/detail/<slug>/', RealestateDetail, name='realestate-detail'),
     path('hotels/', HotelListView.as_view(), name='hotels'),
     path('hotel/detail/<slug>/', HotelDetail, name='hotel-detail'),
+    path('hotel-rooms/', HotelRoomListView.as_view(), name='hotel-rooms'),
     path('hotel-room/detail/<slug>/', HotelRoomDetail, name='hotel-room-detail'),
 ]

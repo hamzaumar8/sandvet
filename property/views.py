@@ -2,7 +2,7 @@ from django.views.generic import View, ListView, DetailView, FormView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q, Count
 from .models import Property, Category, LandProperty, RealEstate, Hotel, HotelRoom
-from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter, HotelFilter
+from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter, HotelFilter, HotelRoomFilter
 from core.models import Locality, Region
 from cars.models import Car, SparePart, School
 
@@ -323,5 +323,5 @@ class HotelRoomListView(ListView):
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.filter = HotelFilter(self.request.GET, queryset=self.model.objects.order_by('-id')) 
+        self.filter = HotelRoomFilter(self.request.GET, queryset=self.model.objects.order_by('-id')) 
         return self.filter.qs
