@@ -348,6 +348,20 @@ class Hotel(models.Model):
         return self.created_at
 
 
+class HotelImage(models.Model):
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True, blank=True, related_name='hotelimages')
+    images = models.ImageField(null=True, blank=True, upload_to="hotel/imgs/")
+
+    def __str__(self):
+        return self.hotel.title
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.images.url 
+        except:
+            url = ''
+        return url
 
 
 class HotelRoom(models.Model):
@@ -414,3 +428,17 @@ class HotelRoom(models.Model):
 
 
 
+class HotelRoomImage(models.Model):
+    hotelroom = models.ForeignKey(HotelRoom, on_delete=models.CASCADE, null=True, blank=True, related_name='hotelroomimages')
+    images = models.ImageField(null=True, blank=True, upload_to="hotelroom/imgs/")
+
+    def __str__(self):
+        return self.hotelroom.title
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.images.url 
+        except:
+            url = ''
+        return url
