@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load static %}
 {% if  spareparts %}
     <section class="popular-listing py-4  section-popular-listings">
         <div class="container">
@@ -19,7 +20,7 @@
                         <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
                             <div class="card__imgBlock">
                                 <div class="overlay"></div>
-                                <img data-src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid lozad">
+                                <img data-src="{{ list.imageURL }}" src="{% static 'img/core/placeholder.jpg' %}" alt="{{ list.title }}" class="img-fluid lozad">
                                 <div class="card__rateInfo">
                                     <h5>&cent; {{ list.price|floatformat:2|intcomma }}</h5>
                                     <span class="purpose-for-sale">For Sale</span>
