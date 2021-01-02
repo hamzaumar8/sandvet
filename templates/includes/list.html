@@ -9,7 +9,9 @@
                     {% if not list.rate %}
                         <div class="card__rateInfo">
                             <h5>&cent; {{ list.price|floatformat:2|intcomma }}</h5>
+                            {% if not list.hotel %}
                             <span class="purpose-for-{% if list.purpose == 'sale'%}sale{%else%}rent{%endif%}">For {% if list.purpose == 'sale'%}sale{%else%}rent{%endif%}</span>
+                            {% endif %}
                         </div>
                     {% endif %}
                 {% endif %}
@@ -19,11 +21,19 @@
             <div class="card__body d-flex justify-content-between">
                 <div>
                     <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
-                        <h3>{{ list.title }}</h3>
-                        <p>
-                            <i class="fa fa-map-marker"></i> {{ list.location_address}} -
-                            {{ list.locality.name }} , {{ list.region }} Region
-                        </p>
+                        {% if list.hotel %}
+                            <h3>{{ list.title }} At {{list.hotel}} </h3>
+                            <p>
+                                <i class="fa fa-map-marker"></i> {{ list.hotel.location_address}} -
+                                {{ list.hotel.locality.name }} , {{ list.hotel.region }} Region
+                            </p>
+                        {% else %}
+                            <h3>{{ list.title }}</h3>
+                            <p>
+                                <i class="fa fa-map-marker"></i> {{ list.location_address}} -
+                                {{ list.locality.name }} , {{ list.region }} Region
+                            </p>
+                        {% endif %}
                     </a>
                     <div class="card__resultItems"> 
                         {% if list.url %}

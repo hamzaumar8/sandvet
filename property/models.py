@@ -331,7 +331,7 @@ class Hotel(models.Model):
         return url
 
     def get_absolute_url(self):
-        return reverse("property:property-detail", kwargs={
+        return reverse("property:hotel-detail", kwargs={
             'slug': self.slug
         })
 
@@ -351,13 +351,14 @@ class Hotel(models.Model):
 
 
 class HotelRoom(models.Model):
-    realestate = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True, blank=True, related_name='hotel')
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True, blank=True, related_name='hotel')
     title = models.CharField(max_length=200,null=True)
-    image = models.ImageField(upload_to='hotels/')
+    price = models.FloatField()
+    image = models.ImageField(upload_to='hotels/rooms/')
     description = models.TextField(null=True, blank=False)
     housekeeping = models.BooleanField(default=False)
     refrigerator = models.BooleanField(default=False)
-    flatscreen_tV = models.BooleanField(default=False)
+    flatscreen_tv = models.BooleanField(default=False)
     kitchenette = models.BooleanField(default=False)
     room_service = models.BooleanField(default=False)
     air_conditioning = models.BooleanField(default=False)
@@ -390,7 +391,7 @@ class HotelRoom(models.Model):
         return url
 
     def get_absolute_url(self):
-        return reverse("property:property-detail", kwargs={
+        return reverse("property:hotel-room-detail", kwargs={
             'slug': self.slug
         })
 

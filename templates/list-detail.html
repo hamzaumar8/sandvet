@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% load crispy_forms_tags %} 
-{% block head_title %} {{ object.title }} {%endblock %} 
+{% block head_title %} {{ object.title }} at {{object.hotel}} {%endblock %} 
 {% block content%}
 {% if object.logoURL %}
 <section class="banner-partial banner-brands" style="background-image: url({{ object.imageURL }});">
@@ -44,14 +44,21 @@
                                     <div class="property-hd-sec descp-text col-12">
                                         <div class="row justify-content-between">
                                             <div class="col-d-10">
+                                                {% if object.hotel %}
+                                                <h1>{{ object.title }} At {{object.hotel}}</h1>
+                                                <p><i class="fa fa-map-marker"></i> {{ object.hotel.location_address}}, {{ object.hotel.locality.name }} - {{ object.hotel.region }} Region</p>
+                                                {% else %}
                                                 <h1>{{ object.title }}</h1>
                                                 <p><i class="fa fa-map-marker"></i> {{ object.location_address}}, {{ object.locality.name }} - {{ object.region }} Region</p>
+                                                {% endif %}
                                             </div><!--card-body end-->
                                             <div class="col-md2">
                                                 {% if not object.logo %}
                                                 <div class="rate-info">
                                                     <h5>&cent; {{ object.price|floatformat:2 }}</h5>
-                                                    <span class="purpose-for-sale">For Sale</span>
+                                                    {% if not object.hotel %}
+                                                        <span class="purpose-for-sale">For Sale</span>
+                                                    {% endif %}
                                                 </div><!--rate-info end-->
                                                 {% endif %}
                                                     <span class="favorites-actions">
@@ -89,18 +96,31 @@
                                         <div class="descp-text">
                                             <div class="row align-items-center justify-content-between panel__cardhead">
                                                 <div class="sortby">
-                                                    {{object.realestate.all|length}} Prpoerty Units
+                                                    {% if  object.rate %}
+                                                        {{object.hotel.all|length}} Rooms
+                                                    {% else %}
+                                                        {{object.realestate.all|length}} Property Units
+                                                    {% endif %}
                                                 </div><!--sortby end-->
                                             </div>
                                             <!--list-head end-->
                                             <div class="listings panel__cardbody row">
                                                 <div class="list_products col-12 m-0 p-0">
                                                     <div class="row">
+                                                    {% if  object.rate %}
+                                                        {% for list in object.hotel.all %}
+                                                            <div class="col-md-6 mb-3">
+                                                                {% include 'includes/list.html' %}
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% else %}
                                                         {% for list in object.realestate.all %}
                                                             <div class="col-md-6 mb-3">
                                                                 {% include 'includes/list.html' %}
                                                             </div>
                                                         {% endfor %}
+                                                    {% endif %}
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -108,9 +128,153 @@
                                         
                                     {% endif %}
 
-                                    
-                                    {% if not object.logo %}
-                                    <div class="details-info  widget-overview visible-sm visible-xs field_1">
+                                    {% if object.rate %}
+                                    <div class="details-info">
+                                        <h3 class=" CATEGORY">Amenities</h3>
+                                        <ul>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c22" 
+                                                {% if object.free_parking %}
+                                                checked="checked" 
+                                                {% endif %}
+                                                disabled="disabled" id="c22">
+                                                <label for="c22">
+                                                    <span></span>
+                                                    <small>Free Parking</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.conference_facilities %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Conference facilities</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.free_wiFi %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Free High Speed Internet (WiFi)</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.pool %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Pool</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.fitness_center %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Fitness Center</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.free_breakfast %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Free Breakfast</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.free_airport_transportation %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Free Airport Transportation</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.bar_or_lounge %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Bar Or Lounge</small>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                        <br style="clear: both;">
+                                    </div>
+                                    {% endif %}
+                                    {% if object.hotel %}
+                                    <div class="details-info">
+                                        <h3 class=" CATEGORY">Amenities</h3>
+                                        <ul>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c22" 
+                                                {% if object.housekeeping %}
+                                                checked="checked" 
+                                                {% endif %}
+                                                disabled="disabled" id="c22">
+                                                <label for="c22">
+                                                    <span></span>
+                                                    <small>Housekeeping</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.refrigerator %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Refrigerator</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.flatscreen_tv %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Flatscreen TV</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.kitchenette %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Kitchenette</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.room_service %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Room Service</small>
+                                                </label>
+                                            </li>
+                                            <li class="input-field option">
+                                                <input type="checkbox" name="c23" {% if object.air_conditioning %}
+                                                checked="checked" 
+                                                {% endif %} disabled="disabled" id="c23">
+                                                <label for="c23">
+                                                    <span></span>
+                                                    <small>Air Conditioning</small>
+                                                </label>
+                                            </li>
+                                        </ul>
+                                        <br style="clear: both;">
+                                    </div>
+                                    {% elif not object.logo %}
+                                    <div class="details-info">
                                         <h3 class=" CATEGORY">Overview</h3>
                                         <ul>
                                             <li><h4>Purpose:</h4> <span>For Sale</span></li>
@@ -126,7 +290,7 @@
                                     </div>
 
                                      <!--details-info end-->
-                                    <div class="details-info  details-info-transparent   field_21">
+                                    <div class="details-info">
                                         <h3 class=" CATEGORY">Indoor amenities</h3>
                                         <ul>
                                             <li class="input-field option">
