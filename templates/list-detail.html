@@ -56,6 +56,9 @@
                                                     {% if object.hotel %}
                                                     <h1>{{ object.title }} At {{object.hotel}}</h1>
                                                     <p><i class="fa fa-map-marker"></i> {{ object.hotel.location_address}}, {{ object.hotel.locality.name }} - {{ object.hotel.region }} Region</p>
+                                                    {% else %}
+                                                        <h1>{{ object.title }}</h1>
+                                                        <p><i class="fa fa-map-marker"></i> {{ object.location_address}}, {{ object.locality.name }} - {{ object.region }} Region</p>
                                                     {% endif %}
                                                 {% else %}
                                                 <h1>{{ object.title }}</h1>
@@ -318,94 +321,62 @@
                                             </ul>
                                             <br style="clear: both;">
                                         </div>
+                                        {% elif not object.logo %}
+                                        <div class="details-info">
+                                            <h3 class=" CATEGORY">Overview</h3>
+                                            <ul>
+                                                {% if object.category.title == 'land' %}
+                                                    <li><h4>Area:</h4> <span>{{ object.landproperty.area }}Ft²</span></li>
+                                                    <li><h4>Dimension:</h4> <span>{{ object.landproperty.dimension }}</span></li>
+                                                {% else %}
+                                                    <li><h4>Area:</h4> <span>{{ object.houseproperty.area }}Ft²</span></li>
+                                                    <li><h4>Beds:</h4> <span>{{ object.houseproperty.bed }}</span></li>
+                                                    <li><h4>Bathrooms:</h4> <span>{{ object.houseproperty.bath }}</span></li>
+                                                    <li><h4>Garage:</h4> <span>{{ object.houseproperty.garage }}</span></li>
+                                                {%endif%}
+                                            </ul>
+                                            <br style="clear: both;">
+                                        </div>
+    
+                                         <!--details-info end-->
+                                        <div class="details-info">
+                                            <h3 class=" CATEGORY">Amenities {{object.amenities}}</h3>
+                                            <ul>
+                                                <li class="input-field option">
+                                                    <input type="checkbox" name="c22" checked="checked" disabled="disabled" id="c22">
+                                                    <label for="c22">
+                                                        <span></span>
+                                                        <small>Air conditioning</small>
+                                                    </label>
+                                                </li>
+                                                <li class="input-field option">
+                                                    <input type="checkbox" name="c23" checked="checked" disabled="disabled" id="c23">
+                                                    <label for="c23">
+                                                        <span></span>
+                                                        <small>Cable TV</small>
+                                                    </label>
+                                                </li>
+                                                <li class="input-field option">
+                                                    <input type="checkbox" name="c29" checked="checked" disabled="disabled" id="c29">
+                                                    <label for="c29">
+                                                        <span></span>
+                                                        <small>Internet</small>
+                                                    </label>
+                                                </li>
+                                                <li class="input-field option">
+                                                    <input type="checkbox" name="c31" checked="checked" disabled="disabled" id="c31">
+                                                    <label for="c31">
+                                                        <span></span>
+                                                        <small>Microwave</small>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                            <br style="clear: both;">
+                                        </div>
                                     {% endif %}
-                                    {% elif not object.logo %}
-                                    <div class="details-info">
-                                        <h3 class=" CATEGORY">Overview</h3>
-                                        <ul>
-                                            <li><h4>Purpose:</h4> <span>For Sale</span></li>
-                                            <li><h4>Sale price:</h4> <span>$1500</span></li>
-                                            <li><h4>Land area:</h4> <span>1300ft2</span></li>
-                                            <li><h4>Area:</h4> <span>240Ft²</span></li>
-                                            <li><h4>Beds:</h4> <span>{{ object.bed }}</span></li>
-                                            <li><h4>Bathrooms:</h4> <span>{{ object.bath }}</span></li>
-                                            <li><h4>Garage:</h4> <span>{{ object.garage }}</span></li>
-                                            <li><h4>Country:</h4> <span>Croatia</span></li>
-                                        </ul>
-                                        <br style="clear: both;">
-                                    </div>
-
-                                     <!--details-info end-->
-                                    <div class="details-info">
-                                        <h3 class=" CATEGORY">Indoor amenities</h3>
-                                        <ul>
-                                            <li class="input-field option">
-                                                <input type="checkbox" name="c22" checked="checked" disabled="disabled" id="c22">
-                                                <label for="c22">
-                                                    <span></span>
-                                                    <small>Air conditioning</small>
-                                                </label>
-                                            </li>
-                                            <li class="input-field option">
-                                                <input type="checkbox" name="c23" checked="checked" disabled="disabled" id="c23">
-                                                <label for="c23">
-                                                    <span></span>
-                                                    <small>Cable TV</small>
-                                                </label>
-                                            </li>
-                                            <li class="input-field option">
-                                                <input type="checkbox" name="c29" checked="checked" disabled="disabled" id="c29">
-                                                <label for="c29">
-                                                    <span></span>
-                                                    <small>Internet</small>
-                                                </label>
-                                            </li>
-                                            <li class="input-field option">
-                                                <input type="checkbox" name="c31" checked="checked" disabled="disabled" id="c31">
-                                                <label for="c31">
-                                                    <span></span>
-                                                    <small>Microwave</small>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                        <br style="clear: both;">
-                                    </div> <!--details-info end-->
-
-                                    <div class="details-info  details-info-transparent   field_52">
-                                        <h3 class=" CATEGORY">Outdoor amenities</h3>
-                                        <ul>
-                                            <li class="input-field option">
-                                                <input type="checkbox" name="c32" checked="checked" disabled="disabled" id="c32">
-                                                <label for="c32">
-                                                    <span></span>
-                                                    <small>Parking</small>
-                                                </label>
-                                            </li>
-                                            <li class="input-field option">
-                                                <input type="checkbox" name="c11" checked="checked" disabled="disabled" id="c11">
-                                                <label for="c11">
-                                                    <span></span>
-                                                    <small>Balcony</small>
-                                                </label>
-                                            </li>
-                                            <li class="input-field option">
-                                                <input type="checkbox" name="c27" checked="checked" disabled="disabled" id="c27">
-                                                <label for="c27">
-                                                    <span></span>
-                                                    <small>Grill</small>
-                                                </label>
-                                            </li>
-                                            <li class="input-field option">
-                                                <input type="checkbox" name="c33" checked="checked" disabled="disabled" id="c33">
-                                                <label for="c33">
-                                                    <span></span>
-                                                    <small>Pool</small>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                        <br style="clear: both;">
-                                    </div>
+                                    
                                     {% endif %} 
+
                                     {% if region_list %}
                                     <div class="similar-listings-posts clearfix">
                                         <h3 class="col-12">Explore Real Estates in {{object.region}} region </h3>

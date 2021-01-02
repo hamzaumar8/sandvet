@@ -7,6 +7,9 @@
             <div class="navigaiton card">
                 <a class="navLinks" href="{% url 'core:index' %}">Home</a>
                 <a class="navLinks" href="{% url 'property:property' %}">Property</a>
+                {% if page_title == 'Hotel Rooms' %}
+                    <a class="navLinks" href="{% url 'property:hotels' %}">Hotels</a>
+                {% endif %}
                 <a class="navLinks">{{ page_title }}</a>
             </div>
         </div>
