@@ -82,3 +82,17 @@ class HotelFilter(django_filters.FilterSet):
             'bar_or_lounge',
 
         ]
+
+class HotelRoomFilter(django_filters.FilterSet):
+    title = django_filters.CharFilter(field_name='title', lookup_expr='icontains')
+    class Meta:
+        model = HotelRoom
+        fields = [
+            'title',
+            'housekeeping',
+            'refrigerator',
+            'flatscreen_tv',
+            'kitchenette',
+            'room_service',
+            'air_conditioning',
+        ]

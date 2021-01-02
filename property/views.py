@@ -302,3 +302,26 @@ def HotelRoomDetail(request, slug):
         'objectimages': roomimages,
     }    
     return render(request, 'list-detail.html', context)
+
+
+
+
+
+class HotelRoomListView(ListView):
+    model = HotelRoom
+    context_object_name = 'lists'
+    template_name = 'property/list.html'
+    paginate_by = 24
+
+    def get_context_data(self, **kwargs):
+        kwargs['page_title'] = "Hotel Rooms"
+        kwargs['filter'] = self.filter
+        kwargs['locality'] =  Locality.objects.all() 
+        kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+        kwargs['category_list'] = Category.objects.all()
+
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        self.filter = HotelFilter(self.request.GET, queryset=self.model.objects.order_by('-id')) 
+        return self.filter.qs
