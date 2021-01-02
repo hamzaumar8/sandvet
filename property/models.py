@@ -424,10 +424,6 @@ class HotelRoom(models.Model):
 
     
 
-
-
-
-
 class HotelRoomImage(models.Model):
     hotelroom = models.ForeignKey(HotelRoom, on_delete=models.CASCADE, null=True, blank=True, related_name='hotelroomimages')
     images = models.ImageField(null=True, blank=True, upload_to="hotelroom/imgs/")

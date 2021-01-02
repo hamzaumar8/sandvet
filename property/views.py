@@ -285,16 +285,20 @@ class HotelListView(ListView):
 
 def HotelDetail(request, slug):
     lists = get_object_or_404(Hotel, slug=slug)
-   
+    hotelimages = lists.hotelimages.order_by('-id')
+
     context = {
         'object': lists, 
+        'objectimages': hotelimages,
     }    
     return render(request, 'list-detail.html', context)
 
 def HotelRoomDetail(request, slug):
     lists = get_object_or_404(HotelRoom, slug=slug)
+    roomimages = lists.hotelroomimages.order_by('-id')
    
     context = {
         'object': lists, 
+        'objectimages': roomimages,
     }    
     return render(request, 'list-detail.html', context)
