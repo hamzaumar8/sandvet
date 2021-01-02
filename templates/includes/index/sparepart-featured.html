@@ -19,7 +19,7 @@
                         <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
                             <div class="card__imgBlock">
                                 <div class="overlay"></div>
-                                <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
+                                <img data-src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid lozad">
                                 <div class="card__rateInfo">
                                     <h5>&cent; {{ list.price|floatformat:2|intcomma }}</h5>
                                     <span class="purpose-for-sale">For Sale</span>

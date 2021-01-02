@@ -4,7 +4,7 @@
         <a href="{{ list.get_absolute_url }}" title="{{ list.title }}" class="preview">
             <div class="card__imgBlock">
                 <div class="overlay"></div>
-                <img src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid">
+                <img data-src="{{ list.imageURL }}" alt="{{ list.title }}" class="img-fluid lozad">
                 {% if not list.url %}
                     {% if not list.rate %}
                         <div class="card__rateInfo">
@@ -223,7 +223,7 @@
                 {% if list.logo %}
                     <div>
                         <div>
-                            <img src="{{ list.logoURL }}" alt="" width="100" height="150" title="{{list.title}} Logo">
+                            <img data-src="{{ list.logoURL }}" alt="" class="lozad" width="100" height="150" title="{{list.title}} Logo">
                         </div>
                     </div>
                 {% endif %}
