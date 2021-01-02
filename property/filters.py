@@ -59,3 +59,26 @@ class HomePropertFilter(django_filters.FilterSet):
             'category'
         ]
 
+
+
+
+class HotelFilter(django_filters.FilterSet):
+    title = django_filters.CharFilter(field_name='title', lookup_expr='icontains')
+    location_address = django_filters.CharFilter(field_name='location_address', lookup_expr='icontains')
+    class Meta:
+        model = Hotel
+        fields = [
+            'title',
+            'location_address', 
+            'locality',
+            'region',
+            'free_parking',
+            'free_wiFi',
+            'pool',
+            'free_breakfast',
+            'fitness_center',
+            'free_airport_transportation',
+            'conference_facilities',
+            'bar_or_lounge',
+
+        ]

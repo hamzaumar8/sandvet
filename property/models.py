@@ -348,6 +348,65 @@ class Hotel(models.Model):
         return self.created_at
 
 
+
+
+class HotelRoom(models.Model):
+    realestate = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=True, blank=True, related_name='hotel')
+    title = models.CharField(max_length=200,null=True)
+    image = models.ImageField(upload_to='hotels/')
+    description = models.TextField(null=True, blank=False)
+    housekeeping = models.BooleanField(default=False)
+    refrigerator = models.BooleanField(default=False)
+    flatscreen_tV = models.BooleanField(default=False)
+    kitchenette = models.BooleanField(default=False)
+    room_service = models.BooleanField(default=False)
+    air_conditioning = models.BooleanField(default=False)
+    views = models.PositiveIntegerField(default=0)
+    featured = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = AutoSlugField(
+                populate_from='title', 
+                unique_with='created_at__month',
+                slugify=custom_slugify
+            )
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url 
+        except:
+            url = ''
+        return url
+
+    @property
+    def logoURL(self):
+        try:
+            url = self.logo.url 
+        except:
+            url = ''
+        return url
+
+    def get_absolute_url(self):
+        return reverse("property:property-detail", kwargs={
+            'slug': self.slug
+        })
+
+    def get_date(self):
+        time = datetime.now()
+        if self.created_at.day == time.day:
+            return str(time.hour - self.created_at.hour) + " hours ago"
+        else:
+            if self.created_at.month == time.month:
+                return str(time.day - self.created_at.day) + " days ago"
+            else:
+                if self.created_at.year == time.year:
+                    return str(time.month - self.created_at.month) + " months ago"
+        return self.created_at
+
+
     
 
 

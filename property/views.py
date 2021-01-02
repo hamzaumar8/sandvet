@@ -2,7 +2,7 @@ from django.views.generic import View, ListView, DetailView, FormView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q, Count
 from .models import Property, Category, LandProperty, RealEstate, Hotel
-from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter
+from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter, HotelFilter
 from core.models import Locality, Region
 from cars.models import Car, SparePart, School
 
@@ -276,5 +276,33 @@ class HotelListView(ListView):
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.filter = RealEstateFilter(self.request.GET, queryset=self.model.objects.order_by('-id')) 
+        self.filter = HotelFilter(self.request.GET, queryset=self.model.objects.order_by('-id')) 
         return self.filter.qs
+
+
+
+
+
+def RealestateDetail(request, slug):
+    lists = get_object_or_404(RealEstate, slug=slug)
+    school_list = School.objects.order_by('-id')[:3]
+    cars_list = Car.objects.filter(region=lists.region).order_by('-id')[:3]
+    property_list = Property.objects.filter(region=lists.region).order_by('-id')[:3]
+    region_list = RealEstate.objects.filter((~Q(id=lists.id)), region=lists.region).order_by('-id')[:3]
+    realestate_list = RealEstate.objects.filter(~Q(id=lists.id), region=lists.region).order_by('-id')[:4]
+    latest_list = Car.objects.order_by('-id')[:6]
+    latest_property = Property.objects.order_by('-id')[:6]
+    latest_spareparts = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
+
+    region = Region.objects.all()
+    context = {
+        'object': lists, 
+        'latest_lists': latest_list,
+        'realestate_lists': realestate_list,
+        'region_list': region_list,
+        'latest_spareparts': latest_spareparts,
+        'latest_property': latest_property,
+        'property_list': property_list,
+        'school_list': school_list
+    }    
+    return render(request, 'list-detail.html', context)
