@@ -127,6 +127,12 @@ def CarDetail(request, slug):
         'latest_property': latest_property,
         'latest_spareparts': latest_spareparts,
     }    
+    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+    context['category_list'] = Category.objects.all()
+    context['brands_list'] = Brand.objects.order_by('-views')[:7]
+    context['driving_list'] = School.objects.order_by('-views')[:7]
+    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7] 
     return render(request, 'cars/car-detail.html', context)
 
 
@@ -235,7 +241,13 @@ def SparePartDetail(request, slug):
         'objectimages': spareimages,
         'region_list': region_list,
         'latest_spareparts': latest_spareparts,
-    }    
+    }   
+    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+    context['category_list'] = Category.objects.all()
+    context['brands_list'] = Brand.objects.order_by('-views')[:7]
+    context['driving_list'] = School.objects.order_by('-views')[:7]
+    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7]  
     return render(request, 'cars/spare-detail.html', context)
 
 
@@ -296,5 +308,11 @@ def SchoolDetail(request, slug):
         'region_list': region_list,
         'school_list': school_list,
         'latest_spareparts': latest_spareparts
-    }    
+    } 
+    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+    context['category_list'] = Category.objects.all()
+    context['brands_list'] = Brand.objects.order_by('-views')[:7]
+    context['driving_list'] = School.objects.order_by('-views')[:7]
+    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7]    
     return render(request, 'cars/school-detail.html', context)

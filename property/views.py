@@ -4,7 +4,7 @@ from django.db.models import Q, Count
 from .models import Property, Category, LandProperty, RealEstate, Hotel, HotelRoom
 from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter, HotelFilter, HotelRoomFilter
 from core.models import Locality, Region
-from cars.models import Car, SparePart, School
+from cars.models import Car, SparePart, School, Brand
 
 # Create your views here.
 class PropertyListView(ListView):
@@ -105,7 +105,13 @@ def propertyDetail(request, slug):
         'latest_lists': latest_list,
         'region_list': region,
         'latest_property': latest_property,
-    }    
+    } 
+    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+    context['category_list'] = Category.objects.all()
+    context['brands_list'] = Brand.objects.order_by('-views')[:7]
+    context['driving_list'] = School.objects.order_by('-views')[:7]
+    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7]    
     return render(request, 'list-detail.html', context)
 
 
@@ -292,7 +298,13 @@ def RealestateDetail(request, slug):
         'latest_property': latest_property,
         'property_list': property_list,
         'school_list': school_list
-    }    
+    }  
+    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+    context['category_list'] = Category.objects.all()
+    context['brands_list'] = Brand.objects.order_by('-views')[:7]
+    context['driving_list'] = School.objects.order_by('-views')[:7]
+    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7]   
     return render(request, 'list-detail.html', context)
 
 
@@ -351,7 +363,13 @@ def HotelRoomDetail(request, slug):
     context = {
         'object': lists, 
         'objectimages': roomimages,
-    }    
+    }   
+    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+    context['category_list'] = Category.objects.all()
+    context['brands_list'] = Brand.objects.order_by('-views')[:7]
+    context['driving_list'] = School.objects.order_by('-views')[:7]
+    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7] 
     return render(request, 'list-detail.html', context)
 
 
@@ -371,7 +389,7 @@ class HotelRoomListView(ListView):
         kwargs['driving_list'] = School.objects.order_by('-views')[:7]
         kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
         kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
-        
+
         kwargs['page_title'] = "Hotel Rooms"
         kwargs['filter'] = self.filter
 
