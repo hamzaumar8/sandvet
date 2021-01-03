@@ -8,10 +8,10 @@
                 <div class="widget-property-search card mt-3 home-widget-search col-11 mx-auto">
                     <form action="{% url 'property:search' %}" class="">
                         <div class="row justify-content-center">
-                            <div class="col-11">
+                            <div class="col-lg-11 col-12">
                                 <div class="row ">
                                     {% for field in filter.form %}
-                                    <div class="col-md-3 border-col">
+                                    <div class="col-lg-3 border-col">
                                         {{ field|as_crispy_field }}
                                     </div>
                                     {% endfor %}
@@ -30,10 +30,10 @@
                 <div class="widget-property-search card mt-3 home-widget-search col-11 mx-auto">
                     <form action="{% url 'cars:cars' %}" class="banner-cars">
                         <div class="row justify-content-center">
-                            <div class="col-11">
+                            <div class="col-lg-11 col-12">
                                 <div class="row ">
                                     {% for field in carfilter.form %}
-                                    <div class="col-md-3 border-col">
+                                    <div class="col-lg-3 border-col">
                                         {{ field|as_crispy_field }}
                                     </div>
                                     {% endfor %}
@@ -52,10 +52,10 @@
                 <div class="widget-property-search card mt-3 home-widget-search col-11 mx-auto">
                     <form action="{% url 'cars:cars' %}" class="banner-cars">
                         <div class="row justify-content-center">
-                            <div class="col-11">
+                            <div class="col-lg-11 col-12">
                                 <div class="row ">
                                     {% for field in carfilter.form %}
-                                    <div class="col-md-3 border-col">
+                                    <div class="col-lg-3 border-col">
                                         {{ field|as_crispy_field }}
                                     </div>
                                     {% endfor %}
