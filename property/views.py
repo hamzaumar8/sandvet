@@ -14,13 +14,15 @@ class PropertyListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['page_title'] = 'All Properties'
-        kwargs['filter'] = self.filter
-        kwargs['locality'] = Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
 
+        kwargs['page_title'] = 'All Properties'
+        kwargs['filter'] = self.filter
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
@@ -35,12 +37,15 @@ class ForSaleListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['page_title'] = 'For Sale'
-        kwargs['filter'] = self.filter
-        kwargs['locality'] = Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
+        kwargs['page_title'] = 'For Sale'
+        kwargs['filter'] = self.filter
 
         return super().get_context_data(**kwargs)
 
@@ -57,12 +62,15 @@ class ForRentListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['page_title'] = 'For Sale'
-        kwargs['filter'] = self.filter
-        kwargs['locality'] = Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
+        kwargs['page_title'] = 'For Sale'
+        kwargs['filter'] = self.filter
 
         return super().get_context_data(**kwargs)
 
@@ -111,12 +119,15 @@ class CategoryForSaleListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['page_title'] = f'{self.slug} For Sale'
-        kwargs['filter'] = self.filter
-        kwargs['locality'] = Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
+        kwargs['page_title'] = f'{self.slug} For Sale'
+        kwargs['filter'] = self.filter
 
         return super().get_context_data(**kwargs)
 
@@ -136,12 +147,15 @@ class CategoryForRentListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['page_title'] = f'{self.slug} For Rent'
-        kwargs['filter'] = self.filter
-        kwargs['locality'] = Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
+        kwargs['page_title'] = f'{self.slug} For Rent'
+        kwargs['filter'] = self.filter
 
         return super().get_context_data(**kwargs)
 
@@ -163,30 +177,24 @@ class SearchListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
+        kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+        kwargs['category_list'] = Category.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
         kwargs['filter'] = self.filter
-        kwargs['locality'] = self.locality
-        kwargs['category_list_nav'] = self.categoryNav
-        kwargs['category_list'] = self.category
-        kwargs['region_list'] = self.region
         
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
         self.filter = PropertyFilter(self.request.GET, queryset= self.model.objects.all()) 
-        self.locality = Locality.objects.all() 
-        self.categoryNav = Category.objects.filter((~Q(title="land")))
-        self.category = Category.objects.all()
-        self.region = Region.objects.all()
         
         self.query = self.filter.qs
         return self.query
 
 
-
-# def checkPage(request):
-#     table1 = Category.objects.all() 
-#     table2 = Property.objects.all() 
-#     return render(request, 'template_name.html',{'table1':table1, 'table2':table2})
 
 def checkPage(request):
     s = Category.objects.all()
@@ -209,11 +217,15 @@ class LandListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['filter'] = self.filter
-        kwargs['locality'] =  Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
         kwargs['page_title'] = "Land"
+        kwargs['filter'] = self.filter
 
         return super().get_context_data(**kwargs)
 
@@ -234,11 +246,15 @@ class RealEstateListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['page_title'] = "RealEstate"
-        kwargs['filter'] = self.filter
-        kwargs['locality'] =  Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
+        kwargs['page_title'] = "RealEstate"
+        kwargs['filter'] = self.filter
 
         return super().get_context_data(**kwargs)
 
@@ -288,11 +304,15 @@ class HotelListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['page_title'] = "Hotels"
-        kwargs['filter'] = self.filter
-        kwargs['locality'] =  Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
+        kwargs['page_title'] = "Hotels"
+        kwargs['filter'] = self.filter
 
         return super().get_context_data(**kwargs)
 
@@ -345,11 +365,15 @@ class HotelRoomListView(ListView):
     paginate_by = 24
 
     def get_context_data(self, **kwargs):
-        kwargs['page_title'] = "Hotel Rooms"
-        kwargs['filter'] = self.filter
-        kwargs['locality'] =  Locality.objects.all() 
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+        
+        kwargs['page_title'] = "Hotel Rooms"
+        kwargs['filter'] = self.filter
 
         return super().get_context_data(**kwargs)
 

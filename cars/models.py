@@ -70,6 +70,7 @@ class Brand(models.Model):
     featured = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='brands/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    views = models.PositiveIntegerField(default=0)
     slug = AutoSlugField(populate_from='name', unique_with='created_at__month', slugify=custom_slugify )
 
     def __str__(self):

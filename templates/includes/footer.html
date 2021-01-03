@@ -1,7 +1,4 @@
 {% load crispy_forms_tags %} 
-
-
-
 <section class="bottom__section">
     <div class="container placeholder-container">
         <div class="row">
@@ -9,6 +6,7 @@
                 <div class="widget-footer-contacts">
                     <h3>For rent</h3>
                     <ul class="footer-list">
+                        <li><span class="value"><a href="{% url 'cars:car-for-hire' %}">Car For Hire</a></li>
                         <li><span class="value"><a href="{% url 'property:for-rent' %}">Property for rent</a></span></li>
                         {% for cate in category_list_nav %}
                         <li><span class="value"><a href="{{cate.get_for_rent_category_url}}">{{cate.title}} for rent</a></span></li>
@@ -18,6 +16,7 @@
                 <div class="widget-footer-contacts mt-3">
                     <h3>For Sale</h3>
                     <ul class="footer-list">
+                        <li><span class="value"><a href="{% url 'cars:car-for-sale' %}">Cars for sale</a></li>
                         <li><span class="value"><a href="{% url 'property:for-sale' %}">Property for sale</a></span></li>
                         {% for cate in category_list %}
                         <li><span class="value"><a href="{{cate.get_for_sale_category_url}}">{{cate.title}} for sale</a></span></li>
@@ -27,23 +26,38 @@
             </div>
             <div class="widget col-xl-3 col-sm-6 col-md-4">
                 <div class="widget-footer-contacts">
-                    <h3>Region or State</h3>
+                    <h3>Top Car Brands</h3>
                     <ul class="footer-list">
-                        {% for region in region_list %}
-                        <li><span class="value"><a href="{{region.get_region_url}}">{{region.name}} </a></span></li>
+                        {% for tbrand in brands_list %}
+                        <li><span class="value"><a href="{{tbrand.get_absolute_url}}">{{tbrand.name}} </a></span></li>
+                        {%endfor%}
+                    </ul>
+                </div>
+                <div class="widget-footer-contacts mt-3">
+                    <h3>Top driving schools</h3>
+                    <ul class="footer-list">                
+                        {% for list in driving_list %}
+                            <li><span class="value"><a href="{{list.get_absolute_url}}">{{list.title}}</a></span></li>
                         {%endfor%}
                     </ul>
                 </div>
             </div>
             <div id="widget-follow-us-1" class="widget footer-regular widget-follow-us block-selio col-xl-3 col-sm-12 col-md-5">
                 <div class="widget-footer-contacts">
-                    <h3>Locality</h3>
+                    <h3>Top Hotels</h3>
                     <ul class="footer-list">                
-                        {% for local in locality %}
-                            <li><span class="value"><a href="{{local.get_locality_url}}">propety at {{local.name}}</a></span></li>
+                        {% for list in hotels_list %}
+                            <li><span class="value"><a href="{{list.get_absolute_url}}">{{list.title}}</a></span></li>
                         {%endfor%}
                     </ul>
-
+                </div>
+                <div class="widget-footer-contacts mt-3">
+                    <h3>Top Real Estates</h3>
+                    <ul class="footer-list">                
+                        {% for list in realestates_list %}
+                            <li><span class="value"><a href="{{list.get_absolute_url}}">{{list.title}}</a></span></li>
+                        {%endfor%}
+                    </ul>
                 </div>
             </div> 
             <div id="widget-footer-contacts-1" class="widget footer-regular widget-footer-contacts block-selio col-xl-3 col-sm-6 col-md-3">

@@ -1,7 +1,7 @@
 from django.views.generic import View, ListView, DetailView, FormView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q
-from property.models import Property, Category
+from property.models import Property, Category, RealEstate, Hotel
 from property.filters import PropertyFilter
 from core.models import Locality, Region
 from .models import Car, Brand, SparePart, School
@@ -15,10 +15,12 @@ class CarListView(ListView):
     paginate_by = 30
 
     def get_context_data(self, **kwargs):
-        kwargs['locality'] = Locality.objects.all()
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
 
         kwargs['sidefilter'] = self.sidefilter
         kwargs['brands']  = Brand.objects.filter(featured=1).order_by('-id')[:12]
@@ -38,10 +40,13 @@ class BrandsView(ListView):
     template_name = 'cars/brands.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['locality'] = Locality.objects.all()
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
         kwargs['property_list']  = Property.objects.order_by('-id')[:3]
         kwargs['car_list']  = Car.objects.order_by('-id')[:4]
 
@@ -58,12 +63,15 @@ class BrandListView(ListView):
     paginate_by = 36
 
     def get_context_data(self, **kwargs):
-        kwargs['filter'] = self.filter
-        kwargs['sidefilter'] = self.sidefilter
-        kwargs['locality'] = Locality.objects.all()
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
+        kwargs['filter'] = self.filter
+        kwargs['sidefilter'] = self.sidefilter
         kwargs['car_count'] =self.brandqueryset.count()
         kwargs['property_list']  = Property.objects.order_by('-id')[:3]
         kwargs['brands']  = Brand.objects.order_by('-id')[:12]
@@ -72,19 +80,21 @@ class BrandListView(ListView):
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
+        
         self.filter = CarFilter(self.request.GET, queryset= self.model.objects.all()) 
         self.sidefilter = CarSideFilter(self.request.GET, queryset= self.model.objects.order_by('-id'))
         self.brand = get_object_or_404(Brand,  slug=self.kwargs.get('slug'))
         self.brandqueryset = Car.objects.filter(brand=self.brand)
+
+        session_key = 'viewed_brands_{}'.format(self.brand.pk) 
+        if not self.request.session.get(session_key, False):
+            self.brand.views += 1
+            self.brand.save()
+            self.request.session[session_key] = True
+
         return self.brandqueryset.order_by('-id')
 
 
-
-# def detail_list(model,  fieldname, field, nid):
-#     if nid:
-#         lists = model.objects.filter((~Q(id=nid)), brand=field).order_by('-id')[:3]
-#     else:
-#         lists = model.objects.filter(brand=field).order_by('-id')[:3]
 
 
 def CarDetail(request, slug):
@@ -129,10 +139,12 @@ class CarListSaleView(ListView):
     paginate_by = 30
 
     def get_context_data(self, **kwargs):
-        kwargs['locality'] = Locality.objects.all()
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
 
         kwargs['sidefilter'] = CarSideFilter(self.request.GET, queryset=self.model.objects.order_by('-id'))
         kwargs['brands']  = Brand.objects.filter(featured=1).order_by('-id')[:12]
@@ -152,10 +164,12 @@ class CarListHireView(ListView):
     paginate_by = 30
 
     def get_context_data(self, **kwargs):
-        kwargs['locality'] = Locality.objects.all()
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
 
         kwargs['sidefilter'] = CarSideFilter(self.request.GET, queryset=self.model.objects.order_by('-id'))
         kwargs['brands']  = Brand.objects.filter(featured=1).order_by('-id')[:12]
@@ -177,10 +191,8 @@ class SparePartListView(ListView):
     paginate_by = 30
 
     def get_context_data(self, **kwargs):
-        kwargs['locality'] = Locality.objects.all()
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
 
         kwargs['filter'] = self.filter
         kwargs['brands']  = Brand.objects.filter(featured=1).order_by('-id')[:12]
@@ -237,10 +249,12 @@ class SchoolListView(ListView):
     paginate_by = 30
 
     def get_context_data(self, **kwargs):
-        kwargs['locality'] = Locality.objects.all()
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
-        kwargs['region_list'] = Region.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
 
         kwargs['filter'] = self.filter
         kwargs['brands']  = Brand.objects.filter(featured=1).order_by('-id')[:12]
