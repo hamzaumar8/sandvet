@@ -438,3 +438,8 @@ class HotelRoomImage(models.Model):
         except:
             url = ''
         return url
+
+
+
+
+

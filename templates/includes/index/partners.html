@@ -1,0 +1,28 @@
+{% load humanize %}
+{% load static %}
+{% if  partners %}
+    <section class="popular-listing  section-popular-listings mb-5">
+        <div class="container-fluid">
+            <div id="panel__responsivePertners" class="row panel__responsive panel__cardbody align-items-center py-3">
+                {% for list in partners %}
+                    <div class="mx-3">
+                        <div class="card text-center listing__card brand-card">
+                            {% if 'http' in list.3 %}
+                                <div class="brand-img">
+                                    <a href="{% url 'property:realestate-detail' slug=list.1%}"><img data-src="/media/{{ list.2 }}" src="{% static 'img/core/placeholder.jpg' %}" alt="{{ list.0 }}" class="img-fluid lozad"></a>
+                                </div>
+                                <a href="{% url 'property:realestate-detail' slug=list.1%}" title="{{ list.0 }}" class="ext-link" tabindex="0"></a>
+                            {% else %}
+                                <div class="brand-img">
+                                    <a href="{% url 'property:hotel-detail' slug=list.1%}"><img data-src="/media/{{ list.2 }}" src="{% static 'img/core/placeholder.jpg' %}" alt="{{ list.0 }}" class="img-fluid lozad"></a>
+                                </div>
+                                <a href="{% url 'property:hotel-detail' slug=list.1%}" title="{{ list.0 }}" class="ext-link" tabindex="0"></a>
+                            {% endif %}
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <script>$(document).ready(function() {"use strict";$('#panel__responsivePertners').slick({autoplay: true,autoplaySpeed: 2000,dots: true,infinite: true,speed: 300,slidesToShow: 8,slidesToScroll: 8,prevArrow: $('#pannelPrevPartners'),nextArrow: $('#pannelNextPartners'),responsive: [{breakpoint: 1024,settings: {slidesToShow: 3,slidesToScroll: 3,infinite: true,dots: true}},{breakpoint: 754,settings: {slidesToShow: 2,slidesToScroll: 2}},{breakpoint: 480,settings: {slidesToShow: 1,slidesToScroll: 1}}]});})</script>
+{% endif %}

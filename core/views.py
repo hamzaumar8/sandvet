@@ -4,7 +4,7 @@ from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import  JsonResponse, HttpResponse
 from django.db.models import Q
-from property.models import Property, Category, Testimony, Subscription
+from property.models import Property, Category, Testimony, Subscription, RealEstate, Hotel
 from property.filters import HomePropertFilter, PropertyFilter
 from .forms import SubscriptionForm
 from .models import Locality, Region
@@ -36,7 +36,9 @@ class IndexPageView(ListView):
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
         kwargs['region_list'] = Region.objects.all()
-
+        
+        
+        kwargs['partners'] = self.partners
         kwargs['testimonys'] = Testimony.objects.all()
         kwargs['brands'] = Brand.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['cars'] = Car.objects.filter(featured=1).order_by('-id')[:12]
@@ -48,6 +50,11 @@ class IndexPageView(ListView):
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
+        self.qs1 = Hotel.objects.values_list('title', 'slug', 'logo', 'rate')
+        self.qs2 = RealEstate.objects.values_list('title', 'slug', 'logo', 'url')
+        self.partners = self.qs1.union(self.qs2).order_by('title')
+
+        cow = ('howdy', 'canew')
         return self.model.objects.order_by('-id')
 
 

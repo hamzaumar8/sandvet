@@ -1836,13 +1836,12 @@
   
   section.main-banner-sec {
     position: relative;
-    padding-bottom: 2rem;
   }
   
   .banner-carousel {
     position: relative;
     width: 100%;
-    margin-bottom: 2rem;
+    height: 440px;
   }
   .banner-slide:after {
     position: absolute;
