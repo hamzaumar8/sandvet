@@ -4,39 +4,24 @@
 {% block head_title %}{% endblock %}
 {% block content %}
 
-<!-- <section class="banner-partial banner-brands" style="background-image: url({% static 'img/about/carousel-4.jpg' %});">
-    <div class="container">
-        <di class="row">
-            <div class="col-md-11 mx-auto">
-                <div class="title-sec">
-                    <p>Best automobile market hub in Ghana.</p>
-                    <div class="widget-property-search card mt-3">
-                        <form action="{% url 'cars:cars' %}" class="">
-                            <div class="row">
-                                {% for field in  sidefilter.form %}
-                                <div class="col-md-3">
-                                    {{ field|as_crispy_field }}
-                                </div>
-                                {% endfor %}
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary ">search</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </di>
-    </div>
-</section>  -->
     
 
-<div class="container mb-4">
+<div class="container mt-3">
     <div class="row">
+        <div class="col-12">
+            <div class="navigaiton card">
+                <a class="navLinks" href="{% url 'core:index' %}">Home</a>
+                <a class="navLinks" href="{% url 'cars:cars' %}">Car</a>
+                <a class="navLinks">{{ page_title }}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
         {% include 'cars/filter.html' %}
         <div class=" col-md-9">
-            <div class="listing-directs py-3 row"> 
-                <div class="col-md-12">
+            <div class="listing-directs py-3"> 
+                <div class="col-12">
                     <div class="cars_grid">
                         <div class="row align-items-center justify-content-between panel__cardhead">
                             <div><h2>{{ car_count }} {{obj_brands.name}} Car(s)</h2></div>
