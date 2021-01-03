@@ -2,40 +2,41 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from allauth.account.forms import SignupForm
+from phonenumber_field.formfields import PhoneNumberField
 
 class CustomSignupForm(SignupForm):
     
-    first_name = forms.CharField(
+    fullname = forms.CharField(
         min_length=7,
         widget=forms.TextInput(attrs={
-            'placeholder': 'first Name',
+            'placeholder': 'Full Name',
             'required': True,
-            # 'class': 'col-md-6'
-        }),
-    )
-    Last_name = forms.CharField(
-        min_length=7,
-        widget=forms.TextInput(attrs={
-            'placeholder': 'Last Name',
-            'required': True,
-            # 'class': 'col-md-6'
         }),
     )
 
-
+    phone_number = PhoneNumberField(
+        required = True,
+        label='Phone Number',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '+233557866983',
+                'required': True
+            }
+        ),
+    )
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
         cleaned_data = super(CustomSignupForm, self).clean()
-        first_name = cleaned_data["first_name"]
-        last_name = cleaned_data["last_name"]
-        # if ' ' in fullname:
-        #     print(fullname)
-        #     user.first_name = fullname.split(' ')[0]
-        #     user.last_name = fullname.split(' ')[1]
-        # else:
-        #     user.first_fullname = fullname
-        user.first_name = first_name
-        user.last_name = last_name
+        fullname = cleaned_data["fullname"]
+        if ' ' in fullname:
+            user.first_name = fullname.split(' ')[0]
+            user.last_name = fullname.split(' ')[1]
+        else:
+            user.first_fullname = fullname
+
+        user_profile = user.profile
+        user_profile.phone_number = cleaned_data['phone_number']
         user.save() 
+        user_profile.save()
         return user
 
