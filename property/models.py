@@ -10,6 +10,20 @@ def custom_slugify(value):
     return default_slugify(value).replace(' ', '-')
 
 
+def get_dated(created_at):
+    time = datetime.now()
+    if created_at.day == time.day:
+        return str(time.hour - created_at.hour) + " hours ago"
+    else:
+        if created_at.month == time.month:
+            return str(time.day - created_at.day) + " days ago"
+        else:
+            if created_at.year == time.year:
+                return str(time.month - created_at.month) + " months ago"
+            else:
+                return str(time.year - created_at.year) + " year(s) ago"
+    return created_at
+
 # Create your models here.
 STAR_RATING = (
     ('1', '1'),
@@ -139,6 +153,8 @@ class Property(models.Model):
             else:
                 if self.created_at.year == time.year:
                     return str(time.month - self.created_at.month) + " months ago"
+                else:
+                    return str(time.year - self.created_at.year) + " year(s) ago"
         return self.created_at
 
 
@@ -202,6 +218,8 @@ class RealEstate(models.Model):
             else:
                 if self.created_at.year == time.year:
                     return str(time.month - self.created_at.month) + " months ago"
+                else:
+                    return str(time.year - self.created_at.year) + " year(s) ago"
         return self.created_at
 
 
@@ -345,6 +363,8 @@ class Hotel(models.Model):
             else:
                 if self.created_at.year == time.year:
                     return str(time.month - self.created_at.month) + " months ago"
+                else:
+                    return str(time.year - self.created_at.year) + " year(s) ago"
         return self.created_at
 
 
@@ -419,6 +439,8 @@ class HotelRoom(models.Model):
             else:
                 if self.created_at.year == time.year:
                     return str(time.month - self.created_at.month) + " months ago"
+                else:
+                    return str(time.year - self.created_at.year) + " year(s) ago"
         return self.created_at
 
 

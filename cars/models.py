@@ -143,6 +143,8 @@ class Car(models.Model):
             else:
                 if self.created_at.year == time.year:
                     return str(time.month - self.created_at.month) + " months ago"
+                else:
+                    return str(time.year - self.created_at.year) + " year(s) ago"
         return self.created_at
 
 
@@ -205,6 +207,8 @@ class SparePart(models.Model):
             else:
                 if self.created_at.year == time.year:
                     return str(time.month - self.created_at.month) + " months ago"
+                else:
+                    return str(time.year - self.created_at.year) + " year(s) ago"
         return self.created_at
 
 
@@ -267,6 +271,8 @@ class School(models.Model):
             else:
                 if self.created_at.year == time.year:
                     return str(time.month - self.created_at.month) + " months ago"
+                else:
+                    return str(time.year - self.created_at.year) + " year(s) ago"
         return self.created_at
 
     
