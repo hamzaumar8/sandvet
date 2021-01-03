@@ -58,8 +58,12 @@ $(document).ready(function() {
     $('.banner-carousel select[name=purpose] > option:first-child').text('Purpose');
     $('.banner-carousel input[name=address] ').attr("placeholder", "Enter Address, City or State");
     $('.banner-carousel input[name=title] ').attr("placeholder", "Property name or title");
-    $('.banner-carousel .banner-cars input[name=title] ').attr("placeholder", "Car name ot title");
+    $('.banner-carousel .banner-cars input[name=title] ').attr("placeholder", "Car name ");
     
+    $('.banner-carousel .realestateForm input[name=title] ').attr("placeholder", "Real estate name ");
+    $('.banner-carousel .hotelForm input[name=title] ').attr("placeholder", "Hotel name");
+    $('.banner-carousel input[name=location_address] ').attr("placeholder", "Location address");
+
     // FILTER
     $('.filter-sec select[name=brand] > option:first-child').text('All');
     $('.filter-sec select[name=car_state] > option:first-child').text('All');

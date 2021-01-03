@@ -97,6 +97,8 @@
         flex: 0 0 100%;
         max-width: 100%;
         border:0;
+    }
+    .home-widget-search .border-col{
         margin-bottom: 10px;
     }
     .home-widget-search .btn-search {

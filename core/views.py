@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import  JsonResponse, HttpResponse
 from django.db.models import Q
 from property.models import Property, Category, Testimony, Subscription, RealEstate, Hotel
-from property.filters import HomePropertFilter, PropertyFilter
+from property.filters import HomePropertFilter, PropertyFilter, HomeHotelFilter, HomeRealEstateFilter
 from .forms import SubscriptionForm
 from .models import Locality, Region
 from cars.filters import CarFilter
@@ -46,7 +46,9 @@ class IndexPageView(ListView):
         kwargs['cars'] = Car.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['spareparts'] = SparePart.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['schools'] = School.objects.filter(featured=1).order_by('-id')[:12]
-        kwargs['carfilter'] = CarFilter(self.request.GET, queryset= self.model.objects.all()) 
+        kwargs['carfilter'] = CarFilter(self.request.GET, queryset=Car.objects.all()) 
+        kwargs['hotelfilter'] = HomeHotelFilter(self.request.GET, queryset= Hotel.objects.all()) 
+        kwargs['realestatefilter'] = HomeRealEstateFilter(self.request.GET, queryset= RealEstate.objects.all()) 
         kwargs['filter'] = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
         kwargs['subscription_form'] = SubscriptionForm()
         return super().get_context_data(**kwargs)

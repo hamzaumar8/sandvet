@@ -2,6 +2,48 @@
 {% load static %}
 <section class="main-banner-sec">
     <div class="banner-carousel">
+        <div class="banner-slide" style="background-image: url({% static 'img/core/banner-realestate.jpg' %});">
+            <div class="home-banner-section col-12">
+                <h3 class="text-center">Buy Properties from the Best Developers.</h3>
+                <div class="widget-property-search card mt-3 home-widget-search col-11 mx-auto">
+                    <form action="{% url 'property:real-estates' %}" class="realestateForm">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-11 col-12">
+                                <div class="row ">
+                                    {% for field in realestatefilter.form %}
+                                    <div class="col-lg-3 border-col">
+                                        {{ field|as_crispy_field }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary  btn-search"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="banner-slide" style="background-image: url({% static 'img/core/banner-hotel.jpg' %});">
+            <div class="home-banner-section col-12">
+                <h3 class="text-center">Book your desired Hotel with us.</h3>
+                <div class="widget-property-search card mt-3 home-widget-search col-11 mx-auto">
+                    <form action="{% url 'property:hotels' %}" class="hotelForm">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-11 col-12">
+                                <div class="row ">
+                                    {% for field in hotelfilter.form %}
+                                    <div class="col-lg-3 border-col">
+                                        {{ field|as_crispy_field }}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary  btn-search"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="banner-slide" style="background-image: url({% static 'img/core/banner-property.jpg' %});">
             <div class="home-banner-section col-12">
                 <h3 class="text-center">Discover a home you'll love to stay</h3>
@@ -26,7 +68,7 @@
         <div class="banner-slide" style="background-image: url({% static 'img/about/carousel-4.jpg' %});">
             <div class="home-banner-section col-12">
                 <h3 class="text-center">Find your dream car with us.</h3>
-                <p class="text-center">Best automobile market hub in Ghana.</p>
+                <!-- <p class="text-center">Best automobile market hub in Ghana.</p> -->
                 <div class="widget-property-search card mt-3 home-widget-search col-11 mx-auto">
                     <form action="{% url 'cars:cars' %}" class="banner-cars">
                         <div class="row justify-content-center">
