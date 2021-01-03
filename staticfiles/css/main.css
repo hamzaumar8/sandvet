@@ -12,7 +12,10 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
   }
-  
+  i.fa-star-o,
+  i.fa-star{
+    color: #ffc107 !important;
+  }
   html,
   body,
   div,
@@ -665,10 +668,22 @@
   
   .banner_text .card .resul-items > span.property-card-value .field_name,
   .card__resultItems > span.property-card-value .field_name {
-    color: #161616;
+    color: var(--colorPrimary);
     font-weight: 400;
   }
-  
+  .favorites-actions .field_name{
+    width: 25px;
+    height: 25px;
+    background: var(--colorPrimary);
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 25px;
+  }
+  .favorites-actions .field_name i{
+    color: #fff !important;
+  }
   .card__footer {
     position: relative;
     display: flex;
@@ -1629,11 +1644,22 @@
     min-height: 98px;
   }
   
-  .listing__card.list .card__resultItems > span.property-card-value {
-    font-size: 12px;
-    padding: 0px 18px;
+  .listing__card .card__resultItems > span.property-card-value {
+    padding: 0 10px;
+    font-size: 14px;
+    font-size: 600;
+    line-height: 1.5;
   }
-  
+  .listing__card .card__resultItems > span.property-card-value:first-child{
+    padding-left: 0;
+  }
+  .listing__card .card__resultItems > span.property-card-value i{
+    font-size: 16px;
+  }
+   .card__resultItems > span.property-card-value .item{
+    color:#444;
+    font-weight: 600;
+  }
   .listing__card.list .card__footer {
     padding: 14px 23px;
   }
@@ -1810,13 +1836,12 @@
   
   section.main-banner-sec {
     position: relative;
-    padding-bottom: 2rem;
   }
   
   .banner-carousel {
     position: relative;
     width: 100%;
-    margin-bottom: 2rem;
+    height: 440px;
   }
   .banner-slide:after {
     position: absolute;
