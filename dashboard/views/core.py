@@ -15,6 +15,12 @@ def gen_asset_id(moduleName):
         return (moduleInstance.id + 1)
     return 1
 
+def auth(request):
+    if request.user.is_superuser:
+        return redirect(reverse("dashboard:dashboard"), permanent=True)
+    else:
+        return redirect(reverse("core:index"), permanent=True)
+
 
 
 @login_required

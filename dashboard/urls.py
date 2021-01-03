@@ -4,6 +4,8 @@ from .views import core, prop, cars
 app_name = 'dashboard'
 
 urlpatterns = [
+    path("accounts/auth/", core.auth, name="auth"),
+
     path('', core.dashboardPage, name='dashboard'),
     path('locality/', core.LocalityPage, name='locality'),
     path('locality/add/', core.LocalityAddPage, name='locality-add'),
