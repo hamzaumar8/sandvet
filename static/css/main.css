@@ -1836,6 +1836,7 @@
   
   section.main-banner-sec {
     position: relative;
+    overflow: hidden;
   }
   
   .banner-carousel {
