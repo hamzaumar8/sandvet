@@ -175,6 +175,17 @@
         outline: none;
         outline-width: 0;
     }
+
+    .navbar-light .navbar-brand img {
+        width: 160px;
+    }
+    .pannel__headtitle h2{
+        font-size: 18px;
+    }
+
+     .subscription h1{
+        font-size: 20px;
+    }
     
 }
 

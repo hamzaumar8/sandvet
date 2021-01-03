@@ -196,6 +196,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = DEFAULT_FROM_EMAIL =  "ctmafri@gmail.com"
 EMAIL_HOST_PASSWORD = "yvbdactfcsfourif"
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    ALLOWED_HOSTS = ['127.0.0.1']
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#     ALLOWED_HOSTS = ['127.0.0.1']
