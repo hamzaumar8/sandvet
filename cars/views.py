@@ -1,10 +1,12 @@
-from django.views.generic import View, ListView, DetailView, FormView
+from django.views.generic import View, ListView
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q
 from property.models import Property, Category, RealEstate, Hotel
 from property.filters import PropertyFilter
 from core.models import Locality, Region
-from .models import Car, Brand, SparePart, School
+from core.forms import BookingForm
+from .models import Car, Brand, SparePart, School, SchoolBooking, CarBooking, SparePartBooking
 from .filters import CarFilter, CarSideFilter, SparePartFilter
 
 # Create your views here.
@@ -116,7 +118,17 @@ def CarDetail(request, slug):
     latest_property = Property.objects.order_by('-id')[:6]
     latest_spareparts = SparePart.objects.order_by('-id')[:6]
 
-    # region = Region.objects.all()
+    form = BookingForm()
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            inst = form.save()
+            CarBooking.objects.create(booking=inst, car=lists)
+            messages.success(request, "We've received your message. We would get back to you soon.")
+            return redirect('cars:car-detail', slug=lists.slug)
+        else:
+            print(form.errors)
+
     context = {
         'object': lists, 
         'objectimages': carimages,
@@ -127,6 +139,7 @@ def CarDetail(request, slug):
         'latest_lists': latest_list,
         'latest_property': latest_property,
         'latest_spareparts': latest_spareparts,
+        'form': form
     }    
     context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
     context['category_list'] = Category.objects.all()
@@ -234,7 +247,17 @@ def SparePartDetail(request, slug):
     latest_property = Property.objects.order_by('-id')[:6]
     latest_list = Car.objects.order_by('-id')[:6]
 
-    # region = Region.objects.all()
+    form = BookingForm()
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            inst = form.save()
+            SparePartBooking.objects.create(booking=inst, sparepart=lists)
+            messages.success(request, "We've received your message. We would get back to you soon.")
+            return redirect('cars:spare-part-detail', slug=lists.slug)
+        else:
+            print(form.errors)
+
     context = {
         'object': lists, 
         'latest_lists': latest_list,
@@ -244,6 +267,7 @@ def SparePartDetail(request, slug):
         'objectimages': spareimages,
         'region_list': region_list,
         'latest_spareparts': latest_spareparts,
+        'form': form
     }   
     context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
     context['category_list'] = Category.objects.all()
@@ -300,7 +324,16 @@ def SchoolDetail(request, slug):
     latest_list = Car.objects.order_by('-id')[:6]
     latest_spareparts = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
 
-    # region = Region.objects.all()
+    form = BookingForm()
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            inst = form.save()
+            SchoolBooking.objects.create(booking=inst, school=lists)
+            messages.success(request, "We've received your message. We would get back to you soon.")
+            return redirect('cars:school-detail', slug=lists.slug)
+        else:
+            print(form.errors)
     context = {
         'object': lists, 
         'latest_lists': latest_list,
@@ -310,7 +343,8 @@ def SchoolDetail(request, slug):
         'objectimages': schoolimages,
         'region_list': region_list,
         'school_list': school_list,
-        'latest_spareparts': latest_spareparts
+        'latest_spareparts': latest_spareparts,
+        'form': form
     } 
     context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
     context['category_list'] = Category.objects.all()

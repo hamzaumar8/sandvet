@@ -6,7 +6,7 @@ from django.utils.translation import gettext as _
 from django.shortcuts import reverse
 from autoslug import AutoSlugField
 from autoslug.settings import slugify as default_slugify
-from core.models import Region, Locality, REGIONS_LIST
+from core.models import Region, Locality, REGIONS_LIST, Booking
 # Create your models here.
 
 def custom_slugify(value):
@@ -290,3 +290,39 @@ class SchoolImage(models.Model):
         except:
             url = ''
         return url
+
+
+
+
+
+
+
+
+
+
+
+
+
+class CarBooking(models.Model):
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelcar', null=True)
+    car = models.ForeignKey(Car,  on_delete=models.CASCADE, related_name='bookcar', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.car.title
+
+class SchoolBooking(models.Model):
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelschool', null=True)
+    school = models.ForeignKey(School,  on_delete=models.CASCADE, related_name='bookschool', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.school.title
+
+class SparePartBooking(models.Model):
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelsparepart', null=True)
+    sparepart = models.ForeignKey(SparePart,  on_delete=models.CASCADE, related_name='booksparepart', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.sparepart.title
