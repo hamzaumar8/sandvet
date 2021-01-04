@@ -1,7 +1,8 @@
 from django.views.generic import View, ListView, DetailView, FormView
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models import Q, Count
-from .models import Property, Category, LandProperty, RealEstate, Hotel, HotelRoom
+from .models import Property, Category, LandProperty, RealEstate, Hotel, HotelRoom, PropertyBooking, HotelBooking, RealEstateBooking, HotelRoomBooking
 from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter, HotelFilter, HotelRoomFilter
 from core.models import Locality, Region
 from core.forms import BookingForm
@@ -99,13 +100,24 @@ def propertyDetail(request, slug):
     latest_spareparts = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
 
 
-    region = Region.objects.all()
+    form = BookingForm()
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            inst = form.save()
+            PropertyBooking.objects.create(booking=inst, property=lists)
+            messages.success(request, "We've received your message. We would get back to you soon.")
+            return redirect('property:property-detail', slug=lists.slug)
+        else:
+            print(form.errors)
+
     context = {
         'page_title': 'Properties',
         'object': lists, 
         'latest_lists': latest_list,
-        'region_list': region,
+        'region_list': region_list,
         'latest_property': latest_property,
+        'form': form
     } 
     context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
     context['category_list'] = Category.objects.all()
@@ -289,7 +301,16 @@ def RealestateDetail(request, slug):
     latest_property = Property.objects.order_by('-id')[:6]
     latest_spareparts = SparePart.objects.filter(~Q(id=lists.id)).order_by('-id')[:6]
 
-    region = Region.objects.all()
+    form = BookingForm()
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            inst = form.save()
+            RealEstateBooking.objects.create(booking=inst, realestate=lists)
+            messages.success(request, "We've received your message. We would get back to you soon.")
+            return redirect('property:realestate-detail', slug=lists.slug)
+        else:
+            print(form.errors)
     context = {
         'object': lists, 
         'latest_lists': latest_list,
@@ -298,7 +319,8 @@ def RealestateDetail(request, slug):
         'latest_spareparts': latest_spareparts,
         'latest_property': latest_property,
         'property_list': property_list,
-        'school_list': school_list
+        'school_list': school_list,
+        'form': form,
     }  
     context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
     context['category_list'] = Category.objects.all()
@@ -345,9 +367,22 @@ def HotelDetail(request, slug):
         lists.views += 1
         lists.save()
         request.session[session_key] = True
+
+    form = BookingForm()
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            inst = form.save()
+            HotelBooking.objects.create(booking=inst, hotel=lists)
+            messages.success(request, "We've received your message. We would get back to you soon.")
+            return redirect('property:hotel-detail', slug=lists.slug)
+        else:
+            print(form.errors)
+
     context = {
         'object': lists, 
         'objectimages': hotelimages,
+        'form': form
     }    
     return render(request, 'list-detail.html', context)
 
@@ -361,9 +396,21 @@ def HotelRoomDetail(request, slug):
         lists.save()
         request.session[session_key] = True
 
+    form = BookingForm()
+    if request.method == "POST":
+        form = BookingForm(request.POST)
+        if form.is_valid():
+            inst = form.save()
+            HotelRoomBooking.objects.create(booking=inst, hotelroom=lists)
+            messages.success(request, "We've received your message. We would get back to you soon.")
+            return redirect('property:hotel-room-detail', slug=lists.slug)
+        else:
+            print(form.errors)
+
     context = {
         'object': lists, 
         'objectimages': roomimages,
+        "form": form,
     }   
     context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
     context['category_list'] = Category.objects.all()

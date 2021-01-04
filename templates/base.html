@@ -47,7 +47,9 @@
     {% endblock %}
     <div class="wrapper">
       <main>
-        {% include "includes/messages.html" %}
+        {% block messages %} 
+          {% include "includes/messages.html" %}
+        {% endblock %}
         {% block content %} 
         
         {% endblock %}

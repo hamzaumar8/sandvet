@@ -476,3 +476,34 @@ class PropertyBooking(models.Model):
 
     def __str__(self):
         return self.property.title
+
+
+
+
+class RealEstateBooking(models.Model):
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='realestatebooking', null=True)
+    realestate = models.ForeignKey(RealEstate,  on_delete=models.CASCADE, related_name='bookrealestate', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+
+    def __str__(self):
+        return self.realestate.title
+
+class HotelBooking(models.Model):
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelbooking', null=True)
+    hotel = models.ForeignKey(Hotel,  on_delete=models.CASCADE, related_name='bookhotel', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+
+    def __str__(self):
+        return self.hotel.title
+
+
+
+class HotelRoomBooking(models.Model):
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelroombooking', null=True)
+    hotelroom = models.ForeignKey(HotelRoom,  on_delete=models.CASCADE, related_name='bookhotelroom', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.hotelroom.title

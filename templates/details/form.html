@@ -1,26 +1,20 @@
+{% load crispy_forms_tags %} 
 <div id="sw_win_contactform_widget-1" class="descp-text widget widget_sw_win_contactform_widget side"><h3 class="widget-title">Contact form</h3>
     <div class="selio_sw_win_wrapper">
         <div class="ci sw_widget sw_wrap">
             <div class="contact-agent widget-form" id="form">
-                <form id="sw_contactform_sw_win_contactform_widget-1" method="post" action="#sw_contactform_sw_win_contactform_widget-1" class="box">
+                    {% include "includes/messages.html" %}
+                    <br>
+                <form id="sw_contactform_sw_win_contactform_widget-1" method="POST"  class="box">
+                    {% csrf_token %}
                     <div class="box-container widget-body">
+                        {% for field in form %}
+                            <div class="form-field">
+                                {{ field|as_crispy_field }}
+                            </div>
+                        {% endfor %}
                         <div class="form-field">
-                            <input class="" name="name" type="text" value="{{ request.user.first_name }} {{ request.user.last_name }}" placeholder="Full name">
-                        </div>
-                        <div class="form-field">
-                            <input class="" name="email" type="text" value="{{ request.user.email }}" placeholder="Your email">
-                        </div>
-                        <div class="form-field">
-                            <input class="" name="phone_number" type="text" value="{{ request.user.profile.phone_number }}" placeholder="Phone number">
-                        </div>
-                        <div class="form-field">
-                            <input class="" name="subject" type="text" value="" placeholder="Subject">
-                        </div>
-                        <div class="form-field">
-                            <textarea  name="message" rows="4" class="" placeholder="Message"></textarea>
-                        </div>
-                        <div class="form-field">
-                            <button type="submit" class="btn2">Send</button>
+                            <button type="submit" class="btn2"><i class="fa fa-send"></i> Send</button>
                         </div>
                     </div>
                 </form>
@@ -28,3 +22,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        "use strict";
+        $("form .box-container input[name=email]").val("{{request.user.email}}")
+        $("form .box-container input[name=name]").val("{{request.user.first_name}} {{request.user.last_name}}")
+        $("form .box-container input[name=phone_number]").val("{{request.user.profile.phone_number}}")
+    })
+</script>
