@@ -4,6 +4,7 @@ from django.db.models import Q, Count
 from .models import Property, Category, LandProperty, RealEstate, Hotel, HotelRoom
 from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter, HotelFilter, HotelRoomFilter
 from core.models import Locality, Region
+from core.forms import BookingForm
 from cars.models import Car, SparePart, School, Brand
 
 # Create your views here.

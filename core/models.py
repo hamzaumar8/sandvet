@@ -2,6 +2,7 @@ from django.db import models
 from django.shortcuts import reverse
 from autoslug import AutoSlugField
 from autoslug.settings import slugify as default_slugify
+from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 def custom_slugify(value):
@@ -58,4 +59,25 @@ class Locality(models.Model):
         return reverse("core:locality", kwargs={
             'locality': self.slug
         })
+
+
+
+
+
+
+class Booking(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
+    phone_number =phone_number = PhoneNumberField()
+    subject = models.CharField(max_length=200,null=True)
+    message = models.TextField()
+    views = models.PositiveIntegerField(default=0)
+    featured = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+
 

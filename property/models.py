@@ -3,7 +3,8 @@ from django.db import models
 from django.shortcuts import reverse
 from autoslug import AutoSlugField
 from autoslug.settings import slugify as default_slugify
-from core.models import  Locality, REGIONS_LIST
+from core.models import  Locality, REGIONS_LIST, Booking
+from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 def custom_slugify(value):
@@ -37,6 +38,7 @@ PRICE_NEGORIABLE = (
     ('yes', 'Yes'),
     ('no', 'No'),
 )
+
 
 
 PROPERTY_PURPOSE_TYPE = [
@@ -465,3 +467,12 @@ class HotelRoomImage(models.Model):
 
 
 
+
+class PropertyBooking(models.Model):
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='propertybooking', null=True)
+    property = models.ForeignKey(Property,  on_delete=models.CASCADE, related_name='bookproperty', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+
+    def __str__(self):
+        return self.property.title
