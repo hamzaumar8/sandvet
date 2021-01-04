@@ -79,8 +79,8 @@
     .banner-carousel .slick-slide .banner-slide, .banner-carousel .slick-slide>div:not(.banner_text), .banner-slide>img{
         min-height: 100% !important;
     }
-    .home-widget-search{
-        box-shadow: unset;
+    .home-widget-search.card{
+        box-shadow: unset !important;
         border-radius: 0 !important;
     }
     .home-widget-search form .row{
@@ -89,6 +89,7 @@
 
     .home-widget-search .btn-search ,
     .home-widget-search #div_id_title ,
+    .home-widget-search #div_id_brand ,
     .home-widget-search #div_id_price__max,
     .home-widget-search #div_id_category,
     .home-widget-search #div_id_price__min {
@@ -96,6 +97,8 @@
         flex: 0 0 100%;
         max-width: 100%;
         border:0;
+    }
+    .home-widget-search .border-col{
         margin-bottom: 10px;
     }
     .home-widget-search .btn-search {
@@ -110,14 +113,30 @@
     .home-widget-search #div_id_title input {
         border-radius: 50px !important;
     }
+
+    .banner-carousel{
+        height:auto;
+    }
+    
+    .border-col{
+        border: unset;
+    }
     
 }
 
 @media (max-width: 745px) {
     
-    
-    .banner-carousel{
-        height: 100vh;
+    .home-banner-section{
+        padding: 1.5rem .5rem;
+    }
+    .banner-brands{
+        padding: 2rem 3rem !important;
+    }
+    .banner-slide{
+        padding: 3rem 4rem !important;
+    }
+    .banner-partial .home-widget-search.card{
+        padding: 1.5rem !important;
     }
 }
 
@@ -133,8 +152,14 @@
         padding: 20px;
     }
     
-    .banner-carousel{
-        height: 80vh;
+    .banner-brands{
+        padding: 2rem !important;
+    }
+    .banner-slide{
+        padding: 2rem 4rem !important;
+    }
+    .home-banner-section h3{
+        font-size: 20px;
     }
     .bannertitle{
         padding: 1rem;
@@ -146,10 +171,30 @@
         padding: 0 2rem;
     }
     .banner-carousel .slick-prev, .banner-carousel .slick-next{
+        width: 30px;
         background-color: var(--colorPrimary);
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        outline: none;
+        outline-width: 0;
     }
     .banner-carousel .slick-prev:before, .banner-carousel .slick-next:before{
         color: var(--white);
+        font-size: 20px;
+        outline: none;
+        outline-width: 0;
+    }
+
+    .navbar-light .navbar-brand img {
+        width: 160px;
+    }
+    .pannel__headtitle h2{
+        font-size: 18px;
+    }
+
+     .subscription h1{
+        font-size: 20px !important;
     }
     
 }
