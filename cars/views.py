@@ -146,6 +146,7 @@ class CarListSaleView(ListView):
     paginate_by = 30
 
     def get_context_data(self, **kwargs):
+        kwargs['page_title'] = "Cars For Sale"
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
         kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
@@ -171,6 +172,7 @@ class CarListHireView(ListView):
     paginate_by = 30
 
     def get_context_data(self, **kwargs):
+        kwargs['page_title'] = "Cars For Hire"
         kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
         kwargs['category_list'] = Category.objects.all()
         kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]

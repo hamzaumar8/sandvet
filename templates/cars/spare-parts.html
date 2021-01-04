@@ -12,12 +12,12 @@
                     <p>Best vehicle spare-parts market hub in Ghana.</p>
                 </div>
                 <div class="widget-property-search card mt-1 home-widget-search col-12 mx-auto">
-                    <form action="{% url 'cars:spare-parts' %}" class="">
+                    <form action="{% url 'cars:spare-parts' %}" class="sparepartForm">
                         <div class="row justify-content-center">
-                            <div class="col-11">
+                            <div class="col-12 col-lg-11">
                                 <div class="row ">
                                     {% for field in filter.form %}
-                                    <div class="col-md-3 border-col">
+                                    <div class="col-lg-3 border-col">
                                         {{ field|as_crispy_field }}
                                     </div>
                                     {% endfor %}

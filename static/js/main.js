@@ -57,13 +57,14 @@ $(document).ready(function() {
     $('.banner-carousel select[name=car_state] > option:first-child').text('Condition');
     $('.banner-carousel select[name=purpose] > option:first-child').text('Purpose');
     $('.banner-carousel input[name=address] ').attr("placeholder", "Enter Address, City or State");
-    $('.banner-carousel input[name=title] ').attr("placeholder", "Property name or title");
-    $('.banner-carousel .banner-cars input[name=title] ').attr("placeholder", "Car name ");
+    $('.banner-carousel input[name=title] ').attr("placeholder", "Property Name or title");
+    $('.banner-carousel .banner-cars input[name=title] ').attr("placeholder", "Car Name ");
     
     $('.banner-carousel .realestateForm input[name=title] ').attr("placeholder", "Real estate name ");
-    $('.banner-carousel .hotelForm input[name=title] ').attr("placeholder", "Hotel name");
+    $('.banner-carousel .hotelForm input[name=title] ').attr("placeholder", "Hotel Name");
     $('.banner-carousel input[name=location_address] ').attr("placeholder", "Location address");
-
+    
+    $('.sparepartForm input[name=title] ').attr("placeholder", "Spare Part Name");
     // FILTER
     $('.filter-sec select[name=brand] > option:first-child').text('All');
     $('.filter-sec select[name=car_state] > option:first-child').text('All');

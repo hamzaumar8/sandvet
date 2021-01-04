@@ -129,8 +129,14 @@
     .home-banner-section{
         padding: 1.5rem .5rem;
     }
+    .banner-brands{
+        padding: 2rem 3rem !important;
+    }
     .banner-slide{
-        padding: 3rem 4rem;
+        padding: 3rem 4rem !important;
+    }
+    .banner-partial .home-widget-search.card{
+        padding: 1.5rem !important;
     }
 }
 
@@ -146,9 +152,11 @@
         padding: 20px;
     }
     
-    
+    .banner-brands{
+        padding: 2rem !important;
+    }
     .banner-slide{
-        padding: 2rem 4rem;
+        padding: 2rem 4rem !important;
     }
     .home-banner-section h3{
         font-size: 20px;

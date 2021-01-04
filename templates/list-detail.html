@@ -339,7 +339,8 @@
                                             </ul>
                                             <br style="clear: both;">
                                         </div>
-    
+                                        
+                                        {% if object.amenities %}
                                          <!--details-info end-->
                                         <div class="details-info">
                                             <h3 class=" CATEGORY">Amenities {{object.amenities}}</h3>
@@ -375,6 +376,7 @@
                                             </ul>
                                             <br style="clear: both;">
                                         </div>
+                                    {% endif %}
                                     {% endif %}
                                     
                                     {% endif %} 
@@ -445,36 +447,7 @@
                 <div class="col-lg-4 pr-0">
                     <div class="sidebar layout2">
                         {% include 'details/agent-info.html'%}
-                        <div id="sw_win_contactform_widget-1" class="descp-text widget widget_sw_win_contactform_widget side"><h3 class="widget-title">Contact form</h3>
-                            <div class="selio_sw_win_wrapper">
-                                <div class="ci sw_widget sw_wrap">
-                                    <div class="contact-agent widget-form" id="form">
-                                        <form id="sw_contactform_sw_win_contactform_widget-1" method="post" action="#sw_contactform_sw_win_contactform_widget-1" class="box">
-                                            <div class="box-container widget-body">
-                                                <div class="form-field">
-                                                    <input class="" id="fullname_sw_win_contactform_widget-1" name="fullname" type="text" value="" placeholder="Full name">
-                                                </div>
-                                                <div class="form-field">
-                                                    <input class="" id="email_sw_win_contactform_widget-1" name="email" type="text" value="" placeholder="Your email">
-                                                </div>
-                                                <div class="form-field">
-                                                    <input class="" id="phone_sw_win_contactform_widget-1" name="phone" type="text" value="" placeholder="Phone number">
-                                                </div>
-                                                <div class="form-field">
-                                                    <input class="" id="subject_sw_win_contactform_widget-1" name="subject" type="text" value="" placeholder="Subject">
-                                                </div>
-                                                <div class="form-field">
-                                                    <textarea id="message_sw_win_contactform_widget-1" name="message" rows="4" class="" placeholder="Message"></textarea>
-                                                </div>
-                                                <div class="form-field">
-                                                    <button type="submit" class="btn2">Send</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'details/form.html'%}
                         {% include 'includes/latest-listing.html' %}
                     </div>
                 </div>
