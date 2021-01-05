@@ -71,6 +71,7 @@ class Booking(models.Model):
     phone_number =phone_number = PhoneNumberField()
     subject = models.CharField(max_length=200,null=True)
     message = models.TextField()
+    read = models.BooleanField(default=False)
     views = models.PositiveIntegerField(default=0)
     featured = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -5,15 +5,17 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title">Recent Customers</h4>
+                <h4 class="header-title">All Bookings</h4>
 
                 <div class="table-responsive mt-3">
-                    <table class="table table-hover table-centered mb-0">
+                    <table id="key-datatable" class="table dt-responsive nowrap">
                         <thead>
                             <tr>
                                 <th>User ID</th>
                                 <th>title</th>
+                                {% if book.property.category %}
                                 <th>Category</th>
+                                {% endif %}
                                 <th>Name</th>
                                 <th>email</th>
                                 <th>Phone</th>
@@ -24,36 +26,32 @@
                     
                         <tbody>
                             {% for book in bookings %}
-                            <tr class="{% if not list.read %}bg-dark text-white{% endif %} ">
+                            <tr class="{% if not book.read %}bg-dark text-white{% endif %} ">
                                 <th scope="row">{{ book.id }}</th>
                                 <td>
                                     {{ book.propertybooking.property.title }}
                                     {{ book.realestatebooking.realestate.title }}
                                     {{ book.hotelbooking.hotel.title }}
                                     {{ book.hotelroombooking.hotelroom.title }}
-                                    {{ book.carbooking.car.title }}
+                                    {{ book.car.title }}
                                     {{ book.schoolbooking.school.title }}
                                     {{ book.sparepartbooking.sparepart.title }}
                                 </td>
+                                {% if book.property.category %}
                                 <td>
-                                    {{ book.propertybooking.property.category }}
-                                    {{ book.realestatebooking.category }}
-                                    {{ book.hotelbooking.category }}
-                                    {{ book.hotelroombooking.category }}
-                                    {{ book.carbooking.category }}
-                                    {{ book.schoolbooking.category }}
-                                    {{ book.sparepartbooking.category }}
+                                    {{ book.property.category }}
                                 </td>
-                                <td>{{ book.name}}</td>
-                                <td>{{ book.email }}</td>
-                                <td>{{ book.phone_number }}</td>
+                                {% endif %}
+                                <td>{{ book.booking.name}}</td>
+                                <td>{{ book.booking.email }}</td>
+                                <td>{{ book.booking.phone_number }}</td>
                                 <td>
                                     <div class="btn-group dropdown">
                                         <a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="index.html#"><i class="mdi mdi-pencil mr-1 text-muted"></i>View</a>
                                             <a class="dropdown-item" href="index.html#"><i class="mdi mdi-email mr-1 text-muted"></i>Send Email</a>
-                                            <a class="dropdown-item" href="{% url 'dashboard:delete-booking' id=book.id%}"><i class="mdi mdi-delete mr-1 text-muted"></i>Remove</a>
+                                            <a class="dropdown-item" href="{% url 'dashboard:view-booking' id=book.id%}"><i class="mdi mdi-pencil mr-1 text-muted"></i>View</a>
+                                            <a class="dropdown-item" href="{% url 'dashboard:delete-booking' id=book.id%}"><i class="mdi mdi-delete mr-1 text-muted"></i>Delete</a>
                                         </div>
                                     </div>
                                 </td>

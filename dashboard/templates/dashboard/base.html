@@ -89,7 +89,7 @@
                     <ul class="list-unstyled topnav-menu-left m-0">
             
                         <li class="logo-box float-left">
-                            <a href="index.html" class="logo">
+                            <a href="{% url 'dashboard:dashboard' %}" class="logo">
                                 <span class="logo-lg">
                                     <img src="{% static 'img/core/logo.png' %}" alt="">
                                 </span>
@@ -151,7 +151,17 @@
                             <li class="has-submenu">
                                 <a href="{% url 'dashboard:realestates' %}"><i class="fe-airplay"></i>Real Estate</a>
                             </li>
-
+                            <li class="has-submenu">
+                                <a href="javascript:void()"><i class="fe-airplay"></i>Bookings</a>
+                                <ul class="submenu">
+                                    <li>
+                                        <a href="{% url 'dashboard:bookings' %}">All Bookings</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'dashboard:car-bookings' %}">Cars</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                         <!-- End navigation menu -->
 

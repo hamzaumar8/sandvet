@@ -304,24 +304,27 @@ class SchoolImage(models.Model):
 
 
 class CarBooking(models.Model):
-    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelcar', null=True)
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='carbooking', null=True)
     car = models.ForeignKey(Car,  on_delete=models.CASCADE, related_name='bookcar', null=True)
+    category = models.CharField(default="Car", max_length=5)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.car.title
 
 class SchoolBooking(models.Model):
-    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelschool', null=True)
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='schoolbooking', null=True)
     school = models.ForeignKey(School,  on_delete=models.CASCADE, related_name='bookschool', null=True)
+    category = models.CharField(default="Driving School", max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.school.title
 
 class SparePartBooking(models.Model):
-    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelsparepart', null=True)
+    booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='sparepartbooking', null=True)
     sparepart = models.ForeignKey(SparePart,  on_delete=models.CASCADE, related_name='booksparepart', null=True)
+    category = models.CharField(default="Spare Parts", max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

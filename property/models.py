@@ -302,7 +302,31 @@ class Subscription(models.Model):
 
    
 
+class HospitalityCategory(models.Model):
+    title = models.CharField(max_length=200, null=True, blank=True, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    slug = AutoSlugField(populate_from='title',unique_with='created_at__month',slugify=custom_slugify )
 
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-id']
+
+    # def get_category_url(self):
+    #     return reverse("core:category", kwargs={
+    #         'slug': self.slug
+    #     })
+
+    # def get_for_sale_category_url(self):
+    #     return reverse("property:for-sale-cate", kwargs={
+    #         'slug': self.slug
+    #     })
+
+    # def get_for_rent_category_url(self):
+    #     return reverse("property:for-rent-cate", kwargs={
+    #         'slug': self.slug
+    #     })
 
 
 class Hotel(models.Model):
@@ -483,6 +507,7 @@ class PropertyBooking(models.Model):
 class RealEstateBooking(models.Model):
     booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='realestatebooking', null=True)
     realestate = models.ForeignKey(RealEstate,  on_delete=models.CASCADE, related_name='bookrealestate', null=True)
+    category = models.CharField(default="Real Estate", max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     
 
@@ -492,6 +517,7 @@ class RealEstateBooking(models.Model):
 class HotelBooking(models.Model):
     booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelbooking', null=True)
     hotel = models.ForeignKey(Hotel,  on_delete=models.CASCADE, related_name='bookhotel', null=True)
+    category = models.CharField(default="Hotel", max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
     
 
@@ -503,6 +529,7 @@ class HotelBooking(models.Model):
 class HotelRoomBooking(models.Model):
     booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelroombooking', null=True)
     hotelroom = models.ForeignKey(HotelRoom,  on_delete=models.CASCADE, related_name='bookhotelroom', null=True)
+    category = models.CharField(default="Hotel Room", max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

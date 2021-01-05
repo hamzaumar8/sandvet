@@ -12,6 +12,12 @@ urlpatterns = [
     path('locality/<int:id>/edit/', core.LocalityEditPage, name='edit-locality'),
     path('locality/<int:id>/delete/', core.DeleteLocality, name='delete-locality'),
 
+    # Bookings
+    path('bookings/', core.BookingsPage, name='bookings'),
+    path('booking/<int:id>/view/', core.ViewBooking, name='view-booking'),
+    path('booking/<int:id>/delete/', core.DeleteBooking, name='delete-booking'),
+
+    path('bookings/cars/', core.CarBookingsPage, name='car-bookings'),
 
     # Propery
     path('properties/', prop.propertyPage, name='property'),

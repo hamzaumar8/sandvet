@@ -4,9 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from property.models import Property, LandProperty
-from core.models import Locality
+from core.models import Locality, Booking
 from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, LocalityForm
-from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
+from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage, CarBooking, SchoolBooking, SparePartBooking
 from dashboard.decorators import check_admin
 # Create your views here.
 def gen_asset_id(moduleName):
@@ -26,8 +26,10 @@ def auth(request):
 @login_required
 @check_admin
 def dashboardPage(request):
+    bookings = Booking.objects.filter(read=False).order_by('-id')[:10]
     context = {
         'dash_title': 'Dashboard',
+        'bookings': bookings
     }
     return render(request, 'dashboard/index.html', context)
 
@@ -90,3 +92,52 @@ def LocalityEditPage(request, *args, **kwargs):
         "form": form,
     }
     return render(request, "dashboard/edit-locality.html", context)
+
+
+
+
+@login_required
+@check_admin
+def BookingsPage(request):
+    bookings = Booking.objects.order_by('-id')
+    context = {
+        'dash_title': 'Bookings',
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/bookings.html', context)
+
+
+@login_required
+@check_admin
+def DeleteBooking(request, *args, **kwargs):
+    get_object_or_404(Booking, pk=kwargs["id"]).delete()
+    messages.success(request, "Booking deleted successfully")
+    return redirect(reverse("dashboard:bookings"))
+
+
+@login_required
+@check_admin
+def ViewBooking(request, *args, **kwargs):
+    booking = get_object_or_404(Booking, pk=kwargs["id"])
+
+    booking.read = True
+    booking.save()
+
+    context = {
+        "booking": booking,
+    }
+    return render(request, "dashboard/view-booking.html", context)
+
+
+
+
+
+@login_required
+@check_admin
+def CarBookingsPage(request):
+    bookings = CarBooking.objects.order_by('-id')
+    context = {
+        'dash_title': 'Car Bookings',
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/ind-bookings.html', context)
