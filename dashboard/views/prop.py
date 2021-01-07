@@ -159,6 +159,30 @@ def PropertyEditPage(request, *args, **kwargs):
 
 @login_required
 @check_admin
+def DeletePropertyImage(request, *args, **kwargs):
+    propimg = get_object_or_404(PropertyImage, pk=kwargs["id"])
+    prop = propimg.prop
+    propimg.delete()
+    messages.success(request, "Image deleted successfully")
+    return redirect("dashboard:edit-property", id=prop.pk)
+
+@login_required
+@check_admin
+def ViewProperty(request, *args, **kwargs):
+    prop = get_object_or_404(Property, pk=kwargs["id"])
+    images = PropertyImage.objects.filter(prop=prop)
+    
+    context = {
+        "prop": prop,
+        "images": images
+    }
+    if  not prop.category.title == 'land':
+        amenities = prop.houseproperty.amenities.split(', ')
+        context['amenities'] = amenities
+    return render(request, "dashboard/view-property.html", context)
+
+@login_required
+@check_admin
 def CategoryPage(request):
     category = Category.objects.all()
     context = {
