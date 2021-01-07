@@ -54,7 +54,7 @@
                     <div class="navbar-collapse" id="navbarSupportedContent">
                         <div id="top-menu" class="d-inline my-2 my-lg-0 ml-auto">
                             <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
+                                <!-- <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">For Rent<span class="caret"></span></a>
                                     <ul class="dropdown-menu animated">
                                         <li class="active"><a href="{% url 'property:for-rent' %}" class="dropdown-item">Properties For  Rent</a></li>
@@ -63,8 +63,8 @@
                                             <li><a href="{{ cate.get_for_rent_category_url }}" class="dropdown-item"> {{cate.title}} for rent</a></li>
                                         {% endfor %}
                                     </ul>
-                                </li>
-                                <li class="nav-item dropdown ">
+                                </li> -->
+                                <!-- <li class="nav-item dropdown ">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">For Sale<span class="caret"></span></a>
                                     <ul class="dropdown-menu animated">
                                         <li class="active"><a href="{% url 'property:for-sale' %}" class="dropdown-item">Properties For Sale</a></li>
@@ -74,7 +74,7 @@
                                             <li><a href="{{ cate.get_for_sale_category_url }}" class="dropdown-item"> {{cate.title}} for sale</a></li>
                                         {% endfor %}
                                     </ul>
-                                </li>
+                                </li> -->
                                 <li class="nav-item dropdown active">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cars<span class="caret"></span></a>
                                     <ul class="dropdown-menu animated">
@@ -84,6 +84,9 @@
                                         <li class=""><a href="{% url 'cars:spare-parts' %}" class="dropdown-item">Spare Parts</a></li>
                                         <li class=""><a href="{% url 'cars:schools' %}" class="dropdown-item">Driving School</a></li>
                                     </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'cars:spare-parts' %}" class="nav-link ">Spare Parts</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'property:real-estates' %}" class="nav-link">Real Estates</a>
@@ -100,6 +103,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'property:land' %}" class="nav-link ">Land</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'cars:schools' %}" class="nav-link ">Driving Schools</a>
                                 </li>
                                 {% if request.user.is_authenticated %}
                                 <li class="nav-item dropdown hidNav d-none">
