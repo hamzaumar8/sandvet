@@ -11,33 +11,29 @@
                 <div class="row">
                     <div class="col-6 ">
                     <div class="card">
-                        <p>Booker Info</p>
+                        <p class="m-2">Booker Info</p>
                                     
                                     <table id="key-datatable" class="table dt-responsive nowrap">
                                         <tbody>
                                             <tr>
-                                                <td>ID</td>
-                                                <td>{{ booking.id }}</td>
+                                                <td>Name</td>
+                                                <td>{{ booking.name }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Tite</td>
-                                                <td>{{ booking.title }}</td>
+                                                <td>Email</td>
+                                                <td>{{ booking.email }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Region</td>
-                                                <td>{{ booking.region }} Region</td>
+                                                <td>Phone number</td>
+                                                <td>{{ booking.phone_number }} </td>
                                             </tr>
                                             <tr>
-                                                <td>Locality</td>
-                                                <td>{{ booking.locality.name }} </td>
+                                                <td>Subject</td>
+                                                <td>{{ booking.subject }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Website URL</td>
-                                                <td> <a href="{{ realestate.url }}">{{ realestate.url }}</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Timestamp</td>
-                                                <td>{{ realestate.created_at }}</td>
+                                                <td>Date</td>
+                                                <td>{{ booking.created_at }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -46,15 +42,17 @@
                     <div class="col-6">
                         
                     <div class="card">
-                        <p>Booker Info</p>
+                        <p class="m-2">{{ booking.propertybooking.property.category }}
+                            {{ booking.realestatebooking.category }}
+                            {{ booking.hotelbooking.category }}
+                            {{ booking.hotelroombooking.category }}
+                            {{ booking.carbooking.category }}
+                            {{ booking.schoolbooking.category }}
+                            {{ booking.sparepartbooking.category }} Info</p>
                                     <table id="key-datatable" class="table dt-responsive nowrap">
                                         <tbody>
                                             <tr>
-                                                <td>ID</td>
-                                                <td>{{ booking.id }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tite</td>
+                                                <td>Title</td>
                                                 <td>
                                                     {{ booking.propertybooking.property.title }}
                                                     {{ booking.realestatebooking.realestate.title }}
@@ -91,7 +89,13 @@
                                             </tr>
                                             <tr>
                                                 <td>Website URL</td>
-                                                <td> <a href="{{ realestate.url }}">{{ realestate.url }}</a></td>
+                                                <td> <a href="{{ booking.propertybooking.property.get_absolute_url }}
+                                                    {{ booking.realestatebooking.realestate.get_absolute_url }}
+                                                    {{ booking.hotelbooking.hotel.get_absolute_url }}
+                                                    {{ booking.hotelroombooking.hotelroom.get_absolute_url }}
+                                                    {{ booking.carbooking.car.get_absolute_url }}
+                                                    {{ booking.schoolbooking.school.get_absolute_url }}
+                                                    {{ booking.sparepartbooking.sparepart.get_absolute_url }}" target="_blank">visit the page</a></td>
                                             </tr>
                                             <tr>
                                                 <td>Timestamp</td>
@@ -101,10 +105,12 @@
                                     </table>
                     </div>
                     </div>
-                    <div class="col-12 card">
-                        <p class="mb-0">Description</p>
-                        <p>{{ realestate.description }} </p>
-                    </div>
+                        <div class="col-12 ">
+                            <div class="card p-2">
+                            <p class="mb-0">Description</p>
+                            <p>{{ booking.message }} </p>
+                        </div>
+                        </div>
                 </div>
                 <br>
                 <div class="btn-group">

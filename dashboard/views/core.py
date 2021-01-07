@@ -2,6 +2,8 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.db.models import Count, Q
+from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from property.models import Property, LandProperty
 from core.models import Locality, Booking
@@ -26,10 +28,12 @@ def auth(request):
 @login_required
 @check_admin
 def dashboardPage(request):
+    user_count = User.objects.filter(~Q(is_superuser=True)).count()
     bookings = Booking.objects.filter(read=False).order_by('-id')[:10]
     context = {
         'dash_title': 'Dashboard',
-        'bookings': bookings
+        'bookings': bookings,
+        "user_count": user_count,
     }
     return render(request, 'dashboard/index.html', context)
 
@@ -124,6 +128,7 @@ def ViewBooking(request, *args, **kwargs):
     booking.save()
 
     context = {
+        'dash_title': 'View Bookings',
         "booking": booking,
     }
     return render(request, "dashboard/view-booking.html", context)
