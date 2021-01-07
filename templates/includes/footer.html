@@ -118,7 +118,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="subscriptionModalLabel">Propert Alerts</h5>
+          <h5 class="modal-title" id="subscriptionModalLabel">Property Alerts</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -133,7 +133,9 @@
             <div id="signup_error"></div>
             <div class="row">
                 {% csrf_token %} 
-                {{subscription_form|crispy}}
+                <div class="col-12">
+                    {{subscription_form|crispy}}
+                </div>
             </div>
             <button type="submit"class="btn btn-primary col-12">Alert Me</button>
             </form>

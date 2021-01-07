@@ -11,10 +11,7 @@
                         <a>                                   
                         <a href="{% url 'core:about' %}">
                             <span>About Us</span>
-                        <a>                                   
-                        <a href="#">
-                            <span>Regions</span>
-                        <a>    
+                        <a>   
                         <a href="#" class="header__contact">
                             <span>Contact Us</span>
                         <a>   
@@ -75,7 +72,7 @@
                                         {% endfor %}
                                     </ul>
                                 </li> -->
-                                <li class="nav-item dropdown active">
+                                <!-- <li class="nav-item dropdown active">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cars<span class="caret"></span></a>
                                     <ul class="dropdown-menu animated">
                                         <li class="active"><a href="{% url 'cars:cars' %}" class="dropdown-item">Cars</a></li>
@@ -84,6 +81,9 @@
                                         <li class=""><a href="{% url 'cars:spare-parts' %}" class="dropdown-item">Spare Parts</a></li>
                                         <li class=""><a href="{% url 'cars:schools' %}" class="dropdown-item">Driving School</a></li>
                                     </ul>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a href="{% url 'cars:cars' %}" class="nav-link ">Cars</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'cars:spare-parts' %}" class="nav-link ">Spare Parts</a>
@@ -91,12 +91,15 @@
                                 <li class="nav-item">
                                     <a href="{% url 'property:real-estates' %}" class="nav-link">Real Estates</a>
                                 </li>
-                                <li class="nav-item dropdown active">
+                                <!-- <li class="nav-item dropdown active">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hotels<span class="caret"></span></a>
                                     <ul class="dropdown-menu animated">
                                         <li class="active"><a href="{% url 'property:hotels' %}" class="dropdown-item">Hotels</a></li>
                                         <li class=""><a href="{% url 'property:hotel-rooms' %}" class="dropdown-item">Hotel Rooms</a></li>
                                     </ul>
+                                </li> -->
+                                <li class="nav-item">
+                                    <a href="{% url 'property:hotels' %}" class="nav-link">Hotels</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{% url 'property:property' %}" class="nav-link">Property</a>
