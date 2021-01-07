@@ -28,6 +28,8 @@ urlpatterns = [
     # Propery
     path('properties/', prop.propertyPage, name='property'),
     path('property/add/', prop.PropertyAddPage, name='add-property'),
+    path('property/<int:id>/edit/', prop.PropertyEditPage, name='edit-property'),
+    path('property/<int:id>/delete/', prop.DeleteProperty, name='delete-property'),
 
     path('property/categories/', prop.CategoryPage, name='categories'),
     path('property/category/add/', prop.CategoryAddPage, name='add-category'),

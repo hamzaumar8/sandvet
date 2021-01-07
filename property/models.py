@@ -164,6 +164,20 @@ class Property(models.Model):
         return LandProperty.objects.get(property=self)
 
 
+class PropertyImage(models.Model):
+    prop = models.ForeignKey(Property, on_delete=models.CASCADE, null=True, blank=True, related_name='propertyimages')
+    images = models.ImageField(null=True, blank=True, upload_to="property/imgs/")
+
+    def __str__(self):
+        return self.property.title
+
+    @property
+    def imageURL(self):
+        try:
+            url =self.images.url 
+        except:
+            url = ''
+        return url
 
 
 

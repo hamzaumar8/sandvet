@@ -156,6 +156,25 @@ class CategoryForm(forms.ModelForm):
 
 
 
+class PropertyImagesForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(PropertyImagesForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+
+    images =  forms.CharField(
+        required = False,
+        label='Property Images',
+        widget=forms.ClearableFileInput(
+            attrs={'multiple': True}
+        )
+    ) 
+    class Meta:
+        model = propsModel.PropertyImage
+        fields = ['images']
+
 class RealEstateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RealEstateForm, self).__init__(*args, **kwargs)

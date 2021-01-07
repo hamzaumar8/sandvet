@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count, Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
-from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage, SocialHandle
-from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm, PropertyHouseForm
+from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage, SocialHandle, PropertyImage, HouseProperty
+from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm, PropertyHouseForm, PropertyImagesForm
 from core.models import Locality
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
 from dashboard.decorators import check_admin
@@ -103,6 +103,59 @@ def ajaxPropertyHouseAdd(request):
 
     # some error occured
     return JsonResponse({}, status=400)
+
+@login_required
+@check_admin
+def DeleteProperty(request, *args, **kwargs):
+    get_object_or_404(Property, pk=kwargs["id"]).delete()
+    messages.success(request, "Property deleted successfully")
+    return redirect(reverse("dashboard:property"))
+
+
+
+@login_required
+@check_admin
+def PropertyEditPage(request, *args, **kwargs):
+    prop = get_object_or_404(Property, pk=kwargs["id"])
+    print(prop.category.title)
+    images = PropertyImage.objects.filter(prop=prop)
+    if prop.category.title == 'land':
+        inst = LandProperty.objects.get(property=prop)
+        editForm = PropertyLandForm(instance=inst)
+    else:
+        inst = HouseProperty.objects.get(property=prop)
+        editForm = PropertyHouseForm(instance=inst)
+    form = PropertyForm(instance=prop)
+    image_form = PropertyImagesForm()
+    if request.method == "POST":
+        if prop.category.title == 'land':
+            inst = LandProperty.objects.get(property=prop)
+            editForm = PropertyLandForm(request.POST, instance=inst)
+        else:
+            inst = HouseProperty.objects.get(property=prop)
+            editForm = PropertyHouseForm(request.POST, instance=inst)
+        form = PropertyForm(request.POST, request.FILES, instance=prop)
+        img_form = PropertyImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid() and editForm.is_valid() :
+            inst = form.save()
+            editForm.save()
+            for imagefile in files:
+                file_instance = PropertyImage(prop=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Property  been updated succesfully')
+            return redirect('dashboard:property')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Edit Property',
+        "form": form,
+        "edit_form": editForm,
+        "image_form": image_form,
+        "images": images
+    }
+    return render(request, "dashboard/edit-property.html", context)
+
 
 @login_required
 @check_admin
