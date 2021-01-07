@@ -73,23 +73,12 @@
                                 </ul>
                             </td>
                         </tr>
+                        {% else %}
+                        <tr>
+                            <td>Dimensions</td>
+                            <td>{{ prop.landproperty.dimension }}</td>
+                        </tr>
                         {%endif%}
-                        <tr>
-                            <td>Drive Type</td>
-                            <td>{{ prop.drive_type }}</td>
-                        </tr>
-                        <tr>
-                            <td>Condition</td>
-                            <td>{{ prop.car_state }}</td>
-                        </tr>
-                        <tr>
-                            <td>Engine</td>
-                            <td>{{ prop.engine }} LT</td>
-                        </tr>
-                        <tr>
-                            <td>Air Con</td>
-                            <td>{{ prop.air_con }} </td>
-                        </tr>
                         <tr>
                             <td>Timestamp</td>
                             <td>{{ prop.created_at }}</td>
