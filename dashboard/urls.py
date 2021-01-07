@@ -18,6 +18,12 @@ urlpatterns = [
     path('booking/<int:id>/delete/', core.DeleteBooking, name='delete-booking'),
 
     path('bookings/cars/', core.CarBookingsPage, name='car-bookings'),
+    path('bookings/spareparts/', core.SparePartBookingsPage, name='sparepart-bookings'),
+    path('bookings/driving-school/', core.SchoolBookingsPage, name='school-bookings'),
+    path('bookings/properties/', core.PropertyBookingsPage, name='properties-bookings'),
+    path('bookings/hotels/', core.HotelBookingsPage, name='hotels-bookings'),
+    path('bookings/hotel-rooms/', core.HotelRoomBookingsPage, name='hotelrooms-bookings'),
+    path('bookings/real-estates/', core.RealEstateBookingsPage, name='realestates-bookings'),
 
     # Propery
     path('properties/', prop.propertyPage, name='property'),

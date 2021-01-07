@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.db.models import Count, Q
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
-from property.models import Property, LandProperty
+from property.models import Property, LandProperty, HouseProperty, PropertyBooking, HotelBooking, RealEstateBooking, HotelRoomBooking
 from core.models import Locality, Booking
 from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, LocalityForm
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage, CarBooking, SchoolBooking, SparePartBooking
@@ -143,6 +143,69 @@ def CarBookingsPage(request):
     bookings = CarBooking.objects.order_by('-id')
     context = {
         'dash_title': 'Car Bookings',
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/ind-bookings.html', context)
+
+
+@login_required
+@check_admin
+def SparePartBookingsPage(request):
+    bookings = SparePartBooking.objects.order_by('-id')
+    context = {
+        'dash_title': 'Spare Parts Bookings',
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/ind-bookings.html', context)
+
+
+@login_required
+@check_admin
+def SchoolBookingsPage(request):
+    bookings = SchoolBooking.objects.order_by('-id')
+    context = {
+        'dash_title': 'School Bookings',
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/ind-bookings.html', context)
+
+
+@login_required
+@check_admin
+def PropertyBookingsPage(request):
+    bookings = PropertyBooking.objects.order_by('-id')
+    context = {
+        'dash_title': 'Property Bookings',
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/ind-bookings.html', context)
+
+@login_required
+@check_admin
+def HotelBookingsPage(request):
+    bookings = HotelBooking.objects.order_by('-id')
+    context = {
+        'dash_title': 'Hotel Bookings',
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/ind-bookings.html', context)
+
+@login_required
+@check_admin
+def RealEstateBookingsPage(request):
+    bookings = RealEstateBooking.objects.order_by('-id')
+    context = {
+        'dash_title': 'Real Estate Bookings',
+        'bookings': bookings
+    }
+    return render(request, 'dashboard/ind-bookings.html', context)
+
+@login_required
+@check_admin
+def HotelRoomBookingsPage(request):
+    bookings = HotelRoomBooking.objects.order_by('-id')
+    context = {
+        'dash_title': 'Hotel Room Bookings',
         'bookings': bookings
     }
     return render(request, 'dashboard/ind-bookings.html', context)
