@@ -121,6 +121,9 @@
     .border-col{
         border: unset;
     }
+    .hidNav{
+        display: block !important;
+    }
     
 }
 
