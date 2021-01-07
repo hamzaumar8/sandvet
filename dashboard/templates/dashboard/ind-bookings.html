@@ -29,10 +29,10 @@
                             <tr class="{% if not book.read %}bg-dark text-white{% endif %} ">
                                 <th scope="row">{{ book.id }}</th>
                                 <td>
-                                    {{ book.propertybooking.property.title }}
+                                    {{ book.property.title }}
                                     {{ book.realestatebooking.realestate.title }}
                                     {{ book.hotelbooking.hotel.title }}
-                                    {{ book.hotelroombooking.hotelroom.title }}
+                                    {{ book.hotelroom.title }}
                                     {{ book.car.title }}
                                     {{ book.schoolbooking.school.title }}
                                     {{ book.sparepartbooking.sparepart.title }}

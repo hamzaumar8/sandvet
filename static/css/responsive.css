@@ -124,6 +124,9 @@
     .hidNav{
         display: block !important;
     }
+    .navbar-light .navbar-brand img{
+        width: 160px;
+    }
     
 }
 
