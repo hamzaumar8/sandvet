@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.db.models import Count, Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage, SocialHandle, PropertyImage, HouseProperty, Hotel, HotelRoom, HotelImage, HotelRoomImage
-from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm, PropertyHouseForm, PropertyImagesForm
+from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm, PropertyHouseForm, PropertyImagesForm, HotelForm, HotelImagesForm
 from core.models import Locality
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
 from dashboard.decorators import check_admin
@@ -411,3 +411,72 @@ def ViewHotel(request, *args, **kwargs):
         "images": images
     }
     return render(request, "dashboard/view-hotel.html", context)
+
+
+
+
+@login_required
+@check_admin
+def HotelAddPage(request):
+    form = HotelForm()
+    image_form = HotelImagesForm()
+    if request.method == "POST":
+        form = HotelForm(request.POST, request.FILES)
+        img_form = HotelImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = HotelImage(hotel=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Hotel been Added succesfully')
+            return redirect('dashboard:hotels')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Add Hotel',
+        "form": form,
+        "image_form": image_form,
+    }
+    return render(request, "dashboard/add-hotel.html", context)
+
+
+
+@login_required
+@check_admin
+def HotelEditPage(request, *args, **kwargs):
+    hotel = get_object_or_404(Hotel, pk=kwargs["id"])
+    form = HotelForm(instance=hotel)
+    images = HotelImage.objects.filter(hotel=hotel)
+    image_form = HotelImagesForm()
+    if request.method == "POST":
+        form = HotelForm(request.POST, request.FILES, instance=hotel)
+        img_form = HotelImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = HotelImage(hotel=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Hotel  been updated succesfully')
+            return redirect('dashboard:hotels')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Edit Car',
+        "form": form,
+        "image_form": image_form,
+        "images": images,
+    }
+    return render(request, "dashboard/add-hotel.html", context)
+
+
+
+@login_required
+@check_admin
+def DeleteHotelImage(request, *args, **kwargs):
+    hotelimg = get_object_or_404(HotelImage, pk=kwargs["id"])
+    hotel = hotelimg.hotel
+    hotelimg.delete()
+    messages.success(request, "Image deleted successfully")
+    return redirect("dashboard:edit-hotel", id=hotel.pk)

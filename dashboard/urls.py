@@ -50,8 +50,12 @@ urlpatterns = [
 
     # Hotels
     path('hotels/', prop.HotelsPage, name='hotels'),
+    path('hotel/add/', prop.HotelAddPage, name='add-hotel'),
     path('hotel/<int:id>/view/', prop.ViewHotel, name='view-hotel'),
     path('hotel/<int:id>/featured/', prop.FeaturedHotel, name='featured-hotel'),
+    path('hotel/<int:id>/edit/', prop.HotelEditPage, name='edit-hotel'),
+    path('hotel/image/<int:id>/delete/', prop.DeleteHotelImage, name='delete-hotel-image'),
+
     # Cars
     path('cars/', cars.CarPage, name='car'),
     path('car/add/', cars.CarAddPage, name='add-car'),

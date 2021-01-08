@@ -6,7 +6,7 @@
     <div class="col-lg-12"> 
         <div class="card">
             <div class="card-body">
-                <a href="{% url 'dashboard:realestates' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-arrow-left mr-1"></i> Back</a>
+                <a href="{% url 'dashboard:hotels' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-arrow-left mr-1"></i> Back</a>
                 <div class="">
                     <div class="">
                         <form class="form-horizontal" method="POST" enctype="multipart/form-data" >
@@ -17,14 +17,6 @@
                                         {{ field|as_crispy_field }}
                                     </div>
                                 {% endfor %}
-                                <div class="card col-md-12 pt-2">
-                                    <h4 class="col-12"> Social Media Handles</h4>
-                                    {% for field in handle_form %}
-                                    <div class="col-md-12 mb-2">
-                                        {{ field|as_crispy_field }}
-                                    </div>
-                                    {% endfor %}
-                                </div>
                                 <div class="col-md-12">
                                     {{image_form|crispy}}
                                 </div>
@@ -35,7 +27,7 @@
                                         <div class="card d-block">
                                             <img class="card-img-top img-fluid" src="{{img.imageURL}}" alt="{{img.car}}" class="img-fluid" style="max-height: 250px;">
                                             <div class="card-body p-1">
-                                                <a href="{% url 'dashboard:delete-realestate-image' id=img.id %}" class="btn btn-sm btn-danger waves-effect waves-light text-white"><i class="mdi mdi-delete mr-1 text-muted"></i>delete</a>
+                                                <a href="{% url 'dashboard:delete-hotel-image' id=img.id %}" class="btn btn-sm btn-danger waves-effect waves-light text-white"><i class="mdi mdi-delete mr-1 text-muted"></i>delete</a>
                                             </div>
                                         </div>
                                     </div>
