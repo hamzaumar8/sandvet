@@ -1,0 +1,105 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'dashboard:hotels' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-arrow-left mr-1"></i> Back</a>
+                <table id="key-datatable" class="table dt-responsive nowrap">
+                    <tbody>
+                        <tr>
+                            <td>ID</td>
+                            <td>{{ hotel.id }}</td>
+                        </tr>
+                        <tr>
+                            <td>Tite</td>
+                            <td>{{ hotel.title }}</td>
+                        </tr>
+                        <tr>
+                            <td>Region</td>
+                            <td>{{ hotel.region }} Region</td>
+                        </tr>
+                        <tr>
+                            <td>Locality</td>
+                            <td>{{ hotel.locality.name }} </td>
+                        </tr>
+                        <tr>
+                            <td>Rating</td>
+                            <td>{{ hotel.rate }}</td>
+                        </tr>
+                        <tr>
+                            <td>Free Parking</td>
+                            <td>{{ hotel.free_parking }}</td>
+                        </tr>
+                        <tr>
+                            <td>Free WiFi</td>
+                            <td>{{ hotel.free_wiFi }}</td>
+                        </tr>
+                        <tr>
+                            <td>Pool</td>
+                            <td>{{ hotel.pool }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fitness Center</td>
+                            <td>{{ hotel.fitness_center }}</td>
+                        </tr>
+                        <tr>
+                            <td>Free Breakfast</td>
+                            <td>{{ hotel.free_breakfast }}</td>
+                        </tr>
+                        <tr>
+                            <td>Free Airport Transportation</td>
+                            <td>{{ hotel.free_airport_transportation }}</td>
+                        </tr>
+                        <tr>
+                            <td>Conference Facilities</td>
+                            <td>{{ hotel.conference_facilities }}</td>
+                        </tr>
+                        <tr>
+                            <td>Bar / Lounge</td>
+                            <td>{{ hotel.bar_or_lounge }}</td>
+                        </tr>
+                        <tr>
+                            <td>Timestamp</td>
+                            <td>{{ hotel.created_at }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-12 card">
+                        <p class="mb-0">Description</p>
+                        <p>{{ hotel.description }} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        Real Estate Images
+                    </div>
+                    <div class="col-lg-3 col-md-6 ">
+                        <div class="card d-block">
+                            <img class="card-img-top img-fluid" src="{{hotel.imageURL}}" alt="{{img.car}}" class="img-fluid" style="max-height: 250px;">
+                        </div>
+                    </div>
+                    {% for img in images %}
+                    <div class="col-lg-3 col-md-6 ">
+                        <div class="card d-block">
+                            <img class="card-img-top img-fluid" src="{{img.imageURL}}" alt="{{img.car}}" class="img-fluid" style="max-height: 250px;">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="{% url 'dashboard:edit-realestate' id=hotel.id%}"><i class="text-white mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
+                    <a class="btn btn-danger" href="{% url 'dashboard:delete-realestate' id=hotel.id%}"><i class="text-white mdi mdi-delete mr-1 text-muted"></i>Delete</a>
+                </div>
+            </div> 
+        </div> 
+    </div>
+</div>
+{% endblock %}
+        
+
+                

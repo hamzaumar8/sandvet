@@ -1,0 +1,64 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'dashboard:add-realestate' %}" class="btn btn-primary mb-3"> <i class="mdi mdi-plus mr-1"></i> New Real Esate</a>
+                <table id="key-datatable" class="table dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <th>Title</th>
+                            <th>Region</th>
+                            <th>Locality</th>
+                            <th>No. of property</th>
+                            <th>Featured</th>
+                            <th>Entry date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for hotel in hotels %}
+                        <tr>
+                            <td>{{ hotel.id }}</td>
+                            <td>{{ hotel.title }}</td>
+                            <td>{{ hotel.region }}</td>
+                            <td>{{ hotel.locality.name }}</td>
+                            <td>
+                                <div class="button-list">
+                                    <button type="button" class="btn btn-primary btn-sm">{{ hotel.num_rooms }}</button>
+                                </div>
+                            </td>
+
+                            <td>
+                                {% if hotel.featured == 1 %}
+                                    <a href="{% url 'dashboard:featured-hotel' id=hotel.id%}" class="btn btn-sm btn-danger">Remove</a>
+                                {% else %}
+                                    <a href="{% url 'dashboard:featured-hotel' id=hotel.id%}" class="btn btn-sm btn-primary">Add</a>
+                                {% endif %}
+                            </td>
+                            <td>{{ hotel.created_at|date:"d- m-Y" }}</td>
+                            <td>
+                                <div class="btn-group dropdown">
+                                    <a href="javascript: void(0);" class="dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="{% url 'dashboard:view-hotel' id=hotel.id %}"><i class="mdi mdi-eye mr-1 text-muted"></i>View</a>
+                                        <a class="dropdown-item" href="{% url 'dashboard:edit-realestate' id=hotel.id %}"><i class="mdi mdi-pencil mr-1 text-muted"></i>Edit</a>
+                                        <a class="dropdown-item" href="{% url 'dashboard:delete-realestate' id=hotel.id%}"><i class="mdi mdi-delete mr-1 text-muted"></i>Delete</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div> 
+        </div> 
+    </div>
+</div>
+{% endblock %}
+        
+
+                

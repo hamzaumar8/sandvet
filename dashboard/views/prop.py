@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count, Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
-from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage, SocialHandle, PropertyImage, HouseProperty
+from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage, SocialHandle, PropertyImage, HouseProperty, Hotel, HotelRoom, HotelImage, HotelRoomImage
 from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm, PropertyHouseForm, PropertyImagesForm
 from core.models import Locality
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
@@ -368,3 +368,46 @@ def ViewRealEstate(request, *args, **kwargs):
         "images": images
     }
     return render(request, "dashboard/view-realestate.html", context)
+
+
+
+
+
+@login_required
+@check_admin
+def HotelsPage(request):
+    hotel = Hotel.objects.all().annotate(num_rooms=Count('hotel', distinct=True))
+    context = {
+        'dash_title': 'Hotels',
+        'hotels': hotel
+    }
+    return render(request, 'dashboard/hotels.html', context)
+
+
+
+
+@login_required
+@check_admin
+def FeaturedHotel(request, *args, **kwargs):
+    hotel = get_object_or_404(Hotel, pk=kwargs["id"])
+    hotel_qs = Hotel.objects.filter(id=hotel.id)
+    if hotel.featured == 1:
+        hotel_qs.update(featured=0)
+    else:
+        hotel_qs.update(featured=1)
+    messages.success(request, "Updated successfully")
+    return redirect('dashboard:hotels')
+
+
+
+
+@login_required
+@check_admin
+def ViewHotel(request, *args, **kwargs):
+    hotel = get_object_or_404(Hotel, pk=kwargs["id"])
+    images = HotelImage.objects.filter(hotel=hotel)
+    context = {
+        "hotel": hotel,
+        "images": images
+    }
+    return render(request, "dashboard/view-hotel.html", context)
