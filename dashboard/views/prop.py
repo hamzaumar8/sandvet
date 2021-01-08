@@ -480,3 +480,14 @@ def DeleteHotelImage(request, *args, **kwargs):
     hotelimg.delete()
     messages.success(request, "Image deleted successfully")
     return redirect("dashboard:edit-hotel", id=hotel.pk)
+
+
+
+
+
+@login_required
+@check_admin
+def DeleteHotel(request, *args, **kwargs):
+    get_object_or_404(Hotel, pk=kwargs["id"]).delete()
+    messages.success(request, "Hotel deleted successfully")
+    return redirect(reverse("dashboard:hotels"))

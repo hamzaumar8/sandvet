@@ -54,6 +54,7 @@ urlpatterns = [
     path('hotel/<int:id>/view/', prop.ViewHotel, name='view-hotel'),
     path('hotel/<int:id>/featured/', prop.FeaturedHotel, name='featured-hotel'),
     path('hotel/<int:id>/edit/', prop.HotelEditPage, name='edit-hotel'),
+    path('hotel/<int:id>/delete/', prop.DeleteHotel, name='delete-hotel'),
     path('hotel/image/<int:id>/delete/', prop.DeleteHotelImage, name='delete-hotel-image'),
 
     # Cars
