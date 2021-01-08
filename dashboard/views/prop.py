@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.db.models import Count, Q
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from property.models import Property, LandProperty, Category, RealEstate, RealEstateImage, SocialHandle, PropertyImage, HouseProperty, Hotel, HotelRoom, HotelImage, HotelRoomImage
-from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm, PropertyHouseForm, PropertyImagesForm, HotelForm, HotelImagesForm
+from dashboard.forms import PropertyForm, PropertyLandForm, CarForm, CarImagesForm, BrandForm, TypeForm, SparePartForm, SparePartImagesForm, SchoolForm, SchoolImagesForm, CategoryForm, RealEstateForm, RealEstateImagesForm, SocialHandleForm, PropertyHouseForm, PropertyImagesForm, HotelForm, HotelImagesForm, HotelRoomForm, HotelRoomImagesForm
 from core.models import Locality
 from cars.models import CarImage, Car, Brand, Type, School, SparePart, SparePartImage, School, SchoolImage
 from dashboard.decorators import check_admin
@@ -491,3 +491,123 @@ def DeleteHotel(request, *args, **kwargs):
     get_object_or_404(Hotel, pk=kwargs["id"]).delete()
     messages.success(request, "Hotel deleted successfully")
     return redirect(reverse("dashboard:hotels"))
+
+
+@login_required
+@check_admin
+def HotelRoomsPage(request):
+    hotelroom = HotelRoom.objects.all()
+    context = {
+        'dash_title': 'Hotel Rooms',
+        'hotelrooms': hotelroom
+    }
+    return render(request, 'dashboard/hotel-rooms.html', context)
+
+
+
+
+@login_required
+@check_admin
+def FeaturedHotelRoom(request, *args, **kwargs):
+    hotelroom = get_object_or_404(HotelRoom, pk=kwargs["id"])
+    hotelroom_qs = HotelRoom.objects.filter(id=hotelroom.id)
+    if hotelroom.featured == 1:
+        hotelroom_qs.update(featured=0)
+    else:
+        hotelroom_qs.update(featured=1)
+    messages.success(request, "Updated successfully")
+    return redirect('dashboard:hotel-rooms')
+
+
+
+
+@login_required
+@check_admin
+def ViewHotelRoom(request, *args, **kwargs):
+    hotelroom = get_object_or_404(HotelRoom, pk=kwargs["id"])
+    images = HotelRoomImage.objects.filter(hotelroom=hotelroom)
+    context = {
+        "hotelroom": hotelroom,
+        "images": images
+    }
+    return render(request, "dashboard/view-hotel-room.html", context)
+
+
+
+
+@login_required
+@check_admin
+def HotelRoomAddPage(request):
+    form = HotelRoomForm()
+    image_form = HotelRoomImagesForm()
+    if request.method == "POST":
+        form = HotelRoomForm(request.POST, request.FILES)
+        img_form = HotelRoomImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = HotelRoomImage(hotelroom=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Hotel Room been Added succesfully')
+            return redirect('dashboard:hotel-rooms')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Add Hotel Room',
+        "form": form,
+        "image_form": image_form,
+    }
+    return render(request, "dashboard/add-hotel-room.html", context)
+
+
+
+@login_required
+@check_admin
+def HotelRoomEditPage(request, *args, **kwargs):
+    hotelroom = get_object_or_404(HotelRoom, pk=kwargs["id"])
+    form = HotelRoomForm(instance=hotelroom)
+    images = HotelRoomImage.objects.filter(hotelroom=hotelroom)
+    image_form = HotelRoomImagesForm()
+    if request.method == "POST":
+        form = HotelRoomForm(request.POST, request.FILES, instance=hotelroom)
+        img_form = HotelRoomImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        if form.is_valid() and img_form.is_valid():
+            inst = form.save()
+            for imagefile in files:
+                file_instance = HotelRoomImage(hotelroom=inst, images=imagefile)
+                file_instance.save()
+            messages.success(request, 'Hotel Room  been updated succesfully')
+            return redirect('dashboard:hotel-rooms')
+        else:
+            print(form.errors)
+    context = {
+        "dash_title": 'Edit Car',
+        "form": form,
+        "image_form": image_form,
+        "images": images,
+    }
+    return render(request, "dashboard/add-hotel-room.html", context)
+
+
+
+@login_required
+@check_admin
+def DeleteHotelRoomImage(request, *args, **kwargs):
+    hotelroomimg = get_object_or_404(HotelRoomImage, pk=kwargs["id"])
+    hotelroom = hotelroomimg.hotelroom
+    hotelroomimg.delete()
+    messages.success(request, "Image deleted successfully")
+    return redirect("dashboard:edit-hotel-room", id=hotelroom.pk)
+
+
+
+
+
+@login_required
+@check_admin
+def DeleteHotelRoom(request, *args, **kwargs):
+    get_object_or_404(HotelRoom, pk=kwargs["id"]).delete()
+    messages.success(request, "Hotel deleted successfully")
+    return redirect(reverse("dashboard:hotel-rooms"))

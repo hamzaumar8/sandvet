@@ -405,3 +405,36 @@ class HotelImagesForm(forms.ModelForm):
     class Meta:
         model = propsModel.HotelImage
         fields = ['images']
+            
+
+
+class HotelRoomForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(HotelRoomForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+    class Meta:
+        model = propsModel.HotelRoom
+        fields = ['title','price', 'hotel', 'image','housekeeping','refrigerator', 'flatscreen_tv', 'kitchenette', 'room_service', 'air_conditioning', 'description']
+
+
+class HotelRoomImagesForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(HotelRoomImagesForm, self).__init__(*args, **kwargs)
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs.update({
+                'class': 'form-control',
+            })
+
+    images =  forms.CharField(
+        required = False,
+        label='Hotel Room Images',
+        widget=forms.ClearableFileInput(
+            attrs={'multiple': True}
+        )
+    ) 
+    class Meta:
+        model = propsModel.HotelRoomImage
+        fields = ['images']
