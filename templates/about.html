@@ -58,10 +58,9 @@
                 <div class="slide left-hidden-slide" data-index="3">
                     <div class="scontent">
                         <i class="fa fa-hotel slide-icon"></i>
-                        <h2 class="title">Hotels and Restaurants</h2>
+                        <h2 class="title">Hotels</h2>
                     </div>
-                    <a href="#">
-                        <img class="lozad" src="{% static 'img/core/placeholder.jpg' %}" data-src="{% static 'img/about/carousel-3.jpg' %}" alt="Hotels and Restaurants"></a>
+                    <img class="lozad" src="{% static 'img/core/placeholder.jpg' %}" data-src="{% static 'img/about/carousel-3.jpg' %}" alt="Hotels">
                     <a href="##" class="link-ext"></a>
                 </div>
                 <div class="slide left-slide" data-index="4">
@@ -69,10 +68,16 @@
                         <i class="fa fa-certificate slide-icon"></i>
                         <h2 class="title">Lands</h2>
                     </div>
-                    <a href="#">
-                        <img class="lozad" src="{% static 'img/core/placeholder.jpg' %}" data-src="{% static 'img/about/carousel-1.jpg' %}" alt="Commercial Solutions">
-                    </a>
-                    <a href="##" class="link-ext"></a>
+                    <img class="lozad" src="{% static 'img/core/placeholder.jpg' %}" data-src="{% static 'img/about/carousel-1.jpg' %}" alt="Commercial Solutions">
+                    <a href="{% url 'property:land' %}" class="link-ext"></a>
+                </div>
+                <div class="slide left-slide" data-index="4">
+                    <div class="scontent">
+                        <i class="fa fa-certificate slide-icon"></i>
+                        <h2 class="title">Spare Parts</h2>
+                    </div>
+                    <img class="lozad" src="{% static 'img/core/placeholder.jpg' %}" data-src="{% static 'img/core/banner-car-parts1.jpg' %}" alt="Commercial Solutions">
+                    <a href="{% url 'cars:spare-parts' %}" class="link-ext"></a>
                 </div>
             </div>
             <div class="ui-card-slider-nav">
@@ -94,22 +99,39 @@
                     </div>
                     <div class="mb-3">
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos reiciendis praesentium nulla. Aperiam nulla suscipit delectus officiis provident dignissimos. Quasi, temporibus. Optio reiciendis maxime modi, quaerat magnam eos tempora iusto!
+                            Sandvet is one of leading company in Ghana established on the purpose of providing services in the form of buying and renting cars, apartments,Offices, land, driving schools and a lot more across the country. Customer satisfaction is our number one priority.
                         </p>
                     </div>
                     <div class="mb-3">
                         <h2>Our vision</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ex sapiente maiores. Cumque culpa odit consectetur labore, minima ipsa eius aliquam accusantium qui error est eveniet ipsum esse consequuntur perspiciatis!</p>
+                        <p>As a platform, we continue to develop services to help businesses do more and enhance services through the internet. You are safe to work with us.Customers are located in all regions, and exchange hundreds of thousands of messages with suppliers on the platform each day.
+                            </p>
                     </div>
                     <div>
                         <h2>Our mission</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat ex sapiente maiores. Cumque culpa odit consectetur labore, minima ipsa eius aliquam accusantium qui error est eveniet ipsum esse consequuntur perspiciatis!</p>
+                        <p>We aim at making renting easier across Ghana and helping real Estate and auto-mobiles companies reach their prospect. We also help People sell their properties. Feel free to contact us now.</p>
                     </div>
                 </div>
+                {% if property_list %}
+                                    <div class="similar-listings-posts clearfix my-5">
+                                        <h3 class="col-12">Latest Properties in {{object.region}} region </h3>
+                                        <div class="list-products">
+                                            <div class="row">
+                                                {%for list in property_list %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'includes/list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
             </div>
 
             <div class="col-md-4">
-                {% include 'includes/featured.html' %}
+                <div class="sidebar layout2">
+                {% include 'includes/latest-listing.html' %}
+            </div>
             </div>
 
         </div>

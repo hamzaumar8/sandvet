@@ -1769,7 +1769,7 @@
   
   .panel__cardhead {
     position: relative;
-    background-color: #fff;
+    /* background-color: #fff; */
     padding: 1rem 1rem 0.5rem;
     border: 0;
   }
@@ -1796,12 +1796,12 @@
   .panel__cardbody {
     padding: 0.5rem 1.5rem 2rem;
     position: relative;
-    background-color: #fff;
+    /* background-color: #fff; */
   }
 
   .panel__cardfooter {
     position: relative;
-    background-color: #fff;
+    /* background-color: #fff; */
     padding: .5rem 1rem 1rem;
     border: 0;
   }
@@ -2661,6 +2661,7 @@ object-position: center; */
 .filter-sec{
   position: relative;
   overflow: hidden;
+  background-color: #fff;
 }
 
 .contact-agent span a{
