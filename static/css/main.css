@@ -2657,7 +2657,10 @@ object-position: center; */
 } */
 
 
-
+.nav-tabs .nav-link{
+  background-color:  var(--colorPrimary);
+  color: #fff;
+}
 .filter-sec{
   position: relative;
   overflow: hidden;

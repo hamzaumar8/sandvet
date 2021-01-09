@@ -54,3 +54,5 @@ class SparePartFilter(django_filters.FilterSet):
             'title',
             'region'
         ]
+
+

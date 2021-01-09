@@ -124,3 +124,4 @@ class HomeRealEstateFilter(django_filters.FilterSet):
             'locality',
             'region',
         ]
+

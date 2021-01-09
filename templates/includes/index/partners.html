@@ -2,7 +2,12 @@
 {% load static %}
 {% if  partners %}
     <section class="popular-listing  section-popular-listings mb-5">
-        <div class="container-fluid panel__cardbody">
+        <div class="container-fluid panel__cardbody px-5">
+            <div class="row">
+                <div class="col-12 pannel__headtitle">
+                    <h2 class="text-center">Truested Partners</h2>
+                </div>
+            </div>
             <div id="panel__responsivePertners" class="row panel__responsive  align-items-center pt-3 mb-1">
                 {% for list in partners %}
                     <div class="mx-3">

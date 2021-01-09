@@ -92,11 +92,11 @@
                 <h3 class="text-center">Best Car Spare parts in Ghana</h3>
                 <!-- <p class="text-center">Best automobile market hub in Ghana.</p> -->
                 <div class="widget-property-search card mt-3 home-widget-search col-11 mx-auto">
-                    <form action="{% url 'cars:cars' %}" class="banner-cars">
+                    <form action="{% url 'cars:spare-parts' %}" class="banner-cars sparepartForm">
                         <div class="row justify-content-center">
                             <div class="col-lg-11 col-12">
                                 <div class="row ">
-                                    {% for field in carfilter.form %}
+                                    {% for field in sparepartfilter.form %}
                                     <div class="col-lg-3 border-col">
                                         {{ field|as_crispy_field }}
                                     </div>

@@ -8,7 +8,7 @@ from property.models import Property, Category, Testimony, Subscription, RealEst
 from property.filters import HomePropertFilter, PropertyFilter, HomeHotelFilter, HomeRealEstateFilter
 from .forms import SubscriptionForm
 from .models import Locality, Region
-from cars.filters import CarFilter
+from cars.filters import CarFilter, SparePartFilter
 from cars.models import Car, Brand, SparePart, School
 # Create your views here.
 
@@ -47,6 +47,7 @@ class IndexPageView(ListView):
         kwargs['spareparts'] = SparePart.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['schools'] = School.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['carfilter'] = CarFilter(self.request.GET, queryset=Car.objects.all()) 
+        kwargs['sparepartfilter'] = SparePartFilter(self.request.GET, queryset=SparePart.objects.all()) 
         kwargs['hotelfilter'] = HomeHotelFilter(self.request.GET, queryset= Hotel.objects.all()) 
         kwargs['realestatefilter'] = HomeRealEstateFilter(self.request.GET, queryset= RealEstate.objects.all()) 
         kwargs['filter'] = HomePropertFilter(self.request.GET, queryset=self.model.objects.all())
