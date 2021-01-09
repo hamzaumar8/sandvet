@@ -544,8 +544,8 @@ class HotelRoomBooking(models.Model):
     booking = models.OneToOneField(Booking,  on_delete=models.CASCADE, related_name='hotelroombooking', null=True)
     hotelroom = models.ForeignKey(HotelRoom,  on_delete=models.CASCADE, related_name='bookhotelroom', null=True)
     category = models.CharField(default="Hotel Room", max_length=15)
-    check_in = models.DateTimeField(null=True)
-    check_out = models.DateField(null=True)
+    check_in = models.DateTimeField(null=True, blank=True)
+    check_out = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

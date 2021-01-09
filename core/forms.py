@@ -43,17 +43,17 @@ class HotelBookingForm(forms.ModelForm):
     check_in = forms.DateField(
         input_formats=["%Y-%m-%dT%H:%M", "%Y-%m-%d %H:%M"],
         required = True,
-        label='Check In Date',
+        label='Check In Date and Time',
         widget=forms.DateTimeInput(attrs={
             'type': 'datetime-local'
         })
     )
     check_out = forms.DateField(
-        input_formats=['%Y-%m-%d'],
+        input_formats=["%Y-%m-%dT%H:%M", "%Y-%m-%d %H:%M"],
         required = True,
         label='Check Out Date',
         widget=forms.DateTimeInput(attrs={
-            'type': 'date'
+            'type': 'datetime-local'
         })
     )
 

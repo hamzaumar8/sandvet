@@ -93,9 +93,9 @@ $(document).ready(function() {
         
     $('.banner-carousel').slick({
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 5000,
         infinite: true,
-        speed: 300,
+        speed: 500,
         dots: false,
         infinite: true,
         slidesToShow: 1,
