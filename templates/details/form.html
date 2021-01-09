@@ -8,6 +8,11 @@
                 <form id="sw_contactform_sw_win_contactform_widget-1" method="POST"  class="box">
                     {% csrf_token %}
                     <div class="box-container widget-body">
+                        {% for field in hotelform %}
+                            <div class="form-field">
+                                {{ field|as_crispy_field }}
+                            </div>
+                        {% endfor %}
                         {% for field in form %}
                             <div class="form-field">
                                 {{ field|as_crispy_field }}

@@ -2,10 +2,10 @@
 {% load static %}
 {% load humanize %}
 {% block content %}
-<section class="pager-sec bfr " style="background-image: url(https://listing-themes.com/selio-wp/wp-content/themes/selio/assets/images/resources/pager-bg.jpg);">
+<section class="pager-sec bfr " style="background-image: url({% static 'img/about/carousel-2.jpg' %}); background-position:center;">
 	<div class="container">
 		<div class="pager-sec-details">
-			<h3 class="">About</h3>
+			<h3 class="">About Us</h3>
             <ul>
                 <li class="item">
                     <a href="{% url 'core:index' %}">Home</a>

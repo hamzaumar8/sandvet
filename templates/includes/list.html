@@ -22,11 +22,19 @@
                 <div>
                     <a href="{{ list.get_absolute_url }}" title="{{ list.title }}">
                         {% if list.hotel %}
-                            <h3>{{ list.title }} At {{list.hotel}} </h3>
-                            <p>
-                                <i class="fa fa-map-marker"></i> {{ list.hotel.location_address}} -
-                                {{ list.hotel.locality.name }} , {{ list.hotel.region }} Region
-                            </p>
+                            {% if list.rate %}
+                                <h3>{{ list.title }}</h3>
+                                    <p>
+                                        <i class="fa fa-map-marker"></i> {{ list.location_address}} -
+                                        {{ list.locality.name }} , {{ list.region }} Region
+                                    </p>
+                                {% else %}
+                                <h3>{{ list.title }} At {{list.hotel}} </h3>
+                                <p>
+                                    <i class="fa fa-map-marker"></i> {{ list.hotel.location_address}} -
+                                    {{ list.hotel.locality.name }} , {{ list.hotel.region }} Region
+                                </p>
+                                {% endif %}
                         {% else %}
                             <h3>{{ list.title }}</h3>
                             <p>

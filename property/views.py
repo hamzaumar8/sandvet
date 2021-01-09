@@ -5,7 +5,7 @@ from django.db.models import Q, Count
 from .models import Property, Category, LandProperty, RealEstate, Hotel, HotelRoom, PropertyBooking, HotelBooking, RealEstateBooking, HotelRoomBooking
 from .filters import PropertyFilter, PropertyCategoryFilter, RealEstateFilter, HotelFilter, HotelRoomFilter
 from core.models import Locality, Region
-from core.forms import BookingForm
+from core.forms import BookingForm, HotelBookingForm
 from cars.models import Car, SparePart, School, Brand
 
 # Create your views here.
@@ -397,11 +397,17 @@ def HotelRoomDetail(request, slug):
         request.session[session_key] = True
 
     form = BookingForm()
+    hotelForm = HotelBookingForm()
     if request.method == "POST":
         form = BookingForm(request.POST)
-        if form.is_valid():
+        hotelForm = HotelBookingForm(request.POST)
+        if form.is_valid() and hotelForm.is_valid():
             inst = form.save()
-            HotelRoomBooking.objects.create(booking=inst, hotelroom=lists)
+            room = hotelForm.save()
+            room.booking = inst
+            room.hotelroom = lists
+            room.save()
+            # HotelRoomBooking.objects.create(booking=inst, hotelroom=lists)
             messages.success(request, "We've received your message. We would get back to you soon.")
             return redirect('property:hotel-room-detail', slug=lists.slug)
         else:
@@ -411,6 +417,7 @@ def HotelRoomDetail(request, slug):
         'object': lists, 
         'objectimages': roomimages,
         "form": form,
+        "hotelform": hotelForm
     }   
     context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
     context['category_list'] = Category.objects.all()

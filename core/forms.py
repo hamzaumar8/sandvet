@@ -1,7 +1,8 @@
 from django import forms
-from property.models import Subscription 
+from property.models import Subscription , HotelRoomBooking
 from phonenumber_field.formfields import PhoneNumberField
 from .models import Booking
+
 
 class SubscriptionForm(forms.ModelForm):  
     class Meta:
@@ -37,4 +38,26 @@ class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
         fields = ['name', 'email', 'phone_number', 'subject', 'message']
+
+class HotelBookingForm(forms.ModelForm):
+    check_in = forms.DateField(
+        input_formats=["%Y-%m-%dT%H:%M", "%Y-%m-%d %H:%M"],
+        required = True,
+        label='Check In Date',
+        widget=forms.DateTimeInput(attrs={
+            'type': 'datetime-local'
+        })
+    )
+    check_out = forms.DateField(
+        input_formats=['%Y-%m-%d'],
+        required = True,
+        label='Check Out Date',
+        widget=forms.DateTimeInput(attrs={
+            'type': 'date'
+        })
+    )
+
+    class Meta:
+        model = HotelRoomBooking
+        fields = ['check_in', 'check_out']
 

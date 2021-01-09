@@ -1,2 +1,108 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<section class="pager-sec bfr " style="background-image: url({% static 'img/about/carousel-2.jpg' %}); background-position:center;">
+	<div class="container">
+		<div class="pager-sec-details">
+			<h3 class="">Contact Us</h3>
+            <ul>
+                <li class="item">
+                    <a href="{% url 'core:index' %}">Home</a>
+                </li>
+                <li>
+                    <span>Contact Us</span>
+                </li>
+            </ul>
+    	</div>
+	</div>
+</section>
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <h3 class="h5">Contact Information</h3>
+                            <p><i class="fa fa-phone"></i> <span class="value"><a href="tel://+233507321204">+233 50 732 1204</a></span></p>
+                            <p><i class="fa fa-phone"></i> <span class="value"><a href="tel://+233554748768">+233 55 474 8768</a></span></p>
+                            <p><i class="fa fa-envelope"></i> <span class="value"><a href="mailto:support@sandvet.com">support@sandvet.com</a></span></p>
+                            <div class="footer-social">
+                                <a href="https://web.facebook.com/Wise-Life-Hacks-113283473860191"><i class="fa fa-facebook"></i></a>
+                                <a href="https://twitter.com/QueenElizabet4"><i class="fa fa-twitter"></i></a>
+                                <a href="https://www.linkedin.com/in/rhema-mensah-amoabeng-2130a61b8/"><i class="fa fa-linkedin"></i></a>
+                                <a href="https://www.instagram.com/sandvetshops/?hl=en"><i class="fa fa-instagram"></i></a>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <p><i class="fa fa-phone"></i> <span class="value"><a href="tel://+233507321204">+233 50 732 1204</a></span></p>
+                            <p><i class="fa fa-phone"></i> <span class="value"><a href="tel://+233554748768">+233 55 474 8768</a></span></p>
+                            <p><i class="fa fa-envelope"></i> <span class="value"><a href="mailto:support@sandvet.com">support@sandvet.com</a></span></p>
+                        </div>  
+                    </div>
+                    <div class="col-md-12 mt-4">
+                        <div class="card">
+                            <div class="contact_form" id="contact_form_169">
+                                <h3 class="h3">Get in Touch</h3>
+                                <form action="" class="" method="POST">
+                                    <div class="form-fieldss">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-4 pl-0">
+                                                <div class="form-field">
+                                                    <input type="text" name="your_name" value="" placeholder="Your Name" id="your_name" class="">
+                                                </div><!-- form-field end-->
+                                            </div>
+                                            <div class="col-lg-4 col-md-4">
+                                                <div class="form-field">
+                                                    <input type="email" name="mail" value="" placeholder="Your Email" id="mail">
+                                                </div><!-- form-field end-->
+                                            </div>
+                                            <div class="col-lg-4 col-md-4 pr-0">
+                                                <div class="form-field">
+                                                    <input type="text" name="phone" value="" placeholder="Your Phone" class="">
+                                                </div><!-- form-field end-->
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 pl-0 pr-0">
+                                                <div class="form-field">
+                                                    <textarea name="message" placeholder="Your Message" class=""></textarea>
+                                                </div><!-- form-field end-->
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 pl-0">
+                                                <button type="submit" class="btn2 btn-primary">Send Message</button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div><!--form-fieldss end-->
+                                </form>
+                            </div>
+                        </div>
 
+                        {% if property_list %}
+                            <div class="similar-listings-posts clearfix my-5">
+                                <h3 class="col-12">Latest Properties available </h3>
+                                <div class="list-products">
+                                    <div class="row">
+                                        {%for list in property_list %}
+                                                <div class="col-lg-4 col-md-6">
+                                                    {% include 'includes/list.html' %}
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="sidebar layout2">
+                    {% include 'includes/latest-listing.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}

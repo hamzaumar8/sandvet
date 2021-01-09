@@ -132,7 +132,21 @@ def subscriptionForm(request):
 
 
 def contactPage(request):
-    return render(request, 'contact.html')
+    latest_list = Car.objects.order_by('-id')[:5]
+    latest_property = Property.objects.order_by('-id')[:6]
+    latest_spareparts = SparePart.objects.order_by('-id')[:5]
+    context = {
+        'latest_lists': latest_list,
+        'property_list': latest_property,
+        'latest_spareparts': latest_spareparts
+    }
+    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+    context['category_list'] = Category.objects.all()
+    context['brands_list'] = Brand.objects.order_by('-views')[:7]
+    context['driving_list'] = School.objects.order_by('-views')[:7]
+    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7] 
+    return render(request, 'contact.html', context)
 
 def aboutPage(request):
     latest_list = Car.objects.order_by('-id')[:5]
