@@ -1782,7 +1782,11 @@
     content: "";
     bottom: 0.5rem;
   }
-  
+  .bodyIndex .panel__cardfooter,
+  .bodyIndex .panel__cardbody,
+  .bodyIndex .panel__cardhead{
+    background-color: transparent !important;
+  }
   .pannel__headtitle h2 {
     text-transform: capitalize;
     font-size: 20px;
@@ -1802,9 +1806,9 @@
     border: 0;
   }
   .btn-see-more{
-    background-color: #fff;
+    background-color: var(--colorPrimary);
     border: 1px solid var(--colorPrimary);
-    color: var(--colorPrimary);
+    color: #fff;
     font-weight: 600;
     border-radius: 35px;
     text-transform: uppercase;
