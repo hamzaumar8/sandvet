@@ -75,6 +75,7 @@ $(document).ready(function() {
           $(".filter-sec form").submit();
         });
     });
+    $('select.nullbooleanselect  > option:first-child').text('Select Option');
     $('select[name=region] > option:first-child').text('All Regions');
     $('select[name=locality] > option:first-child').text('All Locality');
     $('input[name=bed] ').attr("placeholder", "Beds").attr("min", '1');

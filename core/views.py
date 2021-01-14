@@ -4,7 +4,7 @@ from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import  JsonResponse, HttpResponse
 from django.db.models import Q
-from property.models import Property, Category, Testimony, Subscription, RealEstate, Hotel
+from property.models import Property, Category, Testimony, Subscription, RealEstate, Hotel, HotelRoom
 from property.filters import HomePropertFilter, PropertyFilter, HomeHotelFilter, HomeRealEstateFilter
 from .forms import SubscriptionForm
 from .models import Locality, Region
@@ -39,12 +39,13 @@ class IndexPageView(ListView):
         kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
         kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
         
-        
         kwargs['partners'] = self.partners
         kwargs['testimonys'] = Testimony.objects.all()
         kwargs['brands'] = Brand.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['cars'] = Car.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['spareparts'] = SparePart.objects.filter(featured=1).order_by('-id')[:12]
+        kwargs['hotels'] = Hotel.objects.filter(featured=1).order_by('-id')[:12]
+        kwargs['hotelrooms'] = HotelRoom.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['schools'] = School.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['carfilter'] = CarFilter(self.request.GET, queryset=Car.objects.all()) 
         kwargs['sparepartfilter'] = SparePartFilter(self.request.GET, queryset=SparePart.objects.all()) 
@@ -58,8 +59,6 @@ class IndexPageView(ListView):
         self.qs1 = Hotel.objects.values_list('title', 'slug', 'logo', 'rate')
         self.qs2 = RealEstate.objects.values_list('title', 'slug', 'logo', 'url')
         self.partners = self.qs1.union(self.qs2).order_by('title')
-
-        cow = ('howdy', 'canew')
         return self.model.objects.order_by('-id')
 
 

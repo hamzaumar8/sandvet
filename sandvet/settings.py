@@ -198,5 +198,11 @@ EMAIL_HOST_USER = DEFAULT_FROM_EMAIL =  "ctmafri@gmail.com"
 EMAIL_HOST_PASSWORD = "yvbdactfcsfourif"
 
 if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     ALLOWED_HOSTS = ['127.0.0.1']
+
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = 'mail.sandvet.com'
+    EMAIL_PORT =  587 #also tried with 465
+    EMAIL_HOST_USER = 'server@sandvet.com'
+    EMAIL_HOST_PASSWORD = 'p1uhVOKGt}h?'
