@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Property, Category, Testimony, Subscription, LandProperty, RealEstate, SocialHandle, HouseProperty, Hotel, HotelRoom, HotelImage, HotelRoomImage, PropertyBooking
+from .models import Property, Category, Testimony, Subscription, LandProperty, RealEstate, SocialHandle, HouseProperty, Hotel, HotelRoom, HotelImage, HotelRoomImage, PropertyBooking, HotelBooking, HotelRoomBooking
 
 # Register your models here.
 admin.site.register(Property)
@@ -14,4 +14,6 @@ admin.site.register(Hotel)
 admin.site.register(HotelRoom)
 admin.site.register(HotelImage)
 admin.site.register(HotelRoomImage)
+admin.site.register(HotelBooking)
+admin.site.register(HotelRoomBooking)
 admin.site.register(PropertyBooking)

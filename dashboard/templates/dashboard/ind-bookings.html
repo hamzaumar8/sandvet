@@ -30,12 +30,12 @@
                                 <th scope="row">{{ book.id }}</th>
                                 <td>
                                     {{ book.property.title }}
-                                    {{ book.realestatebooking.realestate.title }}
-                                    {{ book.hotelbooking.hotel.title }}
+                                    {{ book.realestate.title }}
+                                    {{ book.hotel.title }}
                                     {{ book.hotelroom.title }}
                                     {{ book.car.title }}
-                                    {{ book.schoolbooking.school.title }}
-                                    {{ book.sparepartbooking.sparepart.title }}
+                                    {{ book.school.title }}
+                                    {{ book.sparepart.title }}
                                 </td>
                                 {% if book.property.category %}
                                 <td>
