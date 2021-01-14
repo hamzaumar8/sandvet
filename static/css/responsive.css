@@ -13,6 +13,17 @@
 }
 
 @media (max-width: 991px) {
+
+    .wd-posts{
+        display: flex;
+        flex-direction: column !important;
+    }
+    .ps-info{
+        padding: 0;
+    }
+    .ps-info > strong{
+        margin-bottom: 5px;
+    }
     .navbar-collapse {
         overflow: auto;
         position: fixed;
@@ -131,7 +142,10 @@
 }
 
 @media (max-width: 745px) {
-    
+    .car-widget-overview > ul > li{
+        flex: 33.333% 0 0;
+        max-width: 33.333%;
+    }
     .home-banner-section{
         padding: 1.5rem .5rem;
     }
@@ -147,6 +161,18 @@
 }
 
 @media (max-width: 576px) {
+    .property-main-img .property-img img{
+        min-height: 300px;
+    }
+    .property-img{
+        height: 300px;
+    }
+    .thumb-img .property-img{
+        height: 70px;
+    }
+    .thumb-img .property-img img{
+        max-height: 70px;
+    }
     .top__header{
         display: none !important;
     }
