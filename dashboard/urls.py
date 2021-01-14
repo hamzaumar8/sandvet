@@ -108,4 +108,6 @@ urlpatterns = [
     # Ajax URLS
     path("dashboard/property/add/land/", prop.ajaxPropertyLandAdd, name="add-land-property"),
     path("dashboard/property/add/house/", prop.ajaxPropertyHouseAdd, name="add-house-property"),
+    path("dashboard/logout/", core.authLogout, name="logout"),
+
 ]

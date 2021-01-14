@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db.models import Count, Q
+from django.contrib.auth import  logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponse, HttpResponseNotFound
 from property.models import Property, LandProperty, HouseProperty, PropertyBooking, HotelBooking, RealEstateBooking, HotelRoomBooking
@@ -16,6 +17,12 @@ def gen_asset_id(moduleName):
     if moduleInstance is not None:
         return (moduleInstance.id + 1)
     return 1
+
+@login_required
+def authLogout(request):
+    logout(request)
+    messages.success(request, "You have signed out.")
+    return redirect('account_login')
 
 def auth(request):
     if request.user.is_superuser:

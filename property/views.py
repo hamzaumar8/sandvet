@@ -249,7 +249,7 @@ class LandListView(ListView):
         return super().get_context_data(**kwargs)
 
     def get_queryset(self):
-        self.landCategory = Category.objects.get(title='land') 
+        self.landCategory = get_object_or_404(Category, title='land') 
         self.filter = PropertyCategoryFilter(self.request.GET, queryset=self.model.objects.filter(category=self.landCategory)) 
         return self.filter.qs
 
