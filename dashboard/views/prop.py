@@ -38,12 +38,13 @@ def PropertyAddPage(request):
     propertyForm = PropertyForm()
     propertyLandForm = PropertyLandForm()
     propertyHouseForm = PropertyHouseForm()
-       
+    image_form = PropertyImagesForm()   
     context = {
         "dash_title": 'Add Property',
         "property_form": propertyForm,
         "propertyland_form": propertyLandForm,
         "propertyhouse_form": propertyHouseForm,
+        "image_form": image_form,
     }
     return render(request, "dashboard/add-property.html", context)
 
@@ -58,7 +59,11 @@ def ajaxPropertyLandAdd(request):
         # get the form data
         form = PropertyForm(request.POST, request.FILES)
         propland_form = PropertyLandForm(request.POST, request.FILES)
-        if form.is_valid() and propland_form.is_valid():
+
+        img_form = PropertyImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        
+        if form.is_valid() and propland_form.is_valid() and img_form.is_valid():
             land = Category.objects.get(title='land')
             instance = form.save(request)
             instance.category = land
@@ -67,6 +72,9 @@ def ajaxPropertyLandAdd(request):
             land.property = instance
             land.save()
             instance.save()
+            for imagefile in files:
+                file_instance = PropertyImage(property=instance, images=imagefile)
+                file_instance.save()
             
             return JsonResponse({'error': False, 'message': 'Uploaded Successfully'}, status=200)
         else:
@@ -87,13 +95,19 @@ def ajaxPropertyHouseAdd(request):
         # get the form data
         form = PropertyForm(request.POST, request.FILES)
         prophouse_form = PropertyHouseForm(request.POST, request.FILES)
-        if form.is_valid() and prophouse_form.is_valid():
+        
+        img_form = PropertyImagesForm(request.POST, request.FILES)
+        files = request.FILES.getlist("images")
+        
+        if form.is_valid() and prophouse_form.is_valid() and img_form.is_valid():
             instance = form.save(request)
             house = prophouse_form.save()
             house.property = instance
             house.save()
             instance.save()
-            
+            for imagefile in files:
+                file_instance = PropertyImage(property=instance, images=imagefile)
+                file_instance.save()
             return JsonResponse({'error': False, 'message': 'Uploaded Successfully'}, status=200)
         else:
             # some form errors occured.
@@ -117,7 +131,6 @@ def DeleteProperty(request, *args, **kwargs):
 @check_admin
 def PropertyEditPage(request, *args, **kwargs):
     prop = get_object_or_404(Property, pk=kwargs["id"])
-    print(prop.category.title)
     images = PropertyImage.objects.filter(prop=prop)
     if prop.category.title == 'land':
         inst = LandProperty.objects.get(property=prop)
