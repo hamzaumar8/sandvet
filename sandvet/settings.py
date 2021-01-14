@@ -98,9 +98,9 @@ WSGI_APPLICATION = 'sandvet.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'tevdnas2020',
-        'USER': 'root',
-        'PASSWORD': "",
+        'NAME': 'sandvet5_niam',
+        'USER': 'sandvet5_sandvet5',
+        'PASSWORD': "wW)ii*TZCmai",
         'HOST': "localhost",
         # 'PORT': "",
         'OPTIONS': {
