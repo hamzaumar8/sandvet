@@ -1,7 +1,7 @@
 from django import forms
 from property.models import Subscription , HotelRoomBooking
 from phonenumber_field.formfields import PhoneNumberField
-from .models import Booking
+from .models import Booking, Contact
 
 
 class SubscriptionForm(forms.ModelForm):  
@@ -61,3 +61,33 @@ class HotelBookingForm(forms.ModelForm):
         model = HotelRoomBooking
         fields = ['check_in', 'check_out']
 
+
+
+
+
+
+class ContactForm(forms.ModelForm):
+    phone_number = PhoneNumberField(
+        required = True,
+        label='Phone Number',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': '+233558733398',
+                'required': True,
+            }
+        ),
+    )
+
+    email =  forms.CharField(
+        required = True,
+        label='Email',
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'example@domain.com',
+                'type': 'email',
+            }
+        )
+    )
+    class Meta:
+        model = Contact
+        fields = ['name', 'email', 'phone_number',  'message']

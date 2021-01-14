@@ -9,3 +9,4 @@ admin.site.index_title = 'Welcome to the sandvet admin area'
 admin.site.register(Region)
 admin.site.register(Locality)
 admin.site.register(Booking)
+admin.site.register(Contact)

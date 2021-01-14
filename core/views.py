@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View, ListView, DetailView
 from django.shortcuts import render, get_object_or_404, redirect, reverse
@@ -6,7 +7,7 @@ from django.http import  JsonResponse, HttpResponse
 from django.db.models import Q
 from property.models import Property, Category, Testimony, Subscription, RealEstate, Hotel, HotelRoom
 from property.filters import HomePropertFilter, PropertyFilter, HomeHotelFilter, HomeRealEstateFilter
-from .forms import SubscriptionForm
+from .forms import SubscriptionForm, ContactForm
 from .models import Locality, Region
 from cars.filters import CarFilter, SparePartFilter
 from cars.models import Car, Brand, SparePart, School
@@ -134,10 +135,22 @@ def contactPage(request):
     latest_list = Car.objects.order_by('-id')[:5]
     latest_property = Property.objects.order_by('-id')[:6]
     latest_spareparts = SparePart.objects.order_by('-id')[:5]
+
+    form = ContactForm()
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "We've received your message. We would get back to you soon.")
+            return redirect('core:contact')
+        else:
+            print(form.errors)
+
     context = {
         'latest_lists': latest_list,
         'property_list': latest_property,
-        'latest_spareparts': latest_spareparts
+        'latest_spareparts': latest_spareparts,
+        'form': form
     }
     context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
     context['category_list'] = Category.objects.all()

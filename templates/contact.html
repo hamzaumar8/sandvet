@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% block messages %} {% endblock %}
 {% load static %}
 {% load humanize %}
+{% load crispy_forms_tags %}
 {% block content %}
 <section class="pager-sec bfr " style="background-image: url({% static 'img/about/carousel-2.jpg' %}); background-position:center;">
 	<div class="container">
@@ -48,26 +50,29 @@
                             <div class="contact_form" id="contact_form_169">
                                 <h3 class="h3">Get in Touch</h3>
                                 <form action="" class="" method="POST">
+                                    {% include "includes/messages.html" %}
+                                    <br>
+                                    {% csrf_token %}
                                     <div class="form-fieldss">
                                         <div class="row">
                                             <div class="col-lg-4 col-md-4 pl-0">
                                                 <div class="form-field">
-                                                    <input type="text" name="your_name" value="" placeholder="Your Name" id="your_name" class="">
+                                                    {{ form.name|as_crispy_field }}
                                                 </div><!-- form-field end-->
                                             </div>
                                             <div class="col-lg-4 col-md-4">
                                                 <div class="form-field">
-                                                    <input type="email" name="mail" value="" placeholder="Your Email" id="mail">
+                                                    {{ form.email|as_crispy_field }}
                                                 </div><!-- form-field end-->
                                             </div>
                                             <div class="col-lg-4 col-md-4 pr-0">
                                                 <div class="form-field">
-                                                    <input type="text" name="phone" value="" placeholder="Your Phone" class="">
+                                                    {{ form.phone_number|as_crispy_field }}
                                                 </div><!-- form-field end-->
                                             </div>
                                             <div class="col-lg-12 col-md-12 pl-0 pr-0">
                                                 <div class="form-field">
-                                                    <textarea name="message" placeholder="Your Message" class=""></textarea>
+                                                    {{ form.message|as_crispy_field }}
                                                 </div><!-- form-field end-->
                                             </div>
                                             <div class="col-lg-12 col-md-12 pl-0">
