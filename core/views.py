@@ -243,3 +243,18 @@ class RegionListView(ListView):
 
 
 
+
+
+
+
+
+def PrivacyPolicyPage(request):
+    context = {}
+    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+    context['category_list'] = Category.objects.all()
+    context['brands_list'] = Brand.objects.order_by('-views')[:7]
+    context['driving_list'] = School.objects.order_by('-views')[:7]
+    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7] 
+    return render(request, 'privacy-policy.html', context)
+

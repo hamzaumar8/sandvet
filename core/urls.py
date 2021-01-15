@@ -15,4 +15,5 @@ urlpatterns = [
     path('ajax_subscriptionform/', subscriptionForm),
     path('contact-us/', contactPage, name='contact'),
     path('about-us/', aboutPage, name='about'),
+    path('privacy-policy/', PrivacyPolicyPage, name='privacy-policy'),
 ]

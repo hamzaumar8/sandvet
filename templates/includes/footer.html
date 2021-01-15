@@ -1,7 +1,7 @@
 {% load crispy_forms_tags %} 
 <section class="bottom__section">
     <div class="container placeholder-container">
-        <div class="row">
+        <div class="row hideView">
             <div class="widget col-xl-3 col-sm-6 col-md-4">
                 <div class="widget-footer-contacts">
                     <h3>For rent</h3>
@@ -92,6 +92,16 @@
                 </div>
             </div>
 
+        </div>
+
+        <div class="row hideLarge d-none">
+            <div class="widget-footer-contacts col-12">
+                <ul class="footer-list row">
+                    <li class="col-xl-3 col-sm-6 col-md-4 col-6"><span class="value"><a href="{% url 'cars:car-for-hire' %}">Terms & Conditions</a></li>
+                    <li class="col-xl-3 col-sm-6 col-md-4 col-6"><span class="value"><a href="{% url 'core:privacy-policy' %}">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>  
         </div>
     </div>
 </section>

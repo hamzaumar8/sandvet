@@ -1,6 +1,15 @@
 {% load crispy_forms_tags %} 
 {% load static %}
-<section class="main-banner-sec">
+<section class="main-banner-sec hideLarge d-none">
+    <div class="banner-carousel">
+        <div class="banner-slide" style="background-image: url({% static 'img/core/banner-realestate.jpg' %});">
+            <div class="home-banner-section col-12">
+                <h3 class="text-center">Buy Properties from the Best Developers.</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="main-banner-sec hideView">
     <div class="banner-carousel">
         <div class="banner-slide" style="background-image: url({% static 'img/core/banner-realestate.jpg' %});">
             <div class="home-banner-section col-12">

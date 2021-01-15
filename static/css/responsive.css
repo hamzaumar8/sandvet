@@ -13,7 +13,25 @@
 }
 
 @media (max-width: 991px) {
-
+    /* .dVYIqU{
+        right: 17px !important;
+    }
+    .jMfHkK{
+        margin: 0 !important;
+    } */
+   .hideLarge .brand-card{
+        padding: 0 !important;
+    background: transparent;
+    }
+    .hideLarge .brand-img{
+        background-color: #fff;
+    }
+    .hideLarge{
+        display: block !important;
+    }
+    .hideView{
+        display: none !important;
+    }
     .wd-posts{
         display: flex;
         flex-direction: column !important;

@@ -1,0 +1,62 @@
+
+{% load static %}
+<section class="popular-listing  section-popular-listings mb-5 hideLarge d-none">
+    <div class="container-fluid panel__cardbody px-5">
+        <div class="row align-items-center justify-content-between panel__cardhead">
+            <div class="pannel__headtitle">
+                <h2 class="text-right">Cars</h2>
+            </div>
+            <div class="nav nav-tabs">
+                <li class="nav-item"><button id="pannelPrevsect1" class="nav-link btnArrows mr-1"> <i class="fa fa-angle-left"></i> </button></li>
+                <li class="nav-item"><button id="pannelNextsect1" class="btnArrows nav-link"> <i class="fa fa-angle-right"></i></button></li>
+            </div>
+        </div>
+        <div id="panel__responsivesect1" class="row panel__responsive  align-items-center pt-3 mb-1 ">
+            <div class="mx-3">
+                <div class="card text-center listing__card brand-card p-0">
+                    <div class="brand-img">
+                        <a href="{% url 'cars:cars' %}"><img data-src="{% static 'img/about/carousel-4.jpg' %}" src="{% static 'img/core/placeholder.jpg' %}" alt="#" class="img-fluid lozad"></a>
+                    </div>
+                    <div class="brand-title">
+                        <a href="{% url 'cars:cars' %}">Cars</a>
+                    </div>
+                    <a href="{% url 'cars:cars' %}" title="" class="ext-link" tabindex="0"></a>
+                </div>
+            </div>
+            <div class="mx-3">
+                <div class="card text-center listing__card brand-card p-0">
+                    <div class="brand-img">
+                        <a href="{% url 'cars:spare-parts' %}"><img data-src="{% static 'img/core/banner-car-parts1.jpg' %}" src="{% static 'img/core/placeholder.jpg' %}" alt="#" class="img-fluid lozad"></a>
+                    </div>
+                    <div class="brand-title">
+                        <a href="{% url 'cars:spare-parts' %}">Spare Parts</a>
+                    </div>
+                    <a href="{% url 'cars:spare-parts' %}" title="" class="ext-link" tabindex="0"></a>
+                </div>
+            </div>
+            <div class="mx-3">
+                <div class="card text-center listing__card brand-card p-0">
+                    <div class="brand-img">
+                        <a href="{% url 'cars:schools' %}"><img data-src="{% static 'img/core/driving-school.jpg' %}" src="{% static 'img/core/placeholder.jpg' %}" alt="#" class="img-fluid lozad"></a>
+                    </div>
+                    <div class="brand-title">
+                        <a href="{% url 'cars:schools' %}">Driving Schools</a>
+                    </div>
+                    <a href="{% url 'cars:schools' %}" title="" class="ext-link" tabindex="0"></a>
+                </div>
+            </div>
+            <div class="mx-3">
+                <div class="card text-center listing__card brand-card p-0">
+                    <div class="brand-img">
+                        <a href="{% url 'cars:brands' %}"><img data-src="{% static 'img/core/car-brands.jpg' %}" src="{% static 'img/core/placeholder.jpg' %}" alt="#" class="img-fluid lozad"></a>
+                    </div>
+                    <div class="brand-title">
+                        <a href="{% url 'cars:brands' %}">Car Brands</a>
+                    </div>
+                    <a href="{% url 'cars:brands' %}" title="" class="ext-link" tabindex="0"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>$(document).ready(function() {"use strict";$('#panel__responsivesect1').slick({autoplay: true,autoplaySpeed: 2000,dots: true,infinite: true,speed: 300,slidesToShow: 8,slidesToScroll: 8,prevArrow: $('#pannelPrevsect1'),nextArrow: $('#pannelNextsect1'),responsive: [{breakpoint: 1024,settings: {slidesToShow: 3,slidesToScroll: 3,infinite: true,dots: true}},{breakpoint: 754,settings: {slidesToShow: 2,slidesToScroll: 2}},{breakpoint: 480,settings: {slidesToShow: 1,slidesToScroll: 1}}]});})</script>
