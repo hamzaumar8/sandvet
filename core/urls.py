@@ -16,4 +16,6 @@ urlpatterns = [
     path('contact-us/', contactPage, name='contact'),
     path('about-us/', aboutPage, name='about'),
     path('privacy-policy/', PrivacyPolicyPage, name='privacy-policy'),
+    path('return-policy/', ReturnPolicyPage, name='return-policy'),
+    path('faqs/', FaqsPage, name='faqs'),
 ]

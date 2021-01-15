@@ -46,6 +46,7 @@ class IndexPageView(ListView):
         kwargs['cars'] = Car.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['spareparts'] = SparePart.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['hotels'] = Hotel.objects.filter(featured=1).order_by('-id')[:12]
+        kwargs['realestate'] = RealEstate.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['hotelrooms'] = HotelRoom.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['schools'] = School.objects.filter(featured=1).order_by('-id')[:12]
         kwargs['carfilter'] = CarFilter(self.request.GET, queryset=Car.objects.all()) 
@@ -249,12 +250,37 @@ class RegionListView(ListView):
 
 
 def PrivacyPolicyPage(request):
-    context = {}
-    context['category_list_nav'] = Category.objects.filter((~Q(title="land")))
-    context['category_list'] = Category.objects.all()
-    context['brands_list'] = Brand.objects.order_by('-views')[:7]
-    context['driving_list'] = School.objects.order_by('-views')[:7]
-    context['hotels_list'] = Hotel.objects.order_by('-views')[:7]
-    context['realestates_list'] = RealEstate.objects.order_by('-views')[:7] 
+    context = {
+        'category_list_nav': Category.objects.filter((~Q(title="land"))),
+        'category_list': Category.objects.all(),
+        'brands_list': Brand.objects.order_by('-views')[:7],
+        'driving_list': School.objects.order_by('-views')[:7],
+        'hotels_list': Hotel.objects.order_by('-views')[:7],
+        'realestates_list': RealEstate.objects.order_by('-views')[:7],
+    }
     return render(request, 'privacy-policy.html', context)
 
+
+
+
+def ReturnPolicyPage(request):
+    context = {
+        'category_list_nav': Category.objects.filter((~Q(title="land"))),
+        'category_list': Category.objects.all(),
+        'brands_list': Brand.objects.order_by('-views')[:7],
+        'driving_list': School.objects.order_by('-views')[:7],
+        'hotels_list': Hotel.objects.order_by('-views')[:7],
+        'realestates_list': RealEstate.objects.order_by('-views')[:7],
+    }
+    return render(request, 'return-policy.html', context)
+
+def FaqsPage(request):
+    context = {
+        'category_list_nav': Category.objects.filter((~Q(title="land"))),
+        'category_list': Category.objects.all(),
+        'brands_list': Brand.objects.order_by('-views')[:7],
+        'driving_list': School.objects.order_by('-views')[:7],
+        'hotels_list': Hotel.objects.order_by('-views')[:7],
+        'realestates_list': RealEstate.objects.order_by('-views')[:7],
+    }
+    return render(request, 'faqs.html', context)
