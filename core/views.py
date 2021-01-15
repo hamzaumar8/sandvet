@@ -284,3 +284,27 @@ def FaqsPage(request):
         'realestates_list': RealEstate.objects.order_by('-views')[:7],
     }
     return render(request, 'faqs.html', context)
+
+
+def SafetyPage(request):
+    context = {
+        'category_list_nav': Category.objects.filter((~Q(title="land"))),
+        'category_list': Category.objects.all(),
+        'brands_list': Brand.objects.order_by('-views')[:7],
+        'driving_list': School.objects.order_by('-views')[:7],
+        'hotels_list': Hotel.objects.order_by('-views')[:7],
+        'realestates_list': RealEstate.objects.order_by('-views')[:7],
+    }
+    return render(request, 'safety-tips.html', context)
+
+
+def ConditionPage(request):
+    context = {
+        'category_list_nav': Category.objects.filter((~Q(title="land"))),
+        'category_list': Category.objects.all(),
+        'brands_list': Brand.objects.order_by('-views')[:7],
+        'driving_list': School.objects.order_by('-views')[:7],
+        'hotels_list': Hotel.objects.order_by('-views')[:7],
+        'realestates_list': RealEstate.objects.order_by('-views')[:7],
+    }
+    return render(request, 'condition.html', context)
