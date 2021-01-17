@@ -1,12 +1,43 @@
 {% load crispy_forms_tags %} 
 {% load static %}
-<section class="main-banner-sec hideLarge d-none">
-    <div class="banner-carousel">
-        <div class="banner-slide" style="background-image: url({% static 'img/core/banner-realestate.jpg' %});">
-            <div class="home-banner-section col-12">
-                <h3 class="text-center">Buy Properties from the Best Developers.</h3>
+
+
+<section class="banner-partial banner-brands hideLarge d-none" style="background-image: url({% static 'img/core/banner-car-parts1.jpg' %});">
+    <div class="container">
+        <di class="row">
+            <div class="col-md-12">
+                <div class="widget-property-search card home-widget-search">
+                    <form action="{% url 'cars:spare-parts' %}" class="sparepartForm">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-11">
+                                <div class="row ">
+                                    <div class="col-4 border-col">
+                                        <div id="div_id_region" class="form-group">
+                                            <div class="">
+                                                <select name="categories" class="select form-control" id="id_region" tabindex="-1">
+                                                    <!-- <option value="" selected="">All Categories</option> -->
+                                                    <option value="property">Properties</option>
+                                                    <option value="cars">Cars</option>
+                                                    <option value="brand">Car Brands</option>
+                                                    <option value="spareparts">Spare Parts</option>
+                                                    <option value="hotels">Hotel</option>
+                                                    <option value="hotelrooms">Hotel Rooms</option>
+                                                    <option value="Lands">lands</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-8 border-col">
+                                        {{ filter.form.title|as_crispy_field }}
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary  btn-search"><i class="fa fa-search"></i></button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </di>
     </div>
 </section>
 <section class="main-banner-sec hideView">

@@ -31,6 +31,16 @@
                                                 <td>Subject</td>
                                                 <td>{{ booking.subject }}</td>
                                             </tr>
+                                            {% if booking.hotelroombooking.check_in %}
+                                            <tr>
+                                                <td>Check In Date</td>
+                                                <td>{{ booking.hotelroombooking.check_in|date:"D, d M, Y h:m:s a" }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Check Out Date</td>
+                                                <td>{{ booking.hotelroombooking.check_out|date:"D, d M, Y h:m:s a" }}</td>
+                                            </tr>
+                                            {% endif %}
                                             <tr>
                                                 <td>Date</td>
                                                 <td>{{ booking.created_at }}</td>

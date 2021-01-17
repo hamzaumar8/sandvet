@@ -29,6 +29,32 @@
     .hideLarge{
         display: block !important;
     }
+    .banner-brands.hideLarge{
+        padding: 4rem !important;
+    }
+    .banner-brands.hideLarge .home-widget-search .border-col{
+        margin-bottom: 0 !important;
+    }
+    .banner-brands.hideLarge .home-widget-search.card{
+        box-shadow:0 1px 6px rgba(136, 152, 170, 0.15) !important;
+        border-radius: 50px !important;
+        padding:0.7rem 2rem .5rem 1.5rem;
+    
+    }
+    .banner-brands.hideLarge .home-widget-search form .row{
+        display: flex;
+        flex-direction: row !important;
+    }
+    .banner-brands.hideLarge .home-widget-search select, .banner-brands.hideLarge .home-widget-search input {
+        border: unset !important;
+        border-radius: unset !important;
+    }
+    .banner-brands.hideLarge .home-widget-search .btn-search {
+        margin: unset !important;
+        -ms-flex: unset !important;
+        flex: unset !important;
+        max-width: unset !important;
+    }
     .hideView{
         display: none !important;
     }
@@ -159,6 +185,17 @@
     
 }
 
+@media (max-width: 765px) {
+    .container{
+        max-width: unset;
+    }
+    .banner-brands.hideLarge{
+        padding: 4rem 0 !important;
+    }
+    .banner-brands.hideLarge .border-col{
+        padding: 0;
+    }
+}
 @media (max-width: 745px) {
     .car-widget-overview > ul > li{
         flex: 33.333% 0 0;
@@ -173,9 +210,9 @@
     .banner-slide{
         padding: 3rem 4rem !important;
     }
-    .banner-partial .home-widget-search.card{
+    /* .banner-partial .home-widget-search.card{
         padding: 1.5rem !important;
-    }
+    } */
 }
 
 @media (max-width: 576px) {
@@ -249,8 +286,29 @@
     
 }
 
-@media (max-width: 400px) {
-    
+@media (max-width: 450px) {
+    .banner-brands.hideLarge .home-widget-search.card{
+        padding: 20px;
+        border-radius: 0 !important;
+    }
+    .banner-brands.hideLarge .home-widget-search .btn-search{
+        -ms-flex: 0 0 95% !important;
+    flex: 0 0 95% !important;
+    max-width: 95% !important;
+    }
+    .banner-brands.hideLarge  .widget-property-search select.select{
+        padding: unset;
+        padding-right: 10px;
+    }
+    .banner-brands.hideLarge .home-widget-search input
+    {
+        padding: unset;
+        padding-left: 10px;
+    }
+    .banner-brands.hideLarge .home-widget-search .border-col {
+        margin-bottom: 10px !important;
+        border-right: 1px solid;
+    }
 }
 
 
