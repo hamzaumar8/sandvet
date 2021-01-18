@@ -2,12 +2,12 @@
 {% load static %}
 
 
-<section class="banner-partial banner-brands hideLarge d-none" style="background-image: url({% static 'img/core/banner-car-parts1.jpg' %});">
+<section class="banner-partial banner-brands hideLarge d-none" style="background-image: url({% static 'img/core/banner-realestate.jpg' %});">
     <div class="container">
         <di class="row">
             <div class="col-md-12">
                 <div class="widget-property-search card home-widget-search">
-                    <form action="{% url 'cars:spare-parts' %}" class="sparepartForm">
+                    <form action="{% url 'core:search' %}" method="GET">
                         <div class="row justify-content-center align-items-center">
                             <div class="col-11">
                                 <div class="row ">
@@ -15,20 +15,24 @@
                                         <div id="div_id_region" class="form-group">
                                             <div class="">
                                                 <select name="categories" class="select form-control" id="id_region" tabindex="-1">
-                                                    <!-- <option value="" selected="">All Categories</option> -->
-                                                    <option value="property">Properties</option>
+                                                    <option value="property">Property</option>
                                                     <option value="cars">Cars</option>
-                                                    <option value="brand">Car Brands</option>
                                                     <option value="spareparts">Spare Parts</option>
+                                                    <option value="realestates">Real Estates</option>
                                                     <option value="hotels">Hotel</option>
                                                     <option value="hotelrooms">Hotel Rooms</option>
-                                                    <option value="Lands">lands</option>
+                                                    <option value="lands">Land</option>
+                                                    <option value="schools">Driving Schools</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-8 border-col">
-                                        {{ filter.form.title|as_crispy_field }}
+                                        <div id="div_id_title" class="form-group">
+                                            <div class="">
+                                                <input type="text" name="search-title" class="textinput textInput form-control" id="id_title" placeholder="Search by Title or Name" required>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

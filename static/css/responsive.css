@@ -284,9 +284,7 @@
         font-size: 20px !important;
     }
     
-}
 
-@media (max-width: 450px) {
     .banner-brands.hideLarge .home-widget-search.card{
         padding: 20px;
         border-radius: 0 !important;

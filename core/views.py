@@ -6,10 +6,10 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import  JsonResponse, HttpResponse
 from django.db.models import Q
 from property.models import Property, Category, Testimony, Subscription, RealEstate, Hotel, HotelRoom
-from property.filters import HomePropertFilter, PropertyFilter, HomeHotelFilter, HomeRealEstateFilter
+from property.filters import HomePropertFilter, PropertyFilter, HomeHotelFilter, HomeRealEstateFilter, HotelFilter, HotelRoomFilter, RealEstateFilter, PropertyCategoryFilter
 from .forms import SubscriptionForm, ContactForm
 from .models import Locality, Region
-from cars.filters import CarFilter, SparePartFilter
+from cars.filters import CarFilter, SparePartFilter, CarSideFilter, SchoolFilter
 from cars.models import Car, Brand, SparePart, School
 # Create your views here.
 
@@ -308,3 +308,49 @@ def ConditionPage(request):
         'realestates_list': RealEstate.objects.order_by('-views')[:7],
     }
     return render(request, 'condition.html', context)
+
+
+
+
+
+
+class SearchBarListView(ListView):
+    model = Property
+    context_object_name = 'lists'
+    template_name = 'property/search-list.html'
+    paginate_by = 24
+
+    def get_context_data(self, **kwargs):
+        kwargs['category_list_nav'] = Category.objects.filter((~Q(title="land")))
+        kwargs['category_list'] = Category.objects.all()
+        kwargs['brands_list'] = Brand.objects.order_by('-views')[:7]
+        kwargs['driving_list'] = School.objects.order_by('-views')[:7]
+        kwargs['hotels_list'] = Hotel.objects.order_by('-views')[:7]
+        kwargs['realestates_list'] = RealEstate.objects.order_by('-views')[:7]
+
+        kwargs['page_title'] = ''
+        kwargs['form_category'] = self.category
+        kwargs['filter'] = self.filter
+        return super().get_context_data(**kwargs)
+
+    def get_queryset(self):
+        query = self.request.GET.get('search-title')
+        self.category = self.request.GET.get('categories')
+        if self.category == 'property':
+            self.filter = PropertyFilter(self.request.GET, queryset= self.model.filter(title__icontains=query).objects.order_by('-id'))
+        elif self.category == 'cars':
+            self.filter = CarSideFilter(self.request.GET, queryset= Car.objects.filter(title__icontains=query).order_by('-id'))
+        elif self.category == 'spareparts':
+            self.filter = SparePartFilter(self.request.GET, queryset= SparePart.objects.filter(title__icontains=query).order_by('-id'))
+        elif self.category == 'hotels':
+            self.filter = HotelFilter(self.request.GET, queryset= Hotel.objects.filter(title__icontains=query).order_by('-id'))
+        elif self.category == 'hotelrooms':
+            self.filter = HotelRoomFilter(self.request.GET, queryset= HotelRoom.objects.filter(title__icontains=query).order_by('-id'))
+        elif self.category == 'realestates':
+            self.filter = RealEstateFilter(self.request.GET, queryset= RealEstate.objects.filter(title__icontains=query).order_by('-id'))
+        elif self.category == 'schools':
+            self.filter = SchoolFilter(self.request.GET, queryset= School.objects.filter(title__icontains=query).order_by('-id'))
+        elif self.category == 'lands':
+            self.landCategory = get_object_or_404(Category, title='land') 
+            self.filter = PropertyCategoryFilter(self.request.GET, queryset=self.model.objects.filter(title__icontains=query, category=self.landCategory)) 
+        return self.filter.qs

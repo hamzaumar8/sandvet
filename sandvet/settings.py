@@ -189,21 +189,20 @@ SESSION_COOKIE_AGE = 3600
 SESSION_SAVE_EVERY_REQUEST = True  
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = DEFAULT_FROM_EMAIL =  "ctmafri@gmail.com"
-EMAIL_HOST_PASSWORD = "yvbdactfcsfourif"
+EMAIL_HOST = 'mail.onestepplabs.com'
+EMAIL_PORT = 587 #also tried with 465
+EMAIL_HOST_USER = 'server@onestepplabs.com'
+EMAIL_HOST_PASSWORD = 'P@ss467'
 
 if DEBUG:
     # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     ALLOWED_HOSTS = ['127.0.0.1']
 
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = 'mail.sandvet.com'
-    EMAIL_PORT =  587 #also tried with 465
-    EMAIL_HOST_USER = 'server@sandvet.com'
-    EMAIL_HOST_PASSWORD = 'p1uhVOKGt}h?'
+    # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    # EMAIL_HOST = 'mail.sandvet.com'
+    # EMAIL_PORT =  587 #also tried with 465
+    # EMAIL_HOST_USER = 'server@sandvet.com'
+    # EMAIL_HOST_PASSWORD = 'p1uhVOKGt}h?'
 
     DATABASES = {
         'default': {

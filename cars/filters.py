@@ -1,6 +1,6 @@
 import django_filters
 from django import forms
-from .models import Car, SparePart
+from .models import Car, SparePart, School
 
 class CarFilter(django_filters.FilterSet):
     title = django_filters.CharFilter(field_name='title', lookup_expr='icontains')
@@ -53,6 +53,17 @@ class SparePartFilter(django_filters.FilterSet):
         fields = [
             'title',
             'region'
+        ]
+
+class SchoolFilter(django_filters.FilterSet):
+    title = django_filters.CharFilter(field_name='title', lookup_expr='icontains')
+    class Meta:
+        model = School
+        fields = [
+            'title',
+            'locality',
+            'region',
+            'location'
         ]
 
 
